@@ -129,4 +129,24 @@ describe('sample browser scan', () => {
     const diff = await comparison.json() as { remaining: unknown[] };
     expect(diff.remaining.length).toBeGreaterThan(0);
   }, 120_000);
+
+  it('switches the checkout sample between its before and fixed states', async () => {
+    const initial = await (await fetch(`${baseUrl}/api/sample/state`)).json() as { variant: string };
+    expect(initial.variant).toBe('before');
+    const before = await (await fetch(`${baseUrl}/sample/checkout`)).text();
+    expect(before).toContain('missing-product.webp');
+
+    const changed = await fetch(`${baseUrl}/api/sample/state`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variant: 'after' }) });
+    expect(changed.status).toBe(200);
+    const after = await (await fetch(`${baseUrl}/sample/checkout`)).text();
+    expect(after).toContain('product.svg');
+    expect(after).toContain('alt="Everyday carry set');
+
+    const invalid = await fetch(`${baseUrl}/api/sample/state`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variant: 'later' }) });
+    expect(invalid.status).toBe(400);
+
+    await fetch(`${baseUrl}/api/sample/state`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variant: 'before' }) });
+    const restored = await (await fetch(`${baseUrl}/sample/checkout`)).text();
+    expect(restored).toContain('missing-product.webp');
+  }, 30_000);
 });

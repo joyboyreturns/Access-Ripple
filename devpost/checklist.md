@@ -79,3 +79,12 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Attribute errors to the triggering action and keep unrelated page warnings as context.
 - [x] Serve the extended checkout sample and verify the full chain, safe and authorized modes, rescan policy, phone layout, 49 tests, typecheck, and production build.
 - [ ] Learner review of the consent wording, observed-journey presentation, and demo script.
+
+### Clearer routes, honest coverage, saved history, and real-site hardening
+- [x] Animate the recorded route with a travelling pulse and flowing edges; stagger long routes and keep step labels readable; honor reduced-motion requests.
+- [x] Explain coverage in the result: pages inspected/blocked/failed, destinations not reached with the stopping limit, links beyond depth, and controls activated versus untested.
+- [x] Save completed scans on this computer (newest 25) and reopen them from **Recent scans** after a scanner restart; add list/rehydrate API and persistence tests.
+- [x] Verify real public websites (example.com, W3C bad-demo, IANA) and fix what they exposed: blocked external links now report honestly as “not followed”, skip links activate by keyboard, and slow sites get a fair reopen timeout.
+- [x] Ship a before/after repair loop on the controlled checkout sample (`/api/sample/state`) and verify 3 resolved items (image alternative text and two 404 signals) with 0 new and 0 changed.
+- [x] Keep the suite green: 53 tests across 9 files, typecheck, production build.
+- [ ] Learner review of the animated route, coverage wording, saved-history behavior, and the recorded demo route.

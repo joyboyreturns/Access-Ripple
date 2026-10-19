@@ -18,6 +18,7 @@ const createBody = z.union([
   z.object({ sample: z.literal('checkout'), authorizeSubmit: z.boolean().optional() }).strict(),
 ]);
 const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
+const sampleStateBody = z.object({ variant: z.enum(['before', 'after']) }).strict();
 const allowedOrigins = new Set(['http://localhost:5173', 'http://127.0.0.1:5173']);
 const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
@@ -90,6 +91,8 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     logController: new LogController({ disableRequestLogging: true }),
   });
   const baseUrl = options.baseUrl ?? 'http://127.0.0.1:4317';
+  // The checkout sample ships in two states so you can demo a real before/after repair loop.
+  let sampleVariant: 'before' | 'after' = 'before';
 
   app.addHook('onRequest', async (request, reply) => {
     const origin = request.headers.origin;
@@ -115,7 +118,18 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
 
   app.get('/api/health', async () => ({ status: 'ok', localOnly: true, graphSchemaVersion: '1.0' }));
 
-  app.get('/sample/checkout', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/checkout.html'), 'utf8')));
+  // The checkout sample can switch between its "before" and "fixed" states so a rescan
+  // compares a real repair on a site you control. Everything else stays identical.
+  app.get('/api/sample/state', async () => ({ variant: sampleVariant }));
+  app.post('/api/sample/state', async (request, reply) => {
+    const body = sampleStateBody.safeParse(request.body);
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SAMPLE_STATE', message: "Provide { \"variant\": 'before' } or { \"variant\": 'after' }.", retryable: false } });
+    sampleVariant = body.data.variant;
+    return { variant: sampleVariant };
+  });
+
+  app.get('/sample/checkout', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), sampleVariant === 'after' ? 'src/sample/site/checkout-fixed.html' : 'src/sample/site/checkout.html'), 'utf8')));
+  app.get('/sample/product.svg', async (_request, reply) => reply.type('image/svg+xml').send(await readFile(resolve(process.cwd(), 'src/sample/site/product.svg'), 'utf8')));
   app.get('/sample/payment', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/payment.html'), 'utf8')));
   app.get('/sample/catalog', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/catalog.html'), 'utf8')));
   app.get('/sample/cart', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/cart.html'), 'utf8')));

@@ -6,7 +6,9 @@ AccessRipple is a developer tool for exploring how a website is connected: pages
 
 The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a complete searchable inventory, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results.
 
-The studio also tests a bounded set of safe controls once each in disposable browser pages and records what actually happened: navigation, content changes, dialogs, validation, loading states, blocked requests, and failures. Observed outcomes replace inference for those controls, and a selected action shows its recorded route across independently inspected pages. Form and submit controls wait for explicit permission, requests that would change data are always blocked and recorded, and consequential actions such as delete, send, or pay are never activated. A controlled checkout fixture in the backend demonstrates the whole chain (catalogue → cart → checkout → payment); it never sends a payment or collects data.
+The studio also tests a bounded set of safe controls once each in disposable browser pages and records what actually happened: navigation, content changes, dialogs, validation, loading states, blocked requests, and failures. Observed outcomes replace inference for those controls, and a selected action shows its recorded route across independently inspected pages with an animated pulse along the way. Form and submit controls wait for explicit permission, requests that would change data are always blocked and recorded, and consequential actions such as delete, send, or pay are never activated. A controlled checkout fixture in the backend demonstrates the whole chain (catalogue → cart → checkout → payment); it never sends a payment or collects data.
+
+Every result also explains its coverage — pages inspected, destinations not reached, and controls left untested, each with a reason — and completed scans are saved on this computer so **Recent scans** survives a restart of the scanner.
 
 ## Run the full app
 
@@ -20,7 +22,7 @@ npm run dev
 
 Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph. Before mapping, you can tick **Test form and submit controls too** to let the scanner activate submit controls as well; requests that would send or change data stay blocked either way.
 
-The decorative video and fonts are served locally. Video motion can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect while the local scanner still has the result. No sample graph is seeded into the interface.
+The decorative video and fonts are served locally. Video motion can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect, and completed scans are kept on this computer so they can be reopened from **Recent scans** after the scanner restarts. No sample graph is seeded into the interface.
 
 ## Run the backend
 
@@ -44,6 +46,25 @@ curl -X POST http://127.0.0.1:4317/api/scans \
 
 Use the returned `scanId` with `GET /api/scans/{scanId}`, `/graph`, and `/export/obsidian`. See the OpenAPI page for the full API.
 
+### Before/after repair loop on the sample
+
+The checkout sample ships in two states so you can demonstrate a real fix on a site you control:
+
+```sh
+# 1. Scan the broken state (the product image has no alternative text and 404s).
+curl -X POST http://127.0.0.1:4317/api/sample/state -H 'content-type: application/json' -d '{"variant":"before"}'
+curl -X POST http://127.0.0.1:4317/api/scans -H 'content-type: application/json' -d '{"sample":"checkout"}'
+
+# 2. Apply the fixed state (product.svg with alternative text).
+curl -X POST http://127.0.0.1:4317/api/sample/state -H 'content-type: application/json' -d '{"variant":"after"}'
+
+# 3. Rescan the same scan and compare: the image finding and both 404 signals resolve.
+curl -X POST http://127.0.0.1:4317/api/scans/{scanId}/rescan -H 'content-type: application/json' -d '{}'
+curl http://127.0.0.1:4317/api/scans/{newScanId}/compare/{scanId}'
+```
+
+`GET /api/sample/state` reports the current variant. In the studio the same loop works through **Rescan and compare** after toggling the state; set it back to `before` when finished.
+
 ## Scan boundaries
 
 - The service binds to loopback and is intended for local development only.
@@ -53,7 +74,7 @@ Use the returned `scanId` with `GET /api/scans/{scanId}`, `/graph`, and `/export
 - Outcomes are labeled observed only when the browser recorded them; link and form destinations that were never activated remain inferred or not tested. Errors are attributed to the action that ran when they occurred, and unrelated page warnings stay context.
 - Private and reserved network addresses are blocked. This local proof of concept is not a hardened public scanning service; do not expose it to the internet.
 - Automated accessibility checks cover a useful subset of barriers; they do not certify accessibility or discover every bug.
-- Scan results stay in memory until the service restarts; export a vault to keep them.
+- Completed scans are saved as JSON on this computer (the newest 25, under `.data/`) so history survives restarts; delete that folder to clear the history. Export a vault to keep a portable copy.
 
 ## Verification
 
