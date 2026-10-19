@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent, type KeyboardEvent, type CSSProperties } from 'react';
 import Icon from './Icons';
-import { describe, nodeColor, pageFor, sceneGraph, type Journey, type GraphFilter, type ViewNode } from './presentation';
+import { cleanLabel, describe, nodeColor, pageFor, sceneGraph, type Journey, type GraphFilter, type ViewNode } from './presentation';
 import type { SiteGraph } from './types';
 
 interface Props { journey: Journey | null; onExitJourney: () => void; graph: SiteGraph; filter: GraphFilter; selectedId: string; focus: boolean; onSelect: (node: ViewNode) => void; onFocus: () => void }
@@ -83,7 +83,7 @@ export default function GraphCanvas({ journey, onExitJourney, graph, filter, sel
         </g>;})}
       </svg><span className="map-coverage">{journey?`A travelling pulse follows the recorded route · hover a step to read its label · dashed = action not tested${journey.findings.length>3?' · all observations in details':''}`:`${scene.nodes.length} focus points · full inventory in List`}</span>
     </div>
-    {journey&&<div className="journey-summary" role="status"><strong>{journey.control.label}</strong><span>{journey.summary}</span></div>}
+    {journey&&<div className="journey-summary" role="status"><strong>{cleanLabel(journey.control.label)}</strong><span>{journey.summary}</span></div>}
     <div className="canvas-bottom"><div className="graph-key"><span><i className="page-dot"/>Page</span><span><i className="issue-dot"/>Accessibility</span><span><i className="error-dot"/>Browser signal</span></div><div className="canvas-actions"><button className={`icon-btn ${focus?'active':''}`} aria-label="Focus selected neighborhood" aria-pressed={focus} onClick={onFocus} title="Focus neighborhood"><Icon name="target" size={18}/></button><button className="icon-btn" onClick={()=>setView(INITIAL)} aria-label="Reset map view"><Icon name="refresh" size={17}/></button><span className="control-separator"/><button className="icon-btn" onClick={()=>setView(v=>({...v,zoom:Math.max(.55,v.zoom-.15)}))} aria-label="Zoom out"><Icon name="minus" size={17}/></button><span className="zoom-readout">{Math.round(view.zoom*100)}%</span><button className="icon-btn" onClick={()=>setView(v=>({...v,zoom:Math.min(1.8,v.zoom+.15)}))} aria-label="Zoom in"><Icon name="plus" size={17}/></button></div></div>
   </div>;
 }

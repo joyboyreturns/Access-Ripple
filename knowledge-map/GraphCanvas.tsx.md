@@ -22,6 +22,7 @@ tags:
 - [[Props]] - `contains` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
+- [[cleanLabel()]] - `imports` [EXTRACTED]
 - [[describe()]] - `imports` [EXTRACTED]
 - [[nodeColor()]] - `imports` [EXTRACTED]
 - [[pageFor()]] - `imports` [EXTRACTED]

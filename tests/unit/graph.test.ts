@@ -71,6 +71,21 @@ describe('evidence graph', () => {
     expect(graph.nodes.find((node) => node.id === 'c2')?.status).toBe('clear');
   });
 
+  it('describes script and email links in plain language instead of raw addresses', () => {
+    const scan = sample('script-link', false);
+    scan.pages[0]!.controls.push(
+      { id: 'c2', role: 'link', accessibleName: 'Cart', href: 'javascript:void(0)', evidenceLabel: 'observed' },
+      { id: 'c3', role: 'link', accessibleName: 'Email us', href: 'mailto:hello@shop.example', evidenceLabel: 'observed' },
+    );
+    const graph = buildGraph(scan);
+    const script = graph.nodes.find((node) => node.kind === 'flow' && node.data.sourceControlId === 'c2');
+    expect(script?.label).toBe('May run a script on this page');
+    expect(script?.label).not.toContain('void');
+    expect(script?.data.destinationUrl).toBe('javascript:void(0)');
+    const email = graph.nodes.find((node) => node.kind === 'flow' && node.data.sourceControlId === 'c3');
+    expect(email?.label).toBe('May open an email draft');
+  });
+
   it('connects a finding only to controls matched on its page', () => {
     const scan=sample('matched',false);
     scan.pages[0]!.findings=[{id:'f1',ruleId:'button-name',impact:'serious',status:'detected',help:'Name the button',helpUrl:'https://example.com/check',targets:['#pay'],affectedControlIds:['c1','missing-control'],evidenceLabel:'observed'}];

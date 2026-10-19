@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L19"
+location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -18,14 +18,17 @@ tags:
 - [[Icon()]] - `calls` [EXTRACTED]
 - [[Landing()]] - `calls` [EXTRACTED]
 - [[Mark()]] - `calls` [EXTRACTED]
+- [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[accept()]] - `contains` [EXTRACTED]
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
+- [[cleanLabel()]] - `calls` [EXTRACTED]
 - [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[downloadVault()]] - `calls` [EXTRACTED]
 - [[exportScan()]] - `contains` [EXTRACTED]
+- [[friendlyScanError()]] - `calls` [EXTRACTED]
 - [[groupIssues()]] - `calls` [EXTRACTED]
 - [[hostname()]] - `calls` [EXTRACTED]
 - [[httpUrl()]] - `calls` [EXTRACTED]
@@ -44,6 +47,7 @@ tags:
 - [[run()]] - `contains` [EXTRACTED]
 - [[select()]] - `contains` [EXTRACTED]
 - [[severity()]] - `calls` [EXTRACTED]
+- [[shortcutOf()]] - `calls` [EXTRACTED]
 - [[storageGet()]] - `calls` [EXTRACTED]
 - [[storageSet()]] - `calls` [EXTRACTED]
 - [[str()]] - `calls` [EXTRACTED]

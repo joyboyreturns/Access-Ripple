@@ -1,4 +1,4 @@
-import { describe as describeNode, groupIssues, sceneGraph, traceJourney } from '../../web/src/presentation.js';
+import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
 import type { GraphNode, InteractionStepView, SiteGraph } from '../../web/src/types.js';
 import { describe as suite, it, expect } from 'vitest';
 
@@ -61,6 +61,14 @@ suite('selected control journeys',()=>{
     expect(result.findings.find(f=>f.node.id==='destination')?.caption).toContain('not proof');
     expect(result.summary).toContain('do not prove the click fails');
   });
+  it('explains script links in a journey without inventing an outside destination',()=>{
+    const g=graph([],false);
+    g.nodes=g.nodes.map(n=>n.id==='flow'?{...n,data:{...n.data,destinationUrl:'javascript:void(0)'}}:n);
+    const result=traceJourney(g,'c')!;
+    expect(result.summary).toContain('script on the same page');
+    expect(result.summary).not.toContain('outside this scan');
+    expect(result.steps.find(s=>s.node.kind==='flow')?.caption).toContain('In-page script');
+  });
   it('states when the destination was not scanned without inventing failures',()=>{
     const result=traceJourney(graph([],false),'c')!;
     expect(result.steps).toHaveLength(3);
@@ -116,5 +124,43 @@ suite('observed journeys',()=>{
     const result=traceJourney(graph,'c')!;
     expect(result.steps.map(s=>s.node.id)).toEqual(['p1','c','flow','p2','c2','flow2','p3']);
     expect(result.summary).toContain('continued through 1 more');
+  });
+});
+
+suite('plain-language labels and destinations',()=>{
+  it('splits website shortcut hints out of control names',()=>{
+    expect(cleanLabel('Cart, shift, option, c')).toBe('Cart');
+    expect(shortcutOf('Cart, shift, option, c')).toBe('Shift + Option + C');
+    expect(cleanLabel('Show/hide shortcuts, shift, option, z')).toBe('Show/hide shortcuts');
+    expect(cleanLabel('Search (Shift + K)')).toBe('Search');
+    expect(shortcutOf('Search (Shift + K)')).toBe('Shift + K');
+    expect(cleanLabel('Delete item')).toBe('Delete item');
+    expect(shortcutOf('Delete item')).toBe('');
+    expect(cleanLabel('Size, S, M')).toBe('Size, S, M');
+    expect(cleanLabel('Search, option, forward slash')).toBe('Search');
+    expect(shortcutOf('Search, option, forward slash')).toBe('Option + /');
+  });
+  it('uses the readable name in control copy and keeps the shortcut separate',()=>{
+    const control:GraphNode={id:'c',kind:'control',label:'Cart, shift, option, c',pageId:'p1',data:{role:'link'},evidenceLabel:'observed'};
+    expect(describeNode(control).title).toBe('Cart');
+    expect(shortcutOf(control.label)).toBe('Shift + Option + C');
+  });
+  it('cleans quoted names inside recorded interaction summaries',()=>{
+    const control:GraphNode={id:'c',kind:'control',label:'Cart, shift, option, c',pageId:'p1',data:{interaction:{tested:true,outcome:'navigated',summary:'Activated “Cart, shift, option, c” navigated to /cart.'}},evidenceLabel:'observed'};
+    const copy=describeNode(control);
+    expect(copy.meaning).toContain('“Cart”');
+    expect(copy.meaning).not.toContain('shift');
+  });
+  it('explains script links instead of exposing javascript:void(0)',()=>{
+    const flow:GraphNode={id:'f',kind:'flow',label:'May lead to void(0)',pageId:'p1',data:{sourceControlId:'c',destinationUrl:'javascript:void(0)',outcome:'not-tested'},evidenceLabel:'inferred'};
+    const copy=describeNode(flow);
+    expect(copy.title).not.toContain('void');
+    expect(copy.title.toLowerCase()).toContain('script');
+    expect(copy.short).toBe('Runs a script on this page');
+  });
+  it('turns common browser failures into an understandable next step',()=>{
+    expect(friendlyScanError('page.goto: net::ERR_NAME_NOT_RESOLVED at https://nope.example')).toContain('could not be found');
+    expect(friendlyScanError('Timeout 60000ms exceeded.')).toContain('took too long');
+    expect(friendlyScanError('The scan worker could not start.')).toBe('The scan worker could not start.');
   });
 });

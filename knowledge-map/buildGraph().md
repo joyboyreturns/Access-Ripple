@@ -2,7 +2,7 @@
 source_file: "src/graph/build-graph.ts"
 type: "code"
 community: "Community None"
-location: "L26"
+location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -17,6 +17,7 @@ tags:
 - [[export.test.ts]] - `imports` [EXTRACTED]
 - [[graph.test.ts]] - `imports` [EXTRACTED]
 - [[lastStep()]] - `calls` [EXTRACTED]
+- [[linkLabel()]] - `calls` [EXTRACTED]
 - [[outcomeLabel()]] - `calls` [EXTRACTED]
 - [[outcomeStatus()]] - `calls` [EXTRACTED]
 - [[performScan()]] - `calls` [EXTRACTED]

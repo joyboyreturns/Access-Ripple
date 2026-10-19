@@ -20,5 +20,7 @@ tags:
 - [[Icons.tsx]] - `contains` [EXTRACTED]
 - [[Landing()]] - `calls` [EXTRACTED]
 - [[Landing.tsx]] - `imports` [EXTRACTED]
+- [[SelectMenu()]] - `calls` [EXTRACTED]
+- [[SelectMenu.tsx]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

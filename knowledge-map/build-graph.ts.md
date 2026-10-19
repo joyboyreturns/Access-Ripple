@@ -28,6 +28,7 @@ tags:
 - [[id()]] - `contains` [EXTRACTED]
 - [[interaction.ts]] - `imports_from` [EXTRACTED]
 - [[lastStep()]] - `contains` [EXTRACTED]
+- [[linkLabel()]] - `contains` [EXTRACTED]
 - [[outcomeLabel()]] - `imports` [EXTRACTED]
 - [[outcomeStatus()]] - `contains` [EXTRACTED]
 - [[ref_node_crypto]] - `imports_from` [EXTRACTED]

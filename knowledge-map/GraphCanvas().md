@@ -16,6 +16,7 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `contains` [EXTRACTED]
 - [[Icon()]] - `calls` [EXTRACTED]
+- [[cleanLabel()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[down()]] - `contains` [EXTRACTED]
 - [[keyDown()]] - `contains` [EXTRACTED]

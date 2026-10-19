@@ -23,6 +23,19 @@ function exclusionLabel(reason: string | undefined): string {
   return 'Not tested in this scan';
 }
 
+/** Describe where an untested link points without exposing raw script or email addresses. */
+function linkLabel(target: string): string {
+  try {
+    const url = new URL(target);
+    if (url.protocol === 'javascript:') return 'May run a script on this page';
+    if (url.protocol === 'mailto:') return 'May open an email draft';
+    if (url.protocol === 'tel:') return 'May start a phone call';
+    return `May lead to ${url.pathname || '/'}`;
+  } catch {
+    return 'May lead to another page';
+  }
+}
+
 export function buildGraph(scan: ScanResult): SiteGraph {
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
@@ -78,7 +91,7 @@ export function buildGraph(scan: ScanResult): SiteGraph {
         let targetUrl: string;
         try { targetUrl = safeDisplayUrl(new URL(target, page.url).toString()); } catch { continue; }
         const flowId = id('flow', `${controlId}|${targetUrl}`);
-        nodes.push({ id: flowId, kind: 'flow', label: `May lead to ${new URL(targetUrl).pathname || '/'}`, status: 'untested', evidenceLabel: control.href ? 'inferred' : 'untested', pageId: page.id, data: { sourceControlId: controlId, sourceUrl: page.url, destinationUrl: targetUrl, outcome: 'not-tested', reason: exclusion?.reason } });
+        nodes.push({ id: flowId, kind: 'flow', label: linkLabel(targetUrl), status: 'untested', evidenceLabel: control.href ? 'inferred' : 'untested', pageId: page.id, data: { sourceControlId: controlId, sourceUrl: page.url, destinationUrl: targetUrl, outcome: 'not-tested', reason: exclusion?.reason } });
         edges.push({ id: id('edge', `${controlId}|may-lead-to|${flowId}`), kind: 'may-lead-to', source: controlId, target: flowId, evidenceLabel: control.href ? 'inferred' : 'untested' });
         const destinationPage = pageIds.get(targetUrl);
         if (destinationPage) edges.push({ id: id('edge', `${flowId}|links-to|${destinationPage}`), kind: 'links-to', source: flowId, target: destinationPage, evidenceLabel: 'inferred' });

@@ -21,6 +21,51 @@ export function str(node: GraphNode | undefined, key: string): string {
   return typeof value === 'string' || typeof value === 'number' ? String(value) : '';
 }
 
+const keyToken = /^(?:shift|ctrl|control|alt|option|cmd|command|meta|fn|esc|escape|enter|return|tab|space|spacebar|delete|backspace|insert|home|end|pageup|pagedown|page up|page down|forward slash|backslash|backtick|back tick|left bracket|right bracket|left arrow|right arrow|up arrow|down arrow|question mark|exclamation mark|number sign|semicolon|apostrophe|underscore|hyphen|period|comma|slash|plus|minus|equals|f\d{1,2}|arrow(?:up|down|left|right)|[a-z0-9]|[⌘⇧⌥⌃⌖↵⌫])$/i;
+const modifierToken = /^(?:shift|ctrl|control|alt|option|cmd|command|meta|fn|[⌘⇧⌥⌃])$/i;
+
+/**
+ * Some sites append their keyboard shortcut to the accessible name, for example
+ * “Cart, shift, option, c” or “Search (Shift + K)”. Separate it so the interface
+ * can show a readable name and keep the shortcut as its own, useful detail.
+ */
+export function labelParts(label: string): { name: string; keys: string[] } {
+  const parenthetical = label.match(/^(.*\S)\s*\(([^()]+)\)\s*$/);
+  if (parenthetical) {
+    const keys = parenthetical[2]!.split(/\s*\+\s*/).map((key) => key.trim()).filter(Boolean);
+    if (keys.length >= 2 && keys.every((key) => keyToken.test(key)) && keys.some((key) => modifierToken.test(key))) return { name: parenthetical[1]!.trim(), keys };
+  }
+  const segments = label.split(',').map((part) => part.trim()).filter(Boolean);
+  const keys: string[] = [];
+  while (segments.length > 1 && keyToken.test(segments[segments.length - 1]!)) keys.unshift(segments.pop()!);
+  if (keys.length < 2 || !keys.some((key) => modifierToken.test(key))) return { name: label, keys: [] };
+  return { name: segments.join(', ').trim() || label, keys };
+}
+
+export function cleanLabel(label: string): string { return labelParts(label).name.trim(); }
+
+export function shortcutOf(label: string): string {
+  const names: Record<string, string> = { shift: 'Shift', ctrl: 'Ctrl', control: 'Ctrl', alt: 'Alt', option: 'Option', cmd: 'Cmd', command: 'Command', meta: 'Meta', fn: 'Fn', esc: 'Esc', escape: 'Esc', enter: 'Enter', return: 'Enter', tab: 'Tab', space: 'Space', spacebar: 'Space', delete: 'Delete', backspace: 'Backspace', pageup: 'Page Up', pagedown: 'Page Down', 'page up': 'Page Up', 'page down': 'Page Down', 'forward slash': '/', slash: '/', backslash: '\\', backtick: '`', 'back tick': '`', 'left bracket': '[', 'right bracket': ']', 'left arrow': '←', 'right arrow': '→', 'up arrow': '↑', 'down arrow': '↓', 'question mark': '?', 'exclamation mark': '!', 'number sign': '#', semicolon: ';', apostrophe: "'", underscore: '_', hyphen: '-', period: '.', comma: ',', plus: '+', minus: '−', equals: '=' };
+  return labelParts(label).keys.map((key) => names[key.toLowerCase()] ?? (key.length === 1 ? key.toUpperCase() : key.charAt(0).toUpperCase() + key.slice(1))).join(' + ');
+}
+
+/** Clean shortcut hints inside quoted names used by recorded summaries. */
+function cleanQuoted(text: string): string {
+  return text.replace(/“([^”]+)”/g, (_match, inner: string) => `“${cleanLabel(inner)}”`);
+}
+
+/** Turn common browser failures into a next step people can understand. */
+export function friendlyScanError(message: string): string {
+  const text = message.toLowerCase();
+  if (/name_not_resolved|enotfound|getaddrinfo/.test(text)) return 'That address could not be found. Check the spelling and try again.';
+  if (/err_connection_refused|econnrefused/.test(text)) return 'The site refused the connection. It may be offline or blocking automated browsers.';
+  if (/err_cert|ssl|certificate/.test(text)) return 'The site’s security certificate could not be verified, so the scan stopped.';
+  if (/timed out|timeout|etimedout/.test(text)) return 'The site took too long to respond. Try again, or start from a smaller page.';
+  if (/err_http_response_code_failure|err_blocked_by_client|\b403\b|\b429\b/.test(text)) return 'The site refused the automated browser. Some sites block scanners; try another public page.';
+  if (/err_internet_disconnected|err_network/.test(text)) return 'The network connection dropped during the scan. Check your connection and try again.';
+  return message;
+}
+
 function stepsOf(node: GraphNode): InteractionStepView[] {
   return Array.isArray(node.data.steps) ? node.data.steps as InteractionStepView[] : [];
 }
@@ -56,7 +101,15 @@ const outcomeCaptions: Record<string, string> = {
   'failed': 'Interaction failed',
 };
 
-function destinationLabel(value: string) { try {const u=new URL(value);return u.pathname==='/'?u.hostname:u.pathname;} catch {return 'Destination not exposed';} }
+function destinationLabel(value: string) {
+  try {
+    const u = new URL(value);
+    if (u.protocol === 'javascript:') return 'an in-page script';
+    if (u.protocol === 'mailto:') return 'an email draft';
+    if (u.protocol === 'tel:') return 'a phone call';
+    return u.pathname === '/' ? u.hostname : u.pathname;
+  } catch { return 'Destination not exposed'; }
+}
 
 function blockedShort(step: { blockKind?: string }): string {
   if (step.blockKind === 'external-navigation') return 'Leaves this website · not followed';
@@ -90,7 +143,7 @@ export function describe(node: GraphNode): Copy {
   if (node.kind === 'flow') {
     const step = lastStepOf(node);
     if (isTestedFlow(node) && step) {
-      const summary = str(node, 'summary');
+      const summary = cleanQuoted(str(node, 'summary'));
       if (step.outcome === 'navigated') return { title: step.destinationUrl ? `Leads to ${destinationLabel(step.destinationUrl)}` : 'Led to another page', short: flowShort(node), meaning: `The action was activated once in a controlled browser and it navigated. ${summary}`, fix: 'Review the destination in context. Actions beyond this recorded route were not tested.' };
       if (step.outcome === 'content-changed') return { title: 'The action changed the page', short: flowShort(node), meaning: `The action was activated once in a controlled browser. ${summary}`, fix: 'Check the revealed controls and content with keyboard and screen-reader testing, then review the route.' };
       if (step.outcome === 'dialog-opened') return { title: 'The action opened a dialog', short: 'Opens a dialog', meaning: `The action was activated once in a controlled browser and opened a dialog. ${summary}`, fix: 'Verify the dialog’s focus handling, Escape behavior, and accessible name manually.' };
@@ -105,18 +158,23 @@ export function describe(node: GraphNode): Copy {
     const reason = str(node, 'reason');
     if (reason === 'requires-authorization') return { title: 'This form control was not activated', short: 'Needs your permission', meaning: 'Submit controls can send data, so AccessRipple only activates them when you explicitly allow form testing before the scan.', fix: 'Enable “Test form controls” in the scan options and rescan. Requests that change data are still blocked and recorded.' };
     if (reason === 'consequential-action') return { title: 'This action was not activated', short: 'Consequential action', meaning: 'The control’s name suggests it could delete, send, cancel, pay, or change something. AccessRipple never activates these actions.', fix: 'Test this action manually in a safe environment with realistic data.' };
-    return { title: str(node, 'destinationUrl') || node.label, short: destinationLabel(str(node, 'destinationUrl')), meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
+    const destination = str(node, 'destinationUrl');
+    if (/^javascript:/i.test(destination)) return { title: 'This link runs a script instead of opening a page', short: 'Runs a script on this page', meaning: 'The link points to an in-page script rather than a page address, so there is no destination to inspect. Its effect only appears when a person activates it.', fix: 'Test this control manually if it matters to a visitor journey. The scan did not click it.' };
+    if (/^mailto:/i.test(destination)) return { title: 'This link opens an email draft', short: 'Opens an email draft', meaning: 'The link starts an email instead of opening a page, so the scan did not follow it.', fix: 'Confirm the address is correct and test the mail link manually.' };
+    if (/^tel:/i.test(destination)) return { title: 'This link starts a phone call', short: 'Starts a phone call', meaning: 'The link opens a phone dialer instead of a page, so the scan did not follow it.', fix: 'Confirm the number is correct and test the link on a phone.' };
+    return { title: destination ? `May lead to ${destinationLabel(destination)}` : cleanLabel(node.label), short: destination ? destinationLabel(destination) : cleanLabel(node.label), meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
   }
   if (node.kind === 'control') {
+    const name = cleanLabel(node.label);
     const interaction = node.data.interaction as { tested?: boolean; outcome?: string; summary?: string; reason?: string } | undefined;
-    if (interaction?.tested) return { title: node.label, short: node.label, meaning: `This control was activated once in a controlled browser. ${interaction.summary ?? ''}`.trim(), fix: 'Open its journey to see the recorded outcome. Actions beyond that route remain untested.' };
+    if (interaction?.tested) return { title: name, short: name, meaning: `This control was activated once in a controlled browser. ${cleanQuoted(interaction.summary ?? '')}`.trim(), fix: 'Open its journey to see the recorded outcome. Actions beyond that route remain untested.' };
     if (interaction && !interaction.tested) {
       const reason = interaction.reason;
-      if (reason === 'requires-authorization') return { title: node.label, short: node.label, meaning: 'This submit control was not activated because it could send data. Enable “Test form controls” before a scan to record what it does.', fix: 'Allow form testing and rescan if you want its validation or client-side behavior observed. Data-changing requests stay blocked.' };
-      if (reason === 'consequential-action') return { title: node.label, short: node.label, meaning: 'This control was not activated because its name suggests a consequential action such as deleting, sending, or paying.', fix: 'Test it manually in a safe environment.' };
-      return { title: node.label, short: node.label, meaning: 'This control was left untested because the scan reached its interaction limit.', fix: 'Run a focused scan or test it manually to record its behavior.' };
+      if (reason === 'requires-authorization') return { title: name, short: name, meaning: 'This submit control was not activated because it could send data. Enable “Test form controls” before a scan to record what it does.', fix: 'Allow form testing and rescan if you want its validation or client-side behavior observed. Data-changing requests stay blocked.' };
+      if (reason === 'consequential-action') return { title: name, short: name, meaning: 'This control was not activated because its name suggests a consequential action such as deleting, sending, or paying.', fix: 'Test it manually in a safe environment.' };
+      return { title: name, short: name, meaning: 'This control was left untested because the scan reached its interaction limit.', fix: 'Run a focused scan or test it manually to record its behavior.' };
     }
-    return { title: node.label, short: node.label, meaning: `A ${str(node, 'role') || 'control'} found on the rendered page. Its presence does not mean its full behavior has been tested.`, fix: 'Review its name, keyboard behavior, and destination in context.' };
+    return { title: name, short: name, meaning: `A ${str(node, 'role') || 'control'} found on the rendered page. Its presence does not mean its full behavior has been tested.`, fix: 'Review its name, keyboard behavior, and destination in context.' };
   }
   return { title: node.label, short: node.label, meaning: node.kind === 'site' ? 'The starting point for this website’s scanned pages and connected findings.' : 'A page visited by the scanner. Connected points show the controls and findings recorded here.', fix: 'Explore a connected point or switch to the list for every recorded element.' };
 }
@@ -180,8 +238,21 @@ export type Journey = {
 
 function outcomeCaption(flow: GraphNode): string {
   const step = lastStepOf(flow);
-  if (!isTestedFlow(flow) || !step) return 'Possible destination · action not tested';
+  if (!isTestedFlow(flow) || !step) {
+    const kind = nonPageDestination(flow);
+    if (kind) return `${kind.caption} · action not tested`;
+    return 'Possible destination · action not tested';
+  }
   return outcomeCaptionOf(step);
+}
+
+/** Script, email, and phone links have no page destination to inspect. */
+function nonPageDestination(flow: GraphNode): { caption: string; summary: string } | null {
+  const value = str(flow, 'destinationUrl');
+  if (/^javascript:/i.test(value)) return { caption: 'In-page script', summary: 'This link runs a script on the same page. There is no page destination to inspect, and the action itself was not activated.' };
+  if (/^mailto:/i.test(value)) return { caption: 'Email link', summary: 'This link opens an email draft. There is no page destination to inspect, and the action itself was not activated.' };
+  if (/^tel:/i.test(value)) return { caption: 'Phone link', summary: 'This link starts a phone call. There is no page destination to inspect, and the action itself was not activated.' };
+  return null;
 }
 
 function testedFlowFor(graph: SiteGraph, controlId: string): GraphNode | undefined {
@@ -240,17 +311,19 @@ export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
     return true;
   });
   const lastStep = flow ? lastStepOf(flow) : undefined;
+  const nonPage = flow ? nonPageDestination(flow) : null;
   const destinationLabelText = lastStep?.destinationUrl ? destinationLabel(lastStep.destinationUrl) : 'its destination';
   const summary = !flow
     ? 'This control has no exposed destination. Its script-driven behavior needs an interaction test.'
     : !observed
-      ? (!destination ? 'A destination was found, but it was outside this scan. Its outcome is unknown.'
+      ? (nonPage ? nonPage.summary
+        : !destination ? 'A destination was found, but it was outside this scan. Its outcome is unknown.'
         : destination.status === 'error' ? 'The destination could not be loaded during this scan. Review its recorded browser evidence.'
           : findings.length ? `${findings.length} observations on this route need review. They do not prove the click fails.`
             : 'The destination was inspected. No findings were recorded there in this scan; the click itself is untested.')
       : lastStep?.outcome === 'navigated' ? `The action was activated once and navigated to ${destinationLabelText}.${hops > 0 ? ` The route continued through ${hops} more independently inspected page${hops === 1 ? '' : 's'}.` : destination ? ' That page was inspected independently.' : ' The destination is outside this scan.'} Actions beyond this recorded route remain untested.`
         : lastStep?.outcome === 'content-changed' ? 'The action was activated once and changed the page. Revealed controls stay untested unless a follow-up was recorded.'
-          : `The action was activated once: ${lastStep?.summary ?? 'outcome recorded'}`;
+          : `The action was activated once: ${lastStep?.summary ? cleanQuoted(lastStep.summary) : 'outcome recorded'}`;
   return { control, steps, findings, edges, summary, observed };
 }
 

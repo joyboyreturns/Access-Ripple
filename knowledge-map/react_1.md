@@ -15,6 +15,7 @@ tags:
 - [[App.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[Landing.tsx]] - `imports_from` [EXTRACTED]
+- [[SelectMenu.tsx]] - `imports_from` [EXTRACTED]
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 
