@@ -14,14 +14,14 @@ export default function GraphCanvas({ journey, onExitJourney, graph, filter, sel
   const drag = useRef<{ id: number; x: number; y: number; view: typeof INITIAL } | null>(null);
   useEffect(() => { if (!stage.current) return; const observer = new ResizeObserver(([e]) => setSize({ w: e.contentRect.width, h: e.contentRect.height })); observer.observe(stage.current); return () => observer.disconnect(); }, []);
   useEffect(() => { setView(INITIAL); }, [graph, journey?.control.id]);
-  const scene = useMemo(() => journey ? {nodes: [...journey.steps.map(s=>s.node), ...journey.findings.slice(0,3)] as ViewNode[], edges: journey.edges} : sceneGraph(graph, filter, focus ? selectedId : undefined), [journey, graph, filter, focus, selectedId]);
+  const scene = useMemo(() => journey ? {nodes: [...journey.steps.map(s=>s.node), ...journey.findings.slice(0,3).map(f=>f.node)] as ViewNode[], edges: journey.edges} : sceneGraph(graph, filter, focus ? selectedId : undefined), [journey, graph, filter, focus, selectedId]);
   const representativeId = scene.nodes.find(n => n.id === selectedId || n.memberIds?.includes(selectedId))?.id ?? selectedId;
   const related = new Set(scene.edges.filter(e => e.source === representativeId || e.target === representativeId).flatMap(e => [e.source, e.target]));
   const positioned = useMemo(() => {
     if (journey) {
       const vertical=size.w<620, count=journey.steps.length;
       return scene.nodes.map((node) => {
-        const index=journey.steps.findIndex(s=>s.node.id===node.id), branch=journey.findings.findIndex(n=>n.id===node.id);
+        const index=journey.steps.findIndex(s=>s.node.id===node.id), branch=journey.findings.findIndex(f=>f.node.id===node.id);
         const x=vertical?(index>=0?size.w*.27:size.w*.76):(index>=0?60+(size.w-120)*index/Math.max(1,count-1):90+(size.w-180)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length)));
         const y=vertical?(index>=0?90+(size.h-210)*index/Math.max(1,count-1):90+(size.h-210)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length))):(index>=0?size.h*.32:size.h*.72);
         return {node,x:size.w/2+(x-size.w/2)*view.zoom+view.panX,y:size.h/2+(y-size.h/2)*view.zoom+view.panY,z:0};

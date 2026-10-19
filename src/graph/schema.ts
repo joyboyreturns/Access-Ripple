@@ -40,6 +40,52 @@ export interface ControlEvidence {
   evidenceLabel: EvidenceLabel;
 }
 
+export type InteractionMode = 'safe' | 'include-submits';
+
+export type InteractionOutcome =
+  | 'navigated'
+  | 'content-changed'
+  | 'dialog-opened'
+  | 'validation-shown'
+  | 'loading'
+  | 'no-visible-change'
+  | 'blocked'
+  | 'failed';
+
+export interface RevealedControlEvidence {
+  name: string;
+  role: string;
+  href?: string;
+}
+
+export interface InteractionStep {
+  controlId: string;
+  label: string;
+  action: 'click';
+  outcome: InteractionOutcome;
+  summary: string;
+  destinationUrl?: string;
+  windowOpened?: string;
+  dialog?: { type: string; message: string };
+  revealed?: RevealedControlEvidence[];
+  errorIds: string[];
+}
+
+export interface InteractionEvidence {
+  id: string;
+  rootControlId: string;
+  mode: InteractionMode;
+  steps: InteractionStep[];
+  evidenceLabel: 'observed';
+}
+
+export type InteractionExclusionReason = 'requires-authorization' | 'consequential-action' | 'budget';
+
+export interface InteractionExclusion {
+  controlId: string;
+  reason: InteractionExclusionReason;
+}
+
 export interface RuntimeErrorEvidence {
   id: string;
   kind: 'page' | 'console' | 'request' | 'http';
@@ -72,6 +118,8 @@ export interface PageEvidence {
   errors: RuntimeErrorEvidence[];
   findings: AccessibilityEvidence[];
   outgoingLinks: string[];
+  interactions: InteractionEvidence[];
+  interactionExclusions?: InteractionExclusion[];
   errorMessage?: string;
 }
 
@@ -83,6 +131,8 @@ export interface ScanLimits {
   maxControlsPerPage: number;
   maxRequestsPerPage?: number;
   maxFindingsPerPage: number;
+  maxInteractionsPerPage: number;
+  maxInteractionsPerScan: number;
 }
 
 export interface ScanProgress {
@@ -105,5 +155,6 @@ export interface ScanResult {
   pages: PageEvidence[];
   graph?: SiteGraph;
   previousScanId?: string;
+  interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
   error?: { code: string; message: string; retryable: boolean };
 }

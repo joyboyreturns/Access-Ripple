@@ -6,7 +6,7 @@ Verified on 19 October 2026. This records mechanical evidence, not a completed l
 
 - `npm run typecheck` — passed for API, tests, and React code.
 - `npm run build` — passed for the Vite frontend and compiled backend.
-- `npm test` — 29 tests passed across 7 files. Includes URL safety, graph generation/comparison, ZIP export, API behavior, a controlled browser fixture, presentation grouping, and the bodyless-rescan regression.
+- `npm test` — 49 tests passed across 8 files. Includes URL safety, graph generation/comparison, ZIP export, API behavior, interaction classification policy, controlled browser fixtures with real observed interactions, presentation grouping and observed-route tracing, and the bodyless-rescan regression.
 
 ## Real browser checks
 
@@ -52,4 +52,17 @@ The learner’s final exploration, guided code tour, and readiness approval rema
 - Live Google browser verification: 2 pages, 39 visible controls, 31 possible journeys, 14 accessibility findings, 3 browser diagnostics. Dynamic content can change these counts. Search for Images displayed four ordered steps and five destination observations. Selecting Low text contrast kept the journey and opened the readable guidance.
 - Verified 390px phone viewport with document width 390px, four numbered steps, six directional edges, working light/dark toggle. Graph labels measure 15px on phone and 16px on desktop. Fixed the non-clickable gap between graph dots and label cards.
 - Type checks, production build, and all 34 tests across seven files pass. Browser fixture coverage includes checkout → payment destination error context, export, rescan, and corrected form inference. New unit coverage includes unknown destinations, script controls, exact control findings, and unrelated warning exclusion.
-- This is a read-only evidence map. It does not yet execute arbitrary multi-step interactions or identify the root cause of every website failure.
+- That revision was a read-only evidence map; recorded browser interaction testing was added in the section below.
+
+## Observed interaction testing revision
+
+Verified on 19 October 2026 with the same local-first scanning service.
+
+- Safe controls are now activated once each in disposable browser pages and their real outcome is recorded: `navigated`, `content-changed`, `dialog-opened`, `validation-shown`, `loading`, `no-visible-change`, `blocked`, or `failed`. A follow-up click follows at most one revealed same-origin continuation link, which is how a script-driven reveal enters the crawl.
+- Interaction policy: form and submit controls are activated only when the scan was explicitly authorized (studio tick-box, or `authorizeSubmit: true` in the API). Non-GET/HEAD requests, cross-origin navigations, and consequential actions (delete, send, pay, sign out, and similar names) are never activated — the former are blocked and recorded, the latter are explained as untested with a reason. Authorization mode is preserved across rescans unless explicitly changed.
+- Graph and journey changes: activated controls get observed flow nodes with outcome, step summaries, and a `links-to` edge to the independently inspected destination. Untested or inferred routes keep their original labels. Observed errors connect to the triggering action with a `failed-at` edge; unrelated page warnings remain page-level context, not causes.
+- Controlled sample evidence (authorized scan through the running dev service): 4 pages inspected including `/sample/cart`, which is only reachable through the JavaScript reveal (`Add to cart` → `View cart · 1 item`); 10 observed actions; 1 consequential exclusion (`Remove item`); 12-step observed journey catalogue → cart → checkout → payment → retry. Safe mode records 9 actions and skips `Check details` with reason `requires-authorization`. The simulated payment gateway timeout is attributed to the action that navigated to the payment page.
+- Studio evidence: consent tick-box visible and unchecked by default; report reads “10 actions activated once in a disposable browser … 1 control stayed untested”. Selected “Add to cart” shows “activated once in a controlled browser” with captioned steps (“Observed navigation · action tested once”, “Continue · activated in a controlled browser”, “Destination · independently inspected”), and route findings are captioned “Recorded on the destination page · context, not proof this action fails”.
+- Phone check at 390×844: document width matched the viewport (390 = 390), consent control measured 354×33 CSS pixels, interaction report 360×134, no horizontal overflow.
+- Attribution hardening found during verification: page-load 404s were racing into the first interaction step. The interaction page now waits for its own load to settle before observing, so errors are attributed only when they occur after the activation. Exemption reasons are now classified before budget limits, so a consequential control is never mislabeled as “budget”.
+- Known boundary: only recorded controls on inspected pages are activated, once each, within a ten-action budget; text entry, real payments, and destructive actions remain out of scope, and a `no-visible-change` outcome may still reflect missing state rather than a broken control.

@@ -1,4 +1,4 @@
-import type { GraphNode, SiteGraph } from './types.js';
+import type { GraphNode, InteractionStepView, SiteGraph } from './types.js';
 
 export type GraphFilter = 'overview' | 'pages' | 'controls' | 'issues' | 'flows';
 export type ViewNode = GraphNode & { memberIds?: string[] };
@@ -21,24 +21,94 @@ export function str(node: GraphNode | undefined, key: string): string {
   return typeof value === 'string' || typeof value === 'number' ? String(value) : '';
 }
 
+function stepsOf(node: GraphNode): InteractionStepView[] {
+  return Array.isArray(node.data.steps) ? node.data.steps as InteractionStepView[] : [];
+}
+
+function lastStepOf(node: GraphNode): InteractionStepView | undefined {
+  const steps = stepsOf(node);
+  return steps[steps.length - 1];
+}
+
+function isTestedFlow(node: GraphNode): boolean {
+  return node.kind === 'flow' && node.data.tested === true && Boolean(lastStepOf(node));
+}
+
+const outcomeShorts: Record<string, string> = {
+  'navigated': 'Leads to destination',
+  'content-changed': 'Reveals new content',
+  'dialog-opened': 'Opens a dialog',
+  'validation-shown': 'Stops at validation',
+  'loading': 'Shows a loading state',
+  'no-visible-change': 'No visible change',
+  'blocked': 'Data request blocked',
+  'failed': 'Interaction failed',
+};
+
+const outcomeCaptions: Record<string, string> = {
+  'navigated': 'Observed navigation · action tested once',
+  'content-changed': 'Observed content change · action tested once',
+  'dialog-opened': 'Observed dialog · action tested once',
+  'validation-shown': 'Observed validation · submission stopped',
+  'loading': 'Observed loading state · action tested once',
+  'no-visible-change': 'No visible change recorded',
+  'blocked': 'Safety policy · request blocked and recorded',
+  'failed': 'Interaction failed',
+};
+
+function destinationLabel(value: string) { try {const u=new URL(value);return u.pathname==='/'?u.hostname:u.pathname;} catch {return 'Destination not exposed';} }
+
+function flowShort(node: GraphNode): string {
+  const step = lastStepOf(node);
+  if (!isTestedFlow(node) || !step) return '';
+  if (step.outcome === 'navigated' && step.destinationUrl) return `Leads to ${destinationLabel(step.destinationUrl)}`;
+  if (step.outcome === 'content-changed' && step.revealed?.length) return `Reveals ${step.revealed.slice(0, 2).map((item) => `“${item.name}”`).join(' and ')}`.slice(0, 60);
+  return outcomeShorts[step.outcome] ?? 'Recorded outcome';
+}
+
 export function describe(node: GraphNode): Copy {
   if (node.kind === 'accessibility-finding') return copies[str(node, 'ruleId')] ?? { title: node.label, short: node.label, meaning: 'This automated check found a possible barrier. Review the affected element in its page context.', fix: 'Inspect the evidence and the check’s guidance, update the site’s source, then run the scan again.' };
   if (node.kind === 'runtime-error') {
     const code = str(node, 'statusCode');
     const kind = str(node, 'kind');
     const isPolicy = /policy|blocked|ORB|CSP/i.test(node.label);
-    return { title: isPolicy ? 'The browser blocked a resource' : code ? `A resource returned an error (${code})` : kind === 'console' || kind === 'page' ? 'The browser reported a script problem' : 'A request did not finish', short: isPolicy ? 'Blocked browser resource' : 'Browser warning', meaning: isPolicy ? 'A browser security policy stopped a request or script. This is a diagnostic signal; it does not by itself prove a visitor-facing failure.' : 'A browser event occurred while this page loaded. Check whether it affects a real visitor before treating it as a broken journey.', fix: 'Inspect the request or script in browser developer tools. Confirm the visible impact before changing server or security settings.' };
+    return { title: isPolicy ? 'The browser blocked a resource' : code ? `A resource returned an error (${code})` : kind === 'console' || kind === 'page' ? 'The browser reported a script problem' : 'A request did not finish', short: isPolicy ? 'Blocked browser resource' : 'Browser warning', meaning: isPolicy ? 'A browser security policy stopped a request or script. This is a diagnostic signal; it does not by itself prove a visitor-facing failure. If it is connected to an observed action, it was recorded while that action ran.' : 'A browser event occurred while this page loaded. Check whether it affects a real visitor before treating it as a broken journey.', fix: 'Inspect the request or script in browser developer tools. Confirm the visible impact before changing server or security settings.' };
   }
-  if (node.kind === 'flow') return { title: str(node, 'destinationUrl') || node.label, short: destinationLabel(str(node, 'destinationUrl')), meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
-  if (node.kind === 'control') return { title: node.label, short: node.label, meaning: `A ${str(node, 'role') || 'control'} found on the rendered page. Its presence does not mean its full behavior has been tested.`, fix: 'Review its name, keyboard behavior, and destination in context.' };
+  if (node.kind === 'flow') {
+    const step = lastStepOf(node);
+    if (isTestedFlow(node) && step) {
+      const summary = str(node, 'summary');
+      if (step.outcome === 'navigated') return { title: step.destinationUrl ? `Leads to ${destinationLabel(step.destinationUrl)}` : 'Led to another page', short: flowShort(node), meaning: `The action was activated once in a controlled browser and it navigated. ${summary}`, fix: 'Review the destination in context. Actions beyond this recorded route were not tested.' };
+      if (step.outcome === 'content-changed') return { title: 'The action changed the page', short: flowShort(node), meaning: `The action was activated once in a controlled browser. ${summary}`, fix: 'Check the revealed controls and content with keyboard and screen-reader testing, then review the route.' };
+      if (step.outcome === 'dialog-opened') return { title: 'The action opened a dialog', short: 'Opens a dialog', meaning: `The action was activated once in a controlled browser and opened a dialog. ${summary}`, fix: 'Verify the dialog’s focus handling, Escape behavior, and accessible name manually.' };
+      if (step.outcome === 'validation-shown') return { title: 'The form stopped at validation', short: 'Stops at validation', meaning: `The submit control was activated with empty test values. The browser stopped submission and marked fields that need attention. No data was sent.`, fix: 'Check the validation messages are announced and associated with their fields. Fill the form manually to test the full submission.' };
+      if (step.outcome === 'loading') return { title: 'The action showed a loading state', short: 'Shows a loading state', meaning: `The action was activated once and entered a loading or disabled state while the page responded. The scan’s observation window may end before the result.`, fix: 'Confirm the loading state is announced to assistive technology and always resolves or times out.' };
+      if (step.outcome === 'blocked') return { title: 'A data-changing request was blocked', short: 'Data request blocked', meaning: `The action ran in a controlled browser but tried to send a data-changing request. AccessRipple blocked it, so nothing left this computer.`, fix: 'If you own the website, test this action manually in a safe environment. The blocked request shows what the control intended to do.' };
+      if (step.outcome === 'no-visible-change') return { title: 'No visible change was recorded', short: 'No visible change', meaning: `The action was activated once in a controlled browser, but nothing visible changed within the observation window. It may depend on values, timing, or state the scan does not have.`, fix: 'Test the action manually with realistic input before deciding whether it is broken.' };
+      return { title: 'The action could not be activated', short: 'Interaction failed', meaning: `The action was activated in a controlled browser but recorded a failure. ${summary}`, fix: 'Check the control’s behavior and any connected browser evidence manually.' };
+    }
+    const reason = str(node, 'reason');
+    if (reason === 'requires-authorization') return { title: 'This form control was not activated', short: 'Needs your permission', meaning: 'Submit controls can send data, so AccessRipple only activates them when you explicitly allow form testing before the scan.', fix: 'Enable “Test form controls” in the scan options and rescan. Requests that change data are still blocked and recorded.' };
+    if (reason === 'consequential-action') return { title: 'This action was not activated', short: 'Consequential action', meaning: 'The control’s name suggests it could delete, send, cancel, pay, or change something. AccessRipple never activates these actions.', fix: 'Test this action manually in a safe environment with realistic data.' };
+    return { title: str(node, 'destinationUrl') || node.label, short: destinationLabel(str(node, 'destinationUrl')), meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
+  }
+  if (node.kind === 'control') {
+    const interaction = node.data.interaction as { tested?: boolean; outcome?: string; summary?: string; reason?: string } | undefined;
+    if (interaction?.tested) return { title: node.label, short: node.label, meaning: `This control was activated once in a controlled browser. ${interaction.summary ?? ''}`.trim(), fix: 'Open its journey to see the recorded outcome. Actions beyond that route remain untested.' };
+    if (interaction && !interaction.tested) {
+      const reason = interaction.reason;
+      if (reason === 'requires-authorization') return { title: node.label, short: node.label, meaning: 'This submit control was not activated because it could send data. Enable “Test form controls” before a scan to record what it does.', fix: 'Allow form testing and rescan if you want its validation or client-side behavior observed. Data-changing requests stay blocked.' };
+      if (reason === 'consequential-action') return { title: node.label, short: node.label, meaning: 'This control was not activated because its name suggests a consequential action such as deleting, sending, or paying.', fix: 'Test it manually in a safe environment.' };
+      return { title: node.label, short: node.label, meaning: 'This control was left untested because the scan reached its interaction limit.', fix: 'Run a focused scan or test it manually to record its behavior.' };
+    }
+    return { title: node.label, short: node.label, meaning: `A ${str(node, 'role') || 'control'} found on the rendered page. Its presence does not mean its full behavior has been tested.`, fix: 'Review its name, keyboard behavior, and destination in context.' };
+  }
   return { title: node.label, short: node.label, meaning: node.kind === 'site' ? 'The starting point for this website’s scanned pages and connected findings.' : 'A page visited by the scanner. Connected points show the controls and findings recorded here.', fix: 'Explore a connected point or switch to the list for every recorded element.' };
 }
 
-function destinationLabel(value: string) { try {const u=new URL(value);return u.pathname==='/'?u.hostname:u.pathname;} catch {return 'Destination not exposed';} }
-
 export function isIssue(node: GraphNode) { return node.kind === 'accessibility-finding' || node.kind === 'runtime-error'; }
 export function severity(node: GraphNode) { return str(node, 'impact') || (node.kind === 'runtime-error' ? 'diagnostic' : 'info'); }
-export function kindName(node: GraphNode) { return ({ site: 'Website', page: 'Page', control: 'Control', flow: 'Possible journey', 'runtime-error': 'Browser signal', 'accessibility-finding': 'Accessibility' })[node.kind]; }
+export function kindName(node: GraphNode) { return ({ site: 'Website', page: 'Page', control: 'Control', flow: 'Observed journey', 'runtime-error': 'Browser signal', 'accessibility-finding': 'Accessibility' })[node.kind]; }
 export function nodeColor(node: GraphNode) { return node.kind === 'accessibility-finding' ? '#e8ae65' : node.kind === 'runtime-error' ? '#e78995' : node.kind === 'page' ? '#b5a5f5' : node.kind === 'flow' ? '#83b9dd' : node.kind === 'control' ? '#98adbb' : '#a7dcc6'; }
 export function pageFor(node: GraphNode, graph: SiteGraph) {
   if (node.kind === 'page') return node;
@@ -83,15 +153,27 @@ export function sceneGraph(graph: SiteGraph, filter: GraphFilter, focusId?: stri
   return { nodes, edges: [...unique.values()] };
 }
 
+export type JourneyFinding = { node: GraphNode; caption: string };
 export type Journey = {
   control: GraphNode;
   steps: { node: GraphNode; caption: string }[];
-  findings: GraphNode[];
+  findings: JourneyFinding[];
   edges: SiteGraph['edges'];
   summary: string;
+  observed: boolean;
 };
 
-/** Follow only recorded relationships. Page findings are context, never proof of a click failure. */
+function outcomeCaption(flow: GraphNode): string {
+  const step = lastStepOf(flow);
+  if (!isTestedFlow(flow) || !step) return 'Possible destination · action not tested';
+  return outcomeCaptions[step.outcome] ?? 'Recorded outcome';
+}
+
+function testedFlowFor(graph: SiteGraph, controlId: string): GraphNode | undefined {
+  return graph.nodes.find(n => n.kind === 'flow' && isTestedFlow(n) && graph.edges.some(e => e.source === controlId && e.target === n.id && e.evidenceLabel === 'observed'));
+}
+
+/** Follow only recorded relationships. Observed outcomes are chained; inference never pretends to be a test. */
 export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
   const root = graph.nodes.find(n => n.id === rootId);
   const control = root?.kind === 'control' ? root : root?.kind === 'flow'
@@ -99,33 +181,75 @@ export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
   if (!control) return null;
   const source = pageFor(control, graph);
   const flows = graph.nodes.filter(n => n.kind === 'flow' && graph.edges.some(e => e.source === control.id && e.target === n.id));
-  const flow = (root?.kind === 'flow' ? flows.find(n => n.id === root.id) : flows[0]);
+  const observedFlow = flows.find(n => isTestedFlow(n));
+  const flow = (root?.kind === 'flow' ? flows.find(n => n.id === root.id) : observedFlow) ?? flows[0];
   const destination = flow ? graph.nodes.find(n => n.kind === 'page' && graph.edges.some(e => e.source === flow.id && e.target === n.id && e.kind === 'links-to')) : undefined;
   const steps: Journey['steps'] = [];
   if (source) steps.push({ node: source, caption: 'Start · page inspected' });
-  steps.push({ node: control, caption: 'Your action · control found, not activated' });
-  if (flow) steps.push({ node: flow, caption: 'Possible destination · action not tested' });
+  steps.push({ node: control, caption: observedFlow ? 'Your action · activated in a controlled browser' : 'Your action · control found, not activated' });
+  if (flow) steps.push({ node: flow, caption: outcomeCaption(flow) });
   if (destination && destination.id !== source?.id) steps.push({ node: destination, caption: 'Destination · independently inspected' });
-  const selectors = [str(control, 'selector')].filter(Boolean);
-  const findings = graph.nodes.filter(n => isIssue(n) && (
-    (destination && graph.edges.some(e => e.source === destination.id && e.target === n.id)) ||
-    graph.edges.some(e => (e.source === control.id || e.source === flow?.id) && e.target === n.id) ||
-    (source && graph.edges.some(e => e.source === source.id && e.target === n.id) &&
-      Array.isArray(n.data.targets) && n.data.targets.some(t => selectors.includes(String(t))))
-  )).sort((a,b)=>Number(a.kind==='runtime-error')-Number(b.kind==='runtime-error'));
-  const ids = new Set([...steps.map(s => s.node.id), ...findings.map(n => n.id)]);
+  const observed = Boolean(flow && isTestedFlow(flow));
+  const visited = new Set(steps.map(s => s.node.id));
+  let page = destination && observed ? destination : undefined;
+  let hops = 0;
+  while (page && hops < 3) {
+    const next = nextObservedHop(graph, page, visited);
+    if (!next) break;
+    steps.push({ node: next.control, caption: 'Continue · activated in a controlled browser' });
+    steps.push({ node: next.flow, caption: outcomeCaption(next.flow) });
+    visited.add(next.control.id); visited.add(next.flow.id);
+    if (!next.destination) break;
+    steps.push({ node: next.destination, caption: 'Destination · independently inspected' });
+    visited.add(next.destination.id);
+    page = next.destination;
+    hops++;
+  }
+  const stepIds = new Set(steps.map(s => s.node.id));
+  const flowErrorIds = new Set(flow ? (Array.isArray(flow.data.errorIds) ? flow.data.errorIds.map(String) : []) : []);
+  const found = new Map<string, JourneyFinding>();
+  for (const node of graph.nodes) {
+    if (!isIssue(node)) continue;
+    if (flowErrorIds.has(node.id)) { found.set(node.id, { node, caption: 'Recorded while this action ran' }); continue; }
+    if (graph.edges.some(e => e.source === control.id && e.target === node.id)) { found.set(node.id, { node, caption: 'Recorded on this control' }); continue; }
+    const owner = steps.find(s => s.node.kind === 'page' && graph.edges.some(e => e.source === s.node.id && e.target === node.id));
+    if (owner && owner.node.id !== source?.id) found.set(node.id, { node, caption: 'Recorded on the destination page · context, not proof this action fails' });
+  }
+  const findings = [...found.values()].sort((a, b) => Number(a.node.kind === 'runtime-error') - Number(b.node.kind === 'runtime-error'));
   const edges = graph.edges.filter(e => {
-    if (!ids.has(e.source) || !ids.has(e.target)) return false;
-    if (findings.some(n=>n.id===e.target)) {
-      if (e.source===flow?.id && destination && graph.edges.some(other=>other.source===destination.id&&other.target===e.target)) return false;
-      if (e.source===source?.id && graph.edges.some(other=>other.source===control.id&&other.target===e.target)) return false;
+    if (!stepIds.has(e.source) || !stepIds.has(e.target)) return false;
+    if (findings.some(item => item.node.id === e.target)) {
+      if (e.source === flow?.id && destination && graph.edges.some(other => other.source === destination.id && other.target === e.target)) return false;
+      if (e.source === source?.id && graph.edges.some(other => other.source === control.id && other.target === e.target)) return false;
     }
     return true;
   });
-  return { control, steps, findings, edges, summary: !flow
+  const lastStep = flow ? lastStepOf(flow) : undefined;
+  const destinationLabelText = lastStep?.destinationUrl ? destinationLabel(lastStep.destinationUrl) : 'its destination';
+  const summary = !flow
     ? 'This control has no exposed destination. Its script-driven behavior needs an interaction test.'
-    : !destination ? 'A destination was found, but it was outside this scan. Its outcome is unknown.'
-    : destination.status === 'error' ? 'The destination could not be loaded during this scan. Review its recorded browser evidence.'
-    : findings.length ? `${findings.length} observations on this route need review. They do not prove the click fails.`
-    : 'The destination was inspected. No findings were recorded there in this scan; the click itself is untested.' };
+    : !observed
+      ? (!destination ? 'A destination was found, but it was outside this scan. Its outcome is unknown.'
+        : destination.status === 'error' ? 'The destination could not be loaded during this scan. Review its recorded browser evidence.'
+          : findings.length ? `${findings.length} observations on this route need review. They do not prove the click fails.`
+            : 'The destination was inspected. No findings were recorded there in this scan; the click itself is untested.')
+      : lastStep?.outcome === 'navigated' ? `The action was activated once and navigated to ${destinationLabelText}.${hops > 0 ? ` The route continued through ${hops} more independently inspected page${hops === 1 ? '' : 's'}.` : destination ? ' That page was inspected independently.' : ' The destination is outside this scan.'} Actions beyond this recorded route remain untested.`
+        : lastStep?.outcome === 'content-changed' ? 'The action was activated once and changed the page. Revealed controls stay untested unless a follow-up was recorded.'
+          : `The action was activated once: ${lastStep?.summary ?? 'outcome recorded'}`;
+  return { control, steps, findings, edges, summary, observed };
+}
+
+function nextObservedHop(graph: SiteGraph, page: GraphNode, visited: Set<string>): { control: GraphNode; flow: GraphNode; destination?: GraphNode } | null {
+  const controls = graph.nodes.filter(n => n.kind === 'control' && graph.edges.some(e => e.source === page.id && e.target === n.id && e.kind === 'has-control'));
+  const candidates = controls.flatMap((control) => {
+    const flow = testedFlowFor(graph, control.id);
+    if (!flow || visited.has(control.id) || visited.has(flow.id)) return [];
+    const destination = graph.nodes.find(n => n.kind === 'page' && graph.edges.some(e => e.source === flow.id && e.target === n.id && e.kind === 'links-to'));
+    if (destination && (destination.id === page.id || visited.has(destination.id))) return [];
+    const name = control.label.toLowerCase();
+    const score = (destination ? 3 : 0) + (/checkout|payment|cart|continue|proceed|next|view|start|begin/.test(name) ? 2 : 0);
+    return [{ control, flow, destination, score }];
+  }).sort((a, b) => b.score - a.score);
+  const best = candidates[0];
+  return best ? { control: best.control, flow: best.flow, destination: best.destination } : null;
 }

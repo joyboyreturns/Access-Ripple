@@ -6,7 +6,7 @@ import type { ScanResult } from '../../src/graph/schema.js';
 
 const scan: ScanResult = {
   id: 'export-scan', createdAt: '2026-10-19T00:00:00.000Z', updatedAt: '2026-10-19T00:00:00.000Z', status: 'complete', inputUrl: 'https://shop.example/', canonicalOrigin: 'https://shop.example',
-  limits: { maxPages: 5, maxDepth: 2, navigationTimeoutMs: 20_000, totalTimeoutMs: 60_000, maxControlsPerPage: 200, maxRequestsPerPage: 300, maxFindingsPerPage: 100 }, progress: { completedPages: 1, totalPageLimit: 5, message: 'done' }, pages: [{ id: 'page1', url: 'https://shop.example/', title: 'Shop', status: 'complete', depth: 0, controls: [], errors: [], findings: [], outgoingLinks: [] }],
+  limits: { maxPages: 5, maxDepth: 2, navigationTimeoutMs: 20_000, totalTimeoutMs: 60_000, maxControlsPerPage: 200, maxRequestsPerPage: 300, maxFindingsPerPage: 100, maxInteractionsPerPage: 4, maxInteractionsPerScan: 10 }, progress: { completedPages: 1, totalPageLimit: 5, message: 'done' }, pages: [{ id: 'page1', url: 'https://shop.example/', title: 'Shop', status: 'complete', depth: 0, controls: [], errors: [], findings: [], outgoingLinks: [], interactions: [] }],
 };
 
 describe('Obsidian export', () => {

@@ -7,9 +7,9 @@ Start the full app with `npm run dev`. Run a real Google scan once and keep the 
 ## Recording route
 
 - **0:00–0:15 — The idea.** Show the video-led introduction. “AccessRipple helps developers see website journeys and accessibility barriers as connected, understandable evidence.”
-- **0:15–1:15 — A real browser scan.** Open the studio and choose **Rescan and compare**. “This earlier result came from a real scan. I’m checking the same public URL again now.” Allow up to a minute for the bounded scan; narrate the five-page limit and the fact that actions are not activated.
+- **0:15–1:15 — A real browser scan.** Open the studio and choose **Rescan and compare**. “This earlier result came from a real scan. I’m checking the same public URL again now.” Allow up to a minute for the bounded scan; narrate the five-page limit, and that safe controls are activated once each in a disposable browser while form submissions need permission.
 - **1:15–1:45 — Understand an issue.** Select a grouped finding. Read its human impact and suggested change. Open developer evidence to show its real target. Rotate the map and focus the neighborhood.
-- **1:45–2:05 — Explore the whole inventory.** Switch to **List**, choose **Controls**, search for a visible control, and select it. Explain that possible destinations remain inferred or not tested.
+- **1:45–2:05 — Follow an observed journey.** Switch to **Controls** and select a button such as **Add to cart** or **Continue to payment**. Walk the numbered route: “activated in a controlled browser”, “observed navigation”, “destination independently inspected”. Point out that steps beyond the recorded route stay untested.
 - **2:05–2:25 — Keep the useful result.** Show the comparison labels and export the Obsidian vault. Explain that an absent finding is “no longer observed,” not proof that a real website was fixed.
 - **2:25–2:40 — The purpose and boundary.** “The goal is a web that more people can use. Automated checks help us start; keyboard, screen-reader, and human testing complete the picture.”
 

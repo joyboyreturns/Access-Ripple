@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Northstar · Catalogue</title>
+  <style>
+    :root{font-family:system-ui,sans-serif;color:#182522;background:#edf3ef}body{margin:0}.shell{max-width:880px;margin:42px auto;padding:24px}.brand{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#39766b}.card{background:#fff;border:1px solid #dce7e1;border-radius:18px;padding:25px;box-shadow:0 10px 35px #284c3c0c;margin-top:22px}h1{font-size:30px;margin:6px 0 8px}.small{color:#67736f;font-size:13px;line-height:1.55}.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid #e5ece7}.price{font-weight:700}.button{display:inline-block;padding:11px 15px;border:1px solid #176b5c33;border-radius:9px;background:#176b5c;color:#fff;font:inherit;font-weight:650;text-decoration:none;cursor:pointer}.ghost{background:#fff;color:#176b5c}.button:focus{outline:3px solid #f0aa4b;outline-offset:3px}.message{background:#f4f8f5;border-left:4px solid #87be9b;padding:11px 13px;border-radius:0 8px 8px 0;font-size:13px;margin-top:12px}.links{display:flex;gap:18px;margin-top:22px;font-size:14px}.links a{color:#176b5c}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="brand">Northstar Supply</div>
+    <h1>Everyday essentials</h1>
+    <p class="small">A local demo catalogue. The “Add to cart” button is script-driven: it changes the page and reveals a link with no destination in the original page markup.</p>
+    <section class="card" aria-label="Product">
+      <div class="row"><span>Everyday carry set</span><span class="price">$48.00</span></div>
+      <div class="row">
+        <button class="button" type="button" id="add-to-cart">Add to cart</button>
+        <a class="button ghost" href="/sample/cart" id="view-cart" hidden>View cart · 1 item</a>
+      </div>
+      <p class="message" id="cart-message" hidden>Added to the local demo cart. Nothing was purchased or sent.</p>
+    </section>
+    <nav class="links" aria-label="Catalogue links">
+      <a href="/sample/checkout">Continue to checkout</a>
+    </nav>
+  </main>
+  <script>
+    document.getElementById('add-to-cart').addEventListener('click', () => {
+      document.getElementById('cart-message').hidden = false;
+      document.getElementById('view-cart').hidden = false;
+    });
+  </script>
+</body>
+</html>

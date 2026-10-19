@@ -71,3 +71,11 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Connect affected-control evidence and avoid misleading form destinations.
 - [x] Verify live Google, phone layout, theme switch, production build, and regression suite.
 - [ ] Learner review of the revised interaction and final submission materials.
+
+### User-requested observed interaction revision
+- [x] Activate safe controls once in disposable pages and record real outcomes (navigation, content change, dialog, validation, loading, blocked, failure).
+- [x] Follow one revealed same-origin continuation link so script-driven flows such as catalogue → cart → checkout are observed, not inferred.
+- [x] Gate form/submit controls behind explicit permission; always block data-changing requests and never activate consequential actions.
+- [x] Attribute errors to the triggering action and keep unrelated page warnings as context.
+- [x] Serve the extended checkout sample and verify the full chain, safe and authorized modes, rescan policy, phone layout, 49 tests, typecheck, and production build.
+- [ ] Learner review of the consent wording, observed-journey presentation, and demo script.

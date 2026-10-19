@@ -20,4 +20,14 @@ describe('studio API requests',()=>{
     expect(new Headers(init.headers).get('content-type')).toBe('application/json');
     expect(JSON.parse(String(init.body))).toEqual({url:'https://example.com/'});
   });
+  it('carries the form-testing permission into new scans and rescans',async()=>{
+    const fetch=vi.fn().mockResolvedValue({ok:true,json:async()=>({scanId:'next'})});
+    vi.stubGlobal('fetch',fetch);
+    await createScan({url:'https://example.com/',authorizeSubmit:true});
+    expect(JSON.parse(String((fetch.mock.calls[0]![1] as RequestInit).body))).toEqual({url:'https://example.com/',authorizeSubmit:true});
+    await rescan('old',{authorizeSubmit:false});
+    const init=fetch.mock.calls[1]![1] as RequestInit;
+    expect(new Headers(init.headers).get('content-type')).toBe('application/json');
+    expect(JSON.parse(String(init.body))).toEqual({authorizeSubmit:false});
+  });
 });

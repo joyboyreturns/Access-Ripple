@@ -4,7 +4,9 @@ AccessRipple is a developer tool for exploring how a website is connected: pages
 
 ## Current build
 
-The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a complete searchable inventory, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results. A controlled checkout fixture remains in the backend for regression testing; it never sends a payment.
+The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a complete searchable inventory, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results.
+
+The studio also tests a bounded set of safe controls once each in disposable browser pages and records what actually happened: navigation, content changes, dialogs, validation, loading states, blocked requests, and failures. Observed outcomes replace inference for those controls, and a selected action shows its recorded route across independently inspected pages. Form and submit controls wait for explicit permission, requests that would change data are always blocked and recorded, and consequential actions such as delete, send, or pay are never activated. A controlled checkout fixture in the backend demonstrates the whole chain (catalogue → cart → checkout → payment); it never sends a payment or collects data.
 
 ## Run the full app
 
@@ -16,7 +18,7 @@ npx playwright install chromium
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph.
+Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph. Before mapping, you can tick **Test form and submit controls too** to let the scanner activate submit controls as well; requests that would send or change data stay blocked either way.
 
 The decorative video and fonts are served locally. Video motion can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect while the local scanner still has the result. No sample graph is seeded into the interface.
 
@@ -46,8 +48,9 @@ Use the returned `scanId` with `GET /api/scans/{scanId}`, `/graph`, and `/export
 
 - The service binds to loopback and is intended for local development only.
 - Scans are bounded to five same-origin pages, two links deep, with per-page and overall time limits.
-- External websites are inspected but not operated: no form submission, arbitrary button clicks, purchases, messages, account changes, or deletion.
-- Link destinations without an executed action are marked inferred; browser/request failures are marked observed only when actually seen.
+- A bounded set of safe controls (ordinary buttons and same-site links) is activated once each in disposable browser pages. Form and submit controls are activated only when the scan explicitly allows it; a tick-box in the studio records that permission, and without it the rescan keeps the previous choice.
+- Data-changing requests (anything other than GET/HEAD) and navigations outside the scanned website are always blocked and recorded, even with permission. Consequential actions such as delete, remove, send, pay, or sign out are never activated.
+- Outcomes are labeled observed only when the browser recorded them; link and form destinations that were never activated remain inferred or not tested. Errors are attributed to the action that ran when they occurred, and unrelated page warnings stay context.
 - Private and reserved network addresses are blocked. This local proof of concept is not a hardened public scanning service; do not expose it to the internet.
 - Automated accessibility checks cover a useful subset of barriers; they do not certify accessibility or discover every bug.
 - Scan results stay in memory until the service restarts; export a vault to keep them.

@@ -1,8 +1,9 @@
-import { createHash, randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { safeDisplayUrl, assertSafeUrl } from './url-safety.js';
-import type { AccessibilityEvidence, ControlEvidence, PageEvidence, RuntimeErrorEvidence, ScanLimits, ScanResult } from '../graph/schema.js';
+import { errorEvidence, stableId } from './evidence.js';
+import { BLOCKED_PATH, runInteractions } from './interaction.js';
+import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanLimits, ScanResult } from '../graph/schema.js';
 import { buildGraph } from '../graph/build-graph.js';
 
 const require = createRequire(import.meta.url);
@@ -15,8 +16,9 @@ const DEFAULT_LIMITS: ScanLimits = {
   maxControlsPerPage: 200,
   maxRequestsPerPage: 300,
   maxFindingsPerPage: 100,
+  maxInteractionsPerPage: 4,
+  maxInteractionsPerScan: 10,
 };
-const BLOCKED_PATH = /(?:^|\/)(?:pay|payment|checkout|purchase|buy|delete|remove|logout|signout|send|transfer|submit|order|confirm|unsubscribe|cancel)(?:\/|$|-)/i;
 
 interface ExtractedControl {
   role: string;
@@ -32,11 +34,8 @@ export interface ScanInput {
   url: string;
   sample?: 'checkout';
   previousScanId?: string;
+  interactionMode?: InteractionMode;
   onUpdate: (scan: ScanResult) => void;
-}
-
-function stableId(prefix: string, text: string): string {
-  return `${prefix}:${createHash('sha1').update(text).digest('hex').slice(0, 14)}`;
 }
 
 function initialResult(input: ScanInput): ScanResult {
@@ -53,21 +52,7 @@ function initialResult(input: ScanInput): ScanResult {
     progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' },
     pages: [],
     previousScanId: input.previousScanId,
-  };
-}
-
-function redactMessage(message: string): string {
-  return message
-    .replace(/https?:\/\/[^\s\"'<>]+/gi, (value) => safeDisplayUrl(value).replace(/[),.;]+$/, ''))
-    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[redacted email]')
-    .slice(0, 240);
-}
-
-function errorEvidence(kind: RuntimeErrorEvidence['kind'], message: string, url?: string, statusCode?: number): RuntimeErrorEvidence {
-  return {
-    id: stableId('runtime-error', `${kind}|${url ? safeDisplayUrl(url) : ''}|${redactMessage(message)}`), kind, message: redactMessage(message),
-    url: url ? safeDisplayUrl(url) : undefined,
-    statusCode, evidenceLabel: 'observed',
+    interactionPolicy: { mode: input.interactionMode ?? 'safe', tested: 0, skipped: 0 },
   };
 }
 
@@ -188,11 +173,24 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
   const startedAt = Date.now();
   const origin = new URL(input.url).origin;
   const sampleOrigin = input.sample ? origin : undefined;
-  const queue: Array<{ url: string; depth: number }> = [{ url: input.url, depth: 0 }];
+  const queue: Array<{ url: string; depth: number }> = [];
   const visited = new Set<string>();
+  const pending = new Set<string>();
+  // Pending work is deduplicated so already-queued destinations never consume the page budget
+  // or crowd out links revealed by an observed interaction.
+  const enqueue = (rawUrl: string, depth: number): void => {
+    const display = safeDisplayUrl(rawUrl);
+    if (visited.has(display) || pending.has(display)) return;
+    if (visited.size + pending.size >= scan.limits.maxPages) return;
+    pending.add(display);
+    queue.push({ url: rawUrl, depth });
+  };
+  enqueue(input.url, 0);
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
   const pages: PageEvidence[] = [];
+  let interactionsUsed = 0;
+  let exclusionsTotal = 0;
 
   try {
     while (queue.length && visited.size < scan.limits.maxPages && Date.now() - startedAt < scan.limits.totalTimeoutMs) {
@@ -204,7 +202,8 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         const pageUrl = safeDisplayUrl(next.url);
         if (visited.has(pageUrl)) continue;
         visited.add(pageUrl);
-        pages.push({ id: stableId('page', pageUrl), url: pageUrl, status: 'skipped', depth: next.depth, controls: [], errors: [errorEvidence('page', error instanceof Error ? error.message : 'URL was blocked.', pageUrl)], findings: [], outgoingLinks: [], errorMessage: 'Destination was blocked by the URL safety policy.' });
+        pending.delete(pageUrl);
+        pages.push({ id: stableId('page', pageUrl), url: pageUrl, status: 'skipped', depth: next.depth, controls: [], errors: [errorEvidence('page', error instanceof Error ? error.message : 'URL was blocked.', pageUrl)], findings: [], outgoingLinks: [], interactions: [], errorMessage: 'Destination was blocked by the URL safety policy.' });
         scan.pages = pages;
         scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, message: 'A destination was blocked by the URL safety policy.' };
         scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
@@ -213,6 +212,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       const displayUrl = safeDisplayUrl(normalized.toString());
       if (visited.has(displayUrl)) continue;
       visited.add(displayUrl);
+      pending.delete(displayUrl);
       scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: displayUrl, message: `Inspecting page ${pages.length + 1}.` };
       scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
       const page = await context.newPage();
@@ -255,6 +255,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             continue;
           }
           visited.add(finalDisplayUrl);
+          pending.delete(finalDisplayUrl);
           pageId = stableId('page', finalDisplayUrl);
         }
         const title = (await page.title()).slice(0, 180) || undefined;
@@ -270,18 +271,52 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             targets.some(target => c.elements[0] === target || c.elements[0].contains(target))).map(c => c.id) }; });
         })()`) as {id:string;controlIds:string[]}[];
         for (const finding of findings) finding.affectedControlIds = affected.find(a => a.id === finding.id)?.controlIds ?? [];
-        entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl) };
+        entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [] };
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {
-            if (queue.length + visited.size >= scan.limits.maxPages) break;
-            if (shouldCrawlLink(href, origin, Boolean(input.sample))) queue.push({ url: href, depth: next.depth + 1 });
+            if (shouldCrawlLink(href, origin, Boolean(input.sample))) enqueue(href, next.depth + 1);
           }
         }
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Page could not be inspected.';
-        entry = { id: pageId, url: displayUrl, status: 'failed', depth: next.depth, controls: [], errors: [...errors.slice(0, 30), errorEvidence('page', message, displayUrl)], findings: [], outgoingLinks: [], errorMessage: message.slice(0, 200) };
+        entry = { id: pageId, url: displayUrl, status: 'failed', depth: next.depth, controls: [], errors: [...errors.slice(0, 30), errorEvidence('page', message, displayUrl)], findings: [], outgoingLinks: [], interactions: [], errorMessage: message.slice(0, 200) };
       } finally {
         await page.close().catch(() => undefined);
+      }
+
+      // Interaction testing: activate a bounded set of recorded controls in disposable pages
+      // and record what actually happened. Data-changing requests are always blocked.
+      if (entry.status === 'complete') {
+        const remaining = scan.limits.maxInteractionsPerScan - interactionsUsed;
+        if (remaining > 0 && Date.now() - startedAt < scan.limits.totalTimeoutMs * 0.62) {
+          const batch = await runInteractions(context, entry, {
+            mode: input.interactionMode ?? 'safe',
+            isSample: Boolean(input.sample),
+            origin,
+            maxPerPage: scan.limits.maxInteractionsPerPage,
+            maxPerScanRemaining: remaining,
+            deadline: startedAt + scan.limits.totalTimeoutMs * 0.78,
+            settleMs: 750,
+            clickTimeoutMs: 2500,
+            onProgress: (message) => {
+              scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: entry.url, message };
+              scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
+            },
+          });
+          interactionsUsed += batch.interactions.length;
+          exclusionsTotal += batch.exclusions.length;
+          entry.interactions = batch.interactions;
+          if (batch.exclusions.length) entry.interactionExclusions = batch.exclusions;
+          for (const error of batch.errors) {
+            if (entry.errors.length >= 120) break;
+            if (!entry.errors.some((existing) => existing.id === error.id)) entry.errors.push(error);
+          }
+          if (next.depth < scan.limits.maxDepth) {
+            for (const href of batch.revealedLinks) {
+              if (shouldCrawlLink(href, origin, Boolean(input.sample))) enqueue(href, next.depth + 1);
+            }
+          }
+        }
       }
       pages.push(entry);
       scan.pages = pages;
@@ -293,11 +328,13 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
     scan.pages = pages;
     scan.status = pages.some((page) => page.status !== 'complete') ? 'partial' : 'complete';
     if (Date.now() - startedAt >= scan.limits.totalTimeoutMs && queue.length) scan.status = 'partial';
+    scan.interactionPolicy = { mode: input.interactionMode ?? 'safe', tested: interactionsUsed, skipped: exclusionsTotal };
     scan.graph = buildGraph(scan);
     scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, message: scan.status === 'complete' ? 'Scan complete.' : 'Scan completed with pages or destinations that could not be inspected.' };
   } catch (error) {
     scan.status = 'failed';
     scan.error = { code: 'SCAN_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan could not complete.', retryable: true };
+    scan.interactionPolicy = { mode: input.interactionMode ?? 'safe', tested: interactionsUsed, skipped: exclusionsTotal };
     if (pages.length) {
       scan.pages = pages;
       scan.graph = buildGraph(scan);

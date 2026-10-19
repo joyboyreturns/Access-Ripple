@@ -18,7 +18,7 @@ export function checkApi() {
   return request<{ status: string; localOnly: boolean }>('/api/health');
 }
 
-export function createScan(input: { url: string } | { sample: 'checkout' }) {
+export function createScan(input: { url: string; authorizeSubmit?: boolean } | { sample: 'checkout' }) {
   return request<{ scanId: string; status: string }>('/api/scans', { method: 'POST', body: JSON.stringify(input) });
 }
 
@@ -30,8 +30,8 @@ export function readGraph(scanId: string) {
   return request<SiteGraph>(`/api/scans/${encodeURIComponent(scanId)}/graph`);
 }
 
-export function rescan(scanId: string) {
-  return request<{ scanId: string }>(`/api/scans/${encodeURIComponent(scanId)}/rescan`, { method: 'POST' });
+export function rescan(scanId: string, input?: { authorizeSubmit?: boolean }) {
+  return request<{ scanId: string }>(`/api/scans/${encodeURIComponent(scanId)}/rescan`, { method: 'POST', ...(input ? { body: JSON.stringify(input) } : {}) });
 }
 
 export function compareScans(currentId: string, previousId: string) {

@@ -6,16 +6,17 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
-import { performScan } from '../scan/worker.js';
+import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { compareScans } from '../graph/compare.js';
 import { createObsidianZip } from '../export/obsidian.js';
-import type { ScanResult } from '../graph/schema.js';
+import type { InteractionMode, ScanResult } from '../graph/schema.js';
 
 const createBody = z.union([
-  z.object({ url: z.string().min(1).max(2048) }).strict(),
-  z.object({ sample: z.literal('checkout') }).strict(),
+  z.object({ url: z.string().min(1).max(2048), authorizeSubmit: z.boolean().optional() }).strict(),
+  z.object({ sample: z.literal('checkout'), authorizeSubmit: z.boolean().optional() }).strict(),
 ]);
+const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
 const allowedOrigins = new Set(['http://localhost:5173', 'http://127.0.0.1:5173']);
 const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
@@ -43,21 +44,23 @@ function canStartScan(address: string): boolean {
   return true;
 }
 
-function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string }, baseUrl: string): ScanResult {
+function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode }, baseUrl: string): ScanResult {
   const id = randomUUID();
   const url = options.sample ? `${baseUrl}/sample/checkout` : options.url;
   const now = new Date().toISOString();
+  const mode: InteractionMode = options.interactionMode ?? 'safe';
   const scan: ScanResult = {
     id, createdAt: now, updatedAt: now, status: 'queued', inputUrl: safeDisplayUrl(url), canonicalOrigin: new URL(url).origin,
-    sample: options.sample, limits: { maxPages: 5, maxDepth: 2, navigationTimeoutMs: 20_000, totalTimeoutMs: 60_000, maxControlsPerPage: 200, maxRequestsPerPage: 300, maxFindingsPerPage: 100 },
-    progress: { completedPages: 0, totalPageLimit: 5, message: 'Waiting for a scan worker.' }, pages: [], previousScanId: options.previousScanId,
+    sample: options.sample, limits: { ...DEFAULT_LIMITS },
+    progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' }, pages: [], previousScanId: options.previousScanId,
+    interactionPolicy: { mode, tested: 0, skipped: 0 },
   };
   scanStore.set(scan);
   schedule(async () => {
     const active = scanStore.get(id);
     if (!active) return;
     try {
-      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, onUpdate: (updated) => scanStore.set(updated) });
+      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, onUpdate: (updated) => scanStore.set(updated) });
     } catch (error) {
       scanStore.set({ ...active, status: 'failed', error: { code: 'SCAN_WORKER_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan worker could not start.', retryable: true }, updatedAt: new Date().toISOString() });
     }
@@ -101,13 +104,16 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
 
   app.get('/sample/checkout', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/checkout.html'), 'utf8')));
   app.get('/sample/payment', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/payment.html'), 'utf8')));
+  app.get('/sample/catalog', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/catalog.html'), 'utf8')));
+  app.get('/sample/cart', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/cart.html'), 'utf8')));
 
   app.post('/api/scans', async (request, reply) => {
     const body = createBody.safeParse(request.body);
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SCAN_REQUEST', message: 'Provide either a public website URL or the built-in checkout sample.', retryable: false } });
     if (!canStartScan(request.ip)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
+    const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
     if ('sample' in body.data) {
-      const scan = launchScan({ sample: 'checkout', url: '' }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', interactionMode }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;
@@ -116,7 +122,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       const unsafe = error instanceof UnsafeUrlError ? error : new UnsafeUrlError('The website address is not allowed.');
       return reply.code(422).send({ error: { code: unsafe.code, message: unsafe.message, retryable: unsafe.code === 'HOST_NOT_FOUND' } });
     }
-    const scan = launchScan({ url: url.toString() }, baseUrl);
+    const scan = launchScan({ url: url.toString(), interactionMode }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
 
@@ -136,9 +142,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/rescan', async (request, reply) => {
     const previous = scanStore.get(request.params.scanId);
     if (!previous) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
+    const body = rescanBody.safeParse(request.body ?? {});
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_RESCAN_REQUEST', message: 'The rescan request could not be read.', retryable: false } });
     if (!canStartScan(request.ip)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
+    const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits'
+      : body.data.authorizeSubmit === false ? 'safe'
+      : previous.interactionPolicy?.mode ?? 'safe';
     if (previous.sample) {
-      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;
@@ -146,7 +157,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     catch {
       return reply.code(422).send({ error: { code: 'URL_NO_LONGER_ALLOWED', message: 'The original address is no longer allowed by the scan safety policy.', retryable: false } });
     }
-    const scan = launchScan({ url: url.toString(), previousScanId: previous.id }, baseUrl);
+    const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
 
