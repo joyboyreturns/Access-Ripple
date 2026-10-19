@@ -2,7 +2,7 @@
 source_file: "src/graph/schema.ts"
 type: "code"
 community: "Community None"
-location: "L88"
+location: "L140"
 tags:
   - graphify/code
   - graphify/EXTRACTED

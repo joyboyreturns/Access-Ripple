@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L44"
+location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -20,6 +20,6 @@ tags:
 - [[rescan()]] - `calls` [EXTRACTED]
 - [[storageSet()]] - `calls` [EXTRACTED]
 - [[submit()]] - `calls` [EXTRACTED]
-- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[waitForScan()_1]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

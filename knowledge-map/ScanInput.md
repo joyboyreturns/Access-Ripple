@@ -2,7 +2,7 @@
 source_file: "src/scan/worker.ts"
 type: "code"
 community: "Community None"
-location: "L30"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,7 @@ tags:
 # ScanInput
 
 ## Connections
+- [[InteractionMode]] - `references` [EXTRACTED]
 - [[ScanResult]] - `references` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 

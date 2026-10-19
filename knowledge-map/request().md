@@ -17,6 +17,7 @@ tags:
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
+- [[listScans()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]

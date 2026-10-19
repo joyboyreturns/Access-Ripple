@@ -28,6 +28,7 @@ tags:
 - [[Saved]] - `contains` [EXTRACTED]
 - [[ScanComparison_1]] - `imports` [EXTRACTED]
 - [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanSummary_1]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
 - [[api.ts]] - `imports_from` [EXTRACTED]
@@ -41,6 +42,7 @@ tags:
 - [[httpUrl()]] - `contains` [EXTRACTED]
 - [[isIssue()]] - `imports` [EXTRACTED]
 - [[kindName()]] - `imports` [EXTRACTED]
+- [[listScans()]] - `imports` [EXTRACTED]
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 - [[matches()]] - `imports` [EXTRACTED]
 - [[motion_1]] - `imports_from` [EXTRACTED]
@@ -58,6 +60,6 @@ tags:
 - [[str()]] - `imports` [EXTRACTED]
 - [[traceJourney()]] - `imports` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
-- [[waitForScan()]] - `imports` [EXTRACTED]
+- [[waitForScan()_1]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

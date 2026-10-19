@@ -15,7 +15,8 @@ tags:
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
+- [[openScan()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
-- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[waitForScan()_1]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

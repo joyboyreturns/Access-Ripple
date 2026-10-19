@@ -12,15 +12,19 @@ tags:
 # safeDisplayUrl()
 
 ## Connections
+- [[activate()]] - `calls` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[build-graph.ts]] - `imports` [EXTRACTED]
 - [[buildGraph()]] - `calls` [EXTRACTED]
 - [[errorEvidence()]] - `calls` [EXTRACTED]
+- [[evidence.ts]] - `imports` [EXTRACTED]
 - [[initialResult()]] - `calls` [EXTRACTED]
 - [[inspectControls()]] - `calls` [EXTRACTED]
+- [[interaction.ts]] - `imports` [EXTRACTED]
 - [[launchScan()]] - `calls` [EXTRACTED]
 - [[performScan()]] - `calls` [EXTRACTED]
 - [[redactMessage()]] - `calls` [EXTRACTED]
+- [[runSingleInteraction()]] - `calls` [EXTRACTED]
 - [[url-safety.ts]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 

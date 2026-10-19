@@ -31,9 +31,12 @@ tags:
 - [[httpUrl()]] - `calls` [EXTRACTED]
 - [[isIssue()]] - `calls` [EXTRACTED]
 - [[kindName()]] - `calls` [EXTRACTED]
+- [[listScans()]] - `calls` [EXTRACTED]
+- [[loadHistory()]] - `contains` [EXTRACTED]
 - [[main.tsx]] - `imports` [EXTRACTED]
 - [[matches()]] - `calls` [EXTRACTED]
 - [[nodeColor()]] - `calls` [EXTRACTED]
+- [[openScan()]] - `contains` [EXTRACTED]
 - [[pageFor()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
@@ -47,6 +50,6 @@ tags:
 - [[studio()]] - `contains` [EXTRACTED]
 - [[submit()]] - `contains` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
-- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[waitForScan()_1]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

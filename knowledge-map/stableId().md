@@ -1,8 +1,8 @@
 ---
-source_file: "src/scan/worker.ts"
+source_file: "src/scan/evidence.ts"
 type: "code"
 community: "Community None"
-location: "L38"
+location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -13,9 +13,12 @@ tags:
 
 ## Connections
 - [[errorEvidence()]] - `calls` [EXTRACTED]
+- [[evidence.ts]] - `contains` [EXTRACTED]
 - [[inspectControls()]] - `calls` [EXTRACTED]
+- [[interaction.ts]] - `imports` [EXTRACTED]
 - [[performScan()]] - `calls` [EXTRACTED]
 - [[runAxe()]] - `calls` [EXTRACTED]
-- [[worker.ts]] - `contains` [EXTRACTED]
+- [[runSingleInteraction()]] - `calls` [EXTRACTED]
+- [[worker.ts]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

@@ -12,11 +12,13 @@ tags:
 # graph.test.ts
 
 ## Connections
+- [[InteractionEvidence]] - `imports` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
 - [[buildGraph()]] - `imports` [EXTRACTED]
 - [[compare.ts]] - `imports_from` [EXTRACTED]
 - [[compareScans()]] - `imports` [EXTRACTED]
+- [[observedInteraction()]] - `contains` [EXTRACTED]
 - [[sample()]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]

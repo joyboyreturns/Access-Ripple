@@ -13,11 +13,13 @@ tags:
 
 ## Connections
 - [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[InteractionStepView]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[describe()]] - `imports` [EXTRACTED]
 - [[finding()]] - `contains` [EXTRACTED]
 - [[graph()]] - `contains` [EXTRACTED]
 - [[groupIssues()]] - `imports` [EXTRACTED]
+- [[observedGraph()]] - `contains` [EXTRACTED]
 - [[page]] - `contains` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
 - [[sceneGraph()]] - `imports` [EXTRACTED]

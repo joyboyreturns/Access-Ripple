@@ -12,6 +12,8 @@ tags:
 # ControlEvidence
 
 ## Connections
+- [[interaction.test.ts]] - `imports` [EXTRACTED]
+- [[interaction.ts]] - `imports` [EXTRACTED]
 - [[schema.ts]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 

@@ -12,6 +12,7 @@ tags:
 # playwright
 
 ## Connections
+- [[interaction.ts]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 - [[performScan()]] - `imports_from` [EXTRACTED]
 

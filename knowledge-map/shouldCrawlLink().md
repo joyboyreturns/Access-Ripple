@@ -2,7 +2,7 @@
 source_file: "src/scan/worker.ts"
 type: "code"
 community: "Community None"
-location: "L172"
+location: "L157"
 tags:
   - graphify/code
   - graphify/EXTRACTED

@@ -13,6 +13,6 @@ tags:
 ## Connections
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
-- [[worker.ts]] - `imports_from` [EXTRACTED]
+- [[evidence.ts]] - `imports_from` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Community_None

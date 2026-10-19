@@ -15,6 +15,7 @@ tags:
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
+- [[openScan()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
 - [[run()]] - `calls` [EXTRACTED]
 
