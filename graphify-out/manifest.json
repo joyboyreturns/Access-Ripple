@@ -203,40 +203,10 @@
     "ast_hash": "2b79450f35c79b8dfcbe01b5bd2edc6f",
     "semantic_hash": ""
   },
-  "screenshot.png.md": {
-    "mtime": 1792418720.9371443,
-    "seen": 1792422461.9176588,
-    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
-    "semantic_hash": ""
-  },
   "web/index.html": {
     "mtime": 1792421858.4281535,
     "seen": 1792422461.9176629,
     "ast_hash": "fa80c8a794d47f8ed098eb659b16b412",
-    "semantic_hash": ""
-  },
-  "web/public/fonts/OFL-InstrumentSerif.txt": {
-    "mtime": 1792422142.5612044,
-    "seen": 1792422461.917664,
-    "ast_hash": "768c3f0d6166414610edb8aab3eebfb3",
-    "semantic_hash": ""
-  },
-  "web/public/fonts/OFL-Inter.txt": {
-    "mtime": 1792422142.1817546,
-    "seen": 1792422461.917665,
-    "ast_hash": "5e95cb23ed621124015c5d23224ba2d3",
-    "semantic_hash": ""
-  },
-  "web/public/media/README.md": {
-    "mtime": 1792422087.0249493,
-    "seen": 1792422461.917666,
-    "ast_hash": "b0b301c580b57b5ad99b56eece768f86",
-    "semantic_hash": ""
-  },
-  "web/public/media/ripple-hero.mp4": {
-    "mtime": 1792420983.773603,
-    "seen": 1792422461.9176672,
-    "ast_hash": "ee6313fe0dafc22a08917ea6295d2437",
     "semantic_hash": ""
   }
 }
