@@ -26,6 +26,10 @@ export function buildGraph(scan: ScanResult): SiteGraph {
     nodes.push({ id: findingId, kind: 'accessibility-finding', label: finding.help, status: finding.status === 'detected' ? 'detected' : 'needs-review', evidenceLabel: 'observed', pageId: page.id, data: { ...finding, snippet: finding.snippet?.slice(0, 220) } });
     const pageId = pageIds.get(page.url)!;
     edges.push({ id: id('edge', `${pageId}|has-finding|${findingId}`), kind: 'has-finding', source: pageId, target: findingId, evidenceLabel: 'observed' });
+    for (const controlId of finding.affectedControlIds ?? []) {
+      if (!page.controls.some(control => control.id === controlId)) continue;
+      edges.push({ id:id('edge', `${controlId}|has-finding|${findingId}`), kind:'has-finding', source:controlId, target:findingId, evidenceLabel:'observed' });
+    }
     return findingId;
   };
 

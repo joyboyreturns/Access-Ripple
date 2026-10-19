@@ -2,7 +2,7 @@
 source_file: "web/src/GraphCanvas.tsx"
 type: "code"
 community: "Community None"
-location: "L40"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED

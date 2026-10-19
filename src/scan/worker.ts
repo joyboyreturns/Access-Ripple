@@ -86,7 +86,8 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
       const label = input?.labels ? Array.from(input.labels).map((item) => item.textContent?.trim()).filter(Boolean).join(' ') : '';
       const name = element.getAttribute('aria-label') || labelledBy || element.getAttribute('title') || label || element.textContent?.trim() || input?.placeholder || input?.name || '';
       if (/[{};]|:hover|:focus|\\.[A-Za-z_-]+\\s*\\{/i.test(name) && name.length > 24) return null;
-      const form = element.closest('form');
+      const form = element.form || element.closest('form');
+      const submitsForm = (element.tagName === 'BUTTON' && element.type === 'submit') || (input && ['submit','image'].includes(input.type));
       let selector = '';
       if (element.id) selector = '#' + CSS.escape(element.id);
       else {
@@ -106,8 +107,8 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
         accessibleName: String(name).replace(/\\s+/g, ' ').slice(0, 120) || undefined,
         selector: selector.slice(0, 240),
         href: anchor?.href || undefined,
-        formAction: form?.action || undefined,
-        method: form?.method?.toUpperCase() || undefined,
+        formAction: submitsForm ? (element.hasAttribute('formaction') ? element.formAction : form?.action || undefined) : undefined,
+        method: submitsForm ? (element.hasAttribute('formmethod') ? element.formMethod : form?.method || '').toUpperCase() || undefined : undefined,
       };
     }).filter(Boolean);
   })()` ) as ExtractedControl[];
@@ -259,6 +260,16 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         const title = (await page.title()).slice(0, 180) || undefined;
         const { controls, links } = await inspectControls(page, finalUrl.toString(), scan.limits.maxControlsPerPage);
         const findings = await runAxe(page, pageId, scan.limits.maxFindingsPerPage);
+        // Resolve both selector formats against the rendered DOM rather than comparing selector text.
+        const affected = await page.evaluate(`(() => {
+          const controls = ${JSON.stringify(controls.map(c => ({id:c.id,selector:c.selector})))};
+          const findings = ${JSON.stringify(findings.map(f => ({id:f.id,targets:f.targets})))};
+          const select = selector => { try { return Array.from(document.querySelectorAll(selector)); } catch { return []; } };
+          const renderedControls=controls.map(c=>({...c,elements:c.selector?select(c.selector):[]})).filter(c=>c.elements.length===1);
+          return findings.map(f => { const targets=f.targets.flatMap(select); return { id:f.id, controlIds:renderedControls.filter(c =>
+            targets.some(target => c.elements[0] === target || c.elements[0].contains(target))).map(c => c.id) }; });
+        })()`) as {id:string;controlIds:string[]}[];
+        for (const finding of findings) finding.affectedControlIds = affected.find(a => a.id === finding.id)?.controlIds ?? [];
         entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl) };
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {

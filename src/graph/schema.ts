@@ -57,6 +57,7 @@ export interface AccessibilityEvidence {
   help: string;
   helpUrl: string;
   targets: string[];
+  affectedControlIds?: string[];
   snippet?: string;
   evidenceLabel: 'observed';
 }

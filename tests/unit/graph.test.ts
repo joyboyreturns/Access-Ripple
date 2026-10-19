@@ -24,6 +24,14 @@ describe('evidence graph', () => {
     expect(scan.graph.edges.map((edge) => edge.kind)).toContain('has-error');
   });
 
+  it('connects a finding only to controls matched on its page', () => {
+    const scan=sample('matched',false);
+    scan.pages[0]!.findings=[{id:'f1',ruleId:'button-name',impact:'serious',status:'detected',help:'Name the button',helpUrl:'https://example.com/check',targets:['#pay'],affectedControlIds:['c1','missing-control'],evidenceLabel:'observed'}];
+    const graph=buildGraph(scan);
+    expect(graph.edges.some(e=>e.source==='c1'&&e.kind==='has-finding')).toBe(true);
+    expect(graph.edges.some(e=>e.source==='missing-control')).toBe(false);
+  });
+
   it('detects a resolved error between two scans', () => {
     const before = sample('before', true);
     const after = sample('after', false);

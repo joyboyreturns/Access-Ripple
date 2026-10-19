@@ -16,11 +16,13 @@ tags:
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[describe()]] - `imports` [EXTRACTED]
 - [[finding()]] - `contains` [EXTRACTED]
+- [[graph()]] - `contains` [EXTRACTED]
 - [[groupIssues()]] - `imports` [EXTRACTED]
 - [[page]] - `contains` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
 - [[sceneGraph()]] - `imports` [EXTRACTED]
 - [[site]] - `contains` [EXTRACTED]
+- [[traceJourney()]] - `imports` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 

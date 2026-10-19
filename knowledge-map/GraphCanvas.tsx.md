@@ -18,6 +18,7 @@ tags:
 - [[INITIAL]] - `contains` [EXTRACTED]
 - [[Icon()]] - `imports` [EXTRACTED]
 - [[Icons.tsx]] - `imports_from` [EXTRACTED]
+- [[Journey]] - `imports` [EXTRACTED]
 - [[Props]] - `contains` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]

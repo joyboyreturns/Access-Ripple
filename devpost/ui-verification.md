@@ -40,3 +40,16 @@ This is a local proof of concept with bounded scans. It does not certify accessi
 The supplied background video is decorative reference media, not a product demonstration recording. `demo-script.md` provides a sub-three-minute recording route; a submission video has not been recorded or uploaded by this work.
 
 The learner’s final exploration, guided code tour, and readiness approval remain pending in `checklist.md`.
+
+
+## Selected-action journey correction
+
+- A named action picker opens a directional journey: source page → selected control → inferred destination → independently scanned destination page, when available. Selecting a finding keeps the route visible.
+- Numbered steps, arrowheads, larger labels, keyboard pan/zoom, and a persistent ordered details list make the path inspectable. Mobile uses a vertical route.
+- Findings are matched to actual rendered controls by resolving their selectors against the DOM. Broad page warnings are not automatically assigned to every button. Destination observations are context, not proof of causation.
+- Form destinations are extracted only for submit controls, including explicit form overrides. Text fields and ordinary buttons no longer inherit a submission flow.
+- Unknown script-driven behavior and unvisited destinations are explained explicitly. External buttons, forms, and payments are not activated.
+- Live Google browser verification: 2 pages, 39 visible controls, 31 possible journeys, 14 accessibility findings, 3 browser diagnostics. Dynamic content can change these counts. Search for Images displayed four ordered steps and five destination observations. Selecting Low text contrast kept the journey and opened the readable guidance.
+- Verified 390px phone viewport with document width 390px, four numbered steps, six directional edges, working light/dark toggle. Graph labels measure 15px on phone and 16px on desktop. Fixed the non-clickable gap between graph dots and label cards.
+- Type checks, production build, and all 34 tests across seven files pass. Browser fixture coverage includes checkout → payment destination error context, export, rescan, and corrected form inference. New unit coverage includes unknown destinations, script controls, exact control findings, and unrelated warning exclusion.
+- This is a read-only evidence map. It does not yet execute arbitrary multi-step interactions or identify the root cause of every website failure.

@@ -46,6 +46,7 @@ tags:
 - [[str()]] - `calls` [EXTRACTED]
 - [[studio()]] - `contains` [EXTRACTED]
 - [[submit()]] - `contains` [EXTRACTED]
+- [[traceJourney()]] - `calls` [EXTRACTED]
 - [[waitForScan()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

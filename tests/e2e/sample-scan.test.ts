@@ -2,6 +2,7 @@ import { createServer } from 'node:net';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { FastifyInstance } from 'fastify';
 import { buildApp } from '../../src/api/app.js';
+import { traceJourney } from '../../web/src/presentation.js';
 import { scanStore } from '../../src/store/memory.js';
 
 describe('sample browser scan', () => {
@@ -40,6 +41,12 @@ describe('sample browser scan', () => {
     expect(scan.graph.nodes.some((node: any) => node.kind === 'runtime-error' && node.label.includes('simulated payment gateway timeout'))).toBe(true);
     expect(scan.graph.edges.some((edge: any) => edge.kind === 'failed-at' && edge.evidenceLabel === 'inferred')).toBe(true);
     expect(scan.graph.nodes.some((node: any) => node.kind === 'accessibility-finding')).toBe(true);
+    const control=scan.graph.nodes.find((node:any)=>node.kind==='control'&&node.label==='Continue to payment');
+    const journey=traceJourney(scan.graph,control.id)!;
+    expect(journey.steps.map(step=>step.node.kind)).toEqual(['page','control','flow','page']);
+    expect(journey.findings.some(node=>node.kind==='runtime-error'&&node.label.includes('simulated payment gateway timeout'))).toBe(true);
+    expect(journey.summary).toContain('do not prove the click fails');
+    expect(scan.pages.flatMap((page:any)=>page.controls).filter((node:any)=>node.role==='email'||node.role==='text').every((node:any)=>!node.formAction)).toBe(true);
     const archive = await fetch(`${baseUrl}/api/scans/${scanId}/export/obsidian`);
     expect(archive.status).toBe(200);
     expect(archive.headers.get('content-type')).toContain('application/zip');

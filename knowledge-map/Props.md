@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[GraphCanvas.tsx]] - `contains` [EXTRACTED]
 - [[GraphFilter]] - `references` [EXTRACTED]
+- [[Journey]] - `references` [EXTRACTED]
 - [[SiteGraph_1]] - `references` [EXTRACTED]
 - [[ViewNode]] - `references` [EXTRACTED]
 

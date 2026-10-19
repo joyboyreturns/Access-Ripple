@@ -63,3 +63,11 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - The UI starts empty and uses real URL scans. The earlier sample graph was removed at the learner’s request; the controlled backend checkout fixture remains available for regression tests.
 - A lightweight SVG spatial projection supplies yaw, pitch, pan, and zoom. A complete searchable list supplies the accessible alternative; no WebGL dependency is required.
 - Browser policy messages are diagnostic signals and are presented separately from accessibility findings.
+
+
+### User-requested journey clarity revision
+- [x] Select a real control and show its ordered, directional route.
+- [x] Keep the route visible while examining a finding.
+- [x] Connect affected-control evidence and avoid misleading form destinations.
+- [x] Verify live Google, phone layout, theme switch, production build, and regression suite.
+- [ ] Learner review of the revised interaction and final submission materials.

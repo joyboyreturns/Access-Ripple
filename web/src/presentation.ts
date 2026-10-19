@@ -29,10 +29,12 @@ export function describe(node: GraphNode): Copy {
     const isPolicy = /policy|blocked|ORB|CSP/i.test(node.label);
     return { title: isPolicy ? 'The browser blocked a resource' : code ? `A resource returned an error (${code})` : kind === 'console' || kind === 'page' ? 'The browser reported a script problem' : 'A request did not finish', short: isPolicy ? 'Blocked browser resource' : 'Browser warning', meaning: isPolicy ? 'A browser security policy stopped a request or script. This is a diagnostic signal; it does not by itself prove a visitor-facing failure.' : 'A browser event occurred while this page loaded. Check whether it affects a real visitor before treating it as a broken journey.', fix: 'Inspect the request or script in browser developer tools. Confirm the visible impact before changing server or security settings.' };
   }
-  if (node.kind === 'flow') return { title: node.label, short: 'Possible destination', meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
+  if (node.kind === 'flow') return { title: str(node, 'destinationUrl') || node.label, short: destinationLabel(str(node, 'destinationUrl')), meaning: 'This destination comes from a link or form on the page. AccessRipple did not activate the action.', fix: 'Follow this path manually in a safe environment to verify the full interaction.' };
   if (node.kind === 'control') return { title: node.label, short: node.label, meaning: `A ${str(node, 'role') || 'control'} found on the rendered page. Its presence does not mean its full behavior has been tested.`, fix: 'Review its name, keyboard behavior, and destination in context.' };
   return { title: node.label, short: node.label, meaning: node.kind === 'site' ? 'The starting point for this website’s scanned pages and connected findings.' : 'A page visited by the scanner. Connected points show the controls and findings recorded here.', fix: 'Explore a connected point or switch to the list for every recorded element.' };
 }
+
+function destinationLabel(value: string) { try {const u=new URL(value);return u.pathname==='/'?u.hostname:u.pathname;} catch {return 'Destination not exposed';} }
 
 export function isIssue(node: GraphNode) { return node.kind === 'accessibility-finding' || node.kind === 'runtime-error'; }
 export function severity(node: GraphNode) { return str(node, 'impact') || (node.kind === 'runtime-error' ? 'diagnostic' : 'info'); }
@@ -79,4 +81,51 @@ export function sceneGraph(graph: SiteGraph, filter: GraphFilter, focusId?: stri
     if (source && target && source !== target) unique.set(`${source}|${target}|${edge.kind}`, { ...edge, source, target });
   });
   return { nodes, edges: [...unique.values()] };
+}
+
+export type Journey = {
+  control: GraphNode;
+  steps: { node: GraphNode; caption: string }[];
+  findings: GraphNode[];
+  edges: SiteGraph['edges'];
+  summary: string;
+};
+
+/** Follow only recorded relationships. Page findings are context, never proof of a click failure. */
+export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
+  const root = graph.nodes.find(n => n.id === rootId);
+  const control = root?.kind === 'control' ? root : root?.kind === 'flow'
+    ? graph.nodes.find(n => n.kind === 'control' && (n.id === str(root, 'sourceControlId') || graph.edges.some(e => e.source === n.id && e.target === root.id))) : undefined;
+  if (!control) return null;
+  const source = pageFor(control, graph);
+  const flows = graph.nodes.filter(n => n.kind === 'flow' && graph.edges.some(e => e.source === control.id && e.target === n.id));
+  const flow = (root?.kind === 'flow' ? flows.find(n => n.id === root.id) : flows[0]);
+  const destination = flow ? graph.nodes.find(n => n.kind === 'page' && graph.edges.some(e => e.source === flow.id && e.target === n.id && e.kind === 'links-to')) : undefined;
+  const steps: Journey['steps'] = [];
+  if (source) steps.push({ node: source, caption: 'Start · page inspected' });
+  steps.push({ node: control, caption: 'Your action · control found, not activated' });
+  if (flow) steps.push({ node: flow, caption: 'Possible destination · action not tested' });
+  if (destination && destination.id !== source?.id) steps.push({ node: destination, caption: 'Destination · independently inspected' });
+  const selectors = [str(control, 'selector')].filter(Boolean);
+  const findings = graph.nodes.filter(n => isIssue(n) && (
+    (destination && graph.edges.some(e => e.source === destination.id && e.target === n.id)) ||
+    graph.edges.some(e => (e.source === control.id || e.source === flow?.id) && e.target === n.id) ||
+    (source && graph.edges.some(e => e.source === source.id && e.target === n.id) &&
+      Array.isArray(n.data.targets) && n.data.targets.some(t => selectors.includes(String(t))))
+  )).sort((a,b)=>Number(a.kind==='runtime-error')-Number(b.kind==='runtime-error'));
+  const ids = new Set([...steps.map(s => s.node.id), ...findings.map(n => n.id)]);
+  const edges = graph.edges.filter(e => {
+    if (!ids.has(e.source) || !ids.has(e.target)) return false;
+    if (findings.some(n=>n.id===e.target)) {
+      if (e.source===flow?.id && destination && graph.edges.some(other=>other.source===destination.id&&other.target===e.target)) return false;
+      if (e.source===source?.id && graph.edges.some(other=>other.source===control.id&&other.target===e.target)) return false;
+    }
+    return true;
+  });
+  return { control, steps, findings, edges, summary: !flow
+    ? 'This control has no exposed destination. Its script-driven behavior needs an interaction test.'
+    : !destination ? 'A destination was found, but it was outside this scan. Its outcome is unknown.'
+    : destination.status === 'error' ? 'The destination could not be loaded during this scan. Review its recorded browser evidence.'
+    : findings.length ? `${findings.length} observations on this route need review. They do not prove the click fails.`
+    : 'The destination was inspected. No findings were recorded there in this scan; the click itself is untested.' };
 }

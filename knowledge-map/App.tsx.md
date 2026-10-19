@@ -56,6 +56,7 @@ tags:
 - [[storageGet()]] - `contains` [EXTRACTED]
 - [[storageSet()]] - `contains` [EXTRACTED]
 - [[str()]] - `imports` [EXTRACTED]
+- [[traceJourney()]] - `imports` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[waitForScan()]] - `imports` [EXTRACTED]
 
