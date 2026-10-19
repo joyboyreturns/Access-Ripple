@@ -44,3 +44,17 @@ body{min-width:320px}
 .journey-active{flex:0 0 auto;min-height:0}.journey-active .graph-stage{height:440px;min-height:440px;flex:0 0 440px}.journey-active .node-card text{font-size:16px}.connection-path[marker-end]:not(.inferred){stroke-dasharray:none;animation:none}.connection-path[marker-end].inferred{stroke-dasharray:7 6;animation:flow 16s linear infinite}@media(max-width:620px){.journey-active .graph-stage{height:560px;min-height:560px;flex-basis:560px}.journey-active .node-card text{font-size:15px}}
 .interaction-consent{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--muted)}.interaction-consent input{width:15px;height:15px;accent-color:var(--accent);margin:0}.interaction-consent span{display:grid;gap:1px}.interaction-consent small{font-size:10px;color:var(--subtle);letter-spacing:0}.interaction-report{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;margin-bottom:18px;border:1px solid color-mix(in srgb,var(--accent) 18%,transparent);border-radius:8px;background:color-mix(in srgb,var(--accent) 3%,var(--surface));font-size:13px;color:var(--muted)}.interaction-report strong{color:var(--text);font-weight:550}.interaction-report svg{color:var(--accent);flex-shrink:0}.journey-finding small{display:block;margin-top:3px;font-size:11px;color:var(--subtle);font-weight:400}
 @media(max-width:650px){.interaction-consent{order:3;width:100%}.scan-context{flex-wrap:wrap}}
+.coverage-details{margin-bottom:18px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.coverage-details summary{display:flex;align-items:center;gap:8px;padding:12px 16px;cursor:pointer;font-size:13px;color:var(--muted);list-style:none}
+.coverage-details summary::-webkit-details-marker{display:none}
+.coverage-details summary svg{color:var(--accent);flex-shrink:0}
+.coverage-details summary::after{content:'+';margin-left:auto;font-size:15px;color:var(--subtle)}
+.coverage-details[open] summary::after{content:'–'}
+.coverage-details summary:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:8px}
+.coverage-details ul{margin:0;padding:0 18px 14px 36px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+.coverage-details li::marker{color:var(--accent)}
+.coverage-details b{color:var(--text)}
+.journey-traversal .traversal-dot{fill:var(--accent);opacity:.95;filter:drop-shadow(0 0 7px var(--accent))}
+.connection-path[marker-end]:not(.inferred){stroke-dasharray:6 8;animation:sweep 1.6s linear infinite}
+@keyframes sweep{to{stroke-dashoffset:-28}}
+@media(prefers-reduced-motion:reduce){.journey-traversal{display:none}.connection-path[marker-end]:not(.inferred){stroke-dasharray:none;animation:none}}

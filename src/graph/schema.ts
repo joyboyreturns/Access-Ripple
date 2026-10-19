@@ -142,6 +142,18 @@ export interface ScanProgress {
   message: string;
 }
 
+/** Plain-language account of what the scan covered and what it left out, with reasons. */
+export interface ScanCoverage {
+  pagesInspected: number;
+  pagesBlocked: number;
+  pagesFailed: number;
+  destinationsNotReached: number;
+  destinationsBeyondDepth: number;
+  stoppedBy: 'page-limit' | 'time-limit' | null;
+  interactionsTested: number;
+  interactionsSkipped: number;
+}
+
 export interface ScanResult {
   id: string;
   createdAt: string;
@@ -156,5 +168,6 @@ export interface ScanResult {
   graph?: SiteGraph;
   previousScanId?: string;
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
+  coverage?: ScanCoverage;
   error?: { code: string; message: string; retryable: boolean };
 }

@@ -1,3 +1,6 @@
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { createServer } from 'node:net';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { FastifyInstance } from 'fastify';
@@ -8,8 +11,11 @@ import { scanStore } from '../../src/store/memory.js';
 describe('sample browser scan', () => {
   let app: FastifyInstance;
   let baseUrl: string;
+  let dataDir: string;
 
   beforeAll(async () => {
+    dataDir = await mkdtemp(join(tmpdir(), 'accessripple-e2e-'));
+    process.env.ACCESSRIPPLE_DATA_DIR = dataDir;
     const reservation = createServer();
     await new Promise<void>((resolve, reject) => reservation.listen(0, '127.0.0.1', resolve).once('error', reject));
     const address = reservation.address();
@@ -21,7 +27,7 @@ describe('sample browser scan', () => {
     await app.listen({ host: '127.0.0.1', port });
   }, 15_000);
 
-  afterAll(async () => { await app?.close(); scanStore.clear(); });
+  afterAll(async () => { await app?.close(); scanStore.clear(); delete process.env.ACCESSRIPPLE_DATA_DIR; await rm(dataDir, { recursive: true, force: true }); });
 
   async function waitForScan(scanId: string): Promise<any> {
     let scan: any;
@@ -87,6 +93,16 @@ describe('sample browser scan', () => {
     const archive = await fetch(`${baseUrl}/api/scans/${scanId}/export/obsidian`);
     expect(archive.status).toBe(200);
     expect(archive.headers.get('content-type')).toContain('application/zip');
+
+    // Coverage explains what was left out, and history survives a scanner restart.
+    expect(scan.coverage).toMatchObject({ pagesInspected: 4, pagesBlocked: 0, pagesFailed: 0 });
+    expect(scan.coverage.interactionsTested).toBeGreaterThan(0);
+    scanStore.clear();
+    const rehydrated = await (await fetch(`${baseUrl}/api/scans/${scanId}`)).json() as any;
+    expect(rehydrated.status).toBe('complete');
+    expect(rehydrated.graph.nodes.length).toBeGreaterThan(0);
+    const history = await (await fetch(`${baseUrl}/api/scans`)).json() as { scans: Array<{ id: string }> };
+    expect(history.scans.some((item) => item.id === scanId)).toBe(true);
   }, 120_000);
 
   it('activates submit controls only after explicit authorization and records validation', async () => {

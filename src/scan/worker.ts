@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { safeDisplayUrl, assertSafeUrl } from './url-safety.js';
 import { errorEvidence, stableId } from './evidence.js';
 import { BLOCKED_PATH, runInteractions } from './interaction.js';
-import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanLimits, ScanResult } from '../graph/schema.js';
+import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanCoverage, ScanLimits, ScanResult } from '../graph/schema.js';
 import { buildGraph } from '../graph/build-graph.js';
 
 const require = createRequire(import.meta.url);
@@ -163,6 +163,26 @@ function shouldCrawlLink(href: string, origin: string, isSample: boolean): boole
   } catch { return false; }
 }
 
+/** Explain coverage honestly: how many pages were inspected, what stopped the crawl, and what stayed out of reach. */
+function summarizeCoverage(pages: PageEvidence[], queueRemaining: number, visitedCount: number, limits: ScanLimits, startedAt: number, interactions: { tested: number; skipped: number }): ScanCoverage {
+  const deepLinks = new Set<string>();
+  for (const page of pages) {
+    if (page.depth >= limits.maxDepth) for (const href of page.outgoingLinks) deepLinks.add(href);
+  }
+  const visited = new Set(pages.map((page) => page.url));
+  const timeExpired = Date.now() - startedAt >= limits.totalTimeoutMs;
+  return {
+    pagesInspected: pages.filter((page) => page.status === 'complete').length,
+    pagesBlocked: pages.filter((page) => page.status === 'skipped').length,
+    pagesFailed: pages.filter((page) => page.status === 'failed').length,
+    destinationsNotReached: queueRemaining,
+    destinationsBeyondDepth: [...deepLinks].filter((href) => !visited.has(href)).length,
+    stoppedBy: queueRemaining === 0 ? null : timeExpired ? 'time-limit' : visitedCount >= limits.maxPages ? 'page-limit' : null,
+    interactionsTested: interactions.tested,
+    interactionsSkipped: interactions.skipped,
+  };
+}
+
 export async function performScan(input: ScanInput): Promise<ScanResult> {
   const { chromium } = await import('playwright');
   const scan = initialResult(input);
@@ -186,8 +206,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
     queue.push({ url: rawUrl, depth });
   };
   enqueue(input.url, 0);
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
+  const browser = await chromium.launch({ headless: true });  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
   const pages: PageEvidence[] = [];
   let interactionsUsed = 0;
   let exclusionsTotal = 0;
@@ -329,6 +348,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
     scan.status = pages.some((page) => page.status !== 'complete') ? 'partial' : 'complete';
     if (Date.now() - startedAt >= scan.limits.totalTimeoutMs && queue.length) scan.status = 'partial';
     scan.interactionPolicy = { mode: input.interactionMode ?? 'safe', tested: interactionsUsed, skipped: exclusionsTotal };
+    scan.coverage = summarizeCoverage(pages, queue.length, visited.size, scan.limits, startedAt, { tested: interactionsUsed, skipped: exclusionsTotal });
     scan.graph = buildGraph(scan);
     scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, message: scan.status === 'complete' ? 'Scan complete.' : 'Scan completed with pages or destinations that could not be inspected.' };
   } catch (error) {
@@ -337,6 +357,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
     scan.interactionPolicy = { mode: input.interactionMode ?? 'safe', tested: interactionsUsed, skipped: exclusionsTotal };
     if (pages.length) {
       scan.pages = pages;
+      scan.coverage = summarizeCoverage(pages, queue.length, visited.size, scan.limits, startedAt, { tested: interactionsUsed, skipped: exclusionsTotal });
       scan.graph = buildGraph(scan);
     }
   } finally {

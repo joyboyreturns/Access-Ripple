@@ -1,4 +1,4 @@
-import type { ScanComparison, ScanResult, SiteGraph } from './types.js';
+import type { ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }
@@ -28,6 +28,10 @@ export function readScan(scanId: string, signal?: AbortSignal) {
 
 export function readGraph(scanId: string) {
   return request<SiteGraph>(`/api/scans/${encodeURIComponent(scanId)}/graph`);
+}
+
+export function listScans() {
+  return request<{ scans: ScanSummary[] }>('/api/scans');
 }
 
 export function rescan(scanId: string, input?: { authorizeSubmit?: boolean }) {

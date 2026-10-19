@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
+import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
 import { compareScans } from '../graph/compare.js';
 import { createObsidianZip } from '../export/obsidian.js';
 import type { InteractionMode, ScanResult } from '../graph/schema.js';
@@ -63,9 +64,21 @@ function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?
       await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, onUpdate: (updated) => scanStore.set(updated) });
     } catch (error) {
       scanStore.set({ ...active, status: 'failed', error: { code: 'SCAN_WORKER_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan worker could not start.', retryable: true }, updatedAt: new Date().toISOString() });
+    } finally {
+      const finished = scanStore.get(id);
+      if (finished && finished.status !== 'queued' && finished.status !== 'running') await diskStore.save(finished);
     }
   });
   return scan;
+}
+
+/** Read a scan from memory, falling back to this computer's saved history. */
+async function getScan(id: string): Promise<ScanResult | undefined> {
+  const inMemory = scanStore.get(id);
+  if (inMemory) return inMemory;
+  const loaded = await diskStore.load(id);
+  if (loaded) scanStore.set(loaded);
+  return loaded;
 }
 
 export interface AppOptions { baseUrl?: string; logger?: boolean; }
@@ -126,21 +139,30 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
 
+  app.get('/api/scans', async () => {
+    const memory = scanStore.list().map(summarizeScan);
+    const disk = await diskStore.list();
+    const merged = new Map<string, ScanSummary>();
+    for (const item of [...disk, ...memory]) merged.set(item.id, item);
+    const scans = [...merged.values()].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 20);
+    return { scans };
+  });
+
   app.get<{ Params: { scanId: string } }>('/api/scans/:scanId', async (request, reply) => {
-    const scan = scanStore.get(request.params.scanId);
-    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable. It may have expired after the service restarted.', retryable: false } });
+    const scan = await getScan(request.params.scanId);
+    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable. It may have been removed from the local history.', retryable: false } });
     return scan;
   });
 
   app.get<{ Params: { scanId: string } }>('/api/scans/:scanId/graph', async (request, reply) => {
-    const scan = scanStore.get(request.params.scanId);
+    const scan = await getScan(request.params.scanId);
     if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
     if (!scan.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'The graph will be available after scanning finishes.', retryable: true } });
     return scan.graph;
   });
 
   app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/rescan', async (request, reply) => {
-    const previous = scanStore.get(request.params.scanId);
+    const previous = await getScan(request.params.scanId);
     if (!previous) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
     const body = rescanBody.safeParse(request.body ?? {});
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_RESCAN_REQUEST', message: 'The rescan request could not be read.', retryable: false } });
@@ -162,8 +184,8 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   });
 
   app.get<{ Params: { scanId: string; otherScanId: string } }>('/api/scans/:scanId/compare/:otherScanId', async (request, reply) => {
-    const current = scanStore.get(request.params.scanId);
-    const previous = scanStore.get(request.params.otherScanId);
+    const current = await getScan(request.params.scanId);
+    const previous = await getScan(request.params.otherScanId);
     if (!current || !previous) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'One of the scans is unavailable.', retryable: false } });
     if (!current.graph || !previous.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'Both scans must finish before comparison.', retryable: true } });
     if (current.canonicalOrigin !== previous.canonicalOrigin) return reply.code(400).send({ error: { code: 'SCAN_ORIGIN_MISMATCH', message: 'Only scans of the same site can be compared.', retryable: false } });
@@ -171,7 +193,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   });
 
   app.get<{ Params: { scanId: string } }>('/api/scans/:scanId/export/obsidian', async (request, reply) => {
-    const scan = scanStore.get(request.params.scanId);
+    const scan = await getScan(request.params.scanId);
     if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
     if (!scan.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'The export will be available after scanning finishes.', retryable: true } });
     try {

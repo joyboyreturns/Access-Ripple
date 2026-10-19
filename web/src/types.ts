@@ -3,6 +3,28 @@ export type GraphNodeKind = 'site' | 'page' | 'control' | 'flow' | 'runtime-erro
 export type InteractionMode = 'safe' | 'include-submits';
 export type InteractionOutcome = 'navigated' | 'content-changed' | 'dialog-opened' | 'validation-shown' | 'loading' | 'no-visible-change' | 'blocked' | 'failed';
 
+export interface ScanCoverage {
+  pagesInspected: number;
+  pagesBlocked: number;
+  pagesFailed: number;
+  destinationsNotReached: number;
+  destinationsBeyondDepth: number;
+  stoppedBy: 'page-limit' | 'time-limit' | null;
+  interactionsTested: number;
+  interactionsSkipped: number;
+}
+
+export interface ScanSummary {
+  id: string;
+  inputUrl: string;
+  status: string;
+  createdAt: string;
+  sample?: string;
+  previousScanId?: string;
+  pages: number;
+  actionsTested: number;
+}
+
 export interface InteractionStepView {
   controlId: string;
   label: string;
@@ -59,6 +81,7 @@ export interface ScanResult {
   canonicalOrigin?: string;
   createdAt?: string;
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
+  coverage?: ScanCoverage;
 }
 
 export interface ScanComparison {
