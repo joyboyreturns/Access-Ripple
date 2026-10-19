@@ -39,7 +39,33 @@ body{min-width:320px}
 
 .journey-details li button{cursor:pointer}.journey-details li button:hover,.journey-finding:hover{background:var(--surface2)}.journey-summary strong{font-size:17px}.connection-path[marker-end]{stroke-width:2.3;color:var(--accent)}
 
-.journey-picker{display:grid;gap:9px;padding:16px 22px;border-bottom:1px solid var(--line);background:var(--surface)}.journey-picker label{font-size:16px;font-weight:600}.journey-picker select{width:100%;min-width:0;max-width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--line2);border-radius:9px;background:var(--surface2);color:var(--text);font:inherit;font-size:16px;text-overflow:ellipsis}.journey-picker select:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.journey-picker{position:relative;z-index:3;display:flex;align-items:center;gap:16px;padding:12px 22px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,var(--surface),var(--surface2))}
+.journey-picker>label{flex-shrink:0;font-size:12px;font-weight:550;letter-spacing:.02em;color:var(--muted)}
+.picker-anchor{position:relative;flex:1;min-width:0}
+.picker-field{display:flex;align-items:center;gap:10px;min-width:0;min-height:46px;padding:0 10px 0 12px;border:1px solid var(--line2);border-radius:9px;background:var(--surface2);color:var(--subtle);cursor:text;transition:border-color .2s,box-shadow .2s,background .2s}
+.picker-field:hover{border-color:var(--subtle)}
+.picker-field:focus-within{border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)}
+.picker-field.armed{border-color:color-mix(in srgb,var(--accent) 42%,var(--line2))}
+.picker-field.armed>svg:first-child{color:var(--accent)}
+.picker-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:14px;letter-spacing:-.01em;text-overflow:ellipsis}
+.picker-input:focus-visible{outline:none}
+.picker-input::placeholder{color:var(--subtle)}
+.picker-chevron{color:var(--subtle);transform:rotate(90deg);transition:transform .22s,color .2s}
+.picker-field.open .picker-chevron{color:var(--accent);transform:rotate(-90deg)}
+.picker-clear{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:transparent;color:var(--subtle);transition:background .2s,color .2s}
+.picker-clear:hover{background:var(--surface3);color:var(--text)}
+.picker-popup{position:absolute;z-index:40;top:calc(100% + 6px);left:0;right:0;border:1px solid var(--line2);border-radius:10px;background:var(--surface);box-shadow:0 26px 70px rgba(0,0,0,.4);overflow:hidden;animation:picker-in .18s ease}
+@keyframes picker-in{from{opacity:0;transform:translateY(-5px)}}
+.picker-popup ul{list-style:none;margin:0;padding:6px;max-height:300px;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--subtle) transparent}
+.picker-option{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;font-size:13px;color:var(--muted);cursor:pointer}
+.picker-option.active{background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--text)}
+.picker-option[aria-selected=true]{color:var(--text)}
+.picker-option>svg{flex-shrink:0;color:var(--accent)}
+.picker-option-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.picker-option-context{flex-shrink:0;font-size:11px;color:var(--subtle)}
+.picker-option.active .picker-option-context{color:var(--muted)}
+.picker-empty{padding:16px 14px;margin:0;font-size:12px;color:var(--subtle)}
+@media(max-width:650px){.journey-picker{align-items:stretch;flex-direction:column;gap:8px;padding:12px 15px}.journey-picker>label{font-size:11px}}
 
 .journey-active{flex:0 0 auto;min-height:0}.journey-active .graph-stage{height:440px;min-height:440px;flex:0 0 440px}.journey-active .node-card text{font-size:16px}.connection-path[marker-end]:not(.inferred){stroke-dasharray:none;animation:none}.connection-path[marker-end].inferred{stroke-dasharray:7 6;animation:flow 16s linear infinite}@media(max-width:620px){.journey-active .graph-stage{height:560px;min-height:560px;flex-basis:560px}.journey-active .node-card text{font-size:15px}}
 .interaction-consent{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--muted)}.interaction-consent input{width:15px;height:15px;accent-color:var(--accent);margin:0}.interaction-consent span{display:grid;gap:1px}.interaction-consent small{font-size:10px;color:var(--subtle);letter-spacing:0}.interaction-report{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 18px;margin-bottom:18px;border:1px solid color-mix(in srgb,var(--accent) 18%,transparent);border-radius:8px;background:color-mix(in srgb,var(--accent) 3%,var(--surface));font-size:13px;color:var(--muted)}.interaction-report strong{color:var(--text);font-weight:550}.interaction-report svg{color:var(--accent);flex-shrink:0}.journey-finding small{display:block;margin-top:3px;font-size:11px;color:var(--subtle);font-weight:400}
@@ -58,3 +84,23 @@ body{min-width:320px}
 .connection-path[marker-end]:not(.inferred){stroke-dasharray:6 8;animation:sweep 1.6s linear infinite}
 @keyframes sweep{to{stroke-dashoffset:-28}}
 @media(prefers-reduced-motion:reduce){.journey-traversal{display:none}.connection-path[marker-end]:not(.inferred){stroke-dasharray:none;animation:none}}
+
+/* Interface polish: consistent press feedback, softer entrances, calmer hovers. */
+.button:active:enabled{transform:translateY(0) scale(.985)}
+.icon-btn:active:enabled{transform:scale(.94)}
+.metal-pill:active{transform:scale(.985)}
+.segmented button:active{transform:scale(.97)}
+.dialog{scrollbar-width:thin;scrollbar-color:var(--subtle) transparent}
+.dialog[open]{animation:dialog-in .2s ease}
+@keyframes dialog-in{from{opacity:0;transform:translateY(8px) scale(.985)}}
+.history-list>button{transition:border-color .2s,background .2s,transform .2s}
+.history-list>button:hover{border-color:var(--line2);background:var(--surface3);transform:translateX(2px)}
+.load-more{transition:border-color .2s,background .2s}
+.load-more:hover{border-color:var(--line2);background:var(--surface3)}
+.inventory-row{transition:background .15s,border-color .15s}
+.coverage-details summary{transition:color .2s}
+.coverage-details summary:hover{color:var(--text)}
+.journey-details li button,.journey-finding{transition:background .2s}
+.scan-bar:focus-within .scan-input-wrap{color:var(--accent)}
+.studio-header .wordmark{transition:opacity .2s}
+.studio-header .wordmark:hover{opacity:.88}
