@@ -68,6 +68,8 @@ export interface InteractionStep {
   windowOpened?: string;
   dialog?: { type: string; message: string };
   revealed?: RevealedControlEvidence[];
+  /** Why a blocked outcome happened: a data-changing request, a navigation off the tested website, or an unsafe URL. */
+  blockKind?: 'data-request' | 'external-navigation' | 'unsafe-url';
   errorIds: string[];
 }
 

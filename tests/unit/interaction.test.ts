@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { classifyAction, summarizeInteraction } from '../../src/scan/interaction.js';
+import { classifyAction, outcomeLabel, summarizeInteraction } from '../../src/scan/interaction.js';
 import type { ControlEvidence, InteractionStep } from '../../src/graph/schema.js';
 
 const control = (overrides: Partial<ControlEvidence>): ControlEvidence => ({ id: 'c', role: 'button', accessibleName: 'Continue', evidenceLabel: 'observed', ...overrides });
@@ -50,6 +50,10 @@ describe('interaction summaries', () => {
 
   it('states blocked and failed outcomes without overclaiming', () => {
     expect(summarizeInteraction([{ controlId: 'c', label: 'Save', action: 'click', outcome: 'blocked', summary: '', errorIds: [] }])).toContain('blocked');
+    expect(summarizeInteraction([{ controlId: 'c', label: 'Learn more', action: 'click', outcome: 'blocked', blockKind: 'external-navigation', summary: '', errorIds: [] }])).toContain('leaves this website');
     expect(summarizeInteraction([{ controlId: 'c', label: 'Save', action: 'click', outcome: 'failed', summary: '', errorIds: [] }])).toContain('could not be activated');
+    expect(outcomeLabel({ controlId: 'c', label: 'Learn more', action: 'click', outcome: 'blocked', blockKind: 'external-navigation', summary: '', errorIds: [] })).toContain('not followed');
+    expect(outcomeLabel({ controlId: 'c', label: 'Report', action: 'click', outcome: 'blocked', blockKind: 'unsafe-url', summary: '', errorIds: [] })).toBe('Blocked by the safety policy');
+    expect(outcomeLabel({ controlId: 'c', label: 'Save', action: 'click', outcome: 'blocked', summary: '', errorIds: [] })).toBe('Data request blocked');
   });
 });

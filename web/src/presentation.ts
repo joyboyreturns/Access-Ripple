@@ -58,11 +58,24 @@ const outcomeCaptions: Record<string, string> = {
 
 function destinationLabel(value: string) { try {const u=new URL(value);return u.pathname==='/'?u.hostname:u.pathname;} catch {return 'Destination not exposed';} }
 
+function blockedShort(step: { blockKind?: string }): string {
+  if (step.blockKind === 'external-navigation') return 'Leaves this website · not followed';
+  if (step.blockKind === 'unsafe-url') return 'Blocked by the safety policy';
+  return 'Data request blocked';
+}
+
+function outcomeCaptionOf(step: { outcome?: string; blockKind?: string }): string {
+  if (step.outcome === 'blocked' && step.blockKind === 'external-navigation') return 'Safety policy · external navigation blocked';
+  if (step.outcome === 'blocked' && step.blockKind === 'unsafe-url') return 'Safety policy · blocked URL';
+  return outcomeCaptions[step.outcome ?? ''] ?? 'Recorded outcome';
+}
+
 function flowShort(node: GraphNode): string {
   const step = lastStepOf(node);
   if (!isTestedFlow(node) || !step) return '';
   if (step.outcome === 'navigated' && step.destinationUrl) return `Leads to ${destinationLabel(step.destinationUrl)}`;
   if (step.outcome === 'content-changed' && step.revealed?.length) return `Reveals ${step.revealed.slice(0, 2).map((item) => `“${item.name}”`).join(' and ')}`.slice(0, 60);
+  if (step.outcome === 'blocked') return blockedShort(step);
   return outcomeShorts[step.outcome] ?? 'Recorded outcome';
 }
 
@@ -83,7 +96,9 @@ export function describe(node: GraphNode): Copy {
       if (step.outcome === 'dialog-opened') return { title: 'The action opened a dialog', short: 'Opens a dialog', meaning: `The action was activated once in a controlled browser and opened a dialog. ${summary}`, fix: 'Verify the dialog’s focus handling, Escape behavior, and accessible name manually.' };
       if (step.outcome === 'validation-shown') return { title: 'The form stopped at validation', short: 'Stops at validation', meaning: `The submit control was activated with empty test values. The browser stopped submission and marked fields that need attention. No data was sent.`, fix: 'Check the validation messages are announced and associated with their fields. Fill the form manually to test the full submission.' };
       if (step.outcome === 'loading') return { title: 'The action showed a loading state', short: 'Shows a loading state', meaning: `The action was activated once and entered a loading or disabled state while the page responded. The scan’s observation window may end before the result.`, fix: 'Confirm the loading state is announced to assistive technology and always resolves or times out.' };
-      if (step.outcome === 'blocked') return { title: 'A data-changing request was blocked', short: 'Data request blocked', meaning: `The action ran in a controlled browser but tried to send a data-changing request. AccessRipple blocked it, so nothing left this computer.`, fix: 'If you own the website, test this action manually in a safe environment. The blocked request shows what the control intended to do.' };
+      if (step.outcome === 'blocked') return step.blockKind === 'external-navigation'
+        ? { title: 'The action leaves this website', short: blockedShort(step), meaning: `The action was activated once in a controlled browser but points to another website, so the navigation was blocked before it was sent.`, fix: 'Follow the link manually if it belongs in a visitor journey. The rest of the recorded route stays available.' }
+        : { title: 'A data-changing request was blocked', short: blockedShort(step), meaning: `The action ran in a controlled browser but tried to send a data-changing request. AccessRipple blocked it, so nothing left this computer.`, fix: 'If you own the website, test this action manually in a safe environment. The blocked request shows what the control intended to do.' };
       if (step.outcome === 'no-visible-change') return { title: 'No visible change was recorded', short: 'No visible change', meaning: `The action was activated once in a controlled browser, but nothing visible changed within the observation window. It may depend on values, timing, or state the scan does not have.`, fix: 'Test the action manually with realistic input before deciding whether it is broken.' };
       return { title: 'The action could not be activated', short: 'Interaction failed', meaning: `The action was activated in a controlled browser but recorded a failure. ${summary}`, fix: 'Check the control’s behavior and any connected browser evidence manually.' };
     }
@@ -166,7 +181,7 @@ export type Journey = {
 function outcomeCaption(flow: GraphNode): string {
   const step = lastStepOf(flow);
   if (!isTestedFlow(flow) || !step) return 'Possible destination · action not tested';
-  return outcomeCaptions[step.outcome] ?? 'Recorded outcome';
+  return outcomeCaptionOf(step);
 }
 
 function testedFlowFor(graph: SiteGraph, controlId: string): GraphNode | undefined {

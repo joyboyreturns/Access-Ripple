@@ -48,6 +48,8 @@ export interface InteractionRunOptions {
   deadline: number;
   settleMs?: number;
   clickTimeoutMs?: number;
+  /** How long a disposable interaction page may take to reopen the tested page. Slow sites deserve a fair retry. */
+  reopenTimeoutMs?: number;
   onProgress?: (message: string) => void;
 }
 
@@ -62,6 +64,7 @@ interface ObservationEvent {
   kind: 'dialog' | 'popup' | 'navigation' | 'blocked';
   detail: string;
   status?: number;
+  blockKind?: 'data-request' | 'external-navigation' | 'unsafe-url';
 }
 
 interface InteractionTarget {
@@ -87,6 +90,7 @@ interface PageSnapshot {
   dialogOpen: boolean;
   mutations: number;
   textLength: number;
+  scrollY: number;
 }
 
 const SNAPSHOT_SCRIPT = `(() => {
@@ -109,6 +113,7 @@ const SNAPSHOT_SCRIPT = `(() => {
     dialogOpen: Boolean(document.querySelector('dialog[open],[role="dialog"]:not([aria-hidden="true"])')),
     mutations: Number(window.__accessRippleMutations || 0),
     textLength: document.body ? document.body.innerText.replace(/\\s+/g, ' ').length : 0,
+    scrollY: Math.round(window.scrollY || 0),
   };
 })()`;
 
@@ -142,6 +147,11 @@ function pushExclusion(batch: InteractionBatch, control: ControlEvidence, reason
   if (batch.exclusions.length >= MAX_EXCLUSIONS_PER_PAGE) return;
   if (batch.exclusions.some((item) => item.controlId === control.id)) return;
   batch.exclusions.push({ controlId: control.id, reason });
+}
+
+function firstBlockKind(blocked: ObservationEvent[]): NonNullable<InteractionStep['blockKind']> {
+  for (const event of blocked) if (event.blockKind) return event.blockKind;
+  return 'data-request';
 }
 
 function priority(item: { control: ControlEvidence; actionClass: ActionClass }): number {
@@ -219,7 +229,7 @@ async function locate(page: Page, target: InteractionTarget, entry: PageEvidence
 
 async function snapshot(page: Page): Promise<PageSnapshot> {
   const value = await page.evaluate(SNAPSHOT_SCRIPT).catch(() => null);
-  if (!value || typeof value !== 'object') return { items: [], dialogOpen: false, mutations: 0, textLength: 0 };
+  if (!value || typeof value !== 'object') return { items: [], dialogOpen: false, mutations: 0, textLength: 0, scrollY: 0 };
   return value as PageSnapshot;
 }
 
@@ -240,6 +250,9 @@ async function runSingleInteraction(
   const events: ObservationEvent[] = [];
   const settleMs = options.settleMs ?? 750;
   const clickTimeoutMs = options.clickTimeoutMs ?? 2500;
+  // Request failures caused by our own safety policy are not site signals; track them so they can be excluded.
+  const policyBlocked = new Set<string>();
+  const policyKey = (url: string) => safeDisplayUrl(url).toLowerCase();
   const recordError = (error: RuntimeErrorEvidence) => { if (errors.length < MAX_ERRORS_PER_INTERACTION) errors.push(error); };
   page.on('dialog', (dialog) => {
     events.push({ kind: 'dialog', detail: `${dialog.type()} dialog: ${dialog.message().slice(0, 160) || 'no message'}` });
@@ -251,7 +264,7 @@ async function runSingleInteraction(
   });
   page.on('pageerror', (error) => recordError(errorEvidence('page', error.message, page.url())));
   page.on('console', (message) => { if (message.type() === 'error') recordError(errorEvidence('console', message.text(), page.url())); });
-  page.on('requestfailed', (request) => recordError(errorEvidence('request', request.failure()?.errorText || 'Network request failed.', request.url())));
+  page.on('requestfailed', (request) => { if (!policyBlocked.has(policyKey(request.url()))) recordError(errorEvidence('request', request.failure()?.errorText || 'Network request failed.', request.url())); });
   page.on('response', (response) => {
     if (response.request().isNavigationRequest() && response.frame() === page.mainFrame()) events.push({ kind: 'navigation', detail: response.url(), status: response.status() });
     if (response.status() >= 400) recordError(errorEvidence('http', `HTTP ${response.status()} response.`, response.url(), response.status()));
@@ -259,27 +272,27 @@ async function runSingleInteraction(
   await page.route('**/*', async (route) => {
     const request = route.request();
     const requestUrl = request.url();
-    if (!requestUrl.startsWith('http://') && !requestUrl.startsWith('https://')) return route.abort('blockedbyclient').catch(() => undefined);
-    if (!['GET', 'HEAD'].includes(request.method().toUpperCase())) {
-      events.push({ kind: 'blocked', detail: `${request.method().toUpperCase()} ${safeDisplayUrl(requestUrl)}` });
+    const block = (detail: string, blockKind: NonNullable<ObservationEvent['blockKind']>) => {
+      policyBlocked.add(policyKey(requestUrl));
+      events.push({ kind: 'blocked', detail, blockKind });
       return route.abort('blockedbyclient').catch(() => undefined);
-    }
+    };
+    if (!requestUrl.startsWith('http://') && !requestUrl.startsWith('https://')) return route.abort('blockedbyclient').catch(() => undefined);
+    if (!['GET', 'HEAD'].includes(request.method().toUpperCase())) return block(`${request.method().toUpperCase()} ${safeDisplayUrl(requestUrl)}`, 'data-request');
     try {
       await assertSafeUrl(requestUrl, { allowLocalSample: options.isSample, sampleOrigin: options.isSample ? options.origin : undefined });
     } catch {
-      events.push({ kind: 'blocked', detail: `unsafe request ${safeDisplayUrl(requestUrl)}` });
-      return route.abort('blockedbyclient').catch(() => undefined);
+      return block(`unsafe request ${safeDisplayUrl(requestUrl)}`, 'unsafe-url');
     }
     if (request.isNavigationRequest() && new URL(requestUrl).origin !== options.origin) {
-      events.push({ kind: 'blocked', detail: `navigation outside the tested website to ${safeDisplayUrl(requestUrl)}` });
-      return route.abort('blockedbyclient').catch(() => undefined);
+      return block(`navigation outside the tested website to ${safeDisplayUrl(requestUrl)}`, 'external-navigation');
     }
     return route.continue();
   });
 
   try {
     try {
-      await page.goto(entry.url, { waitUntil: 'domcontentloaded', timeout: Math.max(4000, clickTimeoutMs) });
+      await page.goto(entry.url, { waitUntil: 'domcontentloaded', timeout: options.reopenTimeoutMs ?? 12_000 });
       // Let the starting page finish its own loading before observing the click, so errors
       // that belong to the page load are never attributed to an interaction that follows.
       await page.waitForLoadState('load', { timeout: Math.max(3000, clickTimeoutMs) }).catch(() => undefined);
@@ -287,7 +300,7 @@ async function runSingleInteraction(
       return {
         evidence: {
           id: stableId('interaction', `${entry.id}|${control.id}|reopen`), rootControlId: control.id, mode: options.mode, evidenceLabel: 'observed',
-          steps: [{ controlId: control.id, label: control.accessibleName || control.role, action: 'click', outcome: 'failed', summary: `The page could not be reopened for testing: ${redactMessage(error instanceof Error ? error.message : 'unknown error')}`, errorIds: [] }],
+          steps: [{ controlId: control.id, label: control.accessibleName || control.href || control.role, action: 'click', outcome: 'failed', summary: `The page could not be reopened for testing: ${redactMessage(error instanceof Error ? error.message : 'unknown error')}`, errorIds: [] }],
         },
         errors,
         links: [],
@@ -325,6 +338,7 @@ async function activate(page: Page, entry: PageEvidence, target: InteractionTarg
   if (!locator) {
     return { ...base, outcome: 'failed', summary: 'The control could not be located on a fresh page load, so its behavior is unknown.', errorIds: [] };
   }
+  await locator.scrollIntoViewIfNeeded({ timeout: 1500 }).catch(() => undefined);
   const before = await snapshot(page);
   await page.evaluate(INSTALL_MUTATION_COUNTER).catch(() => undefined);
   const wasDisabled = await locator.isDisabled().catch(() => false);
@@ -332,11 +346,16 @@ async function activate(page: Page, entry: PageEvidence, target: InteractionTarg
   const eventMark = events.length;
   const errorMark = errors.length;
   let clickError: string | null = null;
+  // Off-screen skip links and focus-revealed controls may reject pointer clicks; keyboard activation is how visitors reach them.
   try {
-    await locator.scrollIntoViewIfNeeded({ timeout: 1500 }).catch(() => undefined);
     await locator.click({ timeout: clickTimeoutMs });
   } catch (error) {
-    clickError = error instanceof Error ? error.message : 'The control could not be activated.';
+    try {
+      await locator.focus({ timeout: 1000 });
+      await page.keyboard.press('Enter');
+    } catch {
+      clickError = error instanceof Error ? error.message : 'The control could not be activated.';
+    }
   }
   await page.waitForTimeout(settleMs);
   await page.waitForLoadState('domcontentloaded', { timeout: 1500 }).catch(() => undefined);
@@ -346,15 +365,24 @@ async function activate(page: Page, entry: PageEvidence, target: InteractionTarg
   const dialog = stepEvents.find((event) => event.kind === 'dialog');
   const popup = stepEvents.find((event) => event.kind === 'popup');
   const blocked = stepEvents.filter((event) => event.kind === 'blocked');
+  const blockedNavigation = blocked.find((event) => event.blockKind === 'external-navigation');
   const navigation = [...stepEvents].reverse().find((event) => event.kind === 'navigation');
   const revealed = after.items.filter((item) => !before.items.some((previous) => itemKey(previous) === itemKey(item)))
     .slice(0, MAX_REVEALED).map((item): RevealedControlEvidence => ({ name: item.name, role: item.role, href: item.href }));
-  const changed = revealed.length > 0 || after.mutations - before.mutations >= 5 || Math.abs(after.textLength - before.textLength) >= 24;
+  const scrolled = Math.abs(after.scrollY - before.scrollY) >= 24;
+  const changed = revealed.length > 0 || after.mutations - before.mutations >= 5 || Math.abs(after.textLength - before.textLength) >= 24 || scrolled;
   const completed = { ...base, controlId: target.id };
   try {
     if (dialog) return { ...completed, outcome: 'dialog-opened', summary: `A ${dialog.detail} appeared; it was dismissed without any input.`, errorIds };
     if (popup) return { ...completed, outcome: 'navigated', summary: `Opened a new window at ${displayPath(popup.detail)}; it was closed without interacting.`, destinationUrl: popup.detail, windowOpened: popup.detail, errorIds };
     const currentHref = page.url();
+    // A blocked external navigation can surface as Chromium's error page; report the policy action, not a fake destination.
+    if (blockedNavigation && (currentHref.startsWith('chrome-error://') || withoutHash(currentHref) === withoutHash(sourceHref))) {
+      let externalHost = '';
+      try { externalHost = new URL(target.href ?? '').hostname; } catch { /* The exact host is unknown; the summary stays generic. */ }
+      return { ...completed, outcome: 'blocked', blockKind: 'external-navigation', summary: `This action leaves the tested website${externalHost ? ` (${externalHost})` : ''}, so the navigation was blocked before it was sent.`, errorIds };
+    }
+    if (currentHref.startsWith('chrome-error://')) return { ...completed, outcome: 'failed', summary: 'The navigation failed before a page could load.', errorIds };
     if (withoutHash(currentHref) !== withoutHash(sourceHref)) {
       const destination = safeDisplayUrl(currentHref);
       if (navigation?.status && navigation.status >= 400) return { ...completed, outcome: 'failed', summary: `Navigated to ${displayPath(destination)}, which returned HTTP ${navigation.status}.`, destinationUrl: destination, errorIds };
@@ -368,8 +396,14 @@ async function activate(page: Page, entry: PageEvidence, target: InteractionTarg
     const nowDisabled = await locator.isDisabled().catch(() => false);
     const busy = await locator.getAttribute('aria-busy').catch(() => null);
     if ((nowDisabled && !wasDisabled) || busy === 'true') return { ...completed, outcome: 'loading', summary: 'The control entered a loading or disabled state while the page responded.', errorIds };
-    if (changed) return { ...completed, outcome: 'content-changed', summary: revealed.length ? `The page changed and revealed ${revealed.map((item) => `“${item.name}”`).slice(0, 2).join(' and ')}.` : 'The page content changed after activation.', revealed, errorIds };
-    if (blocked.length) return { ...completed, outcome: 'blocked', summary: `The action tried a data-changing request (${blocked.map((event) => event.detail).join(', ')}) and AccessRipple blocked it before anything was sent.`, errorIds };
+    if (changed) return { ...completed, outcome: 'content-changed', summary: revealed.length ? `The page changed and revealed ${revealed.map((item) => `“${item.name}”`).slice(0, 2).join(' and ')}.` : scrolled ? 'The viewport moved after activation — an anchor or skip link changed the reading position.' : 'The page content changed after activation.', revealed, errorIds };
+    if (blocked.length) {
+      const kinds = new Set(blocked.map((event) => event.blockKind ?? 'data-request'));
+      const summary = kinds.has('unsafe-url') && kinds.size === 1
+        ? `The action requested a URL the safety policy does not allow (${blocked.map((event) => event.detail).join(', ')}) and AccessRipple blocked it.`
+        : `The action tried a data-changing request (${blocked.map((event) => event.detail).join(', ')}) and AccessRipple blocked it before anything was sent.`;
+      return { ...completed, outcome: 'blocked', blockKind: firstBlockKind(blocked), summary, errorIds };
+    }
     if (clickError) return { ...completed, outcome: 'failed', summary: `The control could not be activated: ${redactMessage(clickError)}`, errorIds };
     return { ...completed, outcome: 'no-visible-change', summary: 'No visible change was recorded within the observation window.', errorIds };
   } finally {
@@ -402,7 +436,7 @@ export function summarizeInteraction(steps: InteractionStep[]): string {
       case 'validation-shown': return `${label} stopped at form validation`;
       case 'loading': return `${label} showed a loading state`;
       case 'no-visible-change': return `${label} showed no visible change`;
-      case 'blocked': return `${label} tried a data-changing request that AccessRipple blocked`;
+      case 'blocked': return step.blockKind === 'external-navigation' ? `${label} leaves this website, so the navigation was blocked` : step.blockKind === 'unsafe-url' ? `${label} requested a blocked URL` : `${label} tried a data-changing request that AccessRipple blocked`;
       default: return `${label} could not be activated`;
     }
   });
@@ -417,7 +451,7 @@ export function outcomeLabel(step: InteractionStep): string {
     case 'validation-shown': return 'Stops at validation';
     case 'loading': return 'Shows a loading state';
     case 'no-visible-change': return 'No visible change';
-    case 'blocked': return 'Data request blocked';
+    case 'blocked': return step.blockKind === 'external-navigation' ? 'Leaves this website · not followed' : step.blockKind === 'unsafe-url' ? 'Blocked by the safety policy' : 'Data request blocked';
     case 'failed': return 'Interaction failed';
   }
 }

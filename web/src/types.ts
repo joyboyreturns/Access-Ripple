@@ -35,6 +35,7 @@ export interface InteractionStepView {
   windowOpened?: string;
   dialog?: { type: string; message: string };
   revealed?: Array<{ name: string; role: string; href?: string }>;
+  blockKind?: 'data-request' | 'external-navigation' | 'unsafe-url';
   errorIds: string[];
 }
 

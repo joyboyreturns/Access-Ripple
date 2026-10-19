@@ -317,6 +317,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             deadline: startedAt + scan.limits.totalTimeoutMs * 0.78,
             settleMs: 750,
             clickTimeoutMs: 2500,
+            reopenTimeoutMs: Math.min(15_000, scan.limits.navigationTimeoutMs),
             onProgress: (message) => {
               scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: entry.url, message };
               scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
