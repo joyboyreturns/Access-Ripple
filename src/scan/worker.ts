@@ -209,7 +209,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: displayUrl, message: `Inspecting page ${pages.length + 1}.` };
       scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
       const page = await context.newPage();
-      const pageId = stableId('page', displayUrl);
+      let pageId = stableId('page', displayUrl);
       const errors: RuntimeErrorEvidence[] = [];
       let requestCount = 0;
       let requestLimitRecorded = false;
@@ -242,6 +242,14 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         if (finalUrl.origin !== origin) throw new Error('This page redirected outside the original website and was not scanned.');
         await page.waitForTimeout(150);
         const finalDisplayUrl = safeDisplayUrl(finalUrl.toString());
+        if (finalDisplayUrl !== displayUrl) {
+          if (visited.has(finalDisplayUrl)) {
+            visited.delete(displayUrl);
+            continue;
+          }
+          visited.add(finalDisplayUrl);
+          pageId = stableId('page', finalDisplayUrl);
+        }
         const title = (await page.title()).slice(0, 180) || undefined;
         const { controls, links } = await inspectControls(page, finalUrl.toString(), scan.limits.maxControlsPerPage);
         const findings = await runAxe(page, pageId, scan.limits.maxFindingsPerPage);
