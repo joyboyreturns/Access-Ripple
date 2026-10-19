@@ -4,7 +4,21 @@ AccessRipple is a developer tool for exploring how a website is connected: pages
 
 ## Current build
 
-The backend-first proof of concept provides a local-only Fastify API, bounded Playwright scans, axe-core checks, a graph result, scan comparison, and an Obsidian-compatible ZIP export. The built-in checkout fixture demonstrates a missing-image finding and a simulated payment-flow error. It never sends a payment.
+The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a complete searchable inventory, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results. A controlled checkout fixture remains in the backend for regression testing; it never sends a payment.
+
+## Run the full app
+
+Requirements: Node.js 22 and npm.
+
+```sh
+npm install
+npx playwright install chromium
+npm run dev
+```
+
+Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph.
+
+The decorative video and fonts are served locally. Video motion can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect while the local scanner still has the result. No sample graph is seeded into the interface.
 
 ## Run the backend
 
@@ -49,6 +63,12 @@ npm run build
 ## Project planning
 
 The product scope, PRD, and technical specification are in `devpost/`. `devpost/learner-profile.md` is local personal context and is excluded from version control.
+
+The UI revision checklist records completed mechanical checks separately from the learner’s pending final review. A short demo route is in `devpost/demo-script.md`.
+
+## Media provenance
+
+The landing animation is the video supplied in the learner’s Vesper design-reference prompt, stored at `web/public/media/ripple-hero.mp4`. It is decorative and is not a recording of AccessRipple scanning a website. Its source is recorded beside the asset. The Inter and Instrument Serif fonts are self-hosted with their OFL notices in `web/public/fonts/`.
 
 ## Compact architecture map
 

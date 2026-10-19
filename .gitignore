@@ -1,5 +1,6 @@
 # Personal learning context stays out of commits by default.
 /devpost/learner-profile.md
+/reference-assets/
 
 # Local credentials and environment files
 .env
@@ -22,3 +23,4 @@ test-results/
 # Graphify local caches (keep the generated source graph and Obsidian notes)
 /graphify-out/cache/
 /graphify-out/.graphify_root
+/graphify-out/.graphify_python

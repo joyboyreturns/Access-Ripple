@@ -1,0 +1,21 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
+
+const webRoot = fileURLToPath(new URL('./web', import.meta.url));
+
+export default defineConfig({
+  root: webRoot,
+  plugins: [react()],
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      '/api': 'http://127.0.0.1:4317',
+      '/sample': 'http://127.0.0.1:4317',
+      '/docs': 'http://127.0.0.1:4317',
+    },
+  },
+  build: { outDir: '../dist/web', emptyOutDir: false },
+});

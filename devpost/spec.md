@@ -203,3 +203,15 @@ There are no external APIs, accounts, or paid services. The crawler visits the u
 - **Useful unknown:** whether a visible button’s route can be known without clicking it. The build will demonstrate that plain links can be mapped from page structure while a script-only button is labeled not tested unless a safe sample probe records it.
 - **Limits recommendation for initial build:** maximum 5 same-origin pages, depth 2, 20-second navigation timeout, 60-second total scan timeout, 200 controls and 300 network requests per page, 1 active scan. Tune only if local sample and API checks show the values block the intended demo.
 - **Status:** the technical stack is a reasoned implementation recommendation based on the learner’s direction; package version resolution will be verified during setup. The backend is local-only; public deployment is deferred.
+
+## Graph Studio UI revision
+
+The implemented front end lives in `web/` and is launched with `npm run dev` alongside the API. The introduction adapts the learner’s Vesper reference using the supplied local MP4, self-hosted Inter and Instrument Serif fonts, metallic controls, and Motion entrance transitions. Both themes, native dialogs, video pause, and reduced-motion preferences are supported.
+
+The studio uses a lightweight SVG spatial projection with yaw, pitch, pan, zoom, keyboard orbit, and a neighborhood focus control. This replaces the earlier React Three Fiber recommendation; no WebGL dependency was added. A bounded, grouped visual scene keeps labels readable, while the searchable and progressively loaded List exposes the entire original inventory. Grouping preserves original IDs, targets, and graph relationships.
+
+`web/src/presentation.ts` converts common accessibility rules into plain-language impact and suggested source changes. Browser security/network events are diagnostic signals, not proof that a visitor’s task failed. Raw selectors, rule IDs, and recorded messages remain behind Developer evidence. External sites are never modified.
+
+The UI connects to scan, rescan, comparison, and ZIP export endpoints. It retains the latest scan ID in tab session storage and restores a result while the local scanner still has it. Rescan handles an expired result by starting a fresh URL scan and explicitly omitting unavailable comparison. Restarting the scanner still clears backend results.
+
+The default interface contains no sample data or sample CTA, as requested by the learner. The backend fixture remains for controlled regression testing. No external-site auto-repair, sample repair UI, public deployment, or completed learner final review is claimed by this revision.

@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1792417328.845898,
-    "seen": 1792417427.147039,
-    "ast_hash": "9324af5a926717cd35ba2c47048fce75",
+    "mtime": 1792419775.91609,
+    "seen": 1792422461.917618,
+    "ast_hash": "c7b08c83ae2813dac24f004123853c92",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "src/scan/worker.ts": {
-    "mtime": 1792417305.9468193,
-    "seen": 1792417427.147052,
-    "ast_hash": "7d68530f46da5edb9294ba4946c11ec6",
+    "mtime": 1792421947.112467,
+    "seen": 1792422461.917634,
+    "ast_hash": "b24b90bf41156017c15c53d06223d430",
     "semantic_hash": ""
   },
   "src/store/memory.ts": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792417290.364926,
-    "seen": 1792417427.1470668,
-    "ast_hash": "2afa8c599e179d226acb53edc8e238e5",
+    "mtime": 1792422086.9784558,
+    "seen": 1792422461.9176588,
+    "ast_hash": "06630846ca35deeb2ed60c73b9a4dd8c",
     "semantic_hash": ""
   },
   "src/sample/site/checkout.html": {
@@ -123,6 +123,120 @@
     "mtime": 1792417328.809371,
     "seen": 1792417427.147062,
     "ast_hash": "ca80e6fe3fed8303fc67230272452346",
+    "semantic_hash": ""
+  },
+  "tests/unit/presentation.test.ts": {
+    "mtime": 1792422125.1575875,
+    "seen": 1792422461.9176419,
+    "ast_hash": "65dc841991469da9bbdafadf6362f175",
+    "semantic_hash": ""
+  },
+  "tests/unit/web-api.test.ts": {
+    "mtime": 1792422252.8437428,
+    "seen": 1792422461.917644,
+    "ast_hash": "5d346519ce9562c01c68e2fbbe511291",
+    "semantic_hash": ""
+  },
+  "tsconfig.web.json": {
+    "mtime": 1792418742.3285744,
+    "seen": 1792422461.9176478,
+    "ast_hash": "b3dbf84bcc1434fc571f55b5e9d1da16",
+    "semantic_hash": ""
+  },
+  "vite.config.ts": {
+    "mtime": 1792418742.2614985,
+    "seen": 1792422461.9176488,
+    "ast_hash": "4605fd08dad88d416f72495391393965",
+    "semantic_hash": ""
+  },
+  "vitest.config.ts": {
+    "mtime": 1792419775.8781848,
+    "seen": 1792422461.91765,
+    "ast_hash": "e11a1bebd334214ba07ff68242dee05c",
+    "semantic_hash": ""
+  },
+  "web/src/App.tsx": {
+    "mtime": 1792421992.1119652,
+    "seen": 1792422461.917651,
+    "ast_hash": "709d758f4da92d0f8e6d8f36b4803b2d",
+    "semantic_hash": ""
+  },
+  "web/src/GraphCanvas.tsx": {
+    "mtime": 1792422618.5894456,
+    "seen": 1792422777.807275,
+    "ast_hash": "7be2423e75c30d42a3a64790ae5b4887",
+    "semantic_hash": ""
+  },
+  "web/src/Icons.tsx": {
+    "mtime": 1792421054.6784678,
+    "seen": 1792422461.917653,
+    "ast_hash": "7c365baf103695b99f0a42bffaeda943",
+    "semantic_hash": ""
+  },
+  "web/src/Landing.tsx": {
+    "mtime": 1792421817.7468693,
+    "seen": 1792422461.917654,
+    "ast_hash": "81a362ad155999ccca558be69f024357",
+    "semantic_hash": ""
+  },
+  "web/src/api.ts": {
+    "mtime": 1792422252.8014247,
+    "seen": 1792422461.917655,
+    "ast_hash": "184e5c773101fa0b28a15297fa2b366e",
+    "semantic_hash": ""
+  },
+  "web/src/main.tsx": {
+    "mtime": 1792418742.184636,
+    "seen": 1792422461.917655,
+    "ast_hash": "8fd5ce4d4123976b70061e6be5fb4d44",
+    "semantic_hash": ""
+  },
+  "web/src/presentation.ts": {
+    "mtime": 1792422125.1151526,
+    "seen": 1792422461.917656,
+    "ast_hash": "9c289bf089d56fc26358ad4fd4b28cda",
+    "semantic_hash": ""
+  },
+  "web/src/types.ts": {
+    "mtime": 1792421266.9190564,
+    "seen": 1792422461.9176571,
+    "ast_hash": "2b79450f35c79b8dfcbe01b5bd2edc6f",
+    "semantic_hash": ""
+  },
+  "screenshot.png.md": {
+    "mtime": 1792418720.9371443,
+    "seen": 1792422461.9176588,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "web/index.html": {
+    "mtime": 1792421858.4281535,
+    "seen": 1792422461.9176629,
+    "ast_hash": "fa80c8a794d47f8ed098eb659b16b412",
+    "semantic_hash": ""
+  },
+  "web/public/fonts/OFL-InstrumentSerif.txt": {
+    "mtime": 1792422142.5612044,
+    "seen": 1792422461.917664,
+    "ast_hash": "768c3f0d6166414610edb8aab3eebfb3",
+    "semantic_hash": ""
+  },
+  "web/public/fonts/OFL-Inter.txt": {
+    "mtime": 1792422142.1817546,
+    "seen": 1792422461.917665,
+    "ast_hash": "5e95cb23ed621124015c5d23224ba2d3",
+    "semantic_hash": ""
+  },
+  "web/public/media/README.md": {
+    "mtime": 1792422087.0249493,
+    "seen": 1792422461.917666,
+    "ast_hash": "b0b301c580b57b5ad99b56eece768f86",
+    "semantic_hash": ""
+  },
+  "web/public/media/ripple-hero.mp4": {
+    "mtime": 1792420983.773603,
+    "seen": 1792422461.9176672,
+    "ast_hash": "ee6313fe0dafc22a08917ea6295d2437",
     "semantic_hash": ""
   }
 }

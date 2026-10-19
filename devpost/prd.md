@@ -145,3 +145,11 @@ Implements `scope.md > The POC Boundary`.
 
 - Exact scan page limit, safe-probe rules, timeout, and persistence duration will be set in `4-spec`.
 - UI/UX Pro Max is treated as the requested design skill; its setup will be verified before the front-end build.
+
+## UI refinement requested by the learner
+
+The learner requested a video-led interface based on the supplied Vesper design prompt, larger readable text, light/dark themes, and issue explanations that do not require reading error logs. The opening introduces AccessRipple, then enters the real URL-driven studio. It starts empty rather than showing seeded sample data. The backend checkout fixture remains a development test resource.
+
+Overview groups repeated findings by rule and page. Selecting a point explains its human impact, suggests a source change, and exposes technical evidence on request. The Map offers spatial orbit, pan, zoom, and neighborhood focus; List exposes every recorded item with filtering and search. Accessibility findings and browser diagnostics are reported separately. Rescans compare observations, and ZIP export preserves the connected result.
+
+This section records the learner’s direct implementation requests. It does not record a new interview or claim their final review of the redesigned app is complete.

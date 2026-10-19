@@ -73,13 +73,19 @@ function errorEvidence(kind: RuntimeErrorEvidence['kind'], message: string, url?
 
 async function inspectControls(page: import('playwright').Page, pageUrl: string, limit: number): Promise<{ controls: ControlEvidence[]; links: string[] }> {
   const extracted = await page.evaluate(`(() => { const maxControls = ${limit};
-    const elements = Array.from(document.querySelectorAll('a[href],button,input,select,textarea,[role=button],[role=link]')).slice(0, maxControls);
+    const elements = Array.from(document.querySelectorAll('a[href],button,input,select,textarea,[role=button],[role=link]')).filter((element) => {
+      if (element.matches('input[type="hidden"],[hidden],[inert]') || element.closest('[hidden],[aria-hidden="true"],[inert]')) return false;
+      const style = getComputedStyle(element);
+      if (style.display === 'none' || style.visibility === 'hidden' || element.getClientRects().length === 0) return false;
+      return true;
+    }).slice(0, maxControls);
     return elements.map((element) => {
       const anchor = element.matches('a[href]') ? element : null;
       const input = element.matches('input') ? element : null;
       const labelledBy = element.getAttribute('aria-labelledby')?.split(/\\s+/).map((id) => document.getElementById(id)?.textContent?.trim()).filter(Boolean).join(' ');
       const label = input?.labels ? Array.from(input.labels).map((item) => item.textContent?.trim()).filter(Boolean).join(' ') : '';
       const name = element.getAttribute('aria-label') || labelledBy || element.getAttribute('title') || label || element.textContent?.trim() || input?.placeholder || input?.name || '';
+      if (/[{};]|:hover|:focus|\\.[A-Za-z_-]+\\s*\\{/i.test(name) && name.length > 24) return null;
       const form = element.closest('form');
       let selector = '';
       if (element.id) selector = '#' + CSS.escape(element.id);
@@ -103,7 +109,7 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
         formAction: form?.action || undefined,
         method: form?.method?.toUpperCase() || undefined,
       };
-    });
+    }).filter(Boolean);
   })()` ) as ExtractedControl[];
 
   const controls = extracted.map((control) => ({
