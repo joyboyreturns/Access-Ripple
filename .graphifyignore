@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.agents/
+.claude/
+agent/
+.obsidian/
+devpost/
+graphify-out/
+
+knowledge-map/

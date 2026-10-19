@@ -1,0 +1,21 @@
+---
+source_file: "src/scan/worker.ts"
+type: "code"
+community: "Community None"
+location: "L38"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Community_None
+---
+
+# stableId()
+
+## Connections
+- [[errorEvidence()]] - `calls` [EXTRACTED]
+- [[inspectControls()]] - `calls` [EXTRACTED]
+- [[performScan()]] - `calls` [EXTRACTED]
+- [[runAxe()]] - `calls` [EXTRACTED]
+- [[worker.ts]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_None

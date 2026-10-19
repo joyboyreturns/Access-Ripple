@@ -1,0 +1,21 @@
+---
+source_file: "tests/unit/url-safety.test.ts"
+type: "code"
+community: "Community None"
+location: "L1"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Community_None
+---
+
+# url-safety.test.ts
+
+## Connections
+- [[UnsafeUrlError]] - `imports` [EXTRACTED]
+- [[assertSafeUrl()]] - `imports` [EXTRACTED]
+- [[isPublicIp()]] - `imports` [EXTRACTED]
+- [[url-safety.ts]] - `imports_from` [EXTRACTED]
+- [[vitest_1]] - `imports_from` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_None

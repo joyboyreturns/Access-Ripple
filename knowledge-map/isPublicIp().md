@@ -1,0 +1,21 @@
+---
+source_file: "src/scan/url-safety.ts"
+type: "code"
+community: "Community None"
+location: "L21"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Community_None
+---
+
+# isPublicIp()
+
+## Connections
+- [[assertSafeUrl()]] - `calls` [EXTRACTED]
+- [[inV4Range()]] - `calls` [EXTRACTED]
+- [[parseIpv6()]] - `calls` [EXTRACTED]
+- [[url-safety.test.ts]] - `imports` [EXTRACTED]
+- [[url-safety.ts]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_None
