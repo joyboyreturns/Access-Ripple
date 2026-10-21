@@ -2,7 +2,7 @@
 source_file: "package.json"
 type: "concept"
 community: "Community None"
-location: "L28"
+location: "L29"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
@@ -12,6 +12,7 @@ tags:
 # playwright
 
 ## Connections
+- [[check-studio.mjs]] - `imports_from` [EXTRACTED]
 - [[interaction.ts]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 - [[performScan()]] - `imports_from` [EXTRACTED]

@@ -28,7 +28,9 @@ Export the vault once before recording so the download is not a surprise. Close 
 
 ## Optional beat: the model-written read
 
-If a model provider is configured, the studio also shows **A model read of this scan** under the summary. Press **Write a briefing** and read it aloud: “A model writes this, but it only ever sees the evidence the browser recorded, and every sentence has to cite an id that exists in the scan. Click a citation and it opens the evidence the sentence came from.”
+If a model provider is configured, the studio also shows **A model read of this scan** under the summary. Press **Write a briefing** and read it aloud: “A model writes this, but it only ever sees the evidence the browser recorded, and every sentence has to cite an id that exists in the scan. Click a citation and it opens the evidence the sentence came from. And notice the dashed chips — those are the things the scan did **not** check.”
+
+That last part is the strongest thing the model says: it is asked to name what is missing, so the reader never assumes the scan was complete. It took about three and a half seconds against a free model.
 
 This is the strongest beat for a “Build With AI” brief, and it is also the riskiest: it needs a provider key and a working network at recording time. The summary above it is generated locally and always works, so if the model call is slow or fails, the demo simply continues. Configure it before recording, never during.
 

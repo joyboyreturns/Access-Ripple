@@ -2,7 +2,7 @@
 source_file: "src/ai/briefing.ts"
 type: "code"
 community: "Community None"
-location: "L35"
+location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -15,6 +15,7 @@ tags:
 - [[dot-constructor()]] - `method` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[briefing.ts]] - `contains` [EXTRACTED]
+- [[requestCompletion()]] - `calls` [EXTRACTED]
 - [[writeBriefing()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None
