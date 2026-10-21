@@ -27,6 +27,7 @@ tags:
 - [[createScan()]] - `contains` [EXTRACTED]
 - [[downloadVault()]] - `contains` [EXTRACTED]
 - [[getAiStatus()]] - `contains` [EXTRACTED]
+- [[getProof()]] - `contains` [EXTRACTED]
 - [[getSampleInfo()]] - `contains` [EXTRACTED]
 - [[listScans()]] - `contains` [EXTRACTED]
 - [[proposeFix()]] - `contains` [EXTRACTED]

@@ -18,6 +18,7 @@ tags:
 - [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[getAiStatus()]] - `calls` [EXTRACTED]
+- [[getProof()]] - `calls` [EXTRACTED]
 - [[getSampleInfo()]] - `calls` [EXTRACTED]
 - [[listScans()]] - `calls` [EXTRACTED]
 - [[proposeFix()]] - `calls` [EXTRACTED]
