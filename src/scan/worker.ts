@@ -168,7 +168,11 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
 
 async function runAxe(page: import('playwright').Page, pageId: string, maxFindings: number): Promise<AccessibilityEvidence[]> {
   try {
-    await page.addScriptTag({ content: axeSource });
+    // The check source is installed before the page's own scripts, so a site
+    // with a strict Content Security Policy can still be checked. If it is
+    // not there for some reason, try the ordinary way once.
+    const present = await page.evaluate(() => Boolean((window as unknown as { axe?: unknown }).axe));
+    if (!present) await page.addScriptTag({ content: axeSource });
     const results = await page.evaluate(async () => {
       const axe = (window as unknown as { axe?: { run: (context: Document, options: object) => Promise<any> } }).axe;
       if (!axe) return null;
@@ -203,11 +207,13 @@ async function runAxe(page: import('playwright').Page, pageId: string, maxFindin
       ruleId: 'accessibility-check-incomplete',
       impact: 'unknown',
       status: 'needs-review',
-      help: `Automated checks could not finish: ${error instanceof Error ? error.message.slice(0, 160) : 'unknown error'}`,
+      help: 'The automated checks could not run on this page.',
       helpUrl: 'https://github.com/dequelabs/axe-core',
       targets: [],
       evidenceLabel: 'observed',
-    }];
+      snippet: undefined,
+      reason: error instanceof Error ? error.message.slice(0, 200) : 'unknown error',
+    } as AccessibilityEvidence];
   }
 }
 
@@ -294,6 +300,9 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: displayUrl, message: `Inspecting page ${pages.length + 1}.`, remainingMs: Math.max(0, startedAt + scan.limits.totalTimeoutMs - Date.now()) };
       scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
       const page = await context.newPage();
+      // Install the check source before any script on the page runs, so a
+      // strict Content Security Policy cannot stop the checks.
+      await page.addInitScript({ content: axeSource }).catch(() => undefined);
       let pageId = stableId('page', displayUrl);
       const errors: RuntimeErrorEvidence[] = [];
       let requestCount = 0;

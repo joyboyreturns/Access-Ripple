@@ -46,12 +46,13 @@ A design review was asked one question: what makes a judge disengage from this d
 
 ## What the real-site sweep found
 
-Ten famous sites were scanned through the running service. Every one produced a well-formed graph, but two things were wrong, and both mattered more on a real site than on the fixture.
+Ten famous sites were scanned through the running service. Every one produced a well-formed graph, but three things were wrong, and all three mattered more on a real site than on the fixture.
 
 - **A site that refuses the scanner was reported as if it had been scanned.** Stack Overflow and Devpost answer an automated browser with a Cloudflare challenge page, and the scan reported one inspected page with a finding on it. That is a lie an accessibility tool cannot tell. A refused page is now recognised, marked blocked rather than inspected, and the story says the site refused the automated browser and that nothing on it could be inspected.
+- **A strict Content Security Policy stopped the checks from running, and the pages were then reported as findings.** The check source was added with `addScriptTag`, which a policy blocks, so four of MDN's five pages had no check run on them — and the tool reported "4 accessibility findings" for four unchecked pages. That is the one thing an accessibility tool must never say. The source is now installed before the site's own scripts, where a policy cannot reach it, and a page whose checks could not run is a separate, clearly labelled item that is never counted as a finding. MDN went from zero real findings to 40.
 - **Interaction testing ate the whole budget on a heavy site.** Wikipedia, GOV.UK and the BBC reached one page and then ran out of time, because every interaction opens its own disposable page and waits for it. Interactions now get a fixed 35% slice of the budget and the crawl keeps the rest. Wikipedia went from one page to four, GOV.UK from one to five. The demo shop is unaffected.
 
-The sites worth showing in a recording, measured on this machine: **developer.mozilla.org** (about 40s, 4 pages, 681 controls, 10 actions activated), **news.ycombinator.com** (about 35s, 5 pages, 1000 controls, 500 findings), **www.w3.org** (about 33s, 5 pages), **www.google.com** (about 30s, 14 findings) and **github.com** (about 50s, 5 pages). Stack Overflow and Devpost answer automated browsers with a challenge page, so they are not in a three-minute video.
+The sites worth showing in a recording, measured on this machine after the fixes: **developer.mozilla.org** (about 45s, 4 pages, 681 controls, 40 findings in 4 kinds, 10 actions activated), **news.ycombinator.com** (about 35s, 5 pages, 1000 controls, 500 findings), **www.w3.org** (about 33s, 5 pages, 3 findings), **www.google.com** (about 30s, 14 findings) and **github.com** (about 50s, 5 pages, 33 findings). Stack Overflow and Devpost answer automated browsers with a challenge page, so they are not in a three-minute video.
 
 ## The route, 180 seconds
 
