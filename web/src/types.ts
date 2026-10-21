@@ -114,6 +114,8 @@ export interface ScanComparison {
   demoShop: boolean;
   /** Findings whose page was not inspected again, so they are unknown rather than resolved. */
   notRechecked: GraphNode[];
+  /** What the model predicted before the change, and what the browser recorded after it. */
+  predictions?: Array<{ issueId: string; expected: 'absent' | 'present'; reason: string; label?: string; observed?: 'absent' | 'present' | 'not rechecked'; outcome?: 'supported' | 'contradicted' | 'not rechecked' }>;
 }
 
 /** A concrete change a model proposes for one finding, grounded in the recorded markup. */

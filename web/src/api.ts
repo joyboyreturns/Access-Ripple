@@ -71,6 +71,14 @@ export function resetDemoShop() {
 }
 
 /** Ask the configured model for a concrete change that fixes one finding. */
+export interface RepairPrediction { issueId: string; expected: 'absent' | 'present'; reason: string; label?: string; observed?: 'absent' | 'present' | 'not rechecked'; outcome?: 'supported' | 'contradicted' | 'not rechecked' }
+export interface RepairContract { predictions: RepairPrediction[]; model: string }
+
+/** Ask the model to commit, in advance, to what its change will fix. */
+export function writeContract(scanId: string, nodeId: string) {
+  return request<RepairContract>(`/api/scans/${encodeURIComponent(scanId)}/contract`, { method: 'POST', body: JSON.stringify({ nodeId }) }, { timeout: MODEL_WAIT_MS });
+}
+
 export function proposeFix(scanId: string, nodeId: string) {
   return request<FixProposal>(`/api/scans/${encodeURIComponent(scanId)}/fix`, { method: 'POST', body: JSON.stringify({ nodeId }) }, { timeout: MODEL_WAIT_MS });
 }
