@@ -117,3 +117,17 @@ Found while exploring the Amazon India scan saved in history: machine-looking na
 - Journeys through script links now say “This link runs a script on the same page. There is no page destination to inspect, and the action itself was not activated.” instead of claiming a destination was outside the scan; the step caption reads “In-page script · action not tested”. A control with a real page destination still reports the inspected destination.
 - Recorded summaries that quote a control name are cleaned the same way (“Activated “Cart” …”), and common scan failures are translated into next steps: unresolvable address, refused connection, timeout, blocked scanner, certificate problems, and network loss each explain what to do next.
 - Verified on the live Amazon India scan: picker and list labels are clean, the inspector shows the shortcut chip, no “void(0)” or raw shortcut text appears anywhere in the interface, the unit suite grew to 60 tests (shortcut parsing, script-link labels, journey summaries), and axe-core reports 0 violations on the map after the change.
+
+## Demo reliability revision
+
+Verified on 21 October 2026 against the running local service.
+
+- **Scan the demo shop** in the studio starts the built-in checkout fixture with one click. It runs in a real Chromium session, inspects 4 pages, activates 9 safe controls once each, and finishes in about ten seconds with no network address involved. `GET /api/sample/info` describes the fixture; the button always resets it to its broken state first, so repeated runs produce the same numbers.
+- **Landing → studio in one click**: "See it in 60 seconds" sets `#demo` and opens the studio, which starts the demo-shop scan on arrival. A fresh load of `#demo` opens the studio rather than the landing page, and a restored previous scan is skipped in that path so the demo scan is the one that runs.
+- **Scan story**: the result now states the observed numbers in one paragraph — "We inspected 4 pages of Northstar demo shop and found 2 accessibility barriers, after activating 9 controls in a disposable browser" — then names the first barrier to look at, where it was found, and the suggested change. A link opens that finding. The tone marker reads "Needs attention", "Worth a look", or "Nothing blocking".
+- **Prove a repair**: the repair lab appears only for a demo-shop scan. "Repair the demo shop" switches the fixture to its repaired state; "Rescan and compare" then reports **3 no longer observed, 2 still observed, 0 new**, and the story updates to 1 barrier and 1 browser signal. A fresh demo-shop scan after the repair returns the fixture to its broken state.
+- **Dead ends removed**: a private or local address now reports that private addresses are blocked on purpose and offers the demo shop instead of stopping at the error.
+- **Naming**: the fixture is "Northstar demo shop" in the graph's site node, the result panel, the recent-scans list, and the exported vault note, instead of `127.0.0.1`.
+- **Demo guide**: a header button lists the four beats of the recording with the exact control to press in each.
+- `npm run typecheck`, `npm run build`, and `npm test` (64 tests across 9 files) pass. New tests cover the sample-info endpoint, the sample scan path, and the scan story's claims and its no-barrier case.
+- Not verified here: a screen recording of the route, a phone-width pass over the new panels, and an axe pass on the new story, repair, and guide surfaces.
