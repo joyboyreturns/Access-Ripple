@@ -18,7 +18,15 @@ test-results/
 /.agents/
 /.claude/
 /agent/
+/.opencode/
+/AGENTS.md
+/.obsidian/
 /.obsidian/workspace.json
+/screenshot.png.md
+
+# Human-maintained project memory (the generated notes in knowledge-map/ are committed)
+/knowledge-map/Project memory.md
+/knowledge-map/Obsidian project memory.md
 
 # Graphify local caches (keep the generated source graph and Obsidian notes)
 /graphify-out/cache/
