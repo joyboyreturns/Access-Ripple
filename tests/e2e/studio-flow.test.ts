@@ -8,9 +8,12 @@ import { buildApp } from '../../src/api/app.js';
 import { scanStore } from '../../src/store/memory.js';
 
 /**
- * The studio's core path, driven through a real browser: the one-click demo
- * shop, the filters, the searchable list, the inspector, the repair loop, and
- * the two error paths a visitor is most likely to hit.
+ * The scan path the studio runs, exercised through the API: the demo shop
+ * scan, the shape of the graph, the refusal of a private address, the repair
+ * loop, and the vault download.
+ *
+ * The studio's own interface is checked separately by `npm run check:studio`,
+ * which drives a real browser.
  */
 describe('the studio in a browser', () => {
   let app: FastifyInstance;

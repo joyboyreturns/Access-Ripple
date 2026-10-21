@@ -53,6 +53,8 @@ Show **ROUTES TO THIS POINT** in the inspector, then follow one of them.
 Say: “This is not a diagram of what might happen. This is the path the browser took, with each step labelled by what was actually observed. And here are the controls that lead to the page with the problem — that is how I choose what to investigate.”
 Click a route and let the pulse travel it. “Anything past the recorded route stays marked untested.”
 
+If you have a few seconds, show the discovery on the demo shop instead: the **Add to cart** button reveals a **View cart** link that is not in the page's source, and the scanner follows it. Say: “That cart link only exists after a click. The scanner found it by activating the button, and followed it into the next page — so a page that is not in the markup still ends up on the map.”
+
 **1:10–1:30 — The model proposes a change.**
 Press **Propose a change**. The diff appears with the file and line.
 Say: “A model proposes the smallest change that fixes the rule, grounded in the markup the browser recorded. This is a suggestion, not proof. Here is how I check it.”
