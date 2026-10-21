@@ -146,6 +146,32 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   // and the deterministic scan story always remains available without one.
   app.get('/api/ai/status', async () => aiStatus());
 
+  // The proof: the newest comparison this computer has on record. It is a
+  // property of the saved history rather than of the open tab, so a fresh
+  // window can open straight on it.
+  app.get('/api/proof', async (_request, reply) => {
+    const memory = scanStore.list().map(summarizeScan);
+    const disk = await diskStore.list();
+    const merged = new Map<string, ScanSummary>();
+    for (const item of [...disk, ...memory]) merged.set(item.id, item);
+    const candidates = [...merged.values()]
+      .filter((item) => item.previousScanId && item.status !== 'failed' && item.status !== 'queued' && item.status !== 'running')
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    let fallback: { comparison: ReturnType<typeof compareScans>; currentScanId: string; previousScanId: string } | undefined;
+    for (const candidate of candidates) {
+      const current = await getScan(candidate.id);
+      const previous = await getScan(candidate.previousScanId!);
+      if (!current?.graph || !previous?.graph) continue;
+      if (current.canonicalOrigin !== previous.canonicalOrigin) continue;
+      const comparison = compareScans(previous, current);
+      // A comparison that actually shows a repair is the one worth opening.
+      if (comparison.resolved.length) return { comparison, currentScanId: current.id, previousScanId: previous.id };
+      fallback = { comparison, currentScanId: current.id, previousScanId: previous.id };
+    }
+    if (fallback) return fallback;
+    return reply.code(404).send({ error: { code: 'NO_PROOF_YET', message: 'No repair has been compared on this computer yet.', retryable: false } });
+  });
+
   app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/briefing', async (request, reply) => {
     const scan = await getScan(request.params.scanId);
     if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });

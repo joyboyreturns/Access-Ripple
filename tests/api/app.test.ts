@@ -41,6 +41,26 @@ describe('local scan API', () => {
     expect(info.json().url).toContain('/sample/checkout');
   });
 
+  it('either reports no proof yet, or returns a well formed comparison', async () => {
+    const app = await buildApp(); apps.push(app);
+    const proof = await app.inject({ method: 'GET', url: '/api/proof' });
+    if (proof.statusCode === 404) {
+      expect(proof.json().error.code).toBe('NO_PROOF_YET');
+      return;
+    }
+    expect(proof.statusCode).toBe(200);
+    const body = proof.json();
+    expect(body.comparison).toBeTruthy();
+    expect(Array.isArray(body.comparison.resolved)).toBe(true);
+    expect(typeof body.currentScanId).toBe('string');
+    expect(typeof body.previousScanId).toBe('string');
+    // A proof that shows a repair is preferred over one that shows nothing.
+    if (body.comparison.resolved.length) {
+      const page = body.comparison.pages.find((item: { before?: string; after?: string }) => item.before && item.after);
+      expect(page).toBeTruthy();
+    }
+  });
+
   it('accepts a demo shop scan without passing the private-address safety check', async () => {
     const app = await buildApp(); apps.push(app);
     const created = await app.inject({ method: 'POST', url: '/api/scans', payload: { sample: 'checkout' } });

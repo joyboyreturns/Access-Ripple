@@ -4,7 +4,7 @@ import GraphCanvas from './GraphCanvas';
 import SelectMenu from './SelectMenu';
 import Landing, { Dialog } from './Landing';
 import Icon, { Mark } from './Icons';
-import { ApiError, checkApi, compareScans, createScan, downloadVault, getAiStatus, getSampleInfo, listScans, proposeFix, readGraph, readScan, rescan, setSampleState, waitForScan, writeBriefing, type AiStatus, type Briefing } from './api';
+import { ApiError, checkApi, compareScans, createScan, downloadVault, getAiStatus, getProof, getSampleInfo, listScans, proposeFix, readGraph, readScan, rescan, setSampleState, waitForScan, writeBriefing, type AiStatus, type Briefing } from './api';
 import { cleanLabel, describe, friendlyScanError, groupIssues, isIssue, kindName, matches, nodeColor, pageFor, scanStory, severity, shortcutOf, str, traceJourney, type GraphFilter, type ViewNode } from './presentation';
 import { TOUR, type TourContext } from './tour';
 import type { FixProposal, SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types';
@@ -110,8 +110,16 @@ export default function App() {
   const [proposal,setProposal]=useState<FixProposal|null>(null),[proposalBusy,setProposalBusy]=useState(false),[proposalError,setProposalError]=useState('');
   const controller=useRef<AbortController|null>(null),urlInput=useRef<HTMLInputElement>(null),inspector=useRef<HTMLElement>(null),demoStarted=useRef(false);
   const reduced=useReducedMotion();
-  useEffect(()=>{const sync=()=>{if(location.hash==='#studio'||location.hash==='#demo'||location.hash==='#proof')setScreen('studio');else if(!location.hash||location.hash==='#')setScreen('home');};window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);
-  useEffect(()=>{if(location.hash==='#proof')setProofOpen(true);},[comparison]);
+  useEffect(()=>{const sync=()=>{if(location.hash==='#studio'||location.hash==='#demo'||location.hash==='#proof')setScreen('studio');else if(!location.hash||location.hash==='#')setScreen('home');if(location.hash!=='#proof')setProofOpen(false);};window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);
+  // #proof opens straight onto the newest comparison on this computer, so a
+  // fresh window can start on the result.
+  useEffect(()=>{
+    if(location.hash!=='#proof')return;
+    const load=()=>void getProof().then((result)=>{setComparison(result.comparison);setProofOpen(true);}).catch(()=>setNotice('No repair has been compared on this computer yet. Scan the demo shop, repair it, and rescan.'));
+    load();
+    const id=window.setInterval(load, 4000);
+    return()=>window.clearInterval(id);
+  },[]);
   useEffect(()=>{window.scrollTo({top:0,behavior:'instant'});},[screen]);
   useEffect(()=>{document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;storageSet('accessripple-theme',theme);},[theme]);
   useEffect(()=>{let active=true;const ping=()=>checkApi().then(v=>{if(active)setConnected(v.status==='ok');}).catch(()=>{if(active)setConnected(false);});void ping();const timer=window.setInterval(ping,20000);return()=>{active=false;clearInterval(timer);};},[]);
@@ -195,6 +203,11 @@ export default function App() {
     const index=TOUR.findIndex(step=>!step.done(tourContext));
     setTourStep(index<0?0:index);
   }
+  async function showProof(){
+    if(comparison){setProofOpen(true);return;}
+    try{const result=await getProof();setComparison(result.comparison);setProofOpen(true);}
+    catch{setNotice('No repair has been compared on this computer yet. Scan the demo shop, repair it, and rescan.');}
+  }
   function select(node:ViewNode){setSelected(node);if(node.kind==='control'||node.kind==='flow'){setJourneyId(node.id);setView('map');setFocus(false);setBeats(b=>({...b,journey:b.journey+1}));}if(window.innerWidth<900)window.setTimeout(()=>inspector.current?.scrollIntoView({behavior:reduced?'instant':'smooth',block:'start'}),80);}
   function changeFilter(next:GraphFilter){setJourneyId(null);setFilter(next);setFocus(false);setQuery('');}
   function studio(){if(location.hash!=='#demo')location.hash='studio';setScreen('studio');}
@@ -247,7 +260,7 @@ export default function App() {
   },[remoteHistory,history]);
 
   return <div className="app" data-theme={theme}><a className="skip-link" href="#main-content">Skip to main content</a>{screen==='home'?<Landing openStudio={studio} theme={theme} toggleTheme={()=>setTheme(v=>v==='dark'?'light':'dark')}/>:<div className={`studio ${tourStep!==null?'touring':''}`}>
-    <header className="studio-header"><a className="wordmark" href="#" aria-label="AccessRipple home"><Mark/><span>Access<span className="wordmark-soft">Ripple</span></span></a><span className="studio-label">/ <span>THE STUDIO</span></span><div className="studio-header-right"><span className={`connection-status ${connected?'online':''}`}><i/>{connected?'Local scanner ready':connected===false?'Scanner offline':'Connecting…'}</span><button className="icon-btn" onClick={()=>setHelpOpen(true)} aria-label="How scanning works"><Icon name="info"/></button><button className="icon-btn guide-button" onClick={startTour} aria-label="Start the guided tour"><Icon name="play" size={17}/></button>{comparison&&<button className="button button-glass compact proof-button" onClick={()=>setProofOpen(true)}><Icon name="check" size={16}/><span>Show the proof</span></button>}<button className="icon-btn theme-switch" role="switch" aria-checked={theme==='light'} aria-label={`Switch to ${theme==='dark'?'light':'dark'} mode`} onClick={()=>setTheme(v=>v==='dark'?'light':'dark')}><Icon name={theme==='dark'?'sun':'moon'}/></button><button className="button button-glass compact" onClick={()=>{void loadHistory();setHistoryOpen(true);}}><Icon name="folder" size={17}/><span>Recent scans</span></button></div></header>
+    <header className="studio-header"><a className="wordmark" href="#" aria-label="AccessRipple home"><Mark/><span>Access<span className="wordmark-soft">Ripple</span></span></a><span className="studio-label">/ <span>THE STUDIO</span></span><div className="studio-header-right"><span className={`connection-status ${connected?'online':''}`}><i/>{connected?'Local scanner ready':connected===false?'Scanner offline':'Connecting…'}</span><button className="icon-btn" onClick={()=>setHelpOpen(true)} aria-label="How scanning works"><Icon name="info"/></button><button className="icon-btn guide-button" onClick={startTour} aria-label="Start the guided tour"><Icon name="play" size={17}/></button><button className="button button-glass compact proof-button" onClick={()=>void showProof()}><Icon name="check" size={16}/><span>Show the proof</span></button><button className="icon-btn theme-switch" role="switch" aria-checked={theme==='light'} aria-label={`Switch to ${theme==='dark'?'light':'dark'} mode`} onClick={()=>setTheme(v=>v==='dark'?'light':'dark')}><Icon name={theme==='dark'?'sun':'moon'}/></button><button className="button button-glass compact" onClick={()=>{void loadHistory();setHistoryOpen(true);}}><Icon name="folder" size={17}/><span>Recent scans</span></button></div></header>
     <main id="main-content" className="studio-main">
       <div className="studio-intro"><div><span className="eyebrow"><i/> WEBSITE JOURNEY INTELLIGENCE</span><h1>A little clarity. <em>A bigger ripple.</em></h1><p>Explore the connections. Understand the barriers. Find your next improvement.</p></div><span className="local-label"><Icon name="shield" size={17}/> On your computer. In your control.</span></div>
       <form className="scan-bar" onSubmit={submit}><div className="scan-input-wrap"><Icon name="globe"/><label className="sr-only" htmlFor="website-url">Website URL</label><input id="website-url" ref={urlInput} placeholder="Enter a website URL, e.g. www.google.com" value={url} onChange={e=>setUrl(e.target.value)} autoComplete="url" inputMode="url" aria-describedby="scan-limits" disabled={busy}/></div><button className="button button-solid" disabled={busy||connected!==true} type="submit">{busy?<span className="spinner"/>:<Icon name="orbit" size={19}/>}<span>{busy?'Mapping website…':'Map this website'}</span>{!busy&&<Icon name="arrow" size={18}/>}</button>{sample&&<button className="button button-glass demo-button" type="button" disabled={busy||connected!==true} onClick={()=>void scanDemo()}><Icon name="play" size={16}/><span>Scan the demo shop</span></button>}</form>

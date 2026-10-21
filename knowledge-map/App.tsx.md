@@ -52,6 +52,7 @@ tags:
 - [[downloadVault()]] - `imports` [EXTRACTED]
 - [[friendlyScanError()]] - `imports` [EXTRACTED]
 - [[getAiStatus()]] - `imports` [EXTRACTED]
+- [[getProof()]] - `imports` [EXTRACTED]
 - [[getSampleInfo()]] - `imports` [EXTRACTED]
 - [[groupIssues()]] - `imports` [EXTRACTED]
 - [[hostname()]] - `contains` [EXTRACTED]

@@ -40,6 +40,11 @@ export function getAiStatus() {
   return request<AiStatus>('/api/ai/status');
 }
 
+/** The newest repair comparison this computer has on record. */
+export function getProof() {
+  return request<{ comparison: ScanComparison; currentScanId: string; previousScanId: string }>('/api/proof');
+}
+
 /** Ask the configured model for a grounded plain-language read of the scan. */
 export function writeBriefing(scanId: string) {
   return request<Briefing>(`/api/scans/${encodeURIComponent(scanId)}/briefing`, { method: 'POST', body: '{}' });

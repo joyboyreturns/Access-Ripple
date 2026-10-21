@@ -12,9 +12,9 @@
     "semantic_hash": ""
   },
   "src/api/app.ts": {
-    "mtime": 1792559182.4489777,
-    "seen": 1792561016.261179,
-    "ast_hash": "d87387b249cb4c2266dd0ca898b97443",
+    "mtime": 1792561194.6875849,
+    "seen": 1792561484.867466,
+    "ast_hash": "277ba4acd7262671e19917113cb97ec4",
     "semantic_hash": ""
   },
   "src/api/server.ts": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "tests/api/app.test.ts": {
-    "mtime": 1792556901.4345312,
-    "seen": 1792557535.398133,
-    "ast_hash": "c19056ec447351bc74f013938629d4d3",
+    "mtime": 1792561430.5136495,
+    "seen": 1792561484.867481,
+    "ast_hash": "7c07d11494bc629cc6646d819d5bec21",
     "semantic_hash": ""
   },
   "tests/e2e/sample-scan.test.ts": {
@@ -156,9 +156,9 @@
     "semantic_hash": ""
   },
   "web/src/App.tsx": {
-    "mtime": 1792560240.0690718,
-    "seen": 1792561016.26125,
-    "ast_hash": "8db155ba30aa02236a1434386cb2f3bd",
+    "mtime": 1792561260.0370407,
+    "seen": 1792561484.867502,
+    "ast_hash": "acdc6ae1d94bbe1a849637df00150059",
     "semantic_hash": ""
   },
   "web/src/GraphCanvas.tsx": {
@@ -180,9 +180,9 @@
     "semantic_hash": ""
   },
   "web/src/api.ts": {
-    "mtime": 1792559266.156303,
-    "seen": 1792561016.261259,
-    "ast_hash": "afa2460206f3c2956a7ed68e23237772",
+    "mtime": 1792561135.4811034,
+    "seen": 1792561484.867507,
+    "ast_hash": "fc60b7be70cfedb08ec21b031bf58f5d",
     "semantic_hash": ""
   },
   "web/src/main.tsx": {
