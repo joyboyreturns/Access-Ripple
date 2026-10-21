@@ -2,7 +2,7 @@
 source_file: "src/scan/worker.ts"
 type: "code"
 community: "Community None"
-location: "L226"
+location: "L243"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -20,6 +20,7 @@ tags:
 - [[initialResult()]] - `calls` [EXTRACTED]
 - [[inspectControls()]] - `calls` [EXTRACTED]
 - [[launchScan()]] - `calls` [EXTRACTED]
+- [[looksLikeRefusal()]] - `calls` [EXTRACTED]
 - [[playwright_1]] - `imports_from` [EXTRACTED]
 - [[runAxe()]] - `calls` [EXTRACTED]
 - [[runInteractions()]] - `calls` [EXTRACTED]

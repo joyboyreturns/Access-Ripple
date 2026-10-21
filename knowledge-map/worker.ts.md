@@ -35,6 +35,7 @@ tags:
 - [[initialResult()]] - `contains` [EXTRACTED]
 - [[inspectControls()]] - `contains` [EXTRACTED]
 - [[interaction.ts]] - `imports_from` [EXTRACTED]
+- [[looksLikeRefusal()]] - `contains` [EXTRACTED]
 - [[performScan()]] - `contains` [EXTRACTED]
 - [[playwright_2]] - `dynamic_import` [EXTRACTED]
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]

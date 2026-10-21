@@ -1766,10 +1766,19 @@
       "height": 60
     },
     {
+      "id": "n_tests_unit_refusal_test_emptygraph",
+      "type": "file",
+      "file": "emptyGraph.md",
+      "x": 3820,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_package_engines",
       "type": "file",
       "file": "engines.md",
-      "x": 3820,
+      "x": 4020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1778,7 +1787,7 @@
       "id": "n_src_scan_evidence_errorevidence",
       "type": "file",
       "file": "errorEvidence().md",
-      "x": 4020,
+      "x": 4220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1787,8 +1796,8 @@
       "id": "n_tsconfig_compileroptions_esmoduleinterop",
       "type": "file",
       "file": "esModuleInterop.md",
-      "x": 4220,
-      "y": 720,
+      "x": 20,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1796,7 +1805,7 @@
       "id": "n_src_scan_evidence",
       "type": "file",
       "file": "evidence.ts.md",
-      "x": 20,
+      "x": 220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1805,7 +1814,7 @@
       "id": "n_tsconfig_build_exclude",
       "type": "file",
       "file": "exclude.md",
-      "x": 220,
+      "x": 420,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1814,7 +1823,7 @@
       "id": "n_src_graph_build_graph_exclusionlabel",
       "type": "file",
       "file": "exclusionLabel().md",
-      "x": 420,
+      "x": 620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1823,7 +1832,7 @@
       "id": "n_tests_unit_export_test",
       "type": "file",
       "file": "export.test.ts.md",
-      "x": 620,
+      "x": 820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1832,7 +1841,7 @@
       "id": "n_web_src_app_app_exportscan",
       "type": "file",
       "file": "exportScan().md",
-      "x": 820,
+      "x": 1020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1841,7 +1850,7 @@
       "id": "n_tsconfig_build_extends",
       "type": "file",
       "file": "extends.md",
-      "x": 1020,
+      "x": 1220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1850,7 +1859,7 @@
       "id": "n_scripts_check_studio_failed",
       "type": "file",
       "file": "failed.md",
-      "x": 1220,
+      "x": 1420,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1859,7 +1868,7 @@
       "id": "n_package_dependencies_fastify",
       "type": "file",
       "file": "fastify.md",
-      "x": 1420,
+      "x": 1620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1868,7 +1877,7 @@
       "id": "n_ref_fastify",
       "type": "file",
       "file": "fastify_1.md",
-      "x": 1620,
+      "x": 1820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1877,7 +1886,7 @@
       "id": "n_tests_unit_presentation_test_finding",
       "type": "file",
       "file": "finding().md",
-      "x": 1820,
+      "x": 2020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1886,7 +1895,7 @@
       "id": "n_src_scan_interaction_firstblockkind",
       "type": "file",
       "file": "firstBlockKind().md",
-      "x": 2020,
+      "x": 2220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1895,7 +1904,7 @@
       "id": "n_src_ai_fix",
       "type": "file",
       "file": "fix.ts.md",
-      "x": 2220,
+      "x": 2420,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1904,7 +1913,7 @@
       "id": "n_src_api_app_fixbody",
       "type": "file",
       "file": "fixBody.md",
-      "x": 2420,
+      "x": 2620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1913,7 +1922,7 @@
       "id": "n_web_src_presentation_flowshort",
       "type": "file",
       "file": "flowShort().md",
-      "x": 2620,
+      "x": 2820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1922,7 +1931,7 @@
       "id": "n_tsconfig_compileroptions_forceconsistentcasinginfilenames",
       "type": "file",
       "file": "forceConsistentCasingInFileNames.md",
-      "x": 2820,
+      "x": 3020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1931,7 +1940,7 @@
       "id": "n_web_src_presentation_friendlyscanerror",
       "type": "file",
       "file": "friendlyScanError().md",
-      "x": 3020,
+      "x": 3220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1940,7 +1949,7 @@
       "id": "n_src_export_obsidian_frontmatter",
       "type": "file",
       "file": "frontmatter().md",
-      "x": 3220,
+      "x": 3420,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1949,7 +1958,7 @@
       "id": "n_web_src_api_getaistatus",
       "type": "file",
       "file": "getAiStatus().md",
-      "x": 3420,
+      "x": 3620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1958,7 +1967,7 @@
       "id": "n_web_src_api_getproof",
       "type": "file",
       "file": "getProof().md",
-      "x": 3620,
+      "x": 3820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1967,7 +1976,7 @@
       "id": "n_web_src_api_getsampleinfo",
       "type": "file",
       "file": "getSampleInfo().md",
-      "x": 3820,
+      "x": 4020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1976,7 +1985,7 @@
       "id": "n_src_api_app_getscan",
       "type": "file",
       "file": "getScan().md",
-      "x": 4020,
+      "x": 4220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1985,8 +1994,8 @@
       "id": "n_tests_unit_briefing_test_graph",
       "type": "file",
       "file": "graph.md",
-      "x": 4220,
-      "y": 800,
+      "x": 20,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1994,7 +2003,7 @@
       "id": "n_tests_unit_presentation_test_graph",
       "type": "file",
       "file": "graph().md",
-      "x": 20,
+      "x": 220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2003,7 +2012,7 @@
       "id": "n_tests_unit_graph_shape_test",
       "type": "file",
       "file": "graph-shape.test.ts.md",
-      "x": 220,
+      "x": 420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2012,7 +2021,7 @@
       "id": "n_tests_unit_graph_test",
       "type": "file",
       "file": "graph.test.ts.md",
-      "x": 420,
+      "x": 620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2021,7 +2030,7 @@
       "id": "n_src_ai_briefing_groundsentences",
       "type": "file",
       "file": "groundSentences().md",
-      "x": 620,
+      "x": 820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2030,7 +2039,7 @@
       "id": "n_web_src_presentation_groupissues",
       "type": "file",
       "file": "groupIssues().md",
-      "x": 820,
+      "x": 1020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2039,7 +2048,7 @@
       "id": "n_scripts_check_studio_has",
       "type": "file",
       "file": "has().md",
-      "x": 1020,
+      "x": 1220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2048,7 +2057,7 @@
       "id": "n_web_src_app_hostname",
       "type": "file",
       "file": "hostname().md",
-      "x": 1220,
+      "x": 1420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2057,7 +2066,7 @@
       "id": "n_web_src_app_httpurl",
       "type": "file",
       "file": "httpUrl().md",
-      "x": 1420,
+      "x": 1620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2066,7 +2075,7 @@
       "id": "n_src_graph_build_graph_id",
       "type": "file",
       "file": "id().md",
-      "x": 1620,
+      "x": 1820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2075,7 +2084,7 @@
       "id": "n_src_scan_url_safety_inv4range",
       "type": "file",
       "file": "inV4Range().md",
-      "x": 1820,
+      "x": 2020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2084,7 +2093,7 @@
       "id": "n_tsconfig_build_include",
       "type": "file",
       "file": "include.md",
-      "x": 2020,
+      "x": 2220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2093,7 +2102,7 @@
       "id": "n_tsconfig_include",
       "type": "file",
       "file": "include_1.md",
-      "x": 2220,
+      "x": 2420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2102,7 +2111,7 @@
       "id": "n_tsconfig_web_include",
       "type": "file",
       "file": "include_2.md",
-      "x": 2420,
+      "x": 2620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2111,7 +2120,7 @@
       "id": "n_src_scan_worker_initialresult",
       "type": "file",
       "file": "initialResult().md",
-      "x": 2620,
+      "x": 2820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2120,7 +2129,7 @@
       "id": "n_src_scan_worker_inspectcontrols",
       "type": "file",
       "file": "inspectControls().md",
-      "x": 2820,
+      "x": 3020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2129,7 +2138,7 @@
       "id": "n_tests_unit_interaction_test",
       "type": "file",
       "file": "interaction.test.ts.md",
-      "x": 3020,
+      "x": 3220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2138,7 +2147,7 @@
       "id": "n_src_scan_interaction",
       "type": "file",
       "file": "interaction.ts.md",
-      "x": 3220,
+      "x": 3420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2147,7 +2156,7 @@
       "id": "n_src_ai_fix_isgrounded",
       "type": "file",
       "file": "isGrounded().md",
-      "x": 3420,
+      "x": 3620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2156,7 +2165,7 @@
       "id": "n_web_src_presentation_isissue",
       "type": "file",
       "file": "isIssue().md",
-      "x": 3620,
+      "x": 3820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2165,7 +2174,7 @@
       "id": "n_src_scan_url_safety_ispublicip",
       "type": "file",
       "file": "isPublicIp().md",
-      "x": 3820,
+      "x": 4020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2174,7 +2183,7 @@
       "id": "n_web_src_presentation_istestedflow",
       "type": "file",
       "file": "isTestedFlow().md",
-      "x": 4020,
+      "x": 4220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2183,8 +2192,8 @@
       "id": "n_src_scan_interaction_itemkey",
       "type": "file",
       "file": "itemKey().md",
-      "x": 4220,
-      "y": 880,
+      "x": 20,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2192,7 +2201,7 @@
       "id": "n_src_api_app_jobs",
       "type": "file",
       "file": "jobs.md",
-      "x": 20,
+      "x": 220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2201,7 +2210,7 @@
       "id": "n_tsconfig_web_compileroptions_jsx",
       "type": "file",
       "file": "jsx.md",
-      "x": 220,
+      "x": 420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2210,7 +2219,7 @@
       "id": "n_package_dependencies_jszip",
       "type": "file",
       "file": "jszip.md",
-      "x": 420,
+      "x": 620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2219,7 +2228,7 @@
       "id": "n_ref_jszip",
       "type": "file",
       "file": "jszip_1.md",
-      "x": 620,
+      "x": 820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2228,7 +2237,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas_keydown",
       "type": "file",
       "file": "keyDown().md",
-      "x": 820,
+      "x": 1020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2237,7 +2246,7 @@
       "id": "n_web_src_presentation_kindname",
       "type": "file",
       "file": "kindName().md",
-      "x": 1020,
+      "x": 1220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2246,7 +2255,7 @@
       "id": "n_web_src_presentation_labelparts",
       "type": "file",
       "file": "labelParts().md",
-      "x": 1220,
+      "x": 1420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2255,7 +2264,7 @@
       "id": "n_src_graph_build_graph_laststep",
       "type": "file",
       "file": "lastStep().md",
-      "x": 1420,
+      "x": 1620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2264,7 +2273,7 @@
       "id": "n_web_src_presentation_laststepof",
       "type": "file",
       "file": "lastStepOf().md",
-      "x": 1620,
+      "x": 1820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2273,7 +2282,7 @@
       "id": "n_src_api_app_launchscan",
       "type": "file",
       "file": "launchScan().md",
-      "x": 1820,
+      "x": 2020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2282,7 +2291,7 @@
       "id": "n_tsconfig_compileroptions_lib",
       "type": "file",
       "file": "lib.md",
-      "x": 2020,
+      "x": 2220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2291,7 +2300,7 @@
       "id": "n_tsconfig_web_compileroptions_lib",
       "type": "file",
       "file": "lib_1.md",
-      "x": 2220,
+      "x": 2420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2300,7 +2309,7 @@
       "id": "n_src_graph_build_graph_linklabel",
       "type": "file",
       "file": "linkLabel().md",
-      "x": 2420,
+      "x": 2620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2309,7 +2318,7 @@
       "id": "n_web_src_api_listscans",
       "type": "file",
       "file": "listScans().md",
-      "x": 2620,
+      "x": 2820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2318,7 +2327,7 @@
       "id": "n_web_src_app_app_loadhistory",
       "type": "file",
       "file": "loadHistory().md",
-      "x": 2820,
+      "x": 3020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2327,7 +2336,7 @@
       "id": "n_src_scan_interaction_locate",
       "type": "file",
       "file": "locate().md",
-      "x": 3020,
+      "x": 3220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2336,7 +2345,16 @@
       "id": "n_src_api_app_locateindemoshop",
       "type": "file",
       "file": "locateInDemoShop().md",
-      "x": 3220,
+      "x": 3420,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_scan_worker_lookslikerefusal",
+      "type": "file",
+      "file": "looksLikeRefusal().md",
+      "x": 3620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2345,7 +2363,7 @@
       "id": "n_web_src_main",
       "type": "file",
       "file": "main.tsx.md",
-      "x": 3420,
+      "x": 3820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2354,7 +2372,7 @@
       "id": "n_web_src_presentation_matches",
       "type": "file",
       "file": "matches().md",
-      "x": 3620,
+      "x": 4020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2363,7 +2381,7 @@
       "id": "n_src_export_obsidian_md",
       "type": "file",
       "file": "md().md",
-      "x": 3820,
+      "x": 4220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2372,8 +2390,8 @@
       "id": "n_src_store_memory",
       "type": "file",
       "file": "memory.ts.md",
-      "x": 4020,
-      "y": 960,
+      "x": 20,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2381,8 +2399,8 @@
       "id": "n_tsconfig_compileroptions_module",
       "type": "file",
       "file": "module.md",
-      "x": 4220,
-      "y": 960,
+      "x": 220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2390,7 +2408,7 @@
       "id": "n_tsconfig_web_compileroptions_module",
       "type": "file",
       "file": "module_1.md",
-      "x": 20,
+      "x": 420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2399,7 +2417,7 @@
       "id": "n_tsconfig_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution.md",
-      "x": 220,
+      "x": 620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2408,7 +2426,7 @@
       "id": "n_tsconfig_web_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution_1.md",
-      "x": 420,
+      "x": 820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2417,7 +2435,7 @@
       "id": "n_package_dependencies_motion",
       "type": "file",
       "file": "motion.md",
-      "x": 620,
+      "x": 1020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2426,7 +2444,7 @@
       "id": "n_ref_motion",
       "type": "file",
       "file": "motion_1.md",
-      "x": 820,
+      "x": 1220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2435,7 +2453,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas_move",
       "type": "file",
       "file": "move().md",
-      "x": 1020,
+      "x": 1420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2444,7 +2462,7 @@
       "id": "n_package_name",
       "type": "file",
       "file": "name.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2453,7 +2471,7 @@
       "id": "n_web_src_presentation_nextobservedhop",
       "type": "file",
       "file": "nextObservedHop().md",
-      "x": 1420,
+      "x": 1820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2462,7 +2480,7 @@
       "id": "n_tsconfig_web_compileroptions_noemit",
       "type": "file",
       "file": "noEmit.md",
-      "x": 1620,
+      "x": 2020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2471,7 +2489,7 @@
       "id": "n_tsconfig_compileroptions_nouncheckedindexedaccess",
       "type": "file",
       "file": "noUncheckedIndexedAccess.md",
-      "x": 1820,
+      "x": 2220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2480,7 +2498,7 @@
       "id": "n_tsconfig_web_compileroptions_nounusedlocals",
       "type": "file",
       "file": "noUnusedLocals.md",
-      "x": 2020,
+      "x": 2420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2489,7 +2507,7 @@
       "id": "n_tsconfig_web_compileroptions_nounusedparameters",
       "type": "file",
       "file": "noUnusedParameters.md",
-      "x": 2220,
+      "x": 2620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2498,7 +2516,7 @@
       "id": "n_package_engines_node",
       "type": "file",
       "file": "node.md",
-      "x": 2420,
+      "x": 2820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2507,7 +2525,7 @@
       "id": "n_web_src_presentation_nodecolor",
       "type": "file",
       "file": "nodeColor().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2516,7 +2534,7 @@
       "id": "n_web_src_presentation_nonpagedestination",
       "type": "file",
       "file": "nonPageDestination().md",
-      "x": 2820,
+      "x": 3220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2525,7 +2543,7 @@
       "id": "n_web_src_app_normalize",
       "type": "file",
       "file": "normalize().md",
-      "x": 3020,
+      "x": 3420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2534,7 +2552,7 @@
       "id": "n_tests_unit_presentation_test_observedgraph",
       "type": "file",
       "file": "observedGraph().md",
-      "x": 3220,
+      "x": 3620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2543,7 +2561,7 @@
       "id": "n_tests_unit_graph_test_observedinteraction",
       "type": "file",
       "file": "observedInteraction().md",
-      "x": 3420,
+      "x": 3820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2552,7 +2570,7 @@
       "id": "n_src_export_obsidian",
       "type": "file",
       "file": "obsidian.ts.md",
-      "x": 3620,
+      "x": 4020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2561,7 +2579,7 @@
       "id": "n_web_src_selectmenu_selectmenu_onkeydown",
       "type": "file",
       "file": "onKeyDown().md",
-      "x": 3820,
+      "x": 4220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2570,8 +2588,8 @@
       "id": "n_web_src_selectmenu_selectmenu_openmenu",
       "type": "file",
       "file": "openMenu().md",
-      "x": 4020,
-      "y": 1040,
+      "x": 20,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2579,8 +2597,8 @@
       "id": "n_web_src_app_app_openscan",
       "type": "file",
       "file": "openScan().md",
-      "x": 4220,
-      "y": 1040,
+      "x": 220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2588,7 +2606,7 @@
       "id": "n_tsconfig_build_compileroptions_outdir",
       "type": "file",
       "file": "outDir.md",
-      "x": 20,
+      "x": 420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2597,7 +2615,7 @@
       "id": "n_tsconfig_compileroptions_outdir",
       "type": "file",
       "file": "outDir_1.md",
-      "x": 220,
+      "x": 620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2606,7 +2624,7 @@
       "id": "n_web_src_presentation_outcomecaption",
       "type": "file",
       "file": "outcomeCaption().md",
-      "x": 420,
+      "x": 820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2615,7 +2633,7 @@
       "id": "n_web_src_presentation_outcomecaptionof",
       "type": "file",
       "file": "outcomeCaptionOf().md",
-      "x": 620,
+      "x": 1020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2624,7 +2642,7 @@
       "id": "n_web_src_presentation_outcomecaptions",
       "type": "file",
       "file": "outcomeCaptions.md",
-      "x": 820,
+      "x": 1220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2633,7 +2651,7 @@
       "id": "n_src_scan_interaction_outcomelabel",
       "type": "file",
       "file": "outcomeLabel().md",
-      "x": 1020,
+      "x": 1420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2642,7 +2660,7 @@
       "id": "n_web_src_presentation_outcomeshorts",
       "type": "file",
       "file": "outcomeShorts.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2651,7 +2669,7 @@
       "id": "n_src_graph_build_graph_outcomestatus",
       "type": "file",
       "file": "outcomeStatus().md",
-      "x": 1420,
+      "x": 1820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2660,7 +2678,7 @@
       "id": "n_package",
       "type": "file",
       "file": "package.json.md",
-      "x": 1620,
+      "x": 2020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2669,7 +2687,7 @@
       "id": "n_tests_unit_presentation_test_page",
       "type": "file",
       "file": "page.md",
-      "x": 1820,
+      "x": 2220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2678,7 +2696,7 @@
       "id": "n_web_src_presentation_pagefor",
       "type": "file",
       "file": "pageFor().md",
-      "x": 2020,
+      "x": 2420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2687,7 +2705,7 @@
       "id": "n_src_scan_url_safety_parseipv6",
       "type": "file",
       "file": "parseIpv6().md",
-      "x": 2220,
+      "x": 2620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2696,7 +2714,7 @@
       "id": "n_src_ai_fix_parseproposal",
       "type": "file",
       "file": "parseProposal().md",
-      "x": 2420,
+      "x": 2820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2705,7 +2723,7 @@
       "id": "n_src_scan_worker_performscan",
       "type": "file",
       "file": "performScan().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2714,7 +2732,7 @@
       "id": "n_tests_unit_persistence_test",
       "type": "file",
       "file": "persistence.test.ts.md",
-      "x": 2820,
+      "x": 3220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2723,7 +2741,7 @@
       "id": "n_package_dependencies_playwright",
       "type": "file",
       "file": "playwright.md",
-      "x": 3020,
+      "x": 3420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2732,7 +2750,7 @@
       "id": "n_ref_playwright",
       "type": "file",
       "file": "playwright_1.md",
-      "x": 3220,
+      "x": 3620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2741,7 +2759,7 @@
       "id": "n_playwright",
       "type": "file",
       "file": "playwright_2.md",
-      "x": 3420,
+      "x": 3820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2750,7 +2768,7 @@
       "id": "n_src_api_server_port",
       "type": "file",
       "file": "port.md",
-      "x": 3620,
+      "x": 4020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2759,7 +2777,7 @@
       "id": "n_tests_unit_presentation_test",
       "type": "file",
       "file": "presentation.test.ts.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2768,8 +2786,8 @@
       "id": "n_web_src_presentation",
       "type": "file",
       "file": "presentation.ts.md",
-      "x": 4020,
-      "y": 1120,
+      "x": 20,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2777,8 +2795,8 @@
       "id": "n_src_scan_interaction_priority",
       "type": "file",
       "file": "priority().md",
-      "x": 4220,
-      "y": 1120,
+      "x": 220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2786,7 +2804,7 @@
       "id": "n_package_private",
       "type": "file",
       "file": "private.md",
-      "x": 20,
+      "x": 420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2795,7 +2813,7 @@
       "id": "n_scripts_check_studio_problems",
       "type": "file",
       "file": "problems.md",
-      "x": 220,
+      "x": 620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2804,7 +2822,7 @@
       "id": "n_web_src_api_proposefix",
       "type": "file",
       "file": "proposeFix().md",
-      "x": 420,
+      "x": 820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2813,7 +2831,7 @@
       "id": "n_src_api_app_pumpqueue",
       "type": "file",
       "file": "pumpQueue().md",
-      "x": 620,
+      "x": 1020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2822,7 +2840,7 @@
       "id": "n_src_scan_interaction_pushexclusion",
       "type": "file",
       "file": "pushExclusion().md",
-      "x": 820,
+      "x": 1220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2831,7 +2849,7 @@
       "id": "n_package_dependencies_react",
       "type": "file",
       "file": "react.md",
-      "x": 1020,
+      "x": 1420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2840,7 +2858,7 @@
       "id": "n_ref_react",
       "type": "file",
       "file": "react_1.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2849,7 +2867,7 @@
       "id": "n_package_dependencies_react_dom",
       "type": "file",
       "file": "react-dom.md",
-      "x": 1420,
+      "x": 1820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2858,7 +2876,7 @@
       "id": "n_ref_react_dom",
       "type": "file",
       "file": "react-dom_1.md",
-      "x": 1620,
+      "x": 2020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2867,7 +2885,7 @@
       "id": "n_src_ai_briefing_readaiconfig",
       "type": "file",
       "file": "readAiConfig().md",
-      "x": 1820,
+      "x": 2220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2876,7 +2894,7 @@
       "id": "n_src_ai_fix_readfixconfig",
       "type": "file",
       "file": "readFixConfig().md",
-      "x": 2020,
+      "x": 2420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2885,7 +2903,7 @@
       "id": "n_web_src_api_readgraph",
       "type": "file",
       "file": "readGraph().md",
-      "x": 2220,
+      "x": 2620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2894,7 +2912,7 @@
       "id": "n_web_src_api_readscan",
       "type": "file",
       "file": "readScan().md",
-      "x": 2420,
+      "x": 2820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2903,7 +2921,7 @@
       "id": "n_src_scan_evidence_redactmessage",
       "type": "file",
       "file": "redactMessage().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2912,7 +2930,7 @@
       "id": "n_ref_node_child_process",
       "type": "file",
       "file": "ref_node_child_process.md",
-      "x": 2820,
+      "x": 3220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2921,7 +2939,7 @@
       "id": "n_ref_node_crypto",
       "type": "file",
       "file": "ref_node_crypto.md",
-      "x": 3020,
+      "x": 3420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2930,7 +2948,7 @@
       "id": "n_ref_node_dns",
       "type": "file",
       "file": "ref_node_dns.md",
-      "x": 3220,
+      "x": 3620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2939,7 +2957,7 @@
       "id": "n_ref_node_fs",
       "type": "file",
       "file": "ref_node_fs.md",
-      "x": 3420,
+      "x": 3820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2948,7 +2966,7 @@
       "id": "n_ref_node_http",
       "type": "file",
       "file": "ref_node_http.md",
-      "x": 3620,
+      "x": 4020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2957,7 +2975,7 @@
       "id": "n_ref_node_module",
       "type": "file",
       "file": "ref_node_module.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2966,8 +2984,8 @@
       "id": "n_ref_node_net",
       "type": "file",
       "file": "ref_node_net.md",
-      "x": 4020,
-      "y": 1200,
+      "x": 20,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2975,8 +2993,8 @@
       "id": "n_ref_node_os",
       "type": "file",
       "file": "ref_node_os.md",
-      "x": 4220,
-      "y": 1200,
+      "x": 220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2984,7 +3002,7 @@
       "id": "n_ref_node_path",
       "type": "file",
       "file": "ref_node_path.md",
-      "x": 20,
+      "x": 420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2993,7 +3011,25 @@
       "id": "n_ref_node_url",
       "type": "file",
       "file": "ref_node_url.md",
-      "x": 220,
+      "x": 620,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_refusal_test",
+      "type": "file",
+      "file": "refusal.test.ts.md",
+      "x": 820,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_refusal_test_refusedscan",
+      "type": "file",
+      "file": "refusedScan().md",
+      "x": 1020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3002,7 +3038,7 @@
       "id": "n_web_src_app_app_repairdemo",
       "type": "file",
       "file": "repairDemo().md",
-      "x": 420,
+      "x": 1220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3011,7 +3047,7 @@
       "id": "n_web_src_api_request",
       "type": "file",
       "file": "request().md",
-      "x": 620,
+      "x": 1420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3020,7 +3056,7 @@
       "id": "n_src_ai_briefing_requestcompletion",
       "type": "file",
       "file": "requestCompletion().md",
-      "x": 820,
+      "x": 1620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3029,7 +3065,7 @@
       "id": "n_src_api_app_requestsbyaddress",
       "type": "file",
       "file": "requestsByAddress.md",
-      "x": 1020,
+      "x": 1820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3038,7 +3074,7 @@
       "id": "n_src_scan_worker_require",
       "type": "file",
       "file": "require.md",
-      "x": 1220,
+      "x": 2020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3047,7 +3083,7 @@
       "id": "n_web_src_api_rescan",
       "type": "file",
       "file": "rescan().md",
-      "x": 1420,
+      "x": 2220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3056,7 +3092,7 @@
       "id": "n_src_api_app_rescanbody",
       "type": "file",
       "file": "rescanBody.md",
-      "x": 1620,
+      "x": 2420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3065,7 +3101,7 @@
       "id": "n_tsconfig_compileroptions_resolvejsonmodule",
       "type": "file",
       "file": "resolveJsonModule.md",
-      "x": 1820,
+      "x": 2620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3074,7 +3110,7 @@
       "id": "n_scripts_check_studio_results",
       "type": "file",
       "file": "results.md",
-      "x": 2020,
+      "x": 2820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3083,7 +3119,7 @@
       "id": "n_tsconfig_build_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir.md",
-      "x": 2220,
+      "x": 3020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3092,7 +3128,7 @@
       "id": "n_tsconfig_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir_1.md",
-      "x": 2420,
+      "x": 3220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3101,7 +3137,7 @@
       "id": "n_web_src_app_app_run",
       "type": "file",
       "file": "run().md",
-      "x": 2620,
+      "x": 3420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3110,7 +3146,7 @@
       "id": "n_src_scan_worker_runaxe",
       "type": "file",
       "file": "runAxe().md",
-      "x": 2820,
+      "x": 3620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3119,7 +3155,7 @@
       "id": "n_src_scan_interaction_runinteractions",
       "type": "file",
       "file": "runInteractions().md",
-      "x": 3020,
+      "x": 3820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3128,7 +3164,7 @@
       "id": "n_src_scan_interaction_runsingleinteraction",
       "type": "file",
       "file": "runSingleInteraction().md",
-      "x": 3220,
+      "x": 4020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3137,7 +3173,7 @@
       "id": "n_src_scan_url_safety_safedisplayurl",
       "type": "file",
       "file": "safeDisplayUrl().md",
-      "x": 3420,
+      "x": 4220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3146,8 +3182,8 @@
       "id": "n_src_export_obsidian_safename",
       "type": "file",
       "file": "safeName().md",
-      "x": 3620,
-      "y": 1280,
+      "x": 20,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3155,8 +3191,8 @@
       "id": "n_tests_unit_graph_test_sample",
       "type": "file",
       "file": "sample().md",
-      "x": 3820,
-      "y": 1280,
+      "x": 220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3164,8 +3200,8 @@
       "id": "n_tests_e2e_sample_scan_test",
       "type": "file",
       "file": "sample-scan.test.ts.md",
-      "x": 4020,
-      "y": 1280,
+      "x": 420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3173,8 +3209,8 @@
       "id": "n_src_api_app_samplestatebody",
       "type": "file",
       "file": "sampleStateBody.md",
-      "x": 4220,
-      "y": 1280,
+      "x": 620,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3182,7 +3218,7 @@
       "id": "n_tests_unit_briefing_test_scan",
       "type": "file",
       "file": "scan.md",
-      "x": 20,
+      "x": 820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3191,7 +3227,7 @@
       "id": "n_tests_unit_export_test_scan",
       "type": "file",
       "file": "scan_1.md",
-      "x": 220,
+      "x": 1020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3200,7 +3236,7 @@
       "id": "n_tests_unit_graph_shape_test_scan",
       "type": "file",
       "file": "scan().md",
-      "x": 420,
+      "x": 1220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3209,7 +3245,7 @@
       "id": "n_tests_unit_persistence_test_scan",
       "type": "file",
       "file": "scan()_1.md",
-      "x": 620,
+      "x": 1420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3218,7 +3254,7 @@
       "id": "n_web_src_app_app_scandemo",
       "type": "file",
       "file": "scanDemo().md",
-      "x": 820,
+      "x": 1620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3227,7 +3263,7 @@
       "id": "n_src_store_disk_scandirectory",
       "type": "file",
       "file": "scanDirectory().md",
-      "x": 1020,
+      "x": 1820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3236,7 +3272,7 @@
       "id": "n_src_store_disk_scanpath",
       "type": "file",
       "file": "scanPath().md",
-      "x": 1220,
+      "x": 2020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3245,7 +3281,7 @@
       "id": "n_src_store_memory_scanstore",
       "type": "file",
       "file": "scanStore.md",
-      "x": 1420,
+      "x": 2220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3254,7 +3290,7 @@
       "id": "n_web_src_presentation_scanstory",
       "type": "file",
       "file": "scanStory()_1.md",
-      "x": 1620,
+      "x": 2420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3263,7 +3299,7 @@
       "id": "n_src_store_memory_scans",
       "type": "file",
       "file": "scans.md",
-      "x": 1820,
+      "x": 2620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3272,7 +3308,7 @@
       "id": "n_web_src_presentation_scenegraph",
       "type": "file",
       "file": "sceneGraph().md",
-      "x": 2020,
+      "x": 2820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3281,7 +3317,7 @@
       "id": "n_src_api_app_schedule",
       "type": "file",
       "file": "schedule().md",
-      "x": 2220,
+      "x": 3020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3290,7 +3326,7 @@
       "id": "n_src_graph_schema",
       "type": "file",
       "file": "schema.ts.md",
-      "x": 2420,
+      "x": 3220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3299,7 +3335,7 @@
       "id": "n_package_scripts",
       "type": "file",
       "file": "scripts.md",
-      "x": 2620,
+      "x": 3420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3308,7 +3344,7 @@
       "id": "n_web_src_app_app_select",
       "type": "file",
       "file": "select().md",
-      "x": 2820,
+      "x": 3620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3317,7 +3353,7 @@
       "id": "n_src_api_server",
       "type": "file",
       "file": "server.ts.md",
-      "x": 3020,
+      "x": 3820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3326,7 +3362,7 @@
       "id": "n_web_src_api_setsamplestate",
       "type": "file",
       "file": "setSampleState().md",
-      "x": 3220,
+      "x": 4020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3335,7 +3371,7 @@
       "id": "n_web_src_presentation_severity",
       "type": "file",
       "file": "severity().md",
-      "x": 3420,
+      "x": 4220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3344,8 +3380,8 @@
       "id": "n_web_src_presentation_shortcutof",
       "type": "file",
       "file": "shortcutOf().md",
-      "x": 3620,
-      "y": 1360,
+      "x": 20,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3353,8 +3389,8 @@
       "id": "n_src_scan_worker_shouldcrawllink",
       "type": "file",
       "file": "shouldCrawlLink().md",
-      "x": 3820,
-      "y": 1360,
+      "x": 220,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3362,8 +3398,8 @@
       "id": "n_web_src_app_app_showproof",
       "type": "file",
       "file": "showProof().md",
-      "x": 4020,
-      "y": 1360,
+      "x": 420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3371,8 +3407,8 @@
       "id": "n_tests_unit_presentation_test_site",
       "type": "file",
       "file": "site.md",
-      "x": 4220,
-      "y": 1360,
+      "x": 620,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3380,7 +3416,7 @@
       "id": "n_web_src_app_sitename",
       "type": "file",
       "file": "siteName().md",
-      "x": 20,
+      "x": 820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3389,7 +3425,7 @@
       "id": "n_tsconfig_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck.md",
-      "x": 220,
+      "x": 1020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3398,7 +3434,7 @@
       "id": "n_tsconfig_web_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck_1.md",
-      "x": 420,
+      "x": 1220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3407,7 +3443,7 @@
       "id": "n_src_scan_interaction_snapshot",
       "type": "file",
       "file": "snapshot().md",
-      "x": 620,
+      "x": 1420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3416,7 +3452,7 @@
       "id": "n_src_scan_evidence_stableid",
       "type": "file",
       "file": "stableId().md",
-      "x": 820,
+      "x": 1620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3425,7 +3461,7 @@
       "id": "n_package_scripts_start_api",
       "type": "file",
       "file": "startapi.md",
-      "x": 1020,
+      "x": 1820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3434,7 +3470,7 @@
       "id": "n_web_src_app_app_starttour",
       "type": "file",
       "file": "startTour().md",
-      "x": 1220,
+      "x": 2020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3443,7 +3479,7 @@
       "id": "n_web_src_presentation_stepsof",
       "type": "file",
       "file": "stepsOf().md",
-      "x": 1420,
+      "x": 2220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3452,7 +3488,7 @@
       "id": "n_scripts_demo_stop",
       "type": "file",
       "file": "stop().md",
-      "x": 1620,
+      "x": 2420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3461,7 +3497,7 @@
       "id": "n_web_src_app_storageget",
       "type": "file",
       "file": "storageGet().md",
-      "x": 1820,
+      "x": 2620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3470,7 +3506,7 @@
       "id": "n_web_src_app_storageset",
       "type": "file",
       "file": "storageSet().md",
-      "x": 2020,
+      "x": 2820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3479,7 +3515,7 @@
       "id": "n_web_src_presentation_str",
       "type": "file",
       "file": "str().md",
-      "x": 2220,
+      "x": 3020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3488,7 +3524,7 @@
       "id": "n_tsconfig_compileroptions_strict",
       "type": "file",
       "file": "strict.md",
-      "x": 2420,
+      "x": 3220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3497,7 +3533,7 @@
       "id": "n_tsconfig_web_compileroptions_strict",
       "type": "file",
       "file": "strict_1.md",
-      "x": 2620,
+      "x": 3420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3506,7 +3542,7 @@
       "id": "n_web_src_app_app_studio",
       "type": "file",
       "file": "studio().md",
-      "x": 2820,
+      "x": 3620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3515,7 +3551,7 @@
       "id": "n_tests_e2e_studio_flow_test",
       "type": "file",
       "file": "studio-flow.test.ts.md",
-      "x": 3020,
+      "x": 3820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3524,7 +3560,7 @@
       "id": "n_web_src_app_app_submit",
       "type": "file",
       "file": "submit().md",
-      "x": 3220,
+      "x": 4020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3533,7 +3569,7 @@
       "id": "n_src_scan_worker_summarizecoverage",
       "type": "file",
       "file": "summarizeCoverage().md",
-      "x": 3420,
+      "x": 4220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3542,8 +3578,8 @@
       "id": "n_src_scan_interaction_summarizeinteraction",
       "type": "file",
       "file": "summarizeInteraction().md",
-      "x": 3620,
-      "y": 1440,
+      "x": 20,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3551,8 +3587,8 @@
       "id": "n_src_store_disk_summarizescan",
       "type": "file",
       "file": "summarizeScan().md",
-      "x": 3820,
-      "y": 1440,
+      "x": 220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3560,8 +3596,8 @@
       "id": "n_tsconfig_compileroptions_target",
       "type": "file",
       "file": "target.md",
-      "x": 4020,
-      "y": 1440,
+      "x": 420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3569,8 +3605,8 @@
       "id": "n_tsconfig_web_compileroptions_target",
       "type": "file",
       "file": "target_1.md",
-      "x": 4220,
-      "y": 1440,
+      "x": 620,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3578,7 +3614,7 @@
       "id": "n_package_scripts_test",
       "type": "file",
       "file": "test.md",
-      "x": 20,
+      "x": 820,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3587,7 +3623,7 @@
       "id": "n_package_scripts_test_watch",
       "type": "file",
       "file": "testwatch.md",
-      "x": 220,
+      "x": 1020,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3596,7 +3632,7 @@
       "id": "n_web_src_presentation_testedflowfor",
       "type": "file",
       "file": "testedFlowFor().md",
-      "x": 420,
+      "x": 1220,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3605,7 +3641,7 @@
       "id": "n_tests_unit_tour_test",
       "type": "file",
       "file": "tour.test.ts.md",
-      "x": 620,
+      "x": 1420,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3614,7 +3650,7 @@
       "id": "n_web_src_tour",
       "type": "file",
       "file": "tour.ts.md",
-      "x": 820,
+      "x": 1620,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3623,7 +3659,7 @@
       "id": "n_web_src_presentation_tracejourney",
       "type": "file",
       "file": "traceJourney().md",
-      "x": 1020,
+      "x": 1820,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3632,7 +3668,7 @@
       "id": "n_tsconfig_build",
       "type": "file",
       "file": "tsconfig.build.json.md",
-      "x": 1220,
+      "x": 2020,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3641,7 +3677,7 @@
       "id": "n_tsconfig",
       "type": "file",
       "file": "tsconfig.json.md",
-      "x": 1420,
+      "x": 2220,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3650,7 +3686,7 @@
       "id": "n_tsconfig_web",
       "type": "file",
       "file": "tsconfig.web.json.md",
-      "x": 1620,
+      "x": 2420,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3659,7 +3695,7 @@
       "id": "n_package_devdependencies_tsx",
       "type": "file",
       "file": "tsx.md",
-      "x": 1820,
+      "x": 2620,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3668,7 +3704,7 @@
       "id": "n_ref_tsx",
       "type": "file",
       "file": "tsx_1.md",
-      "x": 2020,
+      "x": 2820,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3677,7 +3713,7 @@
       "id": "n_scripts_check_studio_txt",
       "type": "file",
       "file": "txt().md",
-      "x": 2220,
+      "x": 3020,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3686,7 +3722,7 @@
       "id": "n_package_type",
       "type": "file",
       "file": "type.md",
-      "x": 2420,
+      "x": 3220,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3695,7 +3731,7 @@
       "id": "n_package_scripts_typecheck",
       "type": "file",
       "file": "typecheck.md",
-      "x": 2620,
+      "x": 3420,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3704,7 +3740,7 @@
       "id": "n_tsconfig_build_compileroptions_types",
       "type": "file",
       "file": "types.md",
-      "x": 2820,
+      "x": 3620,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3713,7 +3749,7 @@
       "id": "n_tsconfig_compileroptions_types",
       "type": "file",
       "file": "types_1.md",
-      "x": 3020,
+      "x": 3820,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3722,7 +3758,7 @@
       "id": "n_tsconfig_web_compileroptions_types",
       "type": "file",
       "file": "types_2.md",
-      "x": 3220,
+      "x": 4020,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3731,7 +3767,7 @@
       "id": "n_web_src_types",
       "type": "file",
       "file": "types.ts.md",
-      "x": 3420,
+      "x": 4220,
       "y": 1520,
       "width": 180,
       "height": 60
@@ -3740,8 +3776,8 @@
       "id": "n_package_devdependencies_typescript",
       "type": "file",
       "file": "typescript.md",
-      "x": 3620,
-      "y": 1520,
+      "x": 20,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3749,8 +3785,8 @@
       "id": "n_ref_typescript",
       "type": "file",
       "file": "typescript_1.md",
-      "x": 3820,
-      "y": 1520,
+      "x": 220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3758,8 +3794,8 @@
       "id": "n_scripts_demo_up",
       "type": "file",
       "file": "up().md",
-      "x": 4020,
-      "y": 1520,
+      "x": 420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3767,8 +3803,8 @@
       "id": "n_web_src_graphcanvas_graphcanvas_up",
       "type": "file",
       "file": "up()_1.md",
-      "x": 4220,
-      "y": 1520,
+      "x": 620,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3776,7 +3812,7 @@
       "id": "n_tests_unit_url_safety_test",
       "type": "file",
       "file": "url-safety.test.ts.md",
-      "x": 20,
+      "x": 820,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3785,7 +3821,7 @@
       "id": "n_src_scan_url_safety",
       "type": "file",
       "file": "url-safety.ts.md",
-      "x": 220,
+      "x": 1020,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3794,7 +3830,7 @@
       "id": "n_src_ai_briefing_userprompt",
       "type": "file",
       "file": "userPrompt().md",
-      "x": 420,
+      "x": 1220,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3803,7 +3839,7 @@
       "id": "n_src_ai_fix_userprompt",
       "type": "file",
       "file": "userPrompt()_1.md",
-      "x": 620,
+      "x": 1420,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3812,7 +3848,7 @@
       "id": "n_tests_unit_persistence_test_uuidfor",
       "type": "file",
       "file": "uuidFor().md",
-      "x": 820,
+      "x": 1620,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3821,7 +3857,7 @@
       "id": "n_src_scan_interaction_validationissue",
       "type": "file",
       "file": "validationIssue().md",
-      "x": 1020,
+      "x": 1820,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3830,7 +3866,7 @@
       "id": "n_package_version",
       "type": "file",
       "file": "version.md",
-      "x": 1220,
+      "x": 2020,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3839,7 +3875,7 @@
       "id": "n_package_devdependencies_vite",
       "type": "file",
       "file": "vite.md",
-      "x": 1420,
+      "x": 2220,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3848,7 +3884,7 @@
       "id": "n_ref_vite",
       "type": "file",
       "file": "vite_1.md",
-      "x": 1620,
+      "x": 2420,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3857,7 +3893,7 @@
       "id": "n_vite_config",
       "type": "file",
       "file": "vite.config.ts.md",
-      "x": 1820,
+      "x": 2620,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3866,7 +3902,7 @@
       "id": "n_package_devdependencies_vitest",
       "type": "file",
       "file": "vitest.md",
-      "x": 2020,
+      "x": 2820,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3875,7 +3911,7 @@
       "id": "n_ref_vitest",
       "type": "file",
       "file": "vitest_1.md",
-      "x": 2220,
+      "x": 3020,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3884,7 +3920,7 @@
       "id": "n_vitest_config",
       "type": "file",
       "file": "vitest.config.ts.md",
-      "x": 2420,
+      "x": 3220,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3893,7 +3929,7 @@
       "id": "n_scripts_demo_wait",
       "type": "file",
       "file": "wait().md",
-      "x": 2620,
+      "x": 3420,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3902,7 +3938,7 @@
       "id": "n_scripts_demo_waitfor",
       "type": "file",
       "file": "waitFor().md",
-      "x": 2820,
+      "x": 3620,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3911,7 +3947,7 @@
       "id": "n_tests_e2e_sample_scan_test_waitforscan",
       "type": "file",
       "file": "waitForScan().md",
-      "x": 3020,
+      "x": 3820,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3920,7 +3956,7 @@
       "id": "n_web_src_api_waitforscan",
       "type": "file",
       "file": "waitForScan()_1.md",
-      "x": 3220,
+      "x": 4020,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3929,7 +3965,7 @@
       "id": "n_tests_unit_web_api_test",
       "type": "file",
       "file": "web-api.test.ts.md",
-      "x": 3420,
+      "x": 4220,
       "y": 1600,
       "width": 180,
       "height": 60
@@ -3938,8 +3974,8 @@
       "id": "n_vite_config_webroot",
       "type": "file",
       "file": "webRoot.md",
-      "x": 3620,
-      "y": 1600,
+      "x": 20,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3947,8 +3983,8 @@
       "id": "n_web_src_styles",
       "type": "file",
       "file": "web_src_styles.md",
-      "x": 3820,
-      "y": 1600,
+      "x": 220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3956,8 +3992,8 @@
       "id": "n_src_scan_interaction_withouthash",
       "type": "file",
       "file": "withoutHash().md",
-      "x": 4020,
-      "y": 1600,
+      "x": 420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3965,8 +4001,8 @@
       "id": "n_src_scan_worker",
       "type": "file",
       "file": "worker.ts.md",
-      "x": 4220,
-      "y": 1600,
+      "x": 620,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3974,7 +4010,7 @@
       "id": "n_src_ai_briefing_writebriefing",
       "type": "file",
       "file": "writeBriefing().md",
-      "x": 20,
+      "x": 820,
       "y": 1680,
       "width": 180,
       "height": 60
@@ -3983,7 +4019,7 @@
       "id": "n_web_src_api_writebriefing",
       "type": "file",
       "file": "writeBriefing()_1.md",
-      "x": 220,
+      "x": 1020,
       "y": 1680,
       "width": 180,
       "height": 60
@@ -3992,7 +4028,7 @@
       "id": "n_src_ai_fix_writefixproposal",
       "type": "file",
       "file": "writeFixProposal().md",
-      "x": 420,
+      "x": 1220,
       "y": 1680,
       "width": 180,
       "height": 60
@@ -4001,7 +4037,7 @@
       "id": "n_package_dependencies_zod",
       "type": "file",
       "file": "zod.md",
-      "x": 620,
+      "x": 1420,
       "y": 1680,
       "width": 180,
       "height": 60
@@ -4010,7 +4046,7 @@
       "id": "n_ref_zod",
       "type": "file",
       "file": "zod_1.md",
-      "x": 820,
+      "x": 1620,
       "y": 1680,
       "width": 180,
       "height": 60
@@ -4560,6 +4596,12 @@
     {
       "id": "e_tests_unit_presentation_test_ref_vitest",
       "fromNode": "n_tests_unit_presentation_test",
+      "toNode": "n_ref_vitest",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_tests_unit_refusal_test_ref_vitest",
+      "fromNode": "n_tests_unit_refusal_test",
       "toNode": "n_ref_vitest",
       "label": "imports_from [EXTRACTED]"
     },
@@ -5209,12 +5251,6 @@
       "id": "e_src_api_app_src_api_app_createbody",
       "fromNode": "n_src_api_app",
       "toNode": "n_src_api_app_createbody",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_rescanbody",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_rescanbody",
       "label": "contains [EXTRACTED]"
     }
   ]
