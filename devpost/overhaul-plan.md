@@ -38,11 +38,20 @@ A design review was asked one question: what makes a judge disengage from this d
 | **A real-site scan** in the saved history | Answers "does this only work on its own demo?" |
 | **Honest naming** — "browser signal", "not tested", "no longer observed" | It is an accessibility tool. Overstating is the one unforgivable bug |
 
-## Three real bugs found while building this
+## The three real bugs the overhaul found
 
 1. **The markup of a failing element was never recorded.** The `snippet` field existed in the schema and was shown in the developer evidence panel, but nothing ever wrote to it. Without it there is no way to ground a proposed change.
 2. **Two different links could collapse into one node.** The selector for an element stopped at four ancestors, so on a list-heavy page every row produced the same path. Four links on Hacker News shared one id, the graph carried the same node twice, and React reported duplicate keys. The path now runs deeper, is verified to match exactly one element, and falls back to a marker when it cannot; the graph also refuses to hold two nodes with one id.
 3. **A repaired page was never photographed.** Pictures were only kept for pages that still had a finding, which is exactly the page that no longer has one after a fix.
+
+## What the real-site sweep found
+
+Ten famous sites were scanned through the running service. Every one produced a well-formed graph, but two things were wrong, and both mattered more on a real site than on the fixture.
+
+- **A site that refuses the scanner was reported as if it had been scanned.** Stack Overflow and Devpost answer an automated browser with a Cloudflare challenge page, and the scan reported one inspected page with a finding on it. That is a lie an accessibility tool cannot tell. A refused page is now recognised, marked blocked rather than inspected, and the story says the site refused the automated browser and that nothing on it could be inspected.
+- **Interaction testing ate the whole budget on a heavy site.** Wikipedia, GOV.UK and the BBC reached one page and then ran out of time, because every interaction opens its own disposable page and waits for it. Interactions now get a fixed 35% slice of the budget and the crawl keeps the rest. Wikipedia went from one page to four, GOV.UK from one to five. The demo shop is unaffected.
+
+The sites worth showing in a recording, measured on this machine: **developer.mozilla.org** (about 40s, 4 pages, 681 controls, 10 actions activated), **news.ycombinator.com** (about 35s, 5 pages, 1000 controls, 500 findings), **www.w3.org** (about 33s, 5 pages), **www.google.com** (about 30s, 14 findings) and **github.com** (about 50s, 5 pages). Stack Overflow and Devpost answer automated browsers with a challenge page, so they are not in a three-minute video.
 
 ## The route, 180 seconds
 
@@ -50,17 +59,18 @@ The full beat sheet with the words to say is in `devpost/demo-script.md`. In out
 
 | Time | Beat |
 | --- | --- |
-| 0:00–0:12 | The proof, full screen: the page before and after, and the counts |
-| 0:12–0:24 | The problem, and what a single tool cannot do |
-| 0:24–0:42 | A real scan in ten seconds |
-| 0:42–0:58 | The map, and a journey that was actually observed |
-| 0:58–1:18 | The barrier, in the page, with its element |
-| 1:18–1:38 | The model proposes a change, grounded in that markup |
-| 1:38–1:48 | A human decides |
-| 1:48–2:08 | The money shot: the pictures, the counts, the honest limit |
-| 2:08–2:26 | A recorded scan of a real public site |
-| 2:26–2:44 | What was not reached and what was not tested |
-| 2:44–3:00 | What you learned, the repository, the closing line |
+| 0:00–0:12 | The landing page |
+| 0:12–0:30 | Type a URL — no scheme needed — and press Map this website |
+| 0:30–0:40 | Cut straight to the result |
+| 0:40–0:58 | The summary and the story paragraph |
+| 0:58–1:18 | The map, and a journey that was actually observed |
+| 1:18–1:36 | The model reads the scan, and names what is missing |
+| 1:36–1:48 | The proof: the page before and after, and the counts |
+| 1:48–2:14 | What was not reached and what was not tested |
+| 2:14–2:34 | The exported vault |
+| 2:34–3:00 | What you learned, the repository, the closing line |
+
+The cut at 0:30 is deliberate. Watching a scan run is the least interesting thing in the world; showing the result of a scan you already ran is the whole point.
 
 ## What still stands between this and a submission
 

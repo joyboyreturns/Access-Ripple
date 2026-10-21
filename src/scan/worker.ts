@@ -28,7 +28,10 @@ const DEFAULT_LIMITS: ScanLimits = {
   maxPages: 5,
   maxDepth: 2,
   navigationTimeoutMs: 20_000,
-  totalTimeoutMs: 60_000,
+  // A busy page can take tens of seconds to inspect, so the budget is wide
+  // enough to reach more than one page on a heavy site. A quick site still
+  // finishes as soon as it is done.
+  totalTimeoutMs: 100_000,
   maxControlsPerPage: 200,
   maxRequestsPerPage: 300,
   maxFindingsPerPage: 100,
@@ -36,6 +39,20 @@ const DEFAULT_LIMITS: ScanLimits = {
   maxInteractionsPerScan: 10,
   maxScreenshots: 5,
 };
+
+/**
+ * Some sites answer an automated browser with a challenge page instead of the
+ * site. Reporting that as a scanned page would be a lie, so it is recognised
+ * and reported as refused.
+ */
+const REFUSAL_PATTERNS = /just a moment|attention required|access denied|verify you are human|checking your browser|are you a robot|enable javascript and cookies/i;
+
+function looksLikeRefusal(title: string, controlCount: number, documentStatus: number): boolean {
+  // 403, 429 and 503 are the server refusing this browser, not a missing page.
+  if ([401, 403, 429, 503].includes(documentStatus)) return true;
+  if (controlCount > 0) return false;
+  return REFUSAL_PATTERNS.test(title);
+}
 
 interface ExtractedControl {
   role: string;
@@ -249,6 +266,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
   const browser = await chromium.launch({ headless: true });  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
   const pages: PageEvidence[] = [];
   let interactionsUsed = 0;
+  let interactionMsUsed = 0;
   let screenshotsTaken = 0;
   let exclusionsTotal = 0;
 
@@ -273,18 +291,22 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       if (visited.has(displayUrl)) continue;
       visited.add(displayUrl);
       pending.delete(displayUrl);
-      scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: displayUrl, message: `Inspecting page ${pages.length + 1}.` };
+      scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: displayUrl, message: `Inspecting page ${pages.length + 1}.`, remainingMs: Math.max(0, startedAt + scan.limits.totalTimeoutMs - Date.now()) };
       scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
       const page = await context.newPage();
       let pageId = stableId('page', displayUrl);
       const errors: RuntimeErrorEvidence[] = [];
       let requestCount = 0;
       let requestLimitRecorded = false;
+      let documentStatus = 0;
       const recordError = (error: RuntimeErrorEvidence) => { if (errors.length < 120) errors.push(error); };
       page.on('pageerror', (error) => recordError(errorEvidence('page', error.message, page.url())));
       page.on('console', (message) => { if (message.type() === 'error') recordError(errorEvidence('console', message.text(), page.url())); });
       page.on('requestfailed', (request) => recordError(errorEvidence('request', request.failure()?.errorText || 'Network request failed.', request.url())));
-      page.on('response', (response) => { if (response.status() >= 400) recordError(errorEvidence('http', `HTTP ${response.status()} response.`, response.url(), response.status())); });
+      page.on('response', (response) => {
+        try { if (response.request().isNavigationRequest() && response.frame() === page.mainFrame()) documentStatus = response.status(); } catch { /* The frame may be gone already. */ }
+        if (response.status() >= 400) recordError(errorEvidence('http', `HTTP ${response.status()} response.`, response.url(), response.status()));
+      });
       await page.route('**/*', async (route) => {
         requestCount += 1;
         if (requestCount > (scan.limits.maxRequestsPerPage ?? 300)) {
@@ -336,7 +358,14 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         // finding is exactly the one worth showing after the repair.
         const shot = screenshotsTaken < (scan.limits.maxScreenshots ?? 5) ? await captureScreenshot(page) : undefined;
         if (shot) screenshotsTaken += 1;
-        entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
+        if (looksLikeRefusal(title ?? "", controls.length, documentStatus)) {
+          entry = {
+            id: pageId, url: finalDisplayUrl, title, status: 'skipped', depth: next.depth, controls: [], errors: [errorEvidence('page', `The site refused the automated browser (HTTP ${documentStatus || 403}). Nothing on this site could be inspected.`, finalDisplayUrl)],
+            findings: [], outgoingLinks: [], interactions: [], screenshot: shot, errorMessage: 'The site refused the automated browser. Some sites answer automated browsers with a challenge page instead of the site.',
+          };
+        } else {
+          entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
+        }
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {
             if (shouldCrawlLink(href, origin, Boolean(input.sample))) enqueue(href, next.depth + 1);
@@ -351,25 +380,30 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
 
       // Interaction testing: activate a bounded set of recorded controls in disposable pages
       // and record what actually happened. Data-changing requests are always blocked.
+      // Interactions get a fixed slice of the budget so a slow site cannot spend
+      // the whole scan on them and leave the map with a single page.
       if (entry.status === 'complete') {
         const remaining = scan.limits.maxInteractionsPerScan - interactionsUsed;
-        if (remaining > 0 && Date.now() - startedAt < scan.limits.totalTimeoutMs * 0.62) {
+        const interactionBudget = scan.limits.totalTimeoutMs * 0.35;
+        if (remaining > 0 && interactionMsUsed < interactionBudget && Date.now() - startedAt < scan.limits.totalTimeoutMs * 0.62) {
+          const interactionStarted = Date.now();
           const batch = await runInteractions(context, entry, {
             mode: input.interactionMode ?? 'safe',
             isSample: Boolean(input.sample),
             origin,
             maxPerPage: scan.limits.maxInteractionsPerPage,
             maxPerScanRemaining: remaining,
-            deadline: startedAt + scan.limits.totalTimeoutMs * 0.78,
+            deadline: Math.min(startedAt + scan.limits.totalTimeoutMs * 0.9, interactionStarted + (interactionBudget - interactionMsUsed)),
             settleMs: 750,
             clickTimeoutMs: 2500,
-            reopenTimeoutMs: Math.min(15_000, scan.limits.navigationTimeoutMs),
+            reopenTimeoutMs: Math.min(10_000, scan.limits.navigationTimeoutMs),
             onProgress: (message) => {
-              scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: entry.url, message };
+              scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, currentUrl: entry.url, message, remainingMs: Math.max(0, startedAt + scan.limits.totalTimeoutMs - Date.now()) };
               scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
             },
           });
           interactionsUsed += batch.interactions.length;
+          interactionMsUsed += Date.now() - interactionStarted;
           exclusionsTotal += batch.exclusions.length;
           entry.interactions = batch.interactions;
           if (batch.exclusions.length) entry.interactionExclusions = batch.exclusions;
@@ -386,7 +420,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       }
       pages.push(entry);
       scan.pages = pages;
-      scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, message: `${pages.length} page${pages.length === 1 ? '' : 's'} inspected.` };
+      scan.progress = { completedPages: pages.length, totalPageLimit: scan.limits.maxPages, message: `${pages.length} page${pages.length === 1 ? '' : 's'} inspected.`, remainingMs: Math.max(0, startedAt + scan.limits.totalTimeoutMs - Date.now()) };
       scan.updatedAt = new Date().toISOString(); input.onUpdate(scan);
     }
 

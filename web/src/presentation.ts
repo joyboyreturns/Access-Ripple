@@ -217,6 +217,7 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
   const rawCount = graph.nodes.filter(n => n.kind === 'accessibility-finding').length;
   const signals = graph.nodes.filter(n => n.kind === 'runtime-error');
   const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'inspected').length ?? 0;
+  const blocked = scan.coverage?.pagesBlocked ?? scan.pages.filter(p => p.status === 'skipped').length;
   const tested = scan.interactionPolicy?.tested ?? 0;
   const site = graph.nodes.find(n => n.kind === 'site')?.label ?? 'this website';
   const order = ['critical', 'serious', 'moderate', 'minor'];
@@ -225,6 +226,16 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
 
   const topCount = top ? Number(top.data.groupCount) || 1 : 1;
   const kinds = findings.length < rawCount ? `, in ${findings.length} kind${findings.length === 1 ? '' : 's'} of barrier` : '';
+  // A site that refused the browser was not inspected, and saying so plainly
+  // matters more than any number.
+  if (!pages && blocked) {
+    return {
+      headline: `${site} refused the automated browser, so nothing on it could be inspected.`,
+      detail: 'Some sites answer an automated browser with a challenge page instead of the site. This is a property of the site, not a fault in the scan.',
+      tone: 'attention',
+    };
+  }
+
   const headline = rawCount
     ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${rawCount} accessibility finding${rawCount === 1 ? '' : 's'}${kinds}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`
     : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility findings in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`;

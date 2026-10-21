@@ -146,6 +146,8 @@ export interface ScanProgress {
   totalPageLimit: number;
   currentUrl?: string;
   message: string;
+  /** How long the scan has left before it stops, so the wait is bounded on screen. */
+  remainingMs?: number;
 }
 
 /** Plain-language account of what the scan covered and what it left out, with reasons. */

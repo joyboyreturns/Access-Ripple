@@ -1,76 +1,88 @@
 # AccessRipple — the three-minute demo
 
+The shape of the recording: **landing page → type a URL → cut to the result → the map and the journeys → the proof.** The cut is the point. Watching a scan run for forty seconds is the least interesting thing in the world; showing the result of a scan you already ran is the whole point.
+
 ## Before you press record
 
-- [ ] `npm run dev` is running. `npm run demo` starts it and opens the studio in demo mode.
+- [ ] `npm run dev` is running.
 - [ ] The provider key is in `.env` and the scanner was restarted after it was added. The AI beats need it.
+- [ ] The sites you want to show are already in **Recent scans**. Scan them once, before you start recording.
 - [ ] The demo shop has been run through once, so **Show the proof** is available. The cold open depends on it.
-- [ ] `npm run check:studio` passes with 30 of 30. It takes a minute and catches anything that broke.
+- [ ] `npm run check:studio` passes with 36 of 36. It takes a minute and catches anything that broke.
 - [ ] The window is one size. The layout is verified at 1440×960 and 390×844.
 - [ ] Nothing private is in the repository, and the public repository is up to date.
 
+## Choosing the site you type
+
+Not every famous site behaves the same. These were measured on this machine:
+
+| Site | Time | Pages | What it gives you |
+| --- | --- | --- | --- |
+| **developer.mozilla.org** | about 40s | 4 | 681 controls, 4 findings, 10 actions activated. Fast, dense, and the most credible name on the list |
+| **news.ycombinator.com** | about 35s | 5 | 1000 controls, 500 findings in 5 kinds. The most dramatic numbers |
+| **www.w3.org** | about 33s | 5 | 187 controls, 3 findings. Scanning the accessibility authority itself is a good line |
+| **www.google.com** | about 30s | 4 | 39 controls, 14 findings, 8 actions. The most famous name, and it finds real things |
+| **github.com** | about 50s | 5 | 315 controls, 4 findings |
+
+**Use MDN or W3C.** They scan in well under a minute, they are unmistakably real, and their names make the credibility beat land on their own.
+
+Two sites to avoid on camera: **stackoverflow.com** and **devpost.com** answer automated browsers with a Cloudflare challenge page. The tool now reports that honestly, but it is a distraction in a three-minute video. Wikipedia, GOV.UK and the BBC scan correctly but take over a minute.
+
 ## The route, 180 seconds
 
-**0:00–0:12 — The cold open: the proof.**
-Open `http://127.0.0.1:5173/#proof`. The proof fills the screen: the same page before and after one change, side by side, with **3 no longer observed · 2 still observed · 0 new** across the top.
-Say: “We changed one image on a checkout page. AccessRipple checked what the browser actually stopped reporting. Three things are no longer observed, nothing new appeared.”
+**0:00–0:12 — The landing page.**
+Show the hero and the video. Say: “AccessRipple turns a website into a map of its pages, journeys, and accessibility barriers, and every point on that map is backed by something a real browser recorded.”
 
-**0:12–0:24 — The problem, and what is different.**
-Say: “Axe and Lighthouse tell you a check failed. They do not tell you which control it belongs to, what the user actually hit, or whether your fix worked. AccessRipple uses axe-core for the checks and adds the journey, the evidence, and the comparison.”
+**0:12–0:30 — Enter a URL.**
+Click **Explore your website**, type the address you prepared — `developer.mozilla.org`, with no `https://`, to show it does not matter — and press **Map this website**. The scan starts.
+Say: “It opens the site in a real browser on this computer. It reads up to five pages, and it activates a bounded set of safe controls once each in disposable pages to see what actually happens.”
 
-**0:24–0:42 — A real scan, in ten seconds.**
-Close the proof and press **Scan the demo shop**. The browser opens four pages, activates nine safe controls once each in disposable pages, and records what happened.
-Say: “This is a real Chromium session on this computer. Nine controls were activated once each. Form and submit controls need permission, and requests that would change data stay blocked.”
-Point at the story paragraph. Do not read every metric.
+**0:30–0:40 — Cut.**
+Cut straight to the result. Do not show the wait. The scan was run before you started recording, so the result is already there.
 
-**0:42–0:58 — Make the map mean something.**
-Switch to **Controls**, choose **Add to cart**. The pulse travels the recorded route.
-Say: “This is the path the browser took, not a diagram of what might happen. Each step is labelled with what was actually observed, and anything past the recorded route stays marked untested.”
+**0:40–0:58 — The result.**
+The scan summary is on screen: pages inspected, visible controls, accessibility findings, actions tested. The story paragraph underneath states it in one sentence.
+Say: “Forty controls were inspected, four accessibility barriers were found, and ten actions were actually activated and recorded.”
 
-**0:58–1:18 — The barrier, in the page.**
-Open **Findings** and select the missing image description. Show the human impact, the CSS selector, and the recorded markup.
-Say: “A person who cannot see the image misses what it communicates. Here is the exact element the check ran on.”
+**0:58–1:18 — The map, and a journey.**
+Switch to **Controls**, choose a control, and watch the pulse travel the recorded route.
+Say: “This is not a diagram of what might happen. This is the path the browser took, with each step labelled by what was actually observed. Anything past the recorded route stays marked untested.”
+Rotate the map. Select a finding and read the human impact and the recorded element.
 
-**1:18–1:38 — The model does something useful.**
-Press **Propose a change**. The proposal appears as a diff, with the file and line it came from.
-Say: “A model proposes the smallest change that fixes the rule, grounded in the markup the browser recorded. It points at checkout.html line 29. This is a grounded proposal, not a verified fix.”
-Be explicit about that last part. It is the difference between a demo and a lie.
+**1:18–1:36 — The model reads the scan.**
+Press **Write a briefing**.
+Say: “A model writes this, but it only ever sees the evidence the browser recorded, and every sentence has to cite an id that exists in the scan. Click a citation and it opens the evidence it came from. And notice the dashed chips — those are the things the scan did **not** check.”
 
-**1:38–1:48 — A human decides.**
-Press **Apply the demo repair**, then **Rescan and compare**.
-Say: “The demo shop is a local fixture this tool owns, so the repair can be applied here. On a real site this stays a suggestion you make in your own code.”
+**1:36–1:48 — The proof of a change.**
+Open **Show the proof**. The same page before and after one change, side by side, with the counts.
+Say: “We changed one image on a checkout page. Three things the browser no longer reports, and nothing new. The proposal was not the proof, the rescan was.”
+Press **Repair the demo shop** then **Rescan and compare** if you want to show the loop live rather than as a still.
 
-**1:48–2:08 — The money shot.**
-The proof reopens with the two pictures. Point at the broken image on the left and the product graphic on the right, and at the counts.
-Say: “The proposal was not the proof. The rescan was. Three things the browser no longer reports, and nothing new. The two that remain are the simulated gateway timeout and a contrast finding that was never part of this fix.”
-Open the coverage panel. “And this only covers five pages. What was not reached, and what was not tested, is written down rather than left out.”
+**1:48–2:14 — What is still missing.**
+Open the coverage panel on the real-site scan.
+Say: “Ten controls were activated. Thirty-six were not, because they needed permission or were safe to skip, and the scan ran out of budget. Automated checks cover a useful subset of barriers. Keyboard, screen-reader, and human testing complete the picture.”
 
-**2:08–2:26 — It is not only the demo shop.**
-Open **Recent scans** and open the saved Hacker News scan. Show the address, the date it was recorded, one observed route, and one finding with its evidence.
-Say: “This is a recorded scan of a real public site, taken on this machine, not a live scan. Five pages, a thousand controls, ten of them activated, and five hundred findings grouped into five kinds of barrier. The tool does not stop working when the site stops being ours.”
+**2:14–2:34 — The artefact.**
+Press **Export vault**. Open the zip briefly, or just show the download.
+Say: “The whole map exports as a linked Obsidian vault, so a team keeps the evidence and not a screenshot.”
 
-**2:26–2:44 — Honest limits.**
-Open the coverage summary on that scan.
-Say: “Thirty-six controls were never activated. Some needed permission, some were safe to skip, and the scan ran out of budget. Automated checks cover a useful subset of barriers. Keyboard, screen-reader, and human testing complete the picture.”
-
-**2:44–3:00 — Learning and close.**
-Say what you actually learned while building this with AI, in one sentence, in your own words.
+**2:34–3:00 — Learning and close.**
+Say what you actually learned building this with AI, in one sentence, in your own words.
 Then: “Don’t stop at a finding. Follow the journey, inspect the evidence, and verify the change.”
 Show the repository link.
 
 ## If something goes wrong
 
+- **The scan is still running when you cut.** Open **Recent scans** and pick the prepared scan of the same site. Say “here is the same site from a scan I ran a moment ago”.
 - **The model call is slow or fails.** The deterministic summary above it always works. Skip to the next beat and say the model was unavailable. Do not retry on camera.
-- **The scan is slow.** It takes about ten seconds. The progress panel shows pages inspected. Narrate over it.
 - **Show the proof is missing.** Run the demo shop once before recording: scan, propose, apply, rescan. The proof is stored with the scan.
-- **The real-site scan is missing.** It lives in the saved history on this computer. Re-scan Hacker News once before recording; never scan it live on camera.
-- **The network is down.** Everything except the model beat works offline, because the demo shop is local.
+- **The network is down.** Everything except the model beat works offline, because the demo shop is local and the recorded scans are on this computer.
 
 ## Honesty notes
 
 - The demo shop is a controlled local fixture with a deliberate fault. Say so. Do not present it as a third-party site.
 - “No longer observed” means the browser stopped reporting that finding. It does not mean the site is now accessible, and the interface says so on screen.
 - The model proposes; it does not apply. The button that repairs the demo shop is labelled **Apply the demo repair** for exactly that reason.
-- The Hacker News scan is a recording, not a live scan. Say the date.
-- The counts in this script are the values the current build produces. Re-check them after any change to the fixture.
+- A recorded scan is a recording, not a live scan. Say the date when you open a saved one.
+- The counts in this script are the values the current build produced on this machine. Public sites change, so re-run `npm run check:studio` and re-check the numbers before you record.
 - This is a recording guide, not evidence that a submission video has been recorded or uploaded.

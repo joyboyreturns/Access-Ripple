@@ -75,7 +75,7 @@ export interface ScanResult {
   id: string;
   status: 'queued' | 'running' | 'complete' | 'partial' | 'failed';
   inputUrl: string;
-  progress: { completedPages: number; totalPageLimit: number; message: string; currentUrl?: string };
+  progress: { completedPages: number; totalPageLimit: number; message: string; currentUrl?: string; remainingMs?: number };
   pages: Array<{ id: string; url: string; title?: string; status: string; findings: unknown[]; controls: unknown[] }>;
   error?: { message: string };
   previousScanId?: string;

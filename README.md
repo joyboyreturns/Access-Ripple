@@ -103,10 +103,11 @@ curl http://127.0.0.1:4317/api/scans/{newScanId}/compare/{scanId}'
 ## Scan boundaries
 
 - The service binds to loopback and is intended for local development only.
-- Scans are bounded to five same-origin pages, two links deep, with per-page and overall time limits.
+- Scans are bounded to five same-origin pages, two links deep, with per-page and overall time limits. Interaction testing gets a fixed slice of the budget so a heavy site still reaches more than one page.
 - A bounded set of safe controls (ordinary buttons and same-site links) is activated once each in disposable browser pages. Form and submit controls are activated only when the scan explicitly allows it; a tick-box in the studio records that permission, and without it the rescan keeps the previous choice.
 - Data-changing requests (anything other than GET/HEAD) and navigations outside the scanned website are always blocked and recorded, even with permission. Consequential actions such as delete, remove, send, pay, or sign out are never activated.
 - Outcomes are labeled observed only when the browser recorded them; link and form destinations that were never activated remain inferred or not tested. Errors are attributed to the action that ran when they occurred, and unrelated page warnings stay context.
+- Some sites answer an automated browser with a challenge page instead of the site. Those are reported as refused rather than as inspected, and the studio says plainly that nothing on them could be inspected.
 - Private and reserved network addresses are blocked. This local proof of concept is not a hardened public scanning service; do not expose it to the internet.
 - Automated accessibility checks cover a useful subset of barriers; they do not certify accessibility or discover every bug.
 - Completed scans are saved as JSON on this computer (the newest 25, under `.data/`) so history survives restarts; delete that folder to clear the history. Export a vault to keep a portable copy.
