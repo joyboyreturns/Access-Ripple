@@ -1,5 +1,9 @@
 import { buildApp } from './app.js';
 
+// Optional local settings, such as a model provider key for the AI briefing.
+// The file stays on this computer and is ignored by git.
+try { process.loadEnvFile?.(); } catch { /* There is no .env file, which is fine. */ }
+
 const host = process.env.HOST ?? '127.0.0.1';
 const port = Number(process.env.PORT ?? 4317);
 if (host !== '127.0.0.1' && host !== '::1' && host !== 'localhost') {

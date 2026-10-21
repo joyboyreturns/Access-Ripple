@@ -161,3 +161,20 @@ body{min-width:320px}
 .tour-script:hover{color:var(--text)}
 .studio.touring .studio-main{padding-bottom:150px}
 @media(max-width:900px){.tour-bar{flex-direction:column;align-items:stretch;gap:12px;bottom:10px;padding:14px}.tour-copy p{font-size:13.5px}.tour-actions{justify-content:flex-end}}
+
+/* ---- Optional AI briefing ---- */
+.ai-briefing{border:1px solid var(--line);border-radius:10px;background:linear-gradient(135deg,color-mix(in srgb,#b5a5f5 7%,var(--surface)),var(--surface) 60%);padding:17px 20px;margin-bottom:18px}
+.ai-head{display:flex;align-items:center;gap:9px;color:#b5a5f5;margin-bottom:10px;flex-wrap:wrap}
+.ai-head strong{color:var(--text);font-size:14px;font-weight:550}
+.ai-model{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:2px 9px}
+.ai-briefing p{margin:0;font-size:14px;line-height:1.65;color:var(--muted);max-width:80ch}
+.ai-briefing code{font-size:12.5px;background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:1px 5px;color:var(--text)}
+.ai-text{color:var(--text)!important;font-size:15px!important}
+.ai-error{color:#f3a5a7!important}
+[data-theme=light] .ai-error{color:#943e44!important}
+.ai-loading{display:flex;align-items:center;gap:10px}
+.ai-citations{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.ai-citations button{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line2);border-radius:20px;background:var(--surface2);color:var(--muted);font-size:11.5px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai-citations button:hover{border-color:var(--subtle);color:var(--text)}
+.ai-actions{margin-top:13px;display:flex;gap:9px}
+@media(max-width:900px){.ai-briefing{padding:15px 16px}}

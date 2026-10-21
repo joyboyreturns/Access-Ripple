@@ -99,3 +99,11 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Record the four beats of the recording as a guide inside the studio.
 - [x] Keep the suite green: 64 tests across 9 files, typecheck, production build.
 - [ ] Learner review of the demo shop, the scan story, the repair lab, and the demo guide.
+
+### Optional AI briefing
+- [x] A local endpoint writes a plain-language read of a finished scan, with every sentence tied to evidence that exists in the scan.
+- [x] Off by default. It switches on only when a provider key is present in a local `.env`, and the deterministic summary is always shown whether or not it is enabled.
+- [x] Ground the model: it only sees a digest of recorded evidence, a sentence whose citations are all invalid is dropped, and a briefing with no grounded sentence fails rather than showing an unverified summary.
+- [x] Show the citations as buttons that open the evidence the sentence came from.
+- [x] Cover the digest, the grounding rules, and the whole request path with unit and API tests against a local mock provider.
+- [ ] Learner records the AI beat with a real key configured, or decides to skip it.
