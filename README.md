@@ -4,7 +4,7 @@ AccessRipple is a developer tool for exploring how a website is connected: pages
 
 ## Current build
 
-The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a complete searchable inventory, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results.
+The React studio connects to a local Fastify API, bounded Playwright scans, and axe-core checks. It includes a video-led introduction, light/dark themes, a spatial graph with orbit/pan/zoom, grouped plain-language findings, a searchable inventory of everything recorded, rescan comparison, and an Obsidian-compatible ZIP export. The interface starts empty and only shows real scan results.
 
 The studio also tests a bounded set of safe controls once each in disposable browser pages and records what actually happened: navigation, content changes, dialogs, validation, loading states, blocked requests, and failures. Observed outcomes replace inference for those controls, and a selected action shows its recorded route across independently inspected pages with an animated pulse along the way. Form and submit controls wait for explicit permission, requests that would change data are always blocked and recorded, and consequential actions such as delete, send, or pay are never activated. A controlled checkout fixture in the backend demonstrates the whole chain (catalogue → cart → checkout → payment); it never sends a payment or collects data.
 
@@ -12,7 +12,7 @@ Every result also explains its coverage — pages inspected, destinations not re
 
 ### The demo shop
 
-A built-in four-page checkout fixture is available directly in the studio. **Scan the demo shop** opens it in a real browser, always from its broken state, so the result is identical on every run and needs no internet connection. **Prove a repair** switches the same fixture between its broken and repaired states and rescans, so the before-and-after comparison happens in the interface. **Show the proof** then shows the same page before and after, side by side, with the counts. The landing page's **See it in 60 seconds** opens the studio straight into that scan. A guide in the studio header lists the beats of a three-minute recording.
+A built-in four-page checkout fixture is available directly in the studio. **Scan the demo shop** opens it in a real browser, always from its broken state, so the result is the same on every run and needs no internet connection. Any change accepted earlier is dropped first, so a second take starts where the first one did. **Prove a repair** switches the same fixture between its broken and repaired states and rescans, so the before-and-after comparison happens in the interface. **Show the proof** then shows the same page before and after, side by side, with the counts. The landing page's **See it in 60 seconds** opens the studio straight into that scan. A guide in the studio header lists the beats of a three-minute recording.
 
 ## Optional AI briefing and proposed changes
 
@@ -40,6 +40,19 @@ Three rules keep the output honest, because an overconfident summary is worse th
 3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps are listed under the summary whether or not the model chose to mention them, as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
 
 A proposed change is grounded the same way: the model receives the failing rule, the CSS selector, and the markup the browser recorded, and the proposal is dropped unless it matches that markup. The tool proposes; it never edits a scanned website. On the built-in demo shop, which this tool owns, the same proposal can be applied so a rescan can prove whether it worked.
+
+## The model has to put its claim on trial
+
+A suggested change is worth little on its own, because a model can write a plausible replacement for a missing image description without ever checking whether it works. So before the change is applied, the model is asked to commit **in writing** to what its change will and will not fix.
+
+The browser then checks those commitments against the rescan. On the demo shop the model commits to three things: the missing description will be gone, the 404 will still be there, and the other 404 will still be there. The rescan checks all three, and the interface reports each one as held, failed, or unknown.
+
+The rules keep this honest:
+
+- The model may only predict about ids it was given, and only two answers are allowed: gone or still there.
+- The finding the change targets must be covered, and at most two more may be predicted.
+- A prediction is only checked when the page it is about was inspected again. A page whose accessibility checks could not run cannot prove anything, so it is reported as **not rechecked** and never counted as a pass.
+- A prediction that failed is reported as failed. The tool does not hide the model's mistakes, because a tool that only shows successes is not telling you whether to trust it.
 
 ## Run the full app
 

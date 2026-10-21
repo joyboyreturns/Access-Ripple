@@ -53,13 +53,13 @@ export const TOUR: TourStep[] = [
   {
     id: 'proposal',
     title: 'Let the model propose a change',
-    say: 'AI proposes a change, using the markup the browser actually recorded. A suggestion, not a proof. Here is how I check it.',
+    say: 'AI proposes a change, using the markup the browser actually recorded. Then it commits, in writing, to what the change will fix. A prediction, not a proof.',
     done: (context) => context.changeProposed > 0,
   },
   {
     id: 'verify',
     title: 'Verify it with a rescan',
-    say: 'The rescan is the proof, not the proposal. The finding it targeted is no longer observed. The failures it did not touch are still there.',
+    say: 'The rescan is the proof, not the proposal. The finding it targeted is no longer observed. The failures it did not touch are still there — and the prediction held.',
     done: (context) => context.compared,
   },
   {
