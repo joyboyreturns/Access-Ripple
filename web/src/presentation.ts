@@ -308,6 +308,36 @@ function testedFlowFor(graph: SiteGraph, controlId: string): GraphNode | undefin
 }
 
 /** Follow only recorded relationships. Observed outcomes are chained; inference never pretends to be a test. */
+export type RouteToFinding = {
+  control: GraphNode;
+  flow: GraphNode;
+  page: GraphNode;
+  observed: boolean;
+  outcome: string;
+};
+
+/**
+ * The routes that reach a barrier. A finding is on a page; this finds the
+ * controls whose recorded journey leads to that page, so the answer to "how
+ * does someone reach this problem?" is one click away.
+ */
+export function routesToFinding(graph: SiteGraph, findingId: string): RouteToFinding[] {
+  const finding = graph.nodes.find((node) => node.id === findingId);
+  const pageId = finding?.pageId;
+  if (!pageId) return [];
+  const routes: RouteToFinding[] = [];
+  for (const flow of graph.nodes) {
+    if (flow.kind !== 'flow') continue;
+    const destination = graph.nodes.find((node) => node.kind === 'page' && graph.edges.some((edge) => edge.source === flow.id && edge.target === node.id && edge.kind === 'links-to'));
+    if (!destination || destination.id !== pageId) continue;
+    const control = graph.nodes.find((node) => node.kind === 'control' && graph.edges.some((edge) => edge.source === node.id && edge.target === flow.id));
+    if (!control) continue;
+    const observed = isTestedFlow(flow);
+    routes.push({ control, flow, page: destination, observed, outcome: observed ? outcomeCaption(flow) : 'Possible destination · action not activated' });
+  }
+  return routes.sort((a, b) => Number(b.observed) - Number(a.observed));
+}
+
 export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
   const root = graph.nodes.find(n => n.id === rootId);
   const control = root?.kind === 'control' ? root : root?.kind === 'flow'
