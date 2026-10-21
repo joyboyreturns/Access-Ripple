@@ -2,7 +2,7 @@
 source_file: "src/store/disk.ts"
 type: "code"
 community: "Community None"
-location: "L46"
+location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED

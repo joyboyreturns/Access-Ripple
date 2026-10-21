@@ -43,6 +43,8 @@ export interface InteractionRunOptions {
   mode: InteractionMode;
   isSample: boolean;
   origin: string;
+  /** Set when the person scanning asked to reach an address on their own computer. */
+  allowPrivateNetwork?: boolean;
   maxPerPage: number;
   maxPerScanRemaining: number;
   deadline: number;
@@ -280,7 +282,7 @@ async function runSingleInteraction(
     if (!requestUrl.startsWith('http://') && !requestUrl.startsWith('https://')) return route.abort('blockedbyclient').catch(() => undefined);
     if (!['GET', 'HEAD'].includes(request.method().toUpperCase())) return block(`${request.method().toUpperCase()} ${safeDisplayUrl(requestUrl)}`, 'data-request');
     try {
-      await assertSafeUrl(requestUrl, { allowLocalSample: options.isSample, sampleOrigin: options.isSample ? options.origin : undefined });
+      await assertSafeUrl(requestUrl, { allowLocalSample: options.isSample, sampleOrigin: options.isSample ? options.origin : undefined, allowPrivateNetwork: options.allowPrivateNetwork });
     } catch {
       return block(`unsafe request ${safeDisplayUrl(requestUrl)}`, 'unsafe-url');
     }

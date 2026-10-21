@@ -221,6 +221,26 @@ await page.waitForTimeout(2500);
 check('private address explains itself', Boolean(await page.$('.alert.error')), (await txt('.alert.error'))?.slice(0, 60) ?? '');
 check('private address offers the demo shop', await page.evaluate(() => [...document.querySelectorAll('.alert')].some((a) => /Scan the demo shop/.test(a.textContent ?? ''))));
 
+// --- 13b. An address on this computer, with the person's permission ---
+// The opt-in must exist, be off by default, and open a local address when
+// it is ticked. The result has to say where it came from.
+check('the private-network opt-in is present', Boolean(await page.$('#allow-private')));
+check('the private-network opt-in is off by default', !(await page.$eval('#allow-private', (input) => input.checked)));
+await page.check('#allow-private');
+check('the stated scope follows the opt-in', /own computer/i.test((await txt('#scan-limits')) ?? ''), (await txt('#scan-limits')) ?? '');
+await page.fill('#website-url', 'http://127.0.0.1:4317/sample/checkout');
+await page.click('button:has-text("Map this website")');
+// The result panel still holds the previous scan, so wait for the new one to
+// replace it rather than for the panel to exist.
+let scannedPrivate = false;
+try {
+  await page.waitForFunction(() => (document.querySelector('.result-summary .eyebrow')?.textContent ?? '').includes('THIS COMPUTER'), undefined, { timeout: 90000 });
+  scannedPrivate = true;
+} catch { scannedPrivate = false; }
+check('a private address scans with the opt-in', scannedPrivate, (await txt('.result-summary .eyebrow')) ?? '');
+check('the story names the scope', /on this computer/i.test((await txt('.scan-story')) ?? ''));
+await page.uncheck('#allow-private');
+
 // --- 14. Invalid URL ---
 await page.fill('#website-url', 'ftp://example.com');
 await page.click('button:has-text("Map this website")');
@@ -236,7 +256,9 @@ console.log('\n=== SUMMARY ===');
 console.log(`${results.filter((r) => r.pass).length}/${results.length} passed`);
 const failed = results.filter((r) => !r.pass);
 if (failed.length) console.log('FAILED:', failed.map((f) => f.name).join(' | '));
-const real = problems.filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p));
+// The studio abandons its own poll when a new scan starts. That is the app
+// working as designed, not a runtime problem.
+const real = problems.filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p) && !/REQFAIL: http:\/\/127\.0\.0\.1:5173\/api\/scans\/.*ERR_ABORTED/.test(p));
 console.log('runtime problems:', real.length ? real : 'none');
 // Leave the demo shop the way it was found, so a test run never spoils the
 // recording that follows it.

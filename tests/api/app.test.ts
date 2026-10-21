@@ -26,6 +26,23 @@ describe('local scan API', () => {
     expect(scanStore.list()).toHaveLength(0);
   });
 
+  it('reaches an address on this computer only when the scan asks permission', async () => {
+    const app = await buildApp(); apps.push(app);
+    const permitted = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin', allowPrivateNetwork: true } });
+    expect(permitted.statusCode).toBe(202);
+    const scan = await app.inject({ method: 'GET', url: `/api/scans/${permitted.json().scanId}` });
+    expect(scan.json().addressScope).toBe('private');
+  });
+
+  it('never scans a cloud credentials address, even with permission', async () => {
+    const app = await buildApp(); apps.push(app);
+    const before = scanStore.list().length;
+    const metadata = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://169.254.169.254/latest/meta-data/', allowPrivateNetwork: true } });
+    expect(metadata.statusCode).toBe(422);
+    expect(metadata.json().error.code).toBe('NEVER_SCANNED');
+    expect(scanStore.list()).toHaveLength(before);
+  });
+
   it('blocks cross-origin browser requests', async () => {
     const app = await buildApp(); apps.push(app);
     const result = await app.inject({ method: 'GET', url: '/api/health', headers: { origin: 'https://attacker.example' } });

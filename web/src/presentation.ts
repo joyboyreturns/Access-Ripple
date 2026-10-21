@@ -262,9 +262,14 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
     : signals.length
       ? `The browser reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading. Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.`
       : 'Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.';
+  // A scan of an address on this computer is a different thing from a scan of a
+  // public site, and the reader is told which one they are looking at.
+  const scope = scan.addressScope === 'private'
+    ? ' This address is on this computer, so it was opened here with your permission. Only the optional AI briefing can send evidence off this computer.'
+    : '';
 
   const tone = findings.some(f => severity(f) === 'critical') ? 'critical' : rawCount || signals.length ? 'attention' : 'clear';
-  return { headline, detail, tone };
+  return { headline, detail: detail + scope, tone };
 }
 
 export function sceneGraph(graph: SiteGraph, filter: GraphFilter, focusId?: string) {

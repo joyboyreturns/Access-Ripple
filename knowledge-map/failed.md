@@ -2,7 +2,7 @@
 source_file: "scripts/check-studio.mjs"
 type: "code"
 community: "Community None"
-location: "L237"
+location: "L257"
 tags:
   - graphify/code
   - graphify/EXTRACTED

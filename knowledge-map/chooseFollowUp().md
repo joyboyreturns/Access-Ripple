@@ -2,7 +2,7 @@
 source_file: "src/scan/interaction.ts"
 type: "code"
 community: "Community None"
-location: "L414"
+location: "L416"
 tags:
   - graphify/code
   - graphify/EXTRACTED

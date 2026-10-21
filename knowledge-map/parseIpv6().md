@@ -2,7 +2,7 @@
 source_file: "src/scan/url-safety.ts"
 type: "code"
 community: "Community None"
-location: "L45"
+location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
