@@ -106,6 +106,10 @@ export interface ScanComparison {
   changed: Array<{ before: GraphNode; after: GraphNode }>;
   /** The same page before and after, so a repair can be shown and not only counted. */
   pages: Array<{ url: string; title?: string; before?: string; after?: string }>;
+  /** True when both scans ran against the built-in demo shop rather than a public site. */
+  demoShop: boolean;
+  /** Findings whose page was not inspected again, so they are unknown rather than resolved. */
+  notRechecked: GraphNode[];
 }
 
 /** A concrete change a model proposes for one finding, grounded in the recorded markup. */

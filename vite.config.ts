@@ -17,5 +17,5 @@ export default defineConfig({
       '/docs': 'http://127.0.0.1:4317',
     },
   },
-  build: { outDir: '../dist/web', emptyOutDir: false },
+  build: { outDir: '../dist/web', emptyOutDir: true },
 });

@@ -1,3 +1,5 @@
+const MODEL_TIMEOUT_MS = 25_000;
+
 import type { ScanResult, SiteGraph } from '../graph/schema.js';
 import { aiStatus, BriefingError, readAiConfig, type AiConfig } from './briefing.js';
 
@@ -79,8 +81,13 @@ export function isGrounded(proposal: { before: string }, snippet: string, target
   const recorded = snippet.replace(/\s+/g, ' ').trim();
   if (!recorded) return false;
   if (before.includes(recorded) || recorded.includes(before)) return true;
-  // Fall back to the selector when the browser shortened the markup.
-  return targets.some((target) => before.includes(target.trim()) || recorded.includes(target.trim()));
+  // The browser sometimes reports only part of the markup. The selector may
+  // stand in for it, but only when the recorded markup really carries that
+  // selector: a proposal that merely mentions the selector proves nothing.
+  return targets.some((target) => {
+    const trimmed = target.trim();
+    return trimmed.length > 2 && recorded.includes(trimmed);
+  });
 }
 
 export async function writeFixProposal(scan: ScanResult, graph: SiteGraph, nodeId: string, config: FixConfig, locate: (snippet: string) => { file: string; line: number } | undefined): Promise<FixProposal> {
@@ -98,7 +105,7 @@ export async function writeFixProposal(scan: ScanResult, graph: SiteGraph, nodeI
   for (const model of models) {
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 45000);
+      const timer = setTimeout(() => controller.abort(), MODEL_TIMEOUT_MS);
       const body: Record<string, unknown> = {
         model,
         temperature: 0,
