@@ -2,7 +2,7 @@
 source_file: "src/ai/briefing.ts"
 type: "code"
 community: "Community None"
-location: "L143"
+location: "L198"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -18,6 +18,6 @@ tags:
 - [[buildApp()]] - `calls` [EXTRACTED]
 - [[buildDigest()]] - `calls` [EXTRACTED]
 - [[groundSentences()]] - `calls` [EXTRACTED]
-- [[userPrompt()]] - `calls` [EXTRACTED]
+- [[requestCompletion()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

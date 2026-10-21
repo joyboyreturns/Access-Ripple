@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[build]] - `contains` [EXTRACTED]
+- [[checkstudio]] - `contains` [EXTRACTED]
 - [[demo]] - `contains` [EXTRACTED]
 - [[dev]] - `contains` [EXTRACTED]
 - [[devapi]] - `contains` [EXTRACTED]

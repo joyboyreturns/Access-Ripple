@@ -26,6 +26,7 @@ tags:
 - [[buildDigest()]] - `contains` [EXTRACTED]
 - [[groundSentences()]] - `contains` [EXTRACTED]
 - [[readAiConfig()]] - `contains` [EXTRACTED]
+- [[requestCompletion()]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[userPrompt()]] - `contains` [EXTRACTED]
 - [[writeBriefing()]] - `contains` [EXTRACTED]
