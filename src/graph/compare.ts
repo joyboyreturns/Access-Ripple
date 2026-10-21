@@ -29,12 +29,19 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
   // not fixed, and saying "resolved" would be a lie.
   const inspectedBefore = new Set(previous.pages.filter((page) => page.status === 'complete').map((page) => page.id));
   const inspectedAfter = new Set(current.pages.filter((page) => page.status === 'complete').map((page) => page.id));
+  // A page whose accessibility checks could not run is not a clear page. It
+  // stayed 'complete' because the page loaded, so the checks that failed on it
+  // would otherwise look like findings that went away.
+  const uncheckedPages = (nodes: GraphNode[]) => new Set(nodes.filter((node) => node.kind === 'accessibility-finding' && node.data.ruleId === 'accessibility-check-incomplete' && node.pageId).map((node) => node.pageId as string));
+  const checksFailedBefore = uncheckedPages(previous.graph?.nodes ?? []);
+  const checksFailedAfter = uncheckedPages(current.graph?.nodes ?? []);
   const notRechecked: GraphNode[] = [];
   for (const [id, oldNode] of before) {
     if (!issueKinds.has(oldNode.kind)) continue;
     const newNode = after.get(id);
     const pageId = oldNode.pageId;
-    const rechecked = !pageId || (inspectedBefore.has(pageId) && inspectedAfter.has(pageId));
+    let rechecked = !pageId || (inspectedBefore.has(pageId) && inspectedAfter.has(pageId));
+    if (rechecked && oldNode.kind === 'accessibility-finding' && pageId && (checksFailedBefore.has(pageId) || checksFailedAfter.has(pageId))) rechecked = false;
     if (!rechecked) { notRechecked.push(oldNode); continue; }
     if (!newNode) resolved.push(oldNode);
     else if (oldNode.status !== newNode.status || oldNode.label !== newNode.label) changed.push({ before: oldNode, after: newNode });

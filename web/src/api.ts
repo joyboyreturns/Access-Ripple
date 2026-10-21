@@ -1,7 +1,7 @@
 import type { FixProposal, SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
 export interface AiStatus { configured: boolean; model: string; provider: string }
-export interface Briefing { text: string; citations: Array<{ id: string; label: string; gap?: boolean }>; model: string; source: 'ai' }
+export interface Briefing { text: string; citations: Array<{ id: string; label: string; gap?: boolean }>; model: string; source: 'ai'; /** What the scan did not check. Always shown, because it is evidence too. */ gaps?: Array<{ id: string; label: string }> }
 
 /**
  * The scanner allows a scan to run for 100 seconds, and the server allows a

@@ -37,8 +37,11 @@ process.on('SIGTERM', stop);
 try {
   await waitFor(API_URL, 'The local scanner');
   await waitFor('http://127.0.0.1:5173/', 'The studio');
-  console.log(`\nAccessRipple is ready. Opening ${WEB_URL}\n`);
-  exec(`open "${WEB_URL}"`, () => {});
+  console.log(`\nAccessRipple is ready.\nOpen this address if your browser did not open by itself:\n\n  ${WEB_URL}\n`);
+  // Opening the browser is a convenience. The address is printed either way,
+  // so this works the same on macOS, Linux, and Windows.
+  const opener = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
+  exec(`"${opener}" "${WEB_URL}"`, () => {});
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error));
   stop();

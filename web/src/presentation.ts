@@ -181,7 +181,19 @@ export function describe(node: GraphNode): Copy {
 
 export function isIssue(node: GraphNode) { return node.kind === 'accessibility-finding' || node.kind === 'runtime-error'; }
 export function severity(node: GraphNode) { return str(node, 'impact') || (node.kind === 'runtime-error' ? 'diagnostic' : 'info'); }
-export function kindName(node: GraphNode) { return ({ site: 'Website', page: 'Page', control: 'Control', flow: 'Observed journey', 'runtime-error': 'Browser signal', 'accessibility-finding': 'Accessibility' })[node.kind]; }
+/** A short, honest summary of what is still observed, without repeating itself. */
+export function remainingSummary(nodes: GraphNode[]): string {
+  const counts = new Map<string, number>();
+  for (const node of nodes) {
+    const label = describe(node).short;
+    counts.set(label, (counts.get(label) ?? 0) + 1);
+  }
+  const parts = [...counts.entries()].map(([label, count]) => (count > 1 ? `${count}× ${label}` : label));
+  const shown = parts.slice(0, 3).join(', ');
+  return parts.length > 3 ? `${shown}, and ${parts.length - 3} more` : shown;
+}
+
+export function kindName(node: GraphNode) { return ({ site: 'Website', page: 'Page', control: 'Control', flow: node.evidenceLabel === 'observed' ? 'Observed journey' : 'Possible route', 'runtime-error': 'Browser signal', 'accessibility-finding': 'Accessibility' })[node.kind]; }
 export function nodeColor(node: GraphNode) { return node.kind === 'accessibility-finding' ? '#e8ae65' : node.kind === 'runtime-error' ? '#e78995' : node.kind === 'page' ? '#b5a5f5' : node.kind === 'flow' ? '#83b9dd' : node.kind === 'control' ? '#98adbb' : '#a7dcc6'; }
 export function pageFor(node: GraphNode, graph: SiteGraph) {
   if (node.kind === 'page') return node;

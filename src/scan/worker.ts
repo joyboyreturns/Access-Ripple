@@ -336,9 +336,10 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
           const request = route.request();
           const requestUrl = request.url();
           if (!requestUrl.startsWith('http://') && !requestUrl.startsWith('https://')) return await route.abort('blockedbyclient');
-          // The page the user asked for is loaded; anything the page tries to
-          // send on its own is stopped, so the scan never changes data.
-          if (!['GET', 'HEAD'].includes(request.method().toUpperCase()) && request.resourceType() !== 'document') {
+          // Only reading requests are sent. This applies to every kind of
+          // request, including a document: a page that submits a form by
+          // itself is stopped too, so the promise holds for the whole page.
+          if (!['GET', 'HEAD'].includes(request.method().toUpperCase())) {
             errors.push(errorEvidence('request', `Blocked a ${request.method().toUpperCase()} request the page tried to send.`, safeDisplayUrl(requestUrl)));
             return await route.abort('blockedbyclient');
           }

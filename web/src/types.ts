@@ -90,6 +90,8 @@ export interface ScanResult {
 }
 
 export interface SampleInfo {
+  /** True when an accepted change is still applied to the demo shop. */
+  patched?: boolean;
   id: 'checkout';
   name: string;
   tagline: string;

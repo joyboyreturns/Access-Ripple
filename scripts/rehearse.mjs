@@ -21,7 +21,7 @@ function record(name) {
 }
 const seconds = (ms) => (ms / 1000).toFixed(1);
 
-const browser = await chromium.launch({ channel: 'chrome' });
+const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const problems = [];
 page.on('console', (m) => { if (m.type() === 'error' && !/422/.test(m.text())) problems.push('CONSOLE: ' + m.text()); });
@@ -116,7 +116,7 @@ try {
   // --- 1:36 the proof ---
   record('The proof');
   await page.click('button:has-text("Show the proof")');
-  await page.waitForSelector('.proof-view', { timeout: 20000 });
+  await page.waitForSelector('dialog.proof-dialog[open]', { timeout: 20000 });
   await page.waitForTimeout(600);
   check('the proof leads with the counts', (await text('.proof-head h2'))?.includes('no longer observed') ?? false, await text('.proof-head h2'));
   check('it is labelled as the controlled demo shop', (await text('.proof-head .eyebrow'))?.includes('DEMO SHOP') ?? false, await text('.proof-head .eyebrow'));
@@ -139,6 +139,9 @@ try {
 } catch (error) {
   console.log('FAIL  the rehearsal stopped ::', error instanceof Error ? error.message.slice(0, 160) : String(error));
 } finally {
+  // Leave the demo shop the way it was found.
+  await fetch('http://127.0.0.1:4317/api/sample/reset', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }).catch(() => undefined);
+  await fetch('http://127.0.0.1:4317/api/sample/state', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variant: 'before' }) }).catch(() => undefined);
   const total = Date.now() - mark;
   if (beat.length) beat.at(-1).ms = total;
   console.log('\n=== BEAT TIMINGS ===');
