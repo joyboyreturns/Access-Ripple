@@ -264,3 +264,17 @@ body{min-width:320px}
 .proof-dialog .proof-shots{max-width:none}
 .proof-dialog .proof-resolved{max-width:none}
 .proof-dialog .proof-rest{max-width:none}
+
+/* The routes that reach a barrier. */
+.routes-to{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:var(--surface2)}
+.routes-to .eyebrow{font-size:9.5px;margin-bottom:8px}
+.routes-to ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.routes-to li button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:7px 8px;border:1px solid transparent;border-radius:6px;background:transparent}
+.routes-to li button:hover{background:var(--surface3);border-color:var(--line)}
+.routes-to li span:nth-child(2){display:flex;flex-direction:column;gap:1px;flex:1;min-width:0}
+.routes-to li strong{font-size:12.5px;font-weight:500;color:var(--text)}
+.routes-to li small{font-size:11px;color:var(--muted)}
+.route-badge{flex-shrink:0;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:20px;border:1px solid var(--line2);color:var(--muted)}
+.route-badge.observed{color:#87be9b;border-color:#87be9b40}
+.route-badge.inferred{color:var(--subtle);border-style:dashed}
+.route-empty{margin:0;font-size:12.5px;line-height:1.6;color:var(--muted)}

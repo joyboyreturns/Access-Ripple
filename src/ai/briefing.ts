@@ -102,7 +102,10 @@ export function buildDigest(scan: ScanResult, graph: SiteGraph): DigestItem[] {
     } else if (node.kind === 'flow') {
       const outcome = typeof node.data.outcome === 'string' ? node.data.outcome : 'unknown';
       const steps = Array.isArray(node.data.steps) ? node.data.steps.length : 0;
-      items.push({ id: node.id, kind: 'observed journey', label: node.label, detail: `outcome=${outcome}; steps=${steps}; page=${pageLabel.get(node.pageId ?? '') ?? 'unknown'}` });
+      // Only a flow that was actually activated is an observed journey. The
+      // rest is a possible route, and the digest says which is which.
+      const observed = node.evidenceLabel === 'observed';
+      items.push({ id: node.id, kind: observed ? 'observed journey' : 'possible route', label: node.label, detail: `outcome=${outcome}; steps=${steps}; page=${pageLabel.get(node.pageId ?? '') ?? 'unknown'}` });
     } else if (node.kind === 'page') {
       items.push({ id: node.id, kind: 'page', label: node.label, detail: `url=${String(node.data.url ?? '')}` });
     }
