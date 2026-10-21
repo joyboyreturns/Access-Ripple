@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[App.tsx]] - `imports_from` [EXTRACTED]
 - [[EvidenceLabel_1]] - `contains` [EXTRACTED]
+- [[FixProposal_1]] - `contains` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphEdge_1]] - `contains` [EXTRACTED]
 - [[GraphNode_1]] - `contains` [EXTRACTED]

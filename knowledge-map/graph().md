@@ -12,7 +12,6 @@ tags:
 # graph()
 
 ## Connections
-- [[control()]] - `indirect_call` [INFERRED]
 - [[presentation.test.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

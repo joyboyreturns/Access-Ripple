@@ -2,7 +2,7 @@
 source_file: "src/scan/worker.ts"
 type: "code"
 community: "Community None"
-location: "L186"
+location: "L226"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -15,6 +15,7 @@ tags:
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[assertSafeUrl()]] - `calls` [EXTRACTED]
 - [[buildGraph()]] - `calls` [EXTRACTED]
+- [[captureScreenshot()]] - `calls` [EXTRACTED]
 - [[errorEvidence()]] - `calls` [EXTRACTED]
 - [[initialResult()]] - `calls` [EXTRACTED]
 - [[inspectControls()]] - `calls` [EXTRACTED]

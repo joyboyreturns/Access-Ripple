@@ -16,6 +16,7 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
+- [[ProofView()]] - `calls` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[blockedShort()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]

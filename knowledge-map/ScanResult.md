@@ -2,7 +2,7 @@
 source_file: "src/graph/schema.ts"
 type: "code"
 community: "Community None"
-location: "L159"
+location: "L163"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -20,6 +20,8 @@ tags:
 - [[compare.ts]] - `imports` [EXTRACTED]
 - [[disk.ts]] - `imports` [EXTRACTED]
 - [[export.test.ts]] - `imports` [EXTRACTED]
+- [[fix.ts]] - `imports` [EXTRACTED]
+- [[graph-shape.test.ts]] - `imports` [EXTRACTED]
 - [[graph.test.ts]] - `imports` [EXTRACTED]
 - [[memory.ts]] - `imports` [EXTRACTED]
 - [[obsidian.ts]] - `imports` [EXTRACTED]

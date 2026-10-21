@@ -29,6 +29,7 @@ tags:
 - [[axeSource]] - `contains` [EXTRACTED]
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
 - [[buildGraph()]] - `imports` [EXTRACTED]
+- [[captureScreenshot()]] - `contains` [EXTRACTED]
 - [[errorEvidence()]] - `imports` [EXTRACTED]
 - [[evidence.ts]] - `imports_from` [EXTRACTED]
 - [[initialResult()]] - `contains` [EXTRACTED]

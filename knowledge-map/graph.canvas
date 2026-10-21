@@ -6,7 +6,7 @@
       "label": "Community 0",
       "x": 0,
       "y": 0,
-      "width": 4620,
+      "width": 4840,
       "height": 2220,
       "color": "1"
     },
@@ -203,8 +203,8 @@
       "id": "n_web_src_app_aibriefing",
       "type": "file",
       "file": "AiBriefing().md",
-      "x": 20,
-      "y": 160,
+      "x": 4220,
+      "y": 80,
       "width": 180,
       "height": 60
     },
@@ -212,7 +212,7 @@
       "id": "n_src_ai_briefing_aiconfig",
       "type": "file",
       "file": "AiConfig.md",
-      "x": 220,
+      "x": 20,
       "y": 160,
       "width": 180,
       "height": 60
@@ -221,7 +221,7 @@
       "id": "n_web_src_api_aistatus",
       "type": "file",
       "file": "AiStatus.md",
-      "x": 420,
+      "x": 220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -230,7 +230,7 @@
       "id": "n_web_src_api_apierror",
       "type": "file",
       "file": "ApiError.md",
-      "x": 620,
+      "x": 420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -239,7 +239,7 @@
       "id": "n_web_src_app_app",
       "type": "file",
       "file": "App().md",
-      "x": 820,
+      "x": 620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -248,7 +248,7 @@
       "id": "n_web_src_app",
       "type": "file",
       "file": "App.tsx.md",
-      "x": 1020,
+      "x": 820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -257,7 +257,7 @@
       "id": "n_src_api_app_appoptions",
       "type": "file",
       "file": "AppOptions.md",
-      "x": 1220,
+      "x": 1020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -266,7 +266,7 @@
       "id": "n_src_scan_interaction_blocked_path",
       "type": "file",
       "file": "BLOCKED_PATH.md",
-      "x": 1420,
+      "x": 1220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -275,7 +275,7 @@
       "id": "n_readme_before_after_repair_loop_on_the_sample",
       "type": "file",
       "file": "Beforeafter repair loop on the sample.md",
-      "x": 1620,
+      "x": 1420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -284,7 +284,7 @@
       "id": "n_src_ai_briefing_briefing",
       "type": "file",
       "file": "Briefing.md",
-      "x": 1820,
+      "x": 1620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -293,7 +293,7 @@
       "id": "n_web_src_api_briefing",
       "type": "file",
       "file": "Briefing_1.md",
-      "x": 2020,
+      "x": 1820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -302,7 +302,7 @@
       "id": "n_src_ai_briefing_briefingcitation",
       "type": "file",
       "file": "BriefingCitation.md",
-      "x": 2220,
+      "x": 2020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -311,7 +311,7 @@
       "id": "n_src_ai_briefing_briefingerror",
       "type": "file",
       "file": "BriefingError.md",
-      "x": 2420,
+      "x": 2220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -320,7 +320,7 @@
       "id": "n_readme_compact_architecture_map",
       "type": "file",
       "file": "Compact architecture map.md",
-      "x": 2620,
+      "x": 2420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -329,7 +329,7 @@
       "id": "n_src_graph_schema_controlevidence",
       "type": "file",
       "file": "ControlEvidence.md",
-      "x": 2820,
+      "x": 2620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -338,7 +338,7 @@
       "id": "n_web_src_presentation_copy",
       "type": "file",
       "file": "Copy.md",
-      "x": 3020,
+      "x": 2820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -347,7 +347,7 @@
       "id": "n_readme_current_build",
       "type": "file",
       "file": "Current build.md",
-      "x": 3220,
+      "x": 3020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -356,7 +356,7 @@
       "id": "n_src_scan_worker_default_limits",
       "type": "file",
       "file": "DEFAULT_LIMITS.md",
-      "x": 3420,
+      "x": 3220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -365,7 +365,7 @@
       "id": "n_web_src_landing_dialog",
       "type": "file",
       "file": "Dialog().md",
-      "x": 3620,
+      "x": 3420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -374,7 +374,7 @@
       "id": "n_src_ai_briefing_digestitem",
       "type": "file",
       "file": "DigestItem.md",
-      "x": 3820,
+      "x": 3620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -383,7 +383,7 @@
       "id": "n_web_src_app_empty",
       "type": "file",
       "file": "EMPTY.md",
-      "x": 4020,
+      "x": 3820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -392,8 +392,8 @@
       "id": "n_src_graph_schema_evidencelabel",
       "type": "file",
       "file": "EvidenceLabel.md",
-      "x": 20,
-      "y": 240,
+      "x": 4020,
+      "y": 160,
       "width": 180,
       "height": 60
     },
@@ -401,8 +401,8 @@
       "id": "n_web_src_types_evidencelabel",
       "type": "file",
       "file": "EvidenceLabel_1.md",
-      "x": 220,
-      "y": 240,
+      "x": 4220,
+      "y": 160,
       "width": 180,
       "height": 60
     },
@@ -410,7 +410,7 @@
       "id": "n_src_scan_worker_extractedcontrol",
       "type": "file",
       "file": "ExtractedControl.md",
-      "x": 420,
+      "x": 20,
       "y": 240,
       "width": 180,
       "height": 60
@@ -419,7 +419,43 @@
       "id": "n_web_src_app_filters",
       "type": "file",
       "file": "FILTERS.md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_fixconfig",
+      "type": "file",
+      "file": "FixConfig.md",
+      "x": 420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_fixproposal",
+      "type": "file",
+      "file": "FixProposal.md",
       "x": 620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_types_fixproposal",
+      "type": "file",
+      "file": "FixProposal_1.md",
+      "x": 820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_app_fixproposalcard",
+      "type": "file",
+      "file": "FixProposalCard().md",
+      "x": 1020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -428,7 +464,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas",
       "type": "file",
       "file": "GraphCanvas().md",
-      "x": 820,
+      "x": 1220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -437,7 +473,7 @@
       "id": "n_web_src_graphcanvas",
       "type": "file",
       "file": "GraphCanvas.tsx.md",
-      "x": 1020,
+      "x": 1420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -446,7 +482,7 @@
       "id": "n_src_graph_schema_graphedge",
       "type": "file",
       "file": "GraphEdge.md",
-      "x": 1220,
+      "x": 1620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -455,7 +491,7 @@
       "id": "n_web_src_types_graphedge",
       "type": "file",
       "file": "GraphEdge_1.md",
-      "x": 1420,
+      "x": 1820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -464,7 +500,7 @@
       "id": "n_src_graph_schema_graphedgekind",
       "type": "file",
       "file": "GraphEdgeKind.md",
-      "x": 1620,
+      "x": 2020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -473,7 +509,7 @@
       "id": "n_web_src_presentation_graphfilter",
       "type": "file",
       "file": "GraphFilter.md",
-      "x": 1820,
+      "x": 2220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -482,7 +518,7 @@
       "id": "n_src_graph_schema_graphnode",
       "type": "file",
       "file": "GraphNode.md",
-      "x": 2020,
+      "x": 2420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -491,7 +527,7 @@
       "id": "n_web_src_types_graphnode",
       "type": "file",
       "file": "GraphNode_1.md",
-      "x": 2220,
+      "x": 2620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -500,7 +536,7 @@
       "id": "n_src_graph_schema_graphnodekind",
       "type": "file",
       "file": "GraphNodeKind.md",
-      "x": 2420,
+      "x": 2820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -509,7 +545,7 @@
       "id": "n_web_src_types_graphnodekind",
       "type": "file",
       "file": "GraphNodeKind_1.md",
-      "x": 2620,
+      "x": 3020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -518,7 +554,7 @@
       "id": "n_src_scan_interaction_ignored_roles",
       "type": "file",
       "file": "IGNORED_ROLES.md",
-      "x": 2820,
+      "x": 3220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -527,7 +563,7 @@
       "id": "n_web_src_graphcanvas_initial",
       "type": "file",
       "file": "INITIAL.md",
-      "x": 3020,
+      "x": 3420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -536,7 +572,7 @@
       "id": "n_web_src_icons_icon",
       "type": "file",
       "file": "Icon().md",
-      "x": 3220,
+      "x": 3620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -545,7 +581,7 @@
       "id": "n_web_src_icons",
       "type": "file",
       "file": "Icons.tsx.md",
-      "x": 3420,
+      "x": 3820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -554,7 +590,7 @@
       "id": "n_src_scan_interaction_interactionbatch",
       "type": "file",
       "file": "InteractionBatch.md",
-      "x": 3620,
+      "x": 4020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -563,7 +599,7 @@
       "id": "n_src_graph_schema_interactionevidence",
       "type": "file",
       "file": "InteractionEvidence.md",
-      "x": 3820,
+      "x": 4220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -572,8 +608,8 @@
       "id": "n_web_src_types_interactionevidenceview",
       "type": "file",
       "file": "InteractionEvidenceView.md",
-      "x": 4020,
-      "y": 240,
+      "x": 20,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -581,7 +617,7 @@
       "id": "n_src_graph_schema_interactionexclusion",
       "type": "file",
       "file": "InteractionExclusion.md",
-      "x": 20,
+      "x": 220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -590,7 +626,7 @@
       "id": "n_src_graph_schema_interactionexclusionreason",
       "type": "file",
       "file": "InteractionExclusionReason.md",
-      "x": 220,
+      "x": 420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -599,7 +635,7 @@
       "id": "n_src_graph_schema_interactionmode",
       "type": "file",
       "file": "InteractionMode.md",
-      "x": 420,
+      "x": 620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -608,7 +644,7 @@
       "id": "n_web_src_types_interactionmode",
       "type": "file",
       "file": "InteractionMode_1.md",
-      "x": 620,
+      "x": 820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -617,7 +653,7 @@
       "id": "n_src_graph_schema_interactionoutcome",
       "type": "file",
       "file": "InteractionOutcome.md",
-      "x": 820,
+      "x": 1020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -626,7 +662,7 @@
       "id": "n_web_src_types_interactionoutcome",
       "type": "file",
       "file": "InteractionOutcome_1.md",
-      "x": 1020,
+      "x": 1220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -635,7 +671,7 @@
       "id": "n_src_scan_interaction_interactionrunoptions",
       "type": "file",
       "file": "InteractionRunOptions.md",
-      "x": 1220,
+      "x": 1420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -644,7 +680,7 @@
       "id": "n_src_graph_schema_interactionstep",
       "type": "file",
       "file": "InteractionStep.md",
-      "x": 1420,
+      "x": 1620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -653,7 +689,7 @@
       "id": "n_web_src_types_interactionstepview",
       "type": "file",
       "file": "InteractionStepView.md",
-      "x": 1620,
+      "x": 1820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -662,7 +698,7 @@
       "id": "n_src_scan_interaction_interactiontarget",
       "type": "file",
       "file": "InteractionTarget.md",
-      "x": 1820,
+      "x": 2020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -671,7 +707,7 @@
       "id": "n_web_src_presentation_journey",
       "type": "file",
       "file": "Journey.md",
-      "x": 2020,
+      "x": 2220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -680,7 +716,7 @@
       "id": "n_web_src_presentation_journeyfinding",
       "type": "file",
       "file": "JourneyFinding.md",
-      "x": 2220,
+      "x": 2420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -689,7 +725,7 @@
       "id": "n_web_src_landing_landing",
       "type": "file",
       "file": "Landing().md",
-      "x": 2420,
+      "x": 2620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -698,7 +734,7 @@
       "id": "n_web_src_landing",
       "type": "file",
       "file": "Landing.tsx.md",
-      "x": 2620,
+      "x": 2820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -707,7 +743,7 @@
       "id": "n_web_src_icons_mark",
       "type": "file",
       "file": "Mark().md",
-      "x": 2820,
+      "x": 3020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -716,7 +752,7 @@
       "id": "n_readme_media_provenance",
       "type": "file",
       "file": "Media provenance.md",
-      "x": 3020,
+      "x": 3220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -725,7 +761,7 @@
       "id": "n_src_scan_interaction_named_roles",
       "type": "file",
       "file": "NAMED_ROLES.md",
-      "x": 3220,
+      "x": 3420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -734,16 +770,16 @@
       "id": "n_src_scan_interaction_observationevent",
       "type": "file",
       "file": "ObservationEvent.md",
-      "x": 3420,
+      "x": 3620,
       "y": 320,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_readme_optional_ai_briefing",
+      "id": "n_readme_optional_ai_briefing_and_proposed_changes",
       "type": "file",
-      "file": "Optional AI briefing.md",
-      "x": 3620,
+      "file": "Optional AI briefing and proposed changes.md",
+      "x": 3820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -752,7 +788,7 @@
       "id": "n_src_graph_schema_pageevidence",
       "type": "file",
       "file": "PageEvidence.md",
-      "x": 3820,
+      "x": 4020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -761,7 +797,7 @@
       "id": "n_src_scan_interaction_pagesnapshot",
       "type": "file",
       "file": "PageSnapshot.md",
-      "x": 4020,
+      "x": 4220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -776,10 +812,19 @@
       "height": 60
     },
     {
+      "id": "n_web_src_app_proofview",
+      "type": "file",
+      "file": "ProofView().md",
+      "x": 220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_web_src_graphcanvas_props",
       "type": "file",
       "file": "Props.md",
-      "x": 220,
+      "x": 420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -788,7 +833,7 @@
       "id": "n_web_src_selectmenu_props",
       "type": "file",
       "file": "Props_1.md",
-      "x": 420,
+      "x": 620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -797,7 +842,7 @@
       "id": "n_readme",
       "type": "file",
       "file": "README.md",
-      "x": 620,
+      "x": 820,
       "y": 400,
       "width": 180,
       "height": 60
@@ -806,7 +851,7 @@
       "id": "n_src_graph_schema_revealedcontrolevidence",
       "type": "file",
       "file": "RevealedControlEvidence.md",
-      "x": 820,
+      "x": 1020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -815,7 +860,7 @@
       "id": "n_readme_run_the_backend",
       "type": "file",
       "file": "Run the backend.md",
-      "x": 1020,
+      "x": 1220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -824,7 +869,7 @@
       "id": "n_readme_run_the_full_app",
       "type": "file",
       "file": "Run the full app.md",
-      "x": 1220,
+      "x": 1420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -833,7 +878,7 @@
       "id": "n_src_graph_schema_runtimeerrorevidence",
       "type": "file",
       "file": "RuntimeErrorEvidence.md",
-      "x": 1420,
+      "x": 1620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -842,7 +887,16 @@
       "id": "n_src_ai_briefing_system_prompt",
       "type": "file",
       "file": "SYSTEM_PROMPT.md",
-      "x": 1620,
+      "x": 1820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_system_prompt",
+      "type": "file",
+      "file": "SYSTEM_PROMPT_1.md",
+      "x": 2020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -851,7 +905,7 @@
       "id": "n_web_src_types_sampleinfo",
       "type": "file",
       "file": "SampleInfo.md",
-      "x": 1820,
+      "x": 2220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -860,7 +914,7 @@
       "id": "n_web_src_app_saved",
       "type": "file",
       "file": "Saved.md",
-      "x": 2020,
+      "x": 2420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -869,7 +923,7 @@
       "id": "n_readme_scan_boundaries",
       "type": "file",
       "file": "Scan boundaries.md",
-      "x": 2220,
+      "x": 2620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -878,7 +932,7 @@
       "id": "n_src_graph_compare_scancomparison",
       "type": "file",
       "file": "ScanComparison.md",
-      "x": 2420,
+      "x": 2820,
       "y": 400,
       "width": 180,
       "height": 60
@@ -887,7 +941,7 @@
       "id": "n_web_src_types_scancomparison",
       "type": "file",
       "file": "ScanComparison_1.md",
-      "x": 2620,
+      "x": 3020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -896,7 +950,7 @@
       "id": "n_src_graph_schema_scancoverage",
       "type": "file",
       "file": "ScanCoverage.md",
-      "x": 2820,
+      "x": 3220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -905,7 +959,7 @@
       "id": "n_web_src_types_scancoverage",
       "type": "file",
       "file": "ScanCoverage_1.md",
-      "x": 3020,
+      "x": 3420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -914,7 +968,7 @@
       "id": "n_src_scan_worker_scaninput",
       "type": "file",
       "file": "ScanInput.md",
-      "x": 3220,
+      "x": 3620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -923,7 +977,7 @@
       "id": "n_src_graph_schema_scanlimits",
       "type": "file",
       "file": "ScanLimits.md",
-      "x": 3420,
+      "x": 3820,
       "y": 400,
       "width": 180,
       "height": 60
@@ -932,7 +986,7 @@
       "id": "n_src_graph_schema_scanprogress",
       "type": "file",
       "file": "ScanProgress.md",
-      "x": 3620,
+      "x": 4020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -941,7 +995,7 @@
       "id": "n_src_graph_schema_scanresult",
       "type": "file",
       "file": "ScanResult.md",
-      "x": 3820,
+      "x": 4220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -950,8 +1004,8 @@
       "id": "n_web_src_types_scanresult",
       "type": "file",
       "file": "ScanResult_1.md",
-      "x": 4020,
-      "y": 400,
+      "x": 20,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -959,7 +1013,7 @@
       "id": "n_src_graph_schema_scanstatus",
       "type": "file",
       "file": "ScanStatus.md",
-      "x": 20,
+      "x": 220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -968,7 +1022,7 @@
       "id": "n_web_src_app_scanstory",
       "type": "file",
       "file": "ScanStory().md",
-      "x": 220,
+      "x": 420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -977,7 +1031,7 @@
       "id": "n_src_store_disk_scansummary",
       "type": "file",
       "file": "ScanSummary.md",
-      "x": 420,
+      "x": 620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -986,7 +1040,7 @@
       "id": "n_web_src_types_scansummary",
       "type": "file",
       "file": "ScanSummary_1.md",
-      "x": 620,
+      "x": 820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -995,7 +1049,7 @@
       "id": "n_web_src_selectmenu_selectmenu",
       "type": "file",
       "file": "SelectMenu().md",
-      "x": 820,
+      "x": 1020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1004,7 +1058,7 @@
       "id": "n_web_src_selectmenu",
       "type": "file",
       "file": "SelectMenu.tsx.md",
-      "x": 1020,
+      "x": 1220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1013,7 +1067,7 @@
       "id": "n_web_src_selectmenu_selectoption",
       "type": "file",
       "file": "SelectOption.md",
-      "x": 1220,
+      "x": 1420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1022,7 +1076,7 @@
       "id": "n_src_graph_schema_sitegraph",
       "type": "file",
       "file": "SiteGraph.md",
-      "x": 1420,
+      "x": 1620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1031,7 +1085,7 @@
       "id": "n_web_src_types_sitegraph",
       "type": "file",
       "file": "SiteGraph_1.md",
-      "x": 1620,
+      "x": 1820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1040,7 +1094,7 @@
       "id": "n_src_scan_interaction_snapshotitem",
       "type": "file",
       "file": "SnapshotItem.md",
-      "x": 1820,
+      "x": 2020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1049,7 +1103,7 @@
       "id": "n_web_src_tour_tour",
       "type": "file",
       "file": "TOUR.md",
-      "x": 2020,
+      "x": 2220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1058,7 +1112,7 @@
       "id": "n_readme_the_demo_shop",
       "type": "file",
       "file": "The demo shop.md",
-      "x": 2220,
+      "x": 2420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1067,7 +1121,7 @@
       "id": "n_web_src_tour_tourcontext",
       "type": "file",
       "file": "TourContext.md",
-      "x": 2420,
+      "x": 2620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1076,7 +1130,7 @@
       "id": "n_web_src_tour_tourstep",
       "type": "file",
       "file": "TourStep.md",
-      "x": 2620,
+      "x": 2820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1085,7 +1139,7 @@
       "id": "n_src_scan_url_safety_unsafeurlerror",
       "type": "file",
       "file": "UnsafeUrlError.md",
-      "x": 2820,
+      "x": 3020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1094,7 +1148,7 @@
       "id": "n_src_scan_url_safety_urlsafetyoptions",
       "type": "file",
       "file": "UrlSafetyOptions.md",
-      "x": 3020,
+      "x": 3220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1103,7 +1157,7 @@
       "id": "n_readme_verification",
       "type": "file",
       "file": "Verification.md",
-      "x": 3220,
+      "x": 3420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1112,7 +1166,7 @@
       "id": "n_web_src_presentation_viewnode",
       "type": "file",
       "file": "ViewNode.md",
-      "x": 3420,
+      "x": 3620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1121,7 +1175,7 @@
       "id": "n_web_src_app_app_accept",
       "type": "file",
       "file": "accept().md",
-      "x": 3620,
+      "x": 3820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1130,7 +1184,7 @@
       "id": "n_src_scan_interaction_activate",
       "type": "file",
       "file": "activate().md",
-      "x": 3820,
+      "x": 4020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1139,7 +1193,7 @@
       "id": "n_src_ai_briefing_aistatus",
       "type": "file",
       "file": "aiStatus().md",
-      "x": 4020,
+      "x": 4220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1190,10 +1244,19 @@
       "height": 60
     },
     {
+      "id": "n_web_src_app_app_askforproposal",
+      "type": "file",
+      "file": "askForProposal().md",
+      "x": 1020,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_src_scan_url_safety_assertsafeurl",
       "type": "file",
       "file": "assertSafeUrl().md",
-      "x": 1020,
+      "x": 1220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1202,7 +1265,7 @@
       "id": "n_package_dependencies_axe_core",
       "type": "file",
       "file": "axe-core.md",
-      "x": 1220,
+      "x": 1420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1211,7 +1274,7 @@
       "id": "n_ref_axe_core",
       "type": "file",
       "file": "axe-core_1.md",
-      "x": 1420,
+      "x": 1620,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1220,7 +1283,7 @@
       "id": "n_src_scan_worker_axesource",
       "type": "file",
       "file": "axeSource.md",
-      "x": 1620,
+      "x": 1820,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1229,7 +1292,7 @@
       "id": "n_src_scan_url_safety_blockedhostsuffixes",
       "type": "file",
       "file": "blockedHostSuffixes.md",
-      "x": 1820,
+      "x": 2020,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1238,7 +1301,7 @@
       "id": "n_src_scan_url_safety_blockedhostnames",
       "type": "file",
       "file": "blockedHostnames.md",
-      "x": 2020,
+      "x": 2220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1247,7 +1310,7 @@
       "id": "n_web_src_presentation_blockedshort",
       "type": "file",
       "file": "blockedShort().md",
-      "x": 2220,
+      "x": 2420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1256,7 +1319,7 @@
       "id": "n_tests_unit_briefing_test",
       "type": "file",
       "file": "briefing.test.ts.md",
-      "x": 2420,
+      "x": 2620,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1265,7 +1328,7 @@
       "id": "n_src_ai_briefing",
       "type": "file",
       "file": "briefing.ts.md",
-      "x": 2620,
+      "x": 2820,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1274,7 +1337,7 @@
       "id": "n_package_scripts_build",
       "type": "file",
       "file": "build.md",
-      "x": 2820,
+      "x": 3020,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1283,7 +1346,7 @@
       "id": "n_src_graph_build_graph",
       "type": "file",
       "file": "build-graph.ts.md",
-      "x": 3020,
+      "x": 3220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1292,7 +1355,7 @@
       "id": "n_src_api_app_buildapp",
       "type": "file",
       "file": "buildApp().md",
-      "x": 3220,
+      "x": 3420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1301,7 +1364,7 @@
       "id": "n_src_ai_briefing_builddigest",
       "type": "file",
       "file": "buildDigest().md",
-      "x": 3420,
+      "x": 3620,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1310,7 +1373,7 @@
       "id": "n_src_graph_build_graph_buildgraph",
       "type": "file",
       "file": "buildGraph().md",
-      "x": 3620,
+      "x": 3820,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1319,7 +1382,16 @@
       "id": "n_src_api_app_canstartscan",
       "type": "file",
       "file": "canStartScan().md",
-      "x": 3820,
+      "x": 4020,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_scan_worker_capturescreenshot",
+      "type": "file",
+      "file": "captureScreenshot().md",
+      "x": 4220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1328,8 +1400,8 @@
       "id": "n_web_src_app_app_changefilter",
       "type": "file",
       "file": "changeFilter().md",
-      "x": 4020,
-      "y": 560,
+      "x": 20,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1337,7 +1409,7 @@
       "id": "n_scripts_check_studio_check",
       "type": "file",
       "file": "check().md",
-      "x": 20,
+      "x": 220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1346,7 +1418,7 @@
       "id": "n_scripts_check_studio",
       "type": "file",
       "file": "check-studio.mjs.md",
-      "x": 220,
+      "x": 420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1355,7 +1427,7 @@
       "id": "n_package_scripts_check_studio",
       "type": "file",
       "file": "checkstudio.md",
-      "x": 420,
+      "x": 620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1364,7 +1436,7 @@
       "id": "n_web_src_api_checkapi",
       "type": "file",
       "file": "checkApi().md",
-      "x": 620,
+      "x": 820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1373,7 +1445,7 @@
       "id": "n_scripts_demo_child",
       "type": "file",
       "file": "child.md",
-      "x": 820,
+      "x": 1020,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1382,7 +1454,7 @@
       "id": "n_web_src_selectmenu_selectmenu_choose",
       "type": "file",
       "file": "choose().md",
-      "x": 1020,
+      "x": 1220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1391,7 +1463,7 @@
       "id": "n_src_scan_interaction_choosefollowup",
       "type": "file",
       "file": "chooseFollowUp().md",
-      "x": 1220,
+      "x": 1420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1400,7 +1472,7 @@
       "id": "n_src_scan_interaction_classifyaction",
       "type": "file",
       "file": "classifyAction().md",
-      "x": 1420,
+      "x": 1620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1409,7 +1481,7 @@
       "id": "n_web_src_presentation_cleanlabel",
       "type": "file",
       "file": "cleanLabel().md",
-      "x": 1620,
+      "x": 1820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1418,7 +1490,7 @@
       "id": "n_web_src_presentation_cleanquoted",
       "type": "file",
       "file": "cleanQuoted().md",
-      "x": 1820,
+      "x": 2020,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1427,7 +1499,7 @@
       "id": "n_web_src_selectmenu_selectmenu_closemenu",
       "type": "file",
       "file": "closeMenu().md",
-      "x": 2020,
+      "x": 2220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1436,7 +1508,7 @@
       "id": "n_src_graph_compare",
       "type": "file",
       "file": "compare.ts.md",
-      "x": 2220,
+      "x": 2420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1445,7 +1517,7 @@
       "id": "n_src_graph_compare_comparescans",
       "type": "file",
       "file": "compareScans().md",
-      "x": 2420,
+      "x": 2620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1454,7 +1526,7 @@
       "id": "n_web_src_api_comparescans",
       "type": "file",
       "file": "compareScans()_1.md",
-      "x": 2620,
+      "x": 2820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1463,7 +1535,7 @@
       "id": "n_tsconfig_build_compileroptions",
       "type": "file",
       "file": "compilerOptions.md",
-      "x": 2820,
+      "x": 3020,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1472,7 +1544,7 @@
       "id": "n_tsconfig_compileroptions",
       "type": "file",
       "file": "compilerOptions_1.md",
-      "x": 3020,
+      "x": 3220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1481,7 +1553,7 @@
       "id": "n_tsconfig_web_compileroptions",
       "type": "file",
       "file": "compilerOptions_2.md",
-      "x": 3220,
+      "x": 3420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1490,7 +1562,7 @@
       "id": "n_package_devdependencies_concurrently",
       "type": "file",
       "file": "concurrently.md",
-      "x": 3420,
+      "x": 3620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1499,7 +1571,7 @@
       "id": "n_ref_concurrently",
       "type": "file",
       "file": "concurrently_1.md",
-      "x": 3620,
+      "x": 3820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1508,7 +1580,16 @@
       "id": "n_tests_unit_tour_test_context",
       "type": "file",
       "file": "context().md",
-      "x": 3820,
+      "x": 4020,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_graph_shape_test_control",
+      "type": "file",
+      "file": "control().md",
+      "x": 4220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1516,9 +1597,9 @@
     {
       "id": "n_tests_unit_interaction_test_control",
       "type": "file",
-      "file": "control().md",
-      "x": 4020,
-      "y": 640,
+      "file": "control()_1.md",
+      "x": 20,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1526,7 +1607,7 @@
       "id": "n_web_src_presentation_copies",
       "type": "file",
       "file": "copies.md",
-      "x": 20,
+      "x": 220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1535,7 +1616,7 @@
       "id": "n_src_api_app_createbody",
       "type": "file",
       "file": "createBody.md",
-      "x": 220,
+      "x": 420,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1544,7 +1625,7 @@
       "id": "n_src_export_obsidian_createobsidianzip",
       "type": "file",
       "file": "createObsidianZip().md",
-      "x": 420,
+      "x": 620,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1553,7 +1634,7 @@
       "id": "n_web_src_api_createscan",
       "type": "file",
       "file": "createScan().md",
-      "x": 620,
+      "x": 820,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1562,7 +1643,7 @@
       "id": "n_package_scripts_demo",
       "type": "file",
       "file": "demo.md",
-      "x": 820,
+      "x": 1020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1571,7 +1652,7 @@
       "id": "n_scripts_demo",
       "type": "file",
       "file": "demo.mjs.md",
-      "x": 1020,
+      "x": 1220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1580,7 +1661,7 @@
       "id": "n_package_dependencies",
       "type": "file",
       "file": "dependencies.md",
-      "x": 1220,
+      "x": 1420,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1589,7 +1670,7 @@
       "id": "n_web_src_presentation_describe",
       "type": "file",
       "file": "describe().md",
-      "x": 1420,
+      "x": 1620,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1598,7 +1679,7 @@
       "id": "n_web_src_presentation_destinationlabel",
       "type": "file",
       "file": "destinationLabel().md",
-      "x": 1620,
+      "x": 1820,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1607,7 +1688,7 @@
       "id": "n_package_scripts_dev",
       "type": "file",
       "file": "dev.md",
-      "x": 1820,
+      "x": 2020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1616,7 +1697,7 @@
       "id": "n_package_scripts_dev_api",
       "type": "file",
       "file": "devapi.md",
-      "x": 2020,
+      "x": 2220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1625,7 +1706,7 @@
       "id": "n_package_scripts_dev_web",
       "type": "file",
       "file": "devweb.md",
-      "x": 2220,
+      "x": 2420,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1634,7 +1715,7 @@
       "id": "n_package_devdependencies",
       "type": "file",
       "file": "devDependencies.md",
-      "x": 2420,
+      "x": 2620,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1643,7 +1724,7 @@
       "id": "n_src_store_disk",
       "type": "file",
       "file": "disk.ts.md",
-      "x": 2620,
+      "x": 2820,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1652,7 +1733,7 @@
       "id": "n_src_store_disk_diskstore",
       "type": "file",
       "file": "diskStore.md",
-      "x": 2820,
+      "x": 3020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1661,7 +1742,7 @@
       "id": "n_src_scan_interaction_displaypath",
       "type": "file",
       "file": "displayPath().md",
-      "x": 3020,
+      "x": 3220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1670,7 +1751,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas_down",
       "type": "file",
       "file": "down().md",
-      "x": 3220,
+      "x": 3420,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1679,7 +1760,7 @@
       "id": "n_web_src_api_downloadvault",
       "type": "file",
       "file": "downloadVault().md",
-      "x": 3420,
+      "x": 3620,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1688,7 +1769,7 @@
       "id": "n_package_engines",
       "type": "file",
       "file": "engines.md",
-      "x": 3620,
+      "x": 3820,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1697,7 +1778,7 @@
       "id": "n_src_scan_evidence_errorevidence",
       "type": "file",
       "file": "errorEvidence().md",
-      "x": 3820,
+      "x": 4020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1706,7 +1787,7 @@
       "id": "n_tsconfig_compileroptions_esmoduleinterop",
       "type": "file",
       "file": "esModuleInterop.md",
-      "x": 4020,
+      "x": 4220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1811,10 +1892,28 @@
       "height": 60
     },
     {
+      "id": "n_src_ai_fix",
+      "type": "file",
+      "file": "fix.ts.md",
+      "x": 2220,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_api_app_fixbody",
+      "type": "file",
+      "file": "fixBody.md",
+      "x": 2420,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_web_src_presentation_flowshort",
       "type": "file",
       "file": "flowShort().md",
-      "x": 2220,
+      "x": 2620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1823,7 +1922,7 @@
       "id": "n_tsconfig_compileroptions_forceconsistentcasinginfilenames",
       "type": "file",
       "file": "forceConsistentCasingInFileNames.md",
-      "x": 2420,
+      "x": 2820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1832,7 +1931,7 @@
       "id": "n_web_src_presentation_friendlyscanerror",
       "type": "file",
       "file": "friendlyScanError().md",
-      "x": 2620,
+      "x": 3020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1841,7 +1940,7 @@
       "id": "n_src_export_obsidian_frontmatter",
       "type": "file",
       "file": "frontmatter().md",
-      "x": 2820,
+      "x": 3220,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1850,7 +1949,7 @@
       "id": "n_web_src_api_getaistatus",
       "type": "file",
       "file": "getAiStatus().md",
-      "x": 3020,
+      "x": 3420,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1859,7 +1958,7 @@
       "id": "n_web_src_api_getsampleinfo",
       "type": "file",
       "file": "getSampleInfo().md",
-      "x": 3220,
+      "x": 3620,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1868,7 +1967,7 @@
       "id": "n_src_api_app_getscan",
       "type": "file",
       "file": "getScan().md",
-      "x": 3420,
+      "x": 3820,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1877,7 +1976,7 @@
       "id": "n_tests_unit_briefing_test_graph",
       "type": "file",
       "file": "graph.md",
-      "x": 3620,
+      "x": 4020,
       "y": 800,
       "width": 180,
       "height": 60
@@ -1886,8 +1985,17 @@
       "id": "n_tests_unit_presentation_test_graph",
       "type": "file",
       "file": "graph().md",
-      "x": 3820,
+      "x": 4220,
       "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_graph_shape_test",
+      "type": "file",
+      "file": "graph-shape.test.ts.md",
+      "x": 20,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1895,8 +2003,8 @@
       "id": "n_tests_unit_graph_test",
       "type": "file",
       "file": "graph.test.ts.md",
-      "x": 4020,
-      "y": 800,
+      "x": 220,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1904,7 +2012,7 @@
       "id": "n_src_ai_briefing_groundsentences",
       "type": "file",
       "file": "groundSentences().md",
-      "x": 20,
+      "x": 420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1913,7 +2021,7 @@
       "id": "n_web_src_presentation_groupissues",
       "type": "file",
       "file": "groupIssues().md",
-      "x": 220,
+      "x": 620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1922,7 +2030,7 @@
       "id": "n_scripts_check_studio_has",
       "type": "file",
       "file": "has().md",
-      "x": 420,
+      "x": 820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1931,7 +2039,7 @@
       "id": "n_web_src_app_hostname",
       "type": "file",
       "file": "hostname().md",
-      "x": 620,
+      "x": 1020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1940,7 +2048,7 @@
       "id": "n_web_src_app_httpurl",
       "type": "file",
       "file": "httpUrl().md",
-      "x": 820,
+      "x": 1220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1949,7 +2057,7 @@
       "id": "n_src_graph_build_graph_id",
       "type": "file",
       "file": "id().md",
-      "x": 1020,
+      "x": 1420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1958,7 +2066,7 @@
       "id": "n_src_scan_url_safety_inv4range",
       "type": "file",
       "file": "inV4Range().md",
-      "x": 1220,
+      "x": 1620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1967,7 +2075,7 @@
       "id": "n_tsconfig_build_include",
       "type": "file",
       "file": "include.md",
-      "x": 1420,
+      "x": 1820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1976,7 +2084,7 @@
       "id": "n_tsconfig_include",
       "type": "file",
       "file": "include_1.md",
-      "x": 1620,
+      "x": 2020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1985,7 +2093,7 @@
       "id": "n_tsconfig_web_include",
       "type": "file",
       "file": "include_2.md",
-      "x": 1820,
+      "x": 2220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -1994,7 +2102,7 @@
       "id": "n_src_scan_worker_initialresult",
       "type": "file",
       "file": "initialResult().md",
-      "x": 2020,
+      "x": 2420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2003,7 +2111,7 @@
       "id": "n_src_scan_worker_inspectcontrols",
       "type": "file",
       "file": "inspectControls().md",
-      "x": 2220,
+      "x": 2620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2012,7 +2120,7 @@
       "id": "n_tests_unit_interaction_test",
       "type": "file",
       "file": "interaction.test.ts.md",
-      "x": 2420,
+      "x": 2820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2021,7 +2129,16 @@
       "id": "n_src_scan_interaction",
       "type": "file",
       "file": "interaction.ts.md",
-      "x": 2620,
+      "x": 3020,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_isgrounded",
+      "type": "file",
+      "file": "isGrounded().md",
+      "x": 3220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2030,7 +2147,7 @@
       "id": "n_web_src_presentation_isissue",
       "type": "file",
       "file": "isIssue().md",
-      "x": 2820,
+      "x": 3420,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2039,7 +2156,7 @@
       "id": "n_src_scan_url_safety_ispublicip",
       "type": "file",
       "file": "isPublicIp().md",
-      "x": 3020,
+      "x": 3620,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2048,7 +2165,7 @@
       "id": "n_web_src_presentation_istestedflow",
       "type": "file",
       "file": "isTestedFlow().md",
-      "x": 3220,
+      "x": 3820,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2057,7 +2174,7 @@
       "id": "n_src_scan_interaction_itemkey",
       "type": "file",
       "file": "itemKey().md",
-      "x": 3420,
+      "x": 4020,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2066,7 +2183,7 @@
       "id": "n_src_api_app_jobs",
       "type": "file",
       "file": "jobs.md",
-      "x": 3620,
+      "x": 4220,
       "y": 880,
       "width": 180,
       "height": 60
@@ -2075,8 +2192,8 @@
       "id": "n_tsconfig_web_compileroptions_jsx",
       "type": "file",
       "file": "jsx.md",
-      "x": 3820,
-      "y": 880,
+      "x": 20,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2084,8 +2201,8 @@
       "id": "n_package_dependencies_jszip",
       "type": "file",
       "file": "jszip.md",
-      "x": 4020,
-      "y": 880,
+      "x": 220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2093,7 +2210,7 @@
       "id": "n_ref_jszip",
       "type": "file",
       "file": "jszip_1.md",
-      "x": 20,
+      "x": 420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2102,7 +2219,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas_keydown",
       "type": "file",
       "file": "keyDown().md",
-      "x": 220,
+      "x": 620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2111,7 +2228,7 @@
       "id": "n_web_src_presentation_kindname",
       "type": "file",
       "file": "kindName().md",
-      "x": 420,
+      "x": 820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2120,7 +2237,7 @@
       "id": "n_web_src_presentation_labelparts",
       "type": "file",
       "file": "labelParts().md",
-      "x": 620,
+      "x": 1020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2129,7 +2246,7 @@
       "id": "n_src_graph_build_graph_laststep",
       "type": "file",
       "file": "lastStep().md",
-      "x": 820,
+      "x": 1220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2138,7 +2255,7 @@
       "id": "n_web_src_presentation_laststepof",
       "type": "file",
       "file": "lastStepOf().md",
-      "x": 1020,
+      "x": 1420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2147,7 +2264,7 @@
       "id": "n_src_api_app_launchscan",
       "type": "file",
       "file": "launchScan().md",
-      "x": 1220,
+      "x": 1620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2156,7 +2273,7 @@
       "id": "n_tsconfig_compileroptions_lib",
       "type": "file",
       "file": "lib.md",
-      "x": 1420,
+      "x": 1820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2165,7 +2282,7 @@
       "id": "n_tsconfig_web_compileroptions_lib",
       "type": "file",
       "file": "lib_1.md",
-      "x": 1620,
+      "x": 2020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2174,7 +2291,7 @@
       "id": "n_src_graph_build_graph_linklabel",
       "type": "file",
       "file": "linkLabel().md",
-      "x": 1820,
+      "x": 2220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2183,7 +2300,7 @@
       "id": "n_web_src_api_listscans",
       "type": "file",
       "file": "listScans().md",
-      "x": 2020,
+      "x": 2420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2192,7 +2309,7 @@
       "id": "n_web_src_app_app_loadhistory",
       "type": "file",
       "file": "loadHistory().md",
-      "x": 2220,
+      "x": 2620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2201,7 +2318,16 @@
       "id": "n_src_scan_interaction_locate",
       "type": "file",
       "file": "locate().md",
-      "x": 2420,
+      "x": 2820,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_api_app_locateindemoshop",
+      "type": "file",
+      "file": "locateInDemoShop().md",
+      "x": 3020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2210,7 +2336,7 @@
       "id": "n_web_src_main",
       "type": "file",
       "file": "main.tsx.md",
-      "x": 2620,
+      "x": 3220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2219,7 +2345,7 @@
       "id": "n_web_src_presentation_matches",
       "type": "file",
       "file": "matches().md",
-      "x": 2820,
+      "x": 3420,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2228,7 +2354,7 @@
       "id": "n_src_export_obsidian_md",
       "type": "file",
       "file": "md().md",
-      "x": 3020,
+      "x": 3620,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2237,7 +2363,7 @@
       "id": "n_src_store_memory",
       "type": "file",
       "file": "memory.ts.md",
-      "x": 3220,
+      "x": 3820,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2246,7 +2372,7 @@
       "id": "n_tsconfig_compileroptions_module",
       "type": "file",
       "file": "module.md",
-      "x": 3420,
+      "x": 4020,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2255,7 +2381,7 @@
       "id": "n_tsconfig_web_compileroptions_module",
       "type": "file",
       "file": "module_1.md",
-      "x": 3620,
+      "x": 4220,
       "y": 960,
       "width": 180,
       "height": 60
@@ -2264,8 +2390,8 @@
       "id": "n_tsconfig_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution.md",
-      "x": 3820,
-      "y": 960,
+      "x": 20,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2273,8 +2399,8 @@
       "id": "n_tsconfig_web_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution_1.md",
-      "x": 4020,
-      "y": 960,
+      "x": 220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2282,7 +2408,7 @@
       "id": "n_package_dependencies_motion",
       "type": "file",
       "file": "motion.md",
-      "x": 20,
+      "x": 420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2291,7 +2417,7 @@
       "id": "n_ref_motion",
       "type": "file",
       "file": "motion_1.md",
-      "x": 220,
+      "x": 620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2300,7 +2426,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas_move",
       "type": "file",
       "file": "move().md",
-      "x": 420,
+      "x": 820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2309,7 +2435,7 @@
       "id": "n_package_name",
       "type": "file",
       "file": "name.md",
-      "x": 620,
+      "x": 1020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2318,7 +2444,7 @@
       "id": "n_web_src_presentation_nextobservedhop",
       "type": "file",
       "file": "nextObservedHop().md",
-      "x": 820,
+      "x": 1220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2327,7 +2453,7 @@
       "id": "n_tsconfig_web_compileroptions_noemit",
       "type": "file",
       "file": "noEmit.md",
-      "x": 1020,
+      "x": 1420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2336,7 +2462,7 @@
       "id": "n_tsconfig_compileroptions_nouncheckedindexedaccess",
       "type": "file",
       "file": "noUncheckedIndexedAccess.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2345,7 +2471,7 @@
       "id": "n_tsconfig_web_compileroptions_nounusedlocals",
       "type": "file",
       "file": "noUnusedLocals.md",
-      "x": 1420,
+      "x": 1820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2354,7 +2480,7 @@
       "id": "n_tsconfig_web_compileroptions_nounusedparameters",
       "type": "file",
       "file": "noUnusedParameters.md",
-      "x": 1620,
+      "x": 2020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2363,7 +2489,7 @@
       "id": "n_package_engines_node",
       "type": "file",
       "file": "node.md",
-      "x": 1820,
+      "x": 2220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2372,7 +2498,7 @@
       "id": "n_web_src_presentation_nodecolor",
       "type": "file",
       "file": "nodeColor().md",
-      "x": 2020,
+      "x": 2420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2381,7 +2507,7 @@
       "id": "n_web_src_presentation_nonpagedestination",
       "type": "file",
       "file": "nonPageDestination().md",
-      "x": 2220,
+      "x": 2620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2390,7 +2516,7 @@
       "id": "n_web_src_app_normalize",
       "type": "file",
       "file": "normalize().md",
-      "x": 2420,
+      "x": 2820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2399,7 +2525,7 @@
       "id": "n_tests_unit_presentation_test_observedgraph",
       "type": "file",
       "file": "observedGraph().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2408,7 +2534,7 @@
       "id": "n_tests_unit_graph_test_observedinteraction",
       "type": "file",
       "file": "observedInteraction().md",
-      "x": 2820,
+      "x": 3220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2417,7 +2543,7 @@
       "id": "n_src_export_obsidian",
       "type": "file",
       "file": "obsidian.ts.md",
-      "x": 3020,
+      "x": 3420,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2426,7 +2552,7 @@
       "id": "n_web_src_selectmenu_selectmenu_onkeydown",
       "type": "file",
       "file": "onKeyDown().md",
-      "x": 3220,
+      "x": 3620,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2435,7 +2561,7 @@
       "id": "n_web_src_selectmenu_selectmenu_openmenu",
       "type": "file",
       "file": "openMenu().md",
-      "x": 3420,
+      "x": 3820,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2444,7 +2570,7 @@
       "id": "n_web_src_app_app_openscan",
       "type": "file",
       "file": "openScan().md",
-      "x": 3620,
+      "x": 4020,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2453,7 +2579,7 @@
       "id": "n_tsconfig_build_compileroptions_outdir",
       "type": "file",
       "file": "outDir.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1040,
       "width": 180,
       "height": 60
@@ -2462,8 +2588,8 @@
       "id": "n_tsconfig_compileroptions_outdir",
       "type": "file",
       "file": "outDir_1.md",
-      "x": 4020,
-      "y": 1040,
+      "x": 20,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2471,7 +2597,7 @@
       "id": "n_web_src_presentation_outcomecaption",
       "type": "file",
       "file": "outcomeCaption().md",
-      "x": 20,
+      "x": 220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2480,7 +2606,7 @@
       "id": "n_web_src_presentation_outcomecaptionof",
       "type": "file",
       "file": "outcomeCaptionOf().md",
-      "x": 220,
+      "x": 420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2489,7 +2615,7 @@
       "id": "n_web_src_presentation_outcomecaptions",
       "type": "file",
       "file": "outcomeCaptions.md",
-      "x": 420,
+      "x": 620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2498,7 +2624,7 @@
       "id": "n_src_scan_interaction_outcomelabel",
       "type": "file",
       "file": "outcomeLabel().md",
-      "x": 620,
+      "x": 820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2507,7 +2633,7 @@
       "id": "n_web_src_presentation_outcomeshorts",
       "type": "file",
       "file": "outcomeShorts.md",
-      "x": 820,
+      "x": 1020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2516,7 +2642,7 @@
       "id": "n_src_graph_build_graph_outcomestatus",
       "type": "file",
       "file": "outcomeStatus().md",
-      "x": 1020,
+      "x": 1220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2525,7 +2651,7 @@
       "id": "n_package",
       "type": "file",
       "file": "package.json.md",
-      "x": 1220,
+      "x": 1420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2534,7 +2660,7 @@
       "id": "n_tests_unit_presentation_test_page",
       "type": "file",
       "file": "page.md",
-      "x": 1420,
+      "x": 1620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2543,7 +2669,7 @@
       "id": "n_web_src_presentation_pagefor",
       "type": "file",
       "file": "pageFor().md",
-      "x": 1620,
+      "x": 1820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2552,7 +2678,16 @@
       "id": "n_src_scan_url_safety_parseipv6",
       "type": "file",
       "file": "parseIpv6().md",
-      "x": 1820,
+      "x": 2020,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_parseproposal",
+      "type": "file",
+      "file": "parseProposal().md",
+      "x": 2220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2561,7 +2696,7 @@
       "id": "n_src_scan_worker_performscan",
       "type": "file",
       "file": "performScan().md",
-      "x": 2020,
+      "x": 2420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2570,7 +2705,7 @@
       "id": "n_tests_unit_persistence_test",
       "type": "file",
       "file": "persistence.test.ts.md",
-      "x": 2220,
+      "x": 2620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2579,7 +2714,7 @@
       "id": "n_package_dependencies_playwright",
       "type": "file",
       "file": "playwright.md",
-      "x": 2420,
+      "x": 2820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2588,7 +2723,7 @@
       "id": "n_ref_playwright",
       "type": "file",
       "file": "playwright_1.md",
-      "x": 2620,
+      "x": 3020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2597,7 +2732,7 @@
       "id": "n_playwright",
       "type": "file",
       "file": "playwright_2.md",
-      "x": 2820,
+      "x": 3220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2606,7 +2741,7 @@
       "id": "n_src_api_server_port",
       "type": "file",
       "file": "port.md",
-      "x": 3020,
+      "x": 3420,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2615,7 +2750,7 @@
       "id": "n_tests_unit_presentation_test",
       "type": "file",
       "file": "presentation.test.ts.md",
-      "x": 3220,
+      "x": 3620,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2624,7 +2759,7 @@
       "id": "n_web_src_presentation",
       "type": "file",
       "file": "presentation.ts.md",
-      "x": 3420,
+      "x": 3820,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2633,7 +2768,7 @@
       "id": "n_src_scan_interaction_priority",
       "type": "file",
       "file": "priority().md",
-      "x": 3620,
+      "x": 4020,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2642,7 +2777,7 @@
       "id": "n_package_private",
       "type": "file",
       "file": "private.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1120,
       "width": 180,
       "height": 60
@@ -2651,8 +2786,17 @@
       "id": "n_scripts_check_studio_problems",
       "type": "file",
       "file": "problems.md",
-      "x": 4020,
-      "y": 1120,
+      "x": 20,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_api_proposefix",
+      "type": "file",
+      "file": "proposeFix().md",
+      "x": 220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2660,7 +2804,7 @@
       "id": "n_src_api_app_pumpqueue",
       "type": "file",
       "file": "pumpQueue().md",
-      "x": 20,
+      "x": 420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2669,7 +2813,7 @@
       "id": "n_src_scan_interaction_pushexclusion",
       "type": "file",
       "file": "pushExclusion().md",
-      "x": 220,
+      "x": 620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2678,7 +2822,7 @@
       "id": "n_package_dependencies_react",
       "type": "file",
       "file": "react.md",
-      "x": 420,
+      "x": 820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2687,7 +2831,7 @@
       "id": "n_ref_react",
       "type": "file",
       "file": "react_1.md",
-      "x": 620,
+      "x": 1020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2696,7 +2840,7 @@
       "id": "n_package_dependencies_react_dom",
       "type": "file",
       "file": "react-dom.md",
-      "x": 820,
+      "x": 1220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2705,7 +2849,7 @@
       "id": "n_ref_react_dom",
       "type": "file",
       "file": "react-dom_1.md",
-      "x": 1020,
+      "x": 1420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2714,7 +2858,16 @@
       "id": "n_src_ai_briefing_readaiconfig",
       "type": "file",
       "file": "readAiConfig().md",
-      "x": 1220,
+      "x": 1620,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_readfixconfig",
+      "type": "file",
+      "file": "readFixConfig().md",
+      "x": 1820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2723,7 +2876,7 @@
       "id": "n_web_src_api_readgraph",
       "type": "file",
       "file": "readGraph().md",
-      "x": 1420,
+      "x": 2020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2732,7 +2885,7 @@
       "id": "n_web_src_api_readscan",
       "type": "file",
       "file": "readScan().md",
-      "x": 1620,
+      "x": 2220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2741,7 +2894,7 @@
       "id": "n_src_scan_evidence_redactmessage",
       "type": "file",
       "file": "redactMessage().md",
-      "x": 1820,
+      "x": 2420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2750,7 +2903,7 @@
       "id": "n_ref_node_child_process",
       "type": "file",
       "file": "ref_node_child_process.md",
-      "x": 2020,
+      "x": 2620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2759,7 +2912,7 @@
       "id": "n_ref_node_crypto",
       "type": "file",
       "file": "ref_node_crypto.md",
-      "x": 2220,
+      "x": 2820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2768,7 +2921,7 @@
       "id": "n_ref_node_dns",
       "type": "file",
       "file": "ref_node_dns.md",
-      "x": 2420,
+      "x": 3020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2777,7 +2930,7 @@
       "id": "n_ref_node_fs",
       "type": "file",
       "file": "ref_node_fs.md",
-      "x": 2620,
+      "x": 3220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2786,7 +2939,7 @@
       "id": "n_ref_node_http",
       "type": "file",
       "file": "ref_node_http.md",
-      "x": 2820,
+      "x": 3420,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2795,7 +2948,7 @@
       "id": "n_ref_node_module",
       "type": "file",
       "file": "ref_node_module.md",
-      "x": 3020,
+      "x": 3620,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2804,7 +2957,7 @@
       "id": "n_ref_node_net",
       "type": "file",
       "file": "ref_node_net.md",
-      "x": 3220,
+      "x": 3820,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2813,7 +2966,7 @@
       "id": "n_ref_node_os",
       "type": "file",
       "file": "ref_node_os.md",
-      "x": 3420,
+      "x": 4020,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2822,7 +2975,7 @@
       "id": "n_ref_node_path",
       "type": "file",
       "file": "ref_node_path.md",
-      "x": 3620,
+      "x": 4220,
       "y": 1200,
       "width": 180,
       "height": 60
@@ -2831,8 +2984,8 @@
       "id": "n_ref_node_url",
       "type": "file",
       "file": "ref_node_url.md",
-      "x": 3820,
-      "y": 1200,
+      "x": 20,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2840,8 +2993,8 @@
       "id": "n_web_src_app_app_repairdemo",
       "type": "file",
       "file": "repairDemo().md",
-      "x": 4020,
-      "y": 1200,
+      "x": 220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2849,7 +3002,7 @@
       "id": "n_web_src_api_request",
       "type": "file",
       "file": "request().md",
-      "x": 20,
+      "x": 420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2858,7 +3011,7 @@
       "id": "n_src_ai_briefing_requestcompletion",
       "type": "file",
       "file": "requestCompletion().md",
-      "x": 220,
+      "x": 620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2867,7 +3020,7 @@
       "id": "n_src_api_app_requestsbyaddress",
       "type": "file",
       "file": "requestsByAddress.md",
-      "x": 420,
+      "x": 820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2876,7 +3029,7 @@
       "id": "n_src_scan_worker_require",
       "type": "file",
       "file": "require.md",
-      "x": 620,
+      "x": 1020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2885,7 +3038,7 @@
       "id": "n_web_src_api_rescan",
       "type": "file",
       "file": "rescan().md",
-      "x": 820,
+      "x": 1220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2894,7 +3047,7 @@
       "id": "n_src_api_app_rescanbody",
       "type": "file",
       "file": "rescanBody.md",
-      "x": 1020,
+      "x": 1420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2903,7 +3056,7 @@
       "id": "n_tsconfig_compileroptions_resolvejsonmodule",
       "type": "file",
       "file": "resolveJsonModule.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2912,7 +3065,7 @@
       "id": "n_scripts_check_studio_results",
       "type": "file",
       "file": "results.md",
-      "x": 1420,
+      "x": 1820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2921,7 +3074,7 @@
       "id": "n_tsconfig_build_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir.md",
-      "x": 1620,
+      "x": 2020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2930,7 +3083,7 @@
       "id": "n_tsconfig_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir_1.md",
-      "x": 1820,
+      "x": 2220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2939,7 +3092,7 @@
       "id": "n_web_src_app_app_run",
       "type": "file",
       "file": "run().md",
-      "x": 2020,
+      "x": 2420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2948,7 +3101,7 @@
       "id": "n_src_scan_worker_runaxe",
       "type": "file",
       "file": "runAxe().md",
-      "x": 2220,
+      "x": 2620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2957,7 +3110,7 @@
       "id": "n_src_scan_interaction_runinteractions",
       "type": "file",
       "file": "runInteractions().md",
-      "x": 2420,
+      "x": 2820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2966,7 +3119,7 @@
       "id": "n_src_scan_interaction_runsingleinteraction",
       "type": "file",
       "file": "runSingleInteraction().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2975,7 +3128,7 @@
       "id": "n_src_scan_url_safety_safedisplayurl",
       "type": "file",
       "file": "safeDisplayUrl().md",
-      "x": 2820,
+      "x": 3220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2984,7 +3137,7 @@
       "id": "n_src_export_obsidian_safename",
       "type": "file",
       "file": "safeName().md",
-      "x": 3020,
+      "x": 3420,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -2993,7 +3146,7 @@
       "id": "n_tests_unit_graph_test_sample",
       "type": "file",
       "file": "sample().md",
-      "x": 3220,
+      "x": 3620,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3002,7 +3155,7 @@
       "id": "n_tests_e2e_sample_scan_test",
       "type": "file",
       "file": "sample-scan.test.ts.md",
-      "x": 3420,
+      "x": 3820,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3011,7 +3164,7 @@
       "id": "n_src_api_app_samplestatebody",
       "type": "file",
       "file": "sampleStateBody.md",
-      "x": 3620,
+      "x": 4020,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3020,7 +3173,7 @@
       "id": "n_tests_unit_briefing_test_scan",
       "type": "file",
       "file": "scan.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1280,
       "width": 180,
       "height": 60
@@ -3029,16 +3182,25 @@
       "id": "n_tests_unit_export_test_scan",
       "type": "file",
       "file": "scan_1.md",
-      "x": 4020,
-      "y": 1280,
+      "x": 20,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_graph_shape_test_scan",
+      "type": "file",
+      "file": "scan().md",
+      "x": 220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
     {
       "id": "n_tests_unit_persistence_test_scan",
       "type": "file",
-      "file": "scan().md",
-      "x": 20,
+      "file": "scan()_1.md",
+      "x": 420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3047,7 +3209,7 @@
       "id": "n_web_src_app_app_scandemo",
       "type": "file",
       "file": "scanDemo().md",
-      "x": 220,
+      "x": 620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3056,7 +3218,7 @@
       "id": "n_src_store_disk_scandirectory",
       "type": "file",
       "file": "scanDirectory().md",
-      "x": 420,
+      "x": 820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3065,7 +3227,7 @@
       "id": "n_src_store_disk_scanpath",
       "type": "file",
       "file": "scanPath().md",
-      "x": 620,
+      "x": 1020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3074,7 +3236,7 @@
       "id": "n_src_store_memory_scanstore",
       "type": "file",
       "file": "scanStore.md",
-      "x": 820,
+      "x": 1220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3083,7 +3245,7 @@
       "id": "n_web_src_presentation_scanstory",
       "type": "file",
       "file": "scanStory()_1.md",
-      "x": 1020,
+      "x": 1420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3092,7 +3254,7 @@
       "id": "n_src_store_memory_scans",
       "type": "file",
       "file": "scans.md",
-      "x": 1220,
+      "x": 1620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3101,7 +3263,7 @@
       "id": "n_web_src_presentation_scenegraph",
       "type": "file",
       "file": "sceneGraph().md",
-      "x": 1420,
+      "x": 1820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3110,7 +3272,7 @@
       "id": "n_src_api_app_schedule",
       "type": "file",
       "file": "schedule().md",
-      "x": 1620,
+      "x": 2020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3119,7 +3281,7 @@
       "id": "n_src_graph_schema",
       "type": "file",
       "file": "schema.ts.md",
-      "x": 1820,
+      "x": 2220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3128,7 +3290,7 @@
       "id": "n_package_scripts",
       "type": "file",
       "file": "scripts.md",
-      "x": 2020,
+      "x": 2420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3137,7 +3299,7 @@
       "id": "n_web_src_app_app_select",
       "type": "file",
       "file": "select().md",
-      "x": 2220,
+      "x": 2620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3146,7 +3308,7 @@
       "id": "n_src_api_server",
       "type": "file",
       "file": "server.ts.md",
-      "x": 2420,
+      "x": 2820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3155,7 +3317,7 @@
       "id": "n_web_src_api_setsamplestate",
       "type": "file",
       "file": "setSampleState().md",
-      "x": 2620,
+      "x": 3020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3164,7 +3326,7 @@
       "id": "n_web_src_presentation_severity",
       "type": "file",
       "file": "severity().md",
-      "x": 2820,
+      "x": 3220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3173,7 +3335,7 @@
       "id": "n_web_src_presentation_shortcutof",
       "type": "file",
       "file": "shortcutOf().md",
-      "x": 3020,
+      "x": 3420,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3182,7 +3344,7 @@
       "id": "n_src_scan_worker_shouldcrawllink",
       "type": "file",
       "file": "shouldCrawlLink().md",
-      "x": 3220,
+      "x": 3620,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3191,7 +3353,7 @@
       "id": "n_tests_unit_presentation_test_site",
       "type": "file",
       "file": "site.md",
-      "x": 3420,
+      "x": 3820,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3200,7 +3362,7 @@
       "id": "n_web_src_app_sitename",
       "type": "file",
       "file": "siteName().md",
-      "x": 3620,
+      "x": 4020,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3209,7 +3371,7 @@
       "id": "n_tsconfig_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck.md",
-      "x": 3820,
+      "x": 4220,
       "y": 1360,
       "width": 180,
       "height": 60
@@ -3218,8 +3380,8 @@
       "id": "n_tsconfig_web_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck_1.md",
-      "x": 4020,
-      "y": 1360,
+      "x": 20,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3227,7 +3389,7 @@
       "id": "n_src_scan_interaction_snapshot",
       "type": "file",
       "file": "snapshot().md",
-      "x": 20,
+      "x": 220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3236,7 +3398,7 @@
       "id": "n_src_scan_evidence_stableid",
       "type": "file",
       "file": "stableId().md",
-      "x": 220,
+      "x": 420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3245,7 +3407,7 @@
       "id": "n_package_scripts_start_api",
       "type": "file",
       "file": "startapi.md",
-      "x": 420,
+      "x": 620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3254,7 +3416,7 @@
       "id": "n_web_src_app_app_starttour",
       "type": "file",
       "file": "startTour().md",
-      "x": 620,
+      "x": 820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3263,7 +3425,7 @@
       "id": "n_web_src_presentation_stepsof",
       "type": "file",
       "file": "stepsOf().md",
-      "x": 820,
+      "x": 1020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3272,7 +3434,7 @@
       "id": "n_scripts_demo_stop",
       "type": "file",
       "file": "stop().md",
-      "x": 1020,
+      "x": 1220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3281,7 +3443,7 @@
       "id": "n_web_src_app_storageget",
       "type": "file",
       "file": "storageGet().md",
-      "x": 1220,
+      "x": 1420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3290,7 +3452,7 @@
       "id": "n_web_src_app_storageset",
       "type": "file",
       "file": "storageSet().md",
-      "x": 1420,
+      "x": 1620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3299,7 +3461,7 @@
       "id": "n_web_src_presentation_str",
       "type": "file",
       "file": "str().md",
-      "x": 1620,
+      "x": 1820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3308,7 +3470,7 @@
       "id": "n_tsconfig_compileroptions_strict",
       "type": "file",
       "file": "strict.md",
-      "x": 1820,
+      "x": 2020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3317,7 +3479,7 @@
       "id": "n_tsconfig_web_compileroptions_strict",
       "type": "file",
       "file": "strict_1.md",
-      "x": 2020,
+      "x": 2220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3326,7 +3488,7 @@
       "id": "n_web_src_app_app_studio",
       "type": "file",
       "file": "studio().md",
-      "x": 2220,
+      "x": 2420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3335,7 +3497,7 @@
       "id": "n_tests_e2e_studio_flow_test",
       "type": "file",
       "file": "studio-flow.test.ts.md",
-      "x": 2420,
+      "x": 2620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3344,7 +3506,7 @@
       "id": "n_web_src_app_app_submit",
       "type": "file",
       "file": "submit().md",
-      "x": 2620,
+      "x": 2820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3353,7 +3515,7 @@
       "id": "n_src_scan_worker_summarizecoverage",
       "type": "file",
       "file": "summarizeCoverage().md",
-      "x": 2820,
+      "x": 3020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3362,7 +3524,7 @@
       "id": "n_src_scan_interaction_summarizeinteraction",
       "type": "file",
       "file": "summarizeInteraction().md",
-      "x": 3020,
+      "x": 3220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3371,7 +3533,7 @@
       "id": "n_src_store_disk_summarizescan",
       "type": "file",
       "file": "summarizeScan().md",
-      "x": 3220,
+      "x": 3420,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3380,7 +3542,7 @@
       "id": "n_tsconfig_compileroptions_target",
       "type": "file",
       "file": "target.md",
-      "x": 3420,
+      "x": 3620,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3389,7 +3551,7 @@
       "id": "n_tsconfig_web_compileroptions_target",
       "type": "file",
       "file": "target_1.md",
-      "x": 3620,
+      "x": 3820,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3398,7 +3560,7 @@
       "id": "n_package_scripts_test",
       "type": "file",
       "file": "test.md",
-      "x": 3820,
+      "x": 4020,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3407,7 +3569,7 @@
       "id": "n_package_scripts_test_watch",
       "type": "file",
       "file": "testwatch.md",
-      "x": 4020,
+      "x": 4220,
       "y": 1440,
       "width": 180,
       "height": 60
@@ -3605,8 +3767,8 @@
       "id": "n_src_scan_url_safety",
       "type": "file",
       "file": "url-safety.ts.md",
-      "x": 20,
-      "y": 1600,
+      "x": 4220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3614,6 +3776,15 @@
       "id": "n_src_ai_briefing_userprompt",
       "type": "file",
       "file": "userPrompt().md",
+      "x": 20,
+      "y": 1600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_userprompt",
+      "type": "file",
+      "file": "userPrompt()_1.md",
       "x": 220,
       "y": 1600,
       "width": 180,
@@ -3794,6 +3965,15 @@
       "id": "n_web_src_api_writebriefing",
       "type": "file",
       "file": "writeBriefing()_1.md",
+      "x": 4220,
+      "y": 1600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_fix_writefixproposal",
+      "type": "file",
+      "file": "writeFixProposal().md",
       "x": 20,
       "y": 1680,
       "width": 180,
@@ -4336,6 +4516,12 @@
       "label": "imports_from [EXTRACTED]"
     },
     {
+      "id": "e_tests_unit_graph_shape_test_ref_vitest",
+      "fromNode": "n_tests_unit_graph_shape_test",
+      "toNode": "n_ref_vitest",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
       "id": "e_tests_unit_graph_test_ref_vitest",
       "fromNode": "n_tests_unit_graph_test",
       "toNode": "n_ref_vitest",
@@ -4570,6 +4756,18 @@
       "label": "contains [EXTRACTED]"
     },
     {
+      "id": "e_src_ai_fix_src_ai_briefing",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_briefing",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing",
+      "label": "re_exports [EXTRACTED]"
+    },
+    {
       "id": "e_src_api_app_src_ai_briefing",
       "fromNode": "n_src_api_app",
       "toNode": "n_src_ai_briefing",
@@ -4580,6 +4778,18 @@
       "fromNode": "n_tests_unit_briefing_test",
       "toNode": "n_src_ai_briefing",
       "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_briefing_aiconfig",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing_aiconfig",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_fixconfig_src_ai_briefing_aiconfig",
+      "fromNode": "n_src_ai_fix_fixconfig",
+      "toNode": "n_src_ai_briefing_aiconfig",
+      "label": "inherits [EXTRACTED]"
     },
     {
       "id": "e_src_ai_briefing_briefingerror_src_ai_briefing_briefingerror_constructor",
@@ -4600,16 +4810,34 @@
       "label": "calls [EXTRACTED]"
     },
     {
+      "id": "e_src_ai_fix_src_ai_briefing_briefingerror",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing_briefingerror",
+      "label": "imports [EXTRACTED]"
+    },
+    {
       "id": "e_src_api_app_src_ai_briefing_briefingerror",
       "fromNode": "n_src_api_app",
       "toNode": "n_src_ai_briefing_briefingerror",
       "label": "imports [EXTRACTED]"
     },
     {
+      "id": "e_src_ai_fix_writefixproposal_src_ai_briefing_briefingerror",
+      "fromNode": "n_src_ai_fix_writefixproposal",
+      "toNode": "n_src_ai_briefing_briefingerror",
+      "label": "calls [EXTRACTED]"
+    },
+    {
       "id": "e_src_ai_briefing_aistatus_src_ai_briefing_readaiconfig",
       "fromNode": "n_src_ai_briefing_aistatus",
       "toNode": "n_src_ai_briefing_readaiconfig",
       "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_briefing_readaiconfig",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing_readaiconfig",
+      "label": "imports [EXTRACTED]"
     },
     {
       "id": "e_src_api_app_src_ai_briefing_readaiconfig",
@@ -4624,10 +4852,22 @@
       "label": "imports [EXTRACTED]"
     },
     {
+      "id": "e_src_ai_fix_readfixconfig_src_ai_briefing_readaiconfig",
+      "fromNode": "n_src_ai_fix_readfixconfig",
+      "toNode": "n_src_ai_briefing_readaiconfig",
+      "label": "calls [EXTRACTED]"
+    },
+    {
       "id": "e_src_api_app_buildapp_src_ai_briefing_readaiconfig",
       "fromNode": "n_src_api_app_buildapp",
       "toNode": "n_src_ai_briefing_readaiconfig",
       "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_briefing_aistatus",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_briefing_aistatus",
+      "label": "imports [EXTRACTED]"
     },
     {
       "id": "e_src_api_app_src_ai_briefing_aistatus",
@@ -4693,6 +4933,120 @@
       "id": "e_src_api_app_buildapp_src_ai_briefing_writebriefing",
       "fromNode": "n_src_api_app_buildapp",
       "toNode": "n_src_ai_briefing_writebriefing",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_graph_schema",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_graph_schema",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_graph_schema_scanresult",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_graph_schema_scanresult",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_graph_schema_sitegraph",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_graph_schema_sitegraph",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_fixproposal",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_fixproposal",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_fixconfig",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_fixconfig",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_readfixconfig",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_readfixconfig",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_system_prompt",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_system_prompt",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_userprompt",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_userprompt",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_parseproposal",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_parseproposal",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_isgrounded",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_isgrounded",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_src_ai_fix_writefixproposal",
+      "fromNode": "n_src_ai_fix",
+      "toNode": "n_src_ai_fix_writefixproposal",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_src_ai_fix",
+      "fromNode": "n_src_api_app",
+      "toNode": "n_src_ai_fix",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_src_ai_fix_readfixconfig",
+      "fromNode": "n_src_api_app",
+      "toNode": "n_src_ai_fix_readfixconfig",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_buildapp_src_ai_fix_readfixconfig",
+      "fromNode": "n_src_api_app_buildapp",
+      "toNode": "n_src_ai_fix_readfixconfig",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_userprompt",
+      "fromNode": "n_src_ai_fix_writefixproposal",
+      "toNode": "n_src_ai_fix_userprompt",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_parseproposal",
+      "fromNode": "n_src_ai_fix_writefixproposal",
+      "toNode": "n_src_ai_fix_parseproposal",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_isgrounded",
+      "fromNode": "n_src_ai_fix_writefixproposal",
+      "toNode": "n_src_ai_fix_isgrounded",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_src_ai_fix_writefixproposal",
+      "fromNode": "n_src_api_app",
+      "toNode": "n_src_ai_fix_writefixproposal",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_buildapp_src_ai_fix_writefixproposal",
+      "fromNode": "n_src_api_app_buildapp",
+      "toNode": "n_src_ai_fix_writefixproposal",
       "label": "calls [EXTRACTED]"
     },
     {
@@ -4844,180 +5198,6 @@
       "fromNode": "n_src_api_app",
       "toNode": "n_src_api_app_rescanbody",
       "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_samplestatebody",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_samplestatebody",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_allowedorigins",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_allowedorigins",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_jobs",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_jobs",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_requestsbyaddress",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_requestsbyaddress",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_schedule",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_schedule",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_pumpqueue",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_pumpqueue",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_canstartscan",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_canstartscan",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_launchscan",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_launchscan",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_getscan",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_getscan",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_appoptions",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_appoptions",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_api_app_buildapp",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_api_app_buildapp",
-      "label": "contains [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_server_src_api_app",
-      "fromNode": "n_src_api_server",
-      "toNode": "n_src_api_app",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_api_app_test_src_api_app",
-      "fromNode": "n_tests_api_app_test",
-      "toNode": "n_src_api_app",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_e2e_sample_scan_test_src_api_app",
-      "fromNode": "n_tests_e2e_sample_scan_test",
-      "toNode": "n_src_api_app",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_e2e_studio_flow_test_src_api_app",
-      "fromNode": "n_tests_e2e_studio_flow_test",
-      "toNode": "n_src_api_app",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_schedule_src_api_app_pumpqueue",
-      "fromNode": "n_src_api_app_schedule",
-      "toNode": "n_src_api_app_pumpqueue",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_launchscan_src_api_app_schedule",
-      "fromNode": "n_src_api_app_launchscan",
-      "toNode": "n_src_api_app_schedule",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_pumpqueue_src_api_app_pumpqueue",
-      "fromNode": "n_src_api_app_pumpqueue",
-      "toNode": "n_src_api_app_pumpqueue",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_api_app_canstartscan",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_api_app_canstartscan",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_api_app_launchscan",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_api_app_launchscan",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_launchscan_src_scan_url_safety_safedisplayurl",
-      "fromNode": "n_src_api_app_launchscan",
-      "toNode": "n_src_scan_url_safety_safedisplayurl",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_launchscan_src_scan_worker_performscan",
-      "fromNode": "n_src_api_app_launchscan",
-      "toNode": "n_src_scan_worker_performscan",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_api_app_getscan",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_api_app_getscan",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_server_src_api_app_buildapp",
-      "fromNode": "n_src_api_server",
-      "toNode": "n_src_api_app_buildapp",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_api_app_test_src_api_app_buildapp",
-      "fromNode": "n_tests_api_app_test",
-      "toNode": "n_src_api_app_buildapp",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_e2e_sample_scan_test_src_api_app_buildapp",
-      "fromNode": "n_tests_e2e_sample_scan_test",
-      "toNode": "n_src_api_app_buildapp",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_e2e_studio_flow_test_src_api_app_buildapp",
-      "fromNode": "n_tests_e2e_studio_flow_test",
-      "toNode": "n_src_api_app_buildapp",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_scan_url_safety_assertsafeurl",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_scan_url_safety_assertsafeurl",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_graph_compare_comparescans",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_graph_compare_comparescans",
-      "label": "calls [EXTRACTED]"
     }
   ]
 }
