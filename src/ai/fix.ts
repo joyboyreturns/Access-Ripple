@@ -117,22 +117,34 @@ export async function writeFixProposal(scan: ScanResult, graph: SiteGraph, nodeI
         ],
       };
       if (config.reasoningEffort) body.reasoning = { effort: config.reasoningEffort };
-      const response = await fetch(`${config.baseUrl}/chat/completions`, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: { 'content-type': 'application/json', authorization: `Bearer ${config.key}`, 'HTTP-Referer': config.siteUrl, 'X-Title': 'AccessRipple' },
-        body: JSON.stringify(body),
-      }).finally(() => clearTimeout(timer));
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new BriefingError(`The model provider answered ${response.status}. ${text.slice(0, 140)}`.trim(), 'REQUEST_FAILED');
+      try {
+        // The timer covers reading the answer, not only the headers. Clearing
+        // it as soon as the response arrives would leave a slow body waiting
+        // with nothing to interrupt it.
+        const response = await fetch(`${config.baseUrl}/chat/completions`, {
+          method: 'POST',
+          signal: controller.signal,
+          headers: { 'content-type': 'application/json', authorization: `Bearer ${config.key}`, 'HTTP-Referer': config.siteUrl, 'X-Title': 'AccessRipple' },
+          body: JSON.stringify(body),
+        });
+        const answer = await response.text();
+        if (!response.ok) {
+          throw new BriefingError(`The model provider answered ${response.status}. ${answer.slice(0, 140)}`.trim(), 'REQUEST_FAILED');
+        }
+        let payload: { choices?: Array<{ message?: { content?: string | null } }> };
+        try {
+          payload = JSON.parse(answer) as typeof payload;
+        } catch {
+          throw new BriefingError('The model answered with something that is not JSON.', 'NO_GROUNDED_SENTENCE');
+        }
+        const content = payload.choices?.[0]?.message?.content ?? '';
+        const proposal = parseProposal(content);
+        if (!proposal) throw new BriefingError('The model did not return a usable change.', 'NO_GROUNDED_SENTENCE');
+        if (!isGrounded(proposal, snippet, targets)) throw new BriefingError('The proposed change did not match the recorded markup.', 'NO_GROUNDED_SENTENCE');
+        return { nodeId, ruleId, ...proposal, location: locate(snippet), model };
+      } finally {
+        clearTimeout(timer);
       }
-      const payload = await response.json() as { choices?: Array<{ message?: { content?: string | null } }> };
-      const content = payload.choices?.[0]?.message?.content ?? '';
-      const proposal = parseProposal(content);
-      if (!proposal) throw new BriefingError('The model did not return a usable change.', 'NO_GROUNDED_SENTENCE');
-      if (!isGrounded(proposal, snippet, targets)) throw new BriefingError('The proposed change did not match the recorded markup.', 'NO_GROUNDED_SENTENCE');
-      return { nodeId, ruleId, ...proposal, location: locate(snippet), model };
     } catch (error) {
       lastError = error instanceof BriefingError ? error : new BriefingError(error instanceof Error ? error.message : String(error), 'REQUEST_FAILED');
     }

@@ -13,6 +13,7 @@ import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/brie
 import { readFixConfig, writeFixProposal } from '../ai/fix.js';
 import { appliedPatches, applyPatch, clearPatches, isDemoFixture, patchedContent } from '../sample/sandbox.js';
 import { checkPredictions, issuesOnPage, writeRepairContract, type RepairContract } from '../ai/contract.js';
+import { contractStore } from '../store/contracts.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
@@ -27,10 +28,14 @@ const createBody = z.union([
 const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
 const fixBody = z.object({ nodeId: z.string().min(1).max(200) }).strict();
 // The contracts a model committed to, kept per scan and finding so the
-// rescan can check them.
-const contracts = new Map<string, RepairContract>();
-const lastProposals = new Map<string, { summary: string; before: string; after: string }>();
+// rescan can check them. They are written to this computer as well, so a
+// restart does not lose a prediction that is waiting to be checked.
 const contractKey = (scanId: string, nodeId: string) => `${scanId}:${nodeId}`;
+const lastProposals = new Map<string, { summary: string; before: string; after: string }>();
+const contractsFor = async (scanId: string): Promise<RepairContract[]> => {
+  const all = await contractStore.all();
+  return Object.entries(all).filter(([key]) => key.startsWith(`${scanId}:`)).map(([, contract]) => contract);
+};
 const applyBody = z.object({ file: z.string().min(1).max(200), before: z.string().min(1).max(4000), after: z.string().min(1).max(4000), summary: z.string().max(300).optional() }).strict();
 const sampleStateBody = z.object({ variant: z.enum(['before', 'after']) }).strict();
 const DEFAULT_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
@@ -178,9 +183,15 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       if (!current?.graph || !previous?.graph) continue;
       if (current.canonicalOrigin !== previous.canonicalOrigin) continue;
       const comparison = compareScans(previous, current);
-      // A comparison that actually shows a repair is the one worth opening.
-      if (comparison.resolved.length) return { comparison, currentScanId: current.id, previousScanId: previous.id };
-      fallback = { comparison, currentScanId: current.id, previousScanId: previous.id };
+      // Any prediction the model made about the earlier scan is checked here
+      // too, so the proof carries the verdicts as well as the counts.
+      const predictions = (await contractsFor(previous.id)).map((contract) => checkPredictions(contract, previous, current)).flat();
+      const withPredictions = { ...comparison, predictions };
+      // A comparison that actually shows a repair is the one worth opening,
+      // and one that carries the model's own verdict is worth more still.
+      if (comparison.resolved.length && predictions.length) return { comparison: withPredictions, currentScanId: current.id, previousScanId: previous.id };
+      if (comparison.resolved.length) return { comparison: withPredictions, currentScanId: current.id, previousScanId: previous.id };
+      fallback = { comparison: withPredictions, currentScanId: current.id, previousScanId: previous.id };
     }
     if (fallback) return fallback;
     return reply.code(404).send({ error: { code: 'NO_PROOF_YET', message: 'No repair has been compared on this computer yet.', retryable: false } });
@@ -340,7 +351,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (!proposal) return reply.code(409).send({ error: { code: 'NO_PROPOSAL', message: 'Ask for a proposed change first, so the prediction is about it.', retryable: true } });
     try {
       const contract = await writeRepairContract(proposal, body.data.nodeId, issuesOnPage(scan.graph, target.pageId), { model: config.model, fallbackModels: config.fallbackModels, key: config.key, baseUrl: config.baseUrl });
-      contracts.set(contractKey(request.params.scanId, body.data.nodeId), contract);
+      await contractStore.set(contractKey(request.params.scanId, body.data.nodeId), contract);
       return contract;
     } catch (error) {
       request.log.warn({ err: { code: error instanceof Error ? error.name : 'unknown' } }, 'repair contract failed');
@@ -376,10 +387,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const comparison = compareScans(previous, current);
     // Any prediction the model made about this scan is now checked against
     // what the browser actually recorded.
-    const checked = [...contracts.entries()]
-      .filter(([key]) => key.startsWith(`${previous.id}:`))
-      .map(([, contract]) => checkPredictions(contract, previous, current))
-      .flat();
+    const checked = (await contractsFor(previous.id)).map((contract) => checkPredictions(contract, previous, current)).flat();
     return { ...comparison, predictions: checked };
   });
 

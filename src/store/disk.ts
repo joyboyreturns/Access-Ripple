@@ -78,7 +78,16 @@ export const diskStore = {
   },
   async prune(): Promise<void> {
     const items = await allSummaries();
-    for (const item of items.slice(MAX_PERSISTED)) {
+    const keep = new Set(items.slice(0, MAX_PERSISTED).map((item) => item.id));
+    // A comparison needs both scans. The earlier partner of a scan that is
+    // kept is kept too, or the before-and-after proof can never be made
+    // again for a repair that was recorded.
+    for (const item of items.slice(0, MAX_PERSISTED)) {
+      const scan = await this.load(item.id);
+      if (scan?.previousScanId) keep.add(scan.previousScanId);
+    }
+    for (const item of items) {
+      if (keep.has(item.id)) continue;
       const path = scanPath(item.id);
       if (path) await unlink(path).catch(() => undefined);
     }

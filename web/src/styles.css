@@ -270,7 +270,7 @@ body{min-width:320px}
 .fix-diff{border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--surface)}
 .fix-line{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;font-size:11.5px;line-height:1.55}
 .fix-line+.fix-line{border-top:1px solid var(--line)}
-.fix-line code{word-break:break-all;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.fix-line code{word-break:normal;overflow-wrap:anywhere;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .fix-line.before{background:color-mix(in srgb,#f3a5a7 7%,transparent)}
 .fix-line.after{background:color-mix(in srgb,#87be9b 8%,transparent)}
 .fix-line.after code{color:var(--text)}
