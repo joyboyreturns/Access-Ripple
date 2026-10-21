@@ -24,6 +24,6 @@ tags:
 - [[nodeColor()]] - `calls` [EXTRACTED]
 - [[pageFor()]] - `calls` [EXTRACTED]
 - [[sceneGraph()]] - `calls` [EXTRACTED]
-- [[up()]] - `contains` [EXTRACTED]
+- [[up()_1]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None
