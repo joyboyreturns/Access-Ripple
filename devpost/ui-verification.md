@@ -237,3 +237,42 @@ A senior review was asked to read the project and say what a judge would find im
 - **The scanner did not serve the built studio**, so `npm start` gave an API with no interface, and the origin check blocked the studio's own assets with a 403. Both are fixed, and `npm start` now gives a working application on one address.
 
 The browser sweep is now 37 checks that use the bundled Chromium, skip the model beats when none is configured, and fail the process when something is wrong. A rehearsal script walks the whole recording route and prints how long each beat takes. The suite is 111 tests across 18 files.
+
+## A second review, four readers, and what it changed
+
+Four readers looked at the project with different questions: what a judge sees in the first eight seconds, whether the AI is real, what a hostile judge would attack, and what the interface looks like on camera. They did not agree with each other on everything, and they found the same two big things.
+
+**The map was the hero and it was below the fold.** The studio read as a stack of cards — headline, URL bar, metrics, story, AI card, repair lab, coverage — with the workspace at the bottom. A judge given a second saw a wall of small text and no map at all. The workspace now sits directly under the metrics, and the studio's own headline and setup notes step aside once there is a scan. The map is on screen at 453 pixels from the top on a 1440×900 display, with no scrolling.
+
+**The AI produced text beside the evidence rather than acting on it.** The model proposed a change and the tool applied it, but nobody ever checked what the model thought the change would do. The model is now asked, before the change is applied, to commit in writing to what it will and will not fix, and the browser checks those commitments against the rescan. On the demo shop the model commits to three things — the missing description will be gone, the 404 will still be there, the other 404 will still be there — and the rescan confirms all three. A prediction that failed is reported as failed, and a prediction about something that was not checked again is unknown, never a pass.
+
+### The claims the code did not support
+
+- The demo scan set the shop to its broken state but never dropped a change accepted earlier, so a second take started with the previous take's repair already applied.
+- The scanner exempted document requests from the read-only rule, so a page that submitted a form by itself could still send data.
+- A page whose accessibility checks could not run stayed "complete", so the findings on it looked like they had gone away.
+- The proof said "Still observed" and then described the same findings as "no longer recorded", and dropped the caveat when nothing remained.
+- A flow that was inferred was called an observed journey.
+- The tour said the journey was the path the browser took. Each step really happened; how they join is the tool's reading of them.
+- The briefing was never actually asked to name what the scan did not check, although the README said it was.
+- The saved history could delete the earlier half of a comparison, which would make the proof impossible to show again.
+- The timeout on a model request covered only the response headers, so a slow body could wait with nothing to interrupt it.
+- The repair lab offered "Break the demo shop again" twice.
+
+### On camera
+
+- The journey was drawn on a mechanical sawtooth, so it did not read as a path through a site. The steps follow one shallow arc when there is room, and are staggered only when they would collide.
+- The travelling pulse followed a straight line between points while the route was drawn as a curve, so it did not travel the route on screen.
+- The step numbers were floating text that overlapped the edges. They are badges now.
+- The legend said a dashed line meant "action not tested" while observed edges were also dashed. The legend matches the drawing now.
+- The type that carries evidence was sized for a desk: map labels at 13 pixels, evidence chips at 10, the diff at 11.5. All of it is sized for a compressed video frame.
+- The proof led with a sentence of counts. It leads with tiles now.
+- The landing page explained the tool in its fourth paragraph. The first sentence says what it does.
+
+### What a judge will find
+
+- `npm run demo` used a macOS-only command to open a browser. It works on any operating system now and prints the address when it cannot.
+- The sweep needed a system Chrome and a live model. It uses the bundled Chromium, skips the model beats when none is configured, and fails the process when something is wrong.
+- The rehearsal looked for a panel that no longer existed and never walked the prediction beat. It does both now.
+
+The suite is 124 tests across 19 files, the browser sweep is 45 checks, and the rehearsal walks the whole route and reports how long each beat takes.
