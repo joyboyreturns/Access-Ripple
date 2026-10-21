@@ -15,7 +15,9 @@ tags:
 - [[dot-constructor()]] - `method` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[briefing.ts]] - `contains` [EXTRACTED]
+- [[fix.ts]] - `imports` [EXTRACTED]
 - [[requestCompletion()]] - `calls` [EXTRACTED]
 - [[writeBriefing()]] - `calls` [EXTRACTED]
+- [[writeFixProposal()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

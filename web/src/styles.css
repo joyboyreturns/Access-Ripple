@@ -245,3 +245,8 @@ body{min-width:320px}
 .fix-actions .button{font-size:12px}
 .hero-position{max-width:52ch;margin:14px 0 0;font-size:14px;line-height:1.7;color:var(--subtle);letter-spacing:-.005em}
 @media(max-width:650px){.hero-position{font-size:13px;max-width:44ch}}
+/* The result count sits on the raised search field, where --subtle is just under 4.5:1. */
+.inventory-search>span{color:var(--muted)}
+/* The small line under a row title is also on the raised surface of a selected row. */
+.inventory-row small{color:var(--muted)}
+.fix-honest{color:var(--muted)}

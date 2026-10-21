@@ -12,6 +12,8 @@ tags:
 # AiConfig
 
 ## Connections
+- [[FixConfig]] - `inherits` [EXTRACTED]
 - [[briefing.ts]] - `contains` [EXTRACTED]
+- [[fix.ts]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

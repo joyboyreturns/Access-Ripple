@@ -9,7 +9,7 @@ tags:
   - community/Community_None
 ---
 
-# Optional AI briefing
+# Optional AI briefing and proposed changes
 
 ## Connections
 - [[AccessRipple]] - `contains` [EXTRACTED]

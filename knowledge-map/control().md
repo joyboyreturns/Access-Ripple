@@ -1,5 +1,5 @@
 ---
-source_file: "tests/unit/interaction.test.ts"
+source_file: "tests/unit/graph-shape.test.ts"
 type: "code"
 community: "Community None"
 location: "L5"
@@ -12,8 +12,6 @@ tags:
 # control()
 
 ## Connections
-- [[graph()]] - `indirect_call` [INFERRED]
-- [[interaction.test.ts]] - `contains` [EXTRACTED]
-- [[observedGraph()]] - `indirect_call` [INFERRED]
+- [[graph-shape.test.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

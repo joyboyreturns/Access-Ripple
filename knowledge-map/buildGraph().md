@@ -15,6 +15,7 @@ tags:
 - [[build-graph.ts]] - `contains` [EXTRACTED]
 - [[exclusionLabel()]] - `calls` [EXTRACTED]
 - [[export.test.ts]] - `imports` [EXTRACTED]
+- [[graph-shape.test.ts]] - `imports` [EXTRACTED]
 - [[graph.test.ts]] - `imports` [EXTRACTED]
 - [[lastStep()]] - `calls` [EXTRACTED]
 - [[linkLabel()]] - `calls` [EXTRACTED]

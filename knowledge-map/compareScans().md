@@ -2,7 +2,7 @@
 source_file: "src/graph/compare.ts"
 type: "code"
 community: "Community None"
-location: "L12"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED

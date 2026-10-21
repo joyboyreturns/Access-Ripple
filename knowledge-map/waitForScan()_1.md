@@ -2,7 +2,7 @@
 source_file: "web/src/api.ts"
 type: "code"
 community: "Community None"
-location: "L68"
+location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED

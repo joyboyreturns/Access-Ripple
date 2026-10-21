@@ -20,6 +20,7 @@ tags:
 - [[getAiStatus()]] - `calls` [EXTRACTED]
 - [[getSampleInfo()]] - `calls` [EXTRACTED]
 - [[listScans()]] - `calls` [EXTRACTED]
+- [[proposeFix()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]

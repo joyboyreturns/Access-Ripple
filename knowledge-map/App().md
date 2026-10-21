@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L52"
+location: "L94"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -15,13 +15,16 @@ tags:
 - [[AiBriefing()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]
+- [[FixProposalCard()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[Icon()]] - `calls` [EXTRACTED]
 - [[Landing()]] - `calls` [EXTRACTED]
 - [[Mark()]] - `calls` [EXTRACTED]
+- [[ProofView()]] - `calls` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[accept()]] - `contains` [EXTRACTED]
+- [[askForProposal()]] - `contains` [EXTRACTED]
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
@@ -45,6 +48,7 @@ tags:
 - [[nodeColor()]] - `calls` [EXTRACTED]
 - [[openScan()]] - `contains` [EXTRACTED]
 - [[pageFor()]] - `calls` [EXTRACTED]
+- [[proposeFix()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
 - [[repairDemo()]] - `contains` [EXTRACTED]

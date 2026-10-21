@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L89"
+location: "L134"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[App()]] - `contains` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[groupIssues()]] - `calls` [EXTRACTED]
 - [[isIssue()]] - `indirect_call` [INFERRED]
 - [[openScan()]] - `calls` [EXTRACTED]

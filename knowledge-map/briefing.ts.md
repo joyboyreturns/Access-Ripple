@@ -24,6 +24,7 @@ tags:
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.test.ts]] - `imports_from` [EXTRACTED]
 - [[buildDigest()]] - `contains` [EXTRACTED]
+- [[fix.ts]] - `imports_from` [EXTRACTED]
 - [[groundSentences()]] - `contains` [EXTRACTED]
 - [[readAiConfig()]] - `contains` [EXTRACTED]
 - [[requestCompletion()]] - `contains` [EXTRACTED]
