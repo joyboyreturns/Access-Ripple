@@ -107,3 +107,13 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Show the citations as buttons that open the evidence the sentence came from.
 - [x] Cover the digest, the grounding rules, and the whole request path with unit and API tests against a local mock provider.
 - [ ] Learner records the AI beat with a real key configured, or decides to skip it.
+
+### A brighter map and a real model
+- [x] Rebuild the map so it reads as a space: colour-matched blooms, a pulse on the selected point, an aurora background with a vignette, flowing observed relationships, and floating label cards.
+- [x] Move the site label under its node so it stops covering a neighbouring point.
+- [x] Fix the grounding for real models: fold a citation back into the sentence it follows, ask for a low reasoning effort, and raise the token budget.
+- [x] Try a chain of free models in order, because free-tier capacity is shared and one model is not dependable.
+- [x] Report what the scan did not check: the coverage gaps enter the digest, the model is asked to name at least one, and the gaps show as dashed chips that are not links.
+- [x] Keep a browser sweep of the whole studio as `npm run check:studio` (30 checks), and add an end-to-end test for the demo path and the graph's internal consistency.
+- [x] Keep the suite green: 83 tests across 12 files, typecheck, production build, axe-core 0 violations.
+- [ ] Learner reads the real briefing and decides whether the model beat belongs in the recording.

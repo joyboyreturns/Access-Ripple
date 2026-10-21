@@ -93,7 +93,7 @@ describe('local scan API', () => {
       expect(grounded.json().source).toBe('ai');
       expect(grounded.json().text).toContain('no text alternative');
       expect(grounded.json().text).not.toContain('[');
-      expect(grounded.json().citations).toEqual([{ id: 'finding:1', label: 'Images must have alternative text' }]);
+      expect(grounded.json().citations).toEqual([{ id: 'finding:1', label: 'Images must have alternative text', gap: false }]);
 
       answer = 'The checkout image has no text alternative [finding:made-up]. The site is unusable for everyone [finding:also-made-up].';
       const invented = await app.inject({ method: 'POST', url: `/api/scans/${scanId}/briefing`, payload: {} });
