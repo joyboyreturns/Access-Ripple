@@ -35,3 +35,6 @@ test-results/
 
 # Local scan history written by the scanner
 .data/
+
+# Throwaway scripts written while working
+*.tmp.mjs
