@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "src/graph/schema.ts": {
-    "mtime": 1792559033.4259276,
-    "seen": 1792561016.261188,
-    "ast_hash": "1d93f8a2ee6ea7bf9a1e292e5e1f21dc",
+    "mtime": 1792563200.696596,
+    "seen": 1792563809.573094,
+    "ast_hash": "ffdd334f821d5389b183ea9d55ecb83a",
     "semantic_hash": ""
   },
   "src/scan/url-safety.ts": {
@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "src/scan/worker.ts": {
-    "mtime": 1792559910.238844,
-    "seen": 1792561016.261201,
-    "ast_hash": "1eecf64ed9aa1c9cbf6e5009fd163b6e",
+    "mtime": 1792563603.3950737,
+    "seen": 1792563809.573101,
+    "ast_hash": "80e82c7697a72fbc686f2e4cfc32c1aa",
     "semantic_hash": ""
   },
   "src/store/memory.ts": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792560766.2642138,
-    "seen": 1792561016.261267,
-    "ast_hash": "ed0181c9305010d157ff336104a1b32d",
+    "mtime": 1792563129.655795,
+    "seen": 1792563809.573153,
+    "ast_hash": "cee1623b5b6587ed2b174240d159ccdb",
     "semantic_hash": ""
   },
   "src/sample/site/checkout.html": {
@@ -156,9 +156,9 @@
     "semantic_hash": ""
   },
   "web/src/App.tsx": {
-    "mtime": 1792561260.0370407,
-    "seen": 1792561484.867502,
-    "ast_hash": "acdc6ae1d94bbe1a849637df00150059",
+    "mtime": 1792563218.849795,
+    "seen": 1792563809.5731368,
+    "ast_hash": "04e4a3367ef3a0eb32797fa71a3320a5",
     "semantic_hash": ""
   },
   "web/src/GraphCanvas.tsx": {
@@ -192,15 +192,15 @@
     "semantic_hash": ""
   },
   "web/src/presentation.ts": {
-    "mtime": 1792560105.178918,
-    "seen": 1792561016.2612622,
-    "ast_hash": "abfa34d10f29fd83c9e4806a8e80e053",
+    "mtime": 1792562348.982029,
+    "seen": 1792563809.573149,
+    "ast_hash": "6b0f908e2f638177c18a4d064be1a96b",
     "semantic_hash": ""
   },
   "web/src/types.ts": {
-    "mtime": 1792559255.3324828,
-    "seen": 1792561016.2612648,
-    "ast_hash": "613bebb1e81a08b043828f111655b3e0",
+    "mtime": 1792563218.9555333,
+    "seen": 1792563809.573152,
+    "ast_hash": "0e14762a03f04eae743073aded40bd95",
     "semantic_hash": ""
   },
   "web/index.html": {
@@ -321,6 +321,12 @@
     "mtime": 1792560058.3208637,
     "seen": 1792561016.261225,
     "ast_hash": "fdf52b9bb60900f44235de109ca66804",
+    "semantic_hash": ""
+  },
+  "tests/unit/refusal.test.ts": {
+    "mtime": 1792563054.856836,
+    "seen": 1792563809.573122,
+    "ast_hash": "c699760ce7c24efbf84f13ee0ef6b972",
     "semantic_hash": ""
   }
 }

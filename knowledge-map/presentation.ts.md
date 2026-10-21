@@ -47,6 +47,7 @@ tags:
 - [[outcomeShorts]] - `contains` [EXTRACTED]
 - [[pageFor()]] - `contains` [EXTRACTED]
 - [[presentation.test.ts]] - `imports_from` [EXTRACTED]
+- [[refusal.test.ts]] - `imports_from` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
 - [[scanStory()_1]] - `contains` [EXTRACTED]
 - [[sceneGraph()]] - `contains` [EXTRACTED]
