@@ -95,6 +95,27 @@ const gaps = await page.evaluate(() => document.querySelectorAll('.ai-citations 
 check('AI cites evidence', chips + gaps > 0, `${chips} evidence chips, ${gaps} gap chips`);
 check('AI names what is missing', gaps > 0, `${gaps} gap chips`);
 
+// --- 8b. A proposed change, grounded in the recorded markup ---
+await page.click('.category-button:has-text("Findings")');
+await page.waitForTimeout(400);
+await page.click('.segmented button:has-text("List")');
+await page.waitForTimeout(400);
+const picked = await page.evaluate(() => {
+  const rows = [...document.querySelectorAll('.inventory-row')];
+  const row = rows.find((r) => /image|alternative/i.test(r.textContent ?? '')) ?? rows[0];
+  if (row) row.click();
+  return row ? row.textContent.slice(0, 40) : null;
+});
+await page.waitForTimeout(500);
+check('a finding can be selected', Boolean(picked), picked ?? '');
+await page.click('.fix-propose .button-glass');
+await page.waitForSelector('.fix-card', { timeout: 90000 });
+const before = await page.evaluate(() => document.querySelector('.fix-line.before code')?.textContent ?? '');
+const after = await page.evaluate(() => document.querySelector('.fix-line.after code')?.textContent ?? '');
+check('a change is proposed', before.length > 10 && after.length > 10, `${before.slice(0, 40)} -> ${after.slice(0, 40)}`);
+check('the proposal names the file and line', Boolean(await page.$('.fix-location')));
+check('the apply button is honest', (await page.evaluate(() => document.querySelector('.fix-actions .button-solid')?.textContent ?? '')).includes('demo repair'));
+
 // --- 9. Repair loop ---
 await page.click('.repair-actions .button-glass');
 await page.waitForTimeout(700);
@@ -103,6 +124,15 @@ await page.click('.repair-actions .button-solid');
 await page.waitForSelector('.comparison', { timeout: 90000 });
 const comparison = await txt('.comparison');
 check('comparison shows three resolved', /3 no longer observed/.test(comparison ?? ''), comparison ?? '');
+
+// --- 9b. The proof: the same page before and after ---
+await page.click('button:has-text("See the page before and after")');
+await page.waitForSelector('.proof-view', { timeout: 10000 });
+const shots = await page.evaluate(() => [...document.querySelectorAll('.proof-shots img')].map((i) => i.naturalWidth));
+check('the proof shows two pictures', shots.length === 2 && shots.every((w) => w > 0), shots.join('x'));
+check('the proof leads with the counts', (await txt('.proof-head h2'))?.includes('no longer observed') ?? false);
+await page.click('.proof-head .icon-btn');
+await page.waitForTimeout(300);
 
 // --- 10. Export ---
 const [download] = await Promise.all([page.waitForEvent('download', { timeout: 60000 }), page.click('button:has-text("Export vault")')]);

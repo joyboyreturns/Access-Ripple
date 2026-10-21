@@ -214,6 +214,7 @@ export function groupIssues(nodes: GraphNode[]): ViewNode[] {
  */
 export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: string; detail: string; tone: 'clear' | 'attention' | 'critical' } {
   const findings = groupIssues(graph.nodes.filter(n => n.kind === 'accessibility-finding'));
+  const rawCount = graph.nodes.filter(n => n.kind === 'accessibility-finding').length;
   const signals = graph.nodes.filter(n => n.kind === 'runtime-error');
   const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'inspected').length ?? 0;
   const tested = scan.interactionPolicy?.tested ?? 0;
@@ -222,17 +223,19 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
   const top = [...findings].sort((a, b) => order.indexOf(severity(a)) - order.indexOf(severity(b)))[0];
   const topPage = top ? pageFor(top, graph)?.label : undefined;
 
-  const headline = findings.length
-    ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${findings.length} accessibility barrier${findings.length === 1 ? '' : 's'}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`
-    : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility barriers in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`;
+  const topCount = top ? Number(top.data.groupCount) || 1 : 1;
+  const kinds = findings.length < rawCount ? `, in ${findings.length} kind${findings.length === 1 ? '' : 's'} of barrier` : '';
+  const headline = rawCount
+    ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${rawCount} accessibility finding${rawCount === 1 ? '' : 's'}${kinds}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`
+    : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility findings in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`;
 
   const detail = top
-    ? `The first to look at is “${describe(top).title}”${topPage ? ` on ${topPage}` : ''}. ${describe(top).fix}${signals.length ? ` The browser also reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading.` : ''}`
+    ? `The first to look at is “${describe(top).title}”${topPage ? ` on ${topPage}` : ''}${topCount > 1 ? `, ${topCount} elements affected` : ''}. ${describe(top).fix}${signals.length ? ` The browser also reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading.` : ''}`
     : signals.length
       ? `The browser reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading. Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.`
       : 'Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.';
 
-  const tone = findings.some(f => severity(f) === 'critical') ? 'critical' : findings.length || signals.length ? 'attention' : 'clear';
+  const tone = findings.some(f => severity(f) === 'critical') ? 'critical' : rawCount || signals.length ? 'attention' : 'clear';
   return { headline, detail, tone };
 }
 

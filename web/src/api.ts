@@ -1,4 +1,4 @@
-import type { SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
+import type { FixProposal, SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
 export interface AiStatus { configured: boolean; model: string; provider: string }
 export interface Briefing { text: string; citations: Array<{ id: string; label: string; gap?: boolean }>; model: string; source: 'ai' }
@@ -43,6 +43,11 @@ export function getAiStatus() {
 /** Ask the configured model for a grounded plain-language read of the scan. */
 export function writeBriefing(scanId: string) {
   return request<Briefing>(`/api/scans/${encodeURIComponent(scanId)}/briefing`, { method: 'POST', body: '{}' });
+}
+
+/** Ask the configured model for a concrete change that fixes one finding. */
+export function proposeFix(scanId: string, nodeId: string) {
+  return request<FixProposal>(`/api/scans/${encodeURIComponent(scanId)}/fix`, { method: 'POST', body: JSON.stringify({ nodeId }) });
 }
 
 export function readScan(scanId: string, signal?: AbortSignal) {

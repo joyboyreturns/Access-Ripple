@@ -104,4 +104,18 @@ export interface ScanComparison {
   remaining: GraphNode[];
   new: GraphNode[];
   changed: Array<{ before: GraphNode; after: GraphNode }>;
+  /** The same page before and after, so a repair can be shown and not only counted. */
+  pages: Array<{ url: string; title?: string; before?: string; after?: string }>;
+}
+
+/** A concrete change a model proposes for one finding, grounded in the recorded markup. */
+export interface FixProposal {
+  nodeId: string;
+  ruleId: string;
+  summary: string;
+  before: string;
+  after: string;
+  why: string;
+  location?: { file: string; line: number };
+  model: string;
 }
