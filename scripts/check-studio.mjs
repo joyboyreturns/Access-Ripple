@@ -148,6 +148,17 @@ if (aiReady) {
   check('a change is proposed', before.length > 10 && after.length > 10, `${before.slice(0, 40)} -> ${after.slice(0, 40)}`);
   check('the proposal names the file and line', Boolean(await page.$('.fix-location')));
   check('the apply button is honest', (await page.evaluate(() => document.querySelector('.fix-actions .button-solid')?.textContent ?? '')).includes('demo shop'));
+  // The model has to commit to what its change will fix, before anything is applied.
+  const predict = await page.$('button:has-text("Ask what this will fix")');
+  if (predict) {
+    await predict.click();
+    await page.waitForSelector('.fix-contract', { timeout: 120000 });
+    const commitments = await page.evaluate(() => [...document.querySelectorAll('.fix-contract li')].length);
+    check('the model commits to what it will fix', commitments > 0, `${commitments} commitments`);
+    check('it commits to the finding it targets', (await page.evaluate(() => document.querySelector('.fix-contract')?.innerText ?? '')).length > 40);
+  } else {
+    check('the model commits to what it will fix', false, 'no way to ask for a prediction');
+  }
 }
 
 // --- 9. The repair loop: an accepted change, applied and measured ---
@@ -162,6 +173,10 @@ if (aiReady) {
   const comparison = await txt('.comparison');
   check('the rescan measured the change', /[1-9]\d* no longer observed/.test(comparison ?? ''), comparison ?? '');
   check('nothing new appeared', /0 new/.test(comparison ?? ''), comparison ?? '');
+  // The prediction is checked against what the browser recorded.
+  const verdicts = await page.evaluate(() => [...document.querySelectorAll('.prediction-verdicts .verdict')].map((row) => row.className.replace('verdict ', '')));
+  check('the prediction was checked', verdicts.length > 0, verdicts.join(', '));
+  check('every prediction has a verdict the tool can stand behind', verdicts.every((verdict) => ['supported', 'contradicted', 'not rechecked'].includes(verdict)), verdicts.join(', '));
 } else {
   // Without a model, the prewritten repair is the controlled comparison.
   await page.click('.repair-actions .button-glass');
@@ -178,7 +193,7 @@ await page.click('button:has-text("See the page before and after")');
 await page.waitForSelector('dialog.proof-dialog[open]', { timeout: 10000 });
 const shots = await page.evaluate(() => [...document.querySelectorAll('.proof-shots img')].map((i) => i.naturalWidth));
 check('the proof shows two pictures', shots.length === 2 && shots.every((w) => w > 0), shots.join('x'));
-check('the proof leads with the counts', (await txt('.proof-head h2'))?.includes('no longer observed') ?? false);
+check('the proof leads with the counts', (await page.evaluate(() => [...document.querySelectorAll('.proof-tile')].map((tile) => tile.textContent).join(' | '))).includes('no longer observed'), await page.evaluate(() => [...document.querySelectorAll('.proof-tile')].map((tile) => tile.textContent).join(' | ')));
 await page.click('.proof-head .icon-btn');
 await page.waitForTimeout(300);
 

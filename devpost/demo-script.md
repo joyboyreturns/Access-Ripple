@@ -1,6 +1,6 @@
 # AccessRipple — the three-minute demo
 
-The shape of the recording: **the argument → a real scan → the barrier and the route to it → the model proposes a change → the rescan verifies it → what is still missing.** The cut is deliberate: watching a scan run is the least interesting thing in the world, showing the result of a scan you already ran is the whole point.
+The shape of the recording: **the argument → a real scan → the barrier and the route to it → the model proposes a change and commits to what it will fix → the rescan checks the commitment → what is still missing.** The cut is deliberate: watching a scan run is the least interesting thing in the world, showing the result of a scan you already ran is the whole point.
 
 The captions in the studio's guided tour carry the same words as this script, in the same order, so a muted recording still explains itself.
 
@@ -10,14 +10,14 @@ The captions in the studio's guided tour carry the same words as this script, in
 - [ ] The provider key is in `.env` and the scanner was restarted after it was added. The AI beats need it.
 - [ ] `npm run prepare:demo` has been run. It clears the saved history, scans the five public sites, and leaves the demo shop in its broken state with the pair the proof needs. Run it the morning of the recording, not earlier: the saved history keeps only the newest twenty-five scans, so test runs push the prepared sites out.
 - [ ] **Show the proof** is available.
-- [ ] `npm run check:studio` passes with 37 of 37. It takes a minute and catches anything that broke.
+- [ ] `npm run check:studio` passes. It takes a minute and catches anything that broke. It leaves the demo shop exactly as it found it, so it is safe to run at any time.
 - [ ] `npm run rehearse` runs the whole route and prints how long each beat takes.
 - [ ] The window is one size. The layout is verified at 1440×960 and 390×844.
 - [ ] Nothing private is in the repository, and the public repository is up to date.
 
 ## Choosing the site you type
 
-Not every famous site behaves the same. These were measured on this machine, after the fixes:
+Not every famous site behaves the same. These were measured on this machine:
 
 | Site | Time | Pages | What it gives you |
 | --- | --- | --- | --- |
@@ -42,41 +42,39 @@ Click **Explore your website**, type `developer.mozilla.org` with no `https://`,
 Say: “It opens the site in a real browser on this computer, reads up to five pages, and activates a bounded set of safe controls once each in disposable pages to see what actually happens.”
 
 **0:22–0:30 — Cut.**
-Cut straight to the result. The scan was run before you started recording, so the result is already there.
+Cut straight to the result. The scan was run before you started recording, so the result is already there, and the map is the first thing below the numbers.
 
-**0:30–0:50 — The result, and the barrier.**
-The summary is on screen: pages inspected, visible controls, accessibility findings, actions tested. The story paragraph states it in one sentence. Open the finding.
+**0:30–0:48 — The result, and the barrier.**
+The summary is on screen: pages inspected, visible controls, accessibility findings, actions tested. Open the finding.
 Say: “Four pages, 681 controls, 40 accessibility findings in 4 kinds of barrier, and 10 actions actually activated. These are the MDN docs, and the target-size rule is failing on their featured article tags.”
 
-**0:50–1:10 — The route to it.**
-Show **ROUTES TO THIS POINT** in the inspector, then follow one of them.
-Say: “This is not a diagram of what might happen. This is the path the browser took, with each step labelled by what was actually observed. And here are the controls that lead to the page with the problem — that is how I choose what to investigate.”
-Click a route and let the pulse travel it. “Anything past the recorded route stays marked untested.”
-
+**0:48–1:08 — The route to it.**
+Show **ROUTES TO THIS POINT** in the inspector, then follow one of them. The map draws the route across the screen with a pulse travelling along it.
+Say: “Here are the controls whose recorded journeys lead to the page with the problem. That is how I choose what to investigate. This is the path the browser recorded — each step really happened.”
 If you have a few seconds, show the discovery on the demo shop instead: the **Add to cart** button reveals a **View cart** link that is not in the page's source, and the scanner follows it. Say: “That cart link only exists after a click. The scanner found it by activating the button, and followed it into the next page — so a page that is not in the markup still ends up on the map.”
 
-**1:10–1:30 — The model proposes a change.**
-Press **Propose a change**. The diff appears with the file and line.
-Say: “A model proposes the smallest change that fixes the rule, grounded in the markup the browser recorded. This is a suggestion, not proof. Here is how I check it.”
+**1:08–1:28 — The model proposes a change, and commits to what it will fix.**
+On the controlled demo shop, press **Propose a change**. The diff appears with the file and line. Then press **Ask what this will fix**.
+Say: “The model receives the failing element the browser actually recorded, and proposes this change. Then I make it commit, in writing, to what it will and will not fix — before anything is applied. It says the description finding will be gone, and that the two missing-file errors will still be there. That is a prediction the browser can check.”
 
-**1:30–1:50 — Apply it to the controlled demo shop.**
-Switch to the demo shop, apply the accepted change, and rescan.
-Say: “Controlled demo shop — the fixture this tool owns, so the change can be applied here. On a real site this stays a suggestion you make in your own code.”
+**1:28–1:42 — Apply it.**
+Press **Apply this change to the demo shop**, then **Rescan and compare**.
+Say: “I approve that exact replacement, not a prebuilt repaired page. On a real site this stays a suggestion you make in your own code.”
 
-**1:50–2:10 — The verification.**
-The comparison and the proof: the page before and after, with the counts.
-Say: “The proposal was not the proof, the rescan was. The finding the change addressed is no longer observed. The two failures it did not touch are still there, because a description does not bring back a missing file — and the tool says so instead of pretending.”
-Point out **not rechecked** if it appears: “And a page that could not be checked again is never counted as fixed.”
+**1:42–2:02 — The verification.**
+The comparison, then the proof: the page before and after, with the counts and the verdicts.
+Say: “The rescan is the proof, not the proposal. The finding the change addressed is no longer observed. The two failures it did not touch are still there, because a description does not bring back a missing file. And the model's prediction held on all three — which the browser checked, not me.”
+Point out the verdict strip if it appears: “And a page that could not be checked again is never counted as fixed.”
 
-**2:10–2:22 — What is still missing.**
+**2:02–2:14 — What is still missing.**
 Open the coverage panel.
 Say: “Ten controls were activated. Thirty-six were not, because they needed permission or were safe to skip. Automated checks cover a useful subset of barriers. Keyboard, screen-reader, and human testing complete the picture.”
 
-**2:22–2:28 — The artefact.**
+**2:14–2:22 — The artefact.**
 Press **Export vault**, open the zip briefly.
 Say: “The whole map exports as a linked Obsidian vault, so a team keeps the evidence, not a screenshot.”
 
-**2:28–3:00 — Learning and close.**
+**2:22–3:00 — Learning and close.**
 Say what you actually learned building this with AI, in one sentence, in your own words.
 Then: **“I learned that finding a problem isn't enough. I need evidence that my change actually helped.”**
 Show the repository link.
@@ -85,14 +83,16 @@ Show the repository link.
 
 - **The scan is still running when you cut.** Open **Recent scans** and pick the prepared scan of the same site. Say “here is the same site from a scan I ran a moment ago”.
 - **The model call is slow or fails.** The deterministic summary above it always works. Skip to the next beat and say the model was unavailable. Do not retry on camera.
-- **Show the proof is missing.** Run the demo shop once before recording: scan, propose, apply, rescan. The proof is stored with the scan.
+- **The model will not commit to anything.** The proposal is still shown and can still be applied and measured. Skip the prediction line and say the model did not make a prediction.
+- **Show the proof is missing.** Run `npm run prepare:demo` before you start. The proof is stored with the scan.
 - **The network is down.** Everything except the model beat works offline, because the demo shop is local and the recorded scans are on this computer.
 
 ## Honesty notes
 
 - The demo shop is a controlled local fixture with a deliberate fault. Say so. Do not present it as a third-party site.
 - “No longer observed” means the browser stopped reporting that finding on a page it checked again. It does not mean the site is now accessible, and the interface says so on screen.
-- The model proposes; it does not apply. The button that changes the demo shop is labelled **Apply this change to the demo shop** for exactly that reason.
+- The route is made of observations that each really happened. How they join into one route is the tool's reading of them, and the interface says that too.
+- The model proposes and predicts; it does not apply. The button that changes the demo shop is labelled **Apply this change to the demo shop** for exactly that reason.
 - A recorded scan is a recording, not a live scan. Say the date when you open a saved one.
 - The counts in this script are the values the current build produced on this machine. Public sites change, so re-run `npm run check:studio` and re-check the numbers before you record.
 - This is a recording guide, not evidence that a submission video has been recorded or uploaded.

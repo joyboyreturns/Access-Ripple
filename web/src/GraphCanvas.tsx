@@ -19,14 +19,20 @@ export default function GraphCanvas({ journey, onExitJourney, graph, filter, sel
   const related = new Set(scene.edges.filter(e => e.source === representativeId || e.target === representativeId).flatMap(e => [e.source, e.target]));
   const positioned = useMemo(() => {
     if (journey) {
-      const vertical=size.w<620, count=journey.steps.length, zigzag=count>5;
-      const spread=vertical?Math.min(64,size.w*.09):Math.min(56,size.h*.09);
+      const vertical=size.w<620, count=journey.steps.length;
+      // The horizontal space each step gets decides how the route is drawn.
+      // When there is room, the steps follow one shallow arc, which reads as a
+      // path across the screen. Only a cramped route is staggered, and then
+      // only enough to keep the numbered badges apart.
+      const gap=vertical?0:Math.max(1,(size.w-140)/Math.max(1,count-1));
+      const roomy=!vertical&&gap>=58;
+      const spread=vertical?Math.min(64,size.w*.09):roomy?0:Math.min(38,size.h*.07);
       return scene.nodes.map((node) => {
         const index=journey.steps.findIndex(s=>s.node.id===node.id), branch=journey.findings.findIndex(f=>f.node.id===node.id);
-        // Long routes zigzag so each numbered step stays readable instead of collapsing into one row.
-        const zig=zigzag&&index>=0?(index%2?-1:1)*spread:0;
-        const x=vertical?(index>=0?size.w*.27+zig:size.w*.76):(index>=0?60+(size.w-120)*index/Math.max(1,count-1):90+(size.w-180)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length)));
-        const y=vertical?(index>=0?90+(size.h-210)*index/Math.max(1,count-1):90+(size.h-210)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length))):(index>=0?size.h*.32+zig:size.h*.72);
+        const zig=spread>0&&index>=0?(index%2?-1:1)*spread:0;
+        const x=vertical?(index>=0?size.w*.27+zig:size.w*.76):(index>=0?70+(size.w-140)*index/Math.max(1,count-1):90+(size.w-180)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length)));
+        const arc=roomy&&index>=0?Math.sin((index/Math.max(1,count-1))*Math.PI)*26:0;
+        const y=vertical?(index>=0?90+(size.h-210)*index/Math.max(1,count-1):90+(size.h-210)*(branch+.5)/Math.max(1,Math.min(3,journey.findings.length))):(index>=0?size.h*.30+arc+zig:size.h*.72);
         return {node,x:size.w/2+(x-size.w/2)*view.zoom+view.panX,y:size.h/2+(y-size.h/2)*view.zoom+view.panY,z:0};
       });
     }
@@ -44,7 +50,17 @@ export default function GraphCanvas({ journey, onExitJourney, graph, filter, sel
   const journeyPath = useMemo(() => {
     if (!journey) return '';
     const chain = journey.steps.map(step => points.get(step.node.id)).filter((point): point is NonNullable<typeof point> => Boolean(point));
-    return chain.length > 1 ? `M${chain.map(point => `${Math.round(point.x)},${Math.round(point.y)}`).join(' L')}` : '';
+    // The same curve the connection is drawn with, so the pulse travels the
+    // route on screen rather than a straight line between the points.
+    let path = '';
+    chain.forEach((point, index) => {
+      const x = Math.round(point.x);
+      const y = Math.round(point.y);
+      if (index === 0) { path = `M${x},${y}`; return; }
+      const previous = chain[index - 1]!;
+      path += ` Q${Math.round((previous.x + point.x) / 2 + 12)},${Math.round((previous.y + point.y) / 2 - 10)} ${x},${y}`;
+    });
+    return chain.length > 1 ? path : '';
   }, [journey, positioned]);
   const labels = useMemo(() => {
     if(journey){const shown=new Set([representativeId,hovered,journey.control.id]);return new Map(positioned.filter(p=>shown.has(p.node.id)).map(p=>{const index=journey.steps.findIndex(s=>s.node.id===p.node.id),alternate=journey.steps.length>5,below=!alternate||index<0||index%2===0;const y=Math.max(6,Math.min(size.h-42,below?p.y+23:p.y-51));return [p.node.id,{x:Math.max(8,Math.min(size.w-204,p.x-98)),y,w:196}];}));}
@@ -85,10 +101,10 @@ export default function GraphCanvas({ journey, onExitJourney, graph, filter, sel
         {scene.edges.map(e=>{const a=points.get(e.source),b=points.get(e.target);if(!a||!b)return null;const observed=e.evidenceLabel==='observed';return <path key={`${e.source}-${e.target}-${e.kind}`} d={`M${a.x},${a.y} Q${(a.x+b.x)/2+12},${(a.y+b.y)/2-10} ${b.x},${b.y}`} className={`connection-path ${observed?'observed':''} ${journey||e.source===representativeId||e.target===representativeId?'selected':''} ${observed?'':'inferred'}`} markerEnd={journey?'url(#journey-arrow)':undefined} pointerEvents="none"><title>{observed?'Recorded relationship':'Possible connection · action not activated'}</title></path>;})}
         {journey&&journeyPath&&<g className="journey-traversal" pointerEvents="none" aria-hidden="true"><circle r="5" className="traversal-dot"><animateMotion dur={`${Math.min(14, Math.max(4, journey.steps.length*.9))}s`} repeatCount="indefinite" path={journeyPath}/></circle></g>}
         {[...positioned].sort((a,b)=>b.z-a.z).map(({node,x,y})=>{const selected=selectedId===node.id||Boolean(node.memberIds?.includes(selectedId)),l=labels.get(node.id),short=describe(node).short,count=Number(node.data.groupCount)||1,stepIndex=journey?journey.steps.findIndex(s=>s.node.id===node.id):-1;const full=`${stepIndex>=0?`STEP ${stepIndex+1} · `:''}${short}`,limit=journey?24:25,shown=full.length>limit?`${full.slice(0,limit-1)}…`:full,ariaLabel=`${shown}${count>1?` · ${count} findings`:''}`;const radius=node.kind==='site'?12:node.kind==='page'?9:6.5;return <g key={node.id} transform={`translate(${x} ${y})`} data-node={node.id} role="button" tabIndex={0} aria-label={ariaLabel} className={`map-node ${selected?'selected':''} ${related.has(node.id)?'related':''}`} style={{'--node-color':nodeColor(node)} as CSSProperties} onPointerDown={e=>e.stopPropagation()} onClick={()=>onSelect(node)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();onSelect(node);}}} onMouseEnter={()=>setHovered(node.id)} onMouseLeave={()=>setHovered('')}>
-          {stepIndex>=0&&!l&&<text className="journey-step-number" textAnchor="middle" y={journey!.steps.length>5&&stepIndex%2===1?34:-24}>STEP {stepIndex+1}</text>}<rect x={Math.min(-22,l?l.x-x:-22)} y="-40" width={Math.max(44,l?l.x-x+l.w:22)-Math.min(-22,l?l.x-x:-22)} height={l?Math.max(84,l.y-y+36):84} fill="transparent" className="node-hit-area"/><title>{describe(node).title}{count>1?` · ${count} affected elements`:''}</title><circle r={radius*3.2} className="node-bloom" fill={nodeColor(node)} pointerEvents="none"/><circle r="18" fill="transparent" className="node-hit"/><circle r={radius} className="node-dot"/><circle r={selected?20:13} className="node-halo" pointerEvents="none"/><circle r={radius+6} className="node-pulse" pointerEvents="none"/>
+          {stepIndex>=0&&!l&&<g className="journey-step-badge" transform="translate(-13 -13)"><circle r="11"/><text textAnchor="middle" dy="4">{stepIndex+1}</text></g>}<rect x={Math.min(-22,l?l.x-x:-22)} y="-40" width={Math.max(44,l?l.x-x+l.w:22)-Math.min(-22,l?l.x-x:-22)} height={l?Math.max(84,l.y-y+36):84} fill="transparent" className="node-hit-area"/><title>{describe(node).title}{count>1?` · ${count} affected elements`:''}</title><circle r={radius*3.2} className="node-bloom" fill={nodeColor(node)} pointerEvents="none"/><circle r="18" fill="transparent" className="node-hit"/><circle r={radius} className="node-dot"/><circle r={selected?20:13} className="node-halo" pointerEvents="none"/><circle r={radius+6} className="node-pulse" pointerEvents="none"/>
           {l&&<><line x1="0" y1="0" x2={l.x-x+(l.x<x?l.w:0)} y2={l.y-y+17} className="label-leader" pointerEvents="none"/><g transform={`translate(${l.x-x} ${l.y-y})`} className="node-card"><rect width={l.w} height="34" rx="8"/><text x="12" y="22">{shown}{count>1?` · ${count}`:''}</text></g></>}
         </g>;})}
-      </svg><span className="map-coverage">{journey?`A travelling pulse follows the recorded route · hover a step to read its label · dashed = action not tested${journey.findings.length>3?' · all observations in details':''}`:`${scene.nodes.length} focus points · full inventory in List`}</span>
+      </svg><span className="map-coverage">{journey?`A travelling pulse follows the recorded route · hover a step to read its label · dashed = a possible connection, not activated${journey.findings.length>3?' · all observations in details':''}`:`${scene.nodes.length} focus points · full inventory in List`}</span>
     </div>
     {journey&&<div className="journey-summary" role="status"><strong>{cleanLabel(journey.control.label)}</strong><span>{journey.summary}</span></div>}
     <div className="canvas-bottom"><div className="graph-key"><span><i className="page-dot"/>Page</span><span><i className="issue-dot"/>Accessibility</span><span><i className="error-dot"/>Browser signal</span></div><div className="canvas-actions"><button className={`icon-btn ${focus?'active':''}`} aria-label="Focus selected neighborhood" aria-pressed={focus} onClick={onFocus} title="Focus neighborhood"><Icon name="target" size={18}/></button><button className="icon-btn" onClick={()=>setView(INITIAL)} aria-label="Reset map view"><Icon name="refresh" size={17}/></button><span className="control-separator"/><button className="icon-btn" onClick={()=>setView(v=>({...v,zoom:Math.max(.55,v.zoom-.15)}))} aria-label="Zoom out"><Icon name="minus" size={17}/></button><span className="zoom-readout">{Math.round(view.zoom*100)}%</span><button className="icon-btn" onClick={()=>setView(v=>({...v,zoom:Math.min(1.8,v.zoom+.15)}))} aria-label="Zoom in"><Icon name="plus" size={17}/></button></div></div>
