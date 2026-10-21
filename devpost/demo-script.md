@@ -8,8 +8,8 @@ The captions in the studio's guided tour carry the same words as this script, in
 
 - [ ] `npm run dev` is running.
 - [ ] The provider key is in `.env` and the scanner was restarted after it was added. The AI beats need it.
-- [ ] The sites you want to show are already in **Recent scans**. Scan them once, before you start recording.
-- [ ] The demo shop has been run through once, so **Show the proof** is available.
+- [ ] `npm run prepare:demo` has been run. It clears the saved history, scans the five public sites, and leaves the demo shop in its broken state with the pair the proof needs. Run it the morning of the recording, not earlier: the saved history keeps only the newest twenty-five scans, so test runs push the prepared sites out.
+- [ ] **Show the proof** is available.
 - [ ] `npm run check:studio` passes with 37 of 37. It takes a minute and catches anything that broke.
 - [ ] `npm run rehearse` runs the whole route and prints how long each beat takes.
 - [ ] The window is one size. The layout is verified at 1440×960 and 390×844.
