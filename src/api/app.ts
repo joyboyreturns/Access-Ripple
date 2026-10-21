@@ -121,6 +121,18 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   // The checkout sample can switch between its "before" and "fixed" states so a rescan
   // compares a real repair on a site you control. Everything else stays identical.
   app.get('/api/sample/state', async () => ({ variant: sampleVariant }));
+
+  // Describes the built-in demo site so the studio can offer it without a network address.
+  app.get('/api/sample/info', async () => ({
+    id: 'checkout' as const,
+    name: 'Northstar demo shop',
+    tagline: 'A four-page checkout flow that ships with a real accessibility fault and a real 404.',
+    url: `${baseUrl}/sample/checkout`,
+    variant: sampleVariant,
+    brokenNote: 'The product image has no text alternative and its file is missing.',
+    fixedNote: 'The product image loads and carries a text alternative.',
+  }));
+
   app.post('/api/sample/state', async (request, reply) => {
     const body = sampleStateBody.safeParse(request.body);
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SAMPLE_STATE', message: "Provide { \"variant\": 'before' } or { \"variant\": 'after' }.", retryable: false } });

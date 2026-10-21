@@ -1,4 +1,4 @@
-import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
+import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, scanStory, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
 import type { GraphNode, InteractionStepView, SiteGraph } from '../../web/src/types.js';
 import { describe as suite, it, expect } from 'vitest';
 
@@ -162,5 +162,23 @@ suite('plain-language labels and destinations',()=>{
     expect(friendlyScanError('page.goto: net::ERR_NAME_NOT_RESOLVED at https://nope.example')).toContain('could not be found');
     expect(friendlyScanError('Timeout 60000ms exceeded.')).toContain('took too long');
     expect(friendlyScanError('The scan worker could not start.')).toBe('The scan worker could not start.');
+  });
+});
+
+suite('the scan story',()=>{
+  const scan={id:'s1',status:'complete' as const,inputUrl:'https://example.com/',progress:{completedPages:3,totalPageLimit:5,message:'done'},pages:[],interactionPolicy:{mode:'safe' as const,tested:9,skipped:1},coverage:{pagesInspected:3,pagesBlocked:0,pagesFailed:0,destinationsNotReached:0,destinationsBeyondDepth:0,stoppedBy:null,interactionsTested:9,interactionsSkipped:1}};
+  it('states the observed numbers and names the first barrier to look at',()=>{
+    const graph:SiteGraph={schemaVersion:'1.0',nodes:[site,page,{...finding('f1'),data:{ruleId:'image-alt',impact:'critical',targets:['img']}}],edges:[]};
+    const story=scanStory(scan,graph);
+    expect(story.headline).toContain('3 pages');
+    expect(story.headline).toContain('9 controls');
+    expect(story.detail).toContain('An image needs a text alternative');
+    expect(story.tone).toBe('critical');
+  });
+  it('does not claim a barrier when the scan observed none',()=>{
+    const graph:SiteGraph={schemaVersion:'1.0',nodes:[site,page],edges:[]};
+    const story=scanStory(scan,graph);
+    expect(story.headline).toContain('found no accessibility barriers');
+    expect(story.tone).toBe('clear');
   });
 });

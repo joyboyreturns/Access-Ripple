@@ -41,7 +41,9 @@ export function buildGraph(scan: ScanResult): SiteGraph {
   const edges: GraphEdge[] = [];
   const origin = scan.canonicalOrigin ?? new URL(scan.inputUrl).origin;
   const siteId = id('site', origin);
-  nodes.push({ id: siteId, kind: 'site', label: new URL(origin).hostname, evidenceLabel: 'observed', data: { origin } });
+  // The built-in demo shop runs on loopback, so name it instead of showing a raw address.
+  const siteLabel = scan.sample === 'checkout' ? 'Northstar demo shop' : new URL(origin).hostname;
+  nodes.push({ id: siteId, kind: 'site', label: siteLabel, evidenceLabel: 'observed', data: { origin } });
 
   const pageIds = new Map<string, string>();
   for (const page of scan.pages) {

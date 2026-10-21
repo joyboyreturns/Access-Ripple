@@ -96,10 +96,15 @@ The landing animation is the video supplied in the learner’s Vesper design-ref
 
 ## Compact architecture map
 
-The project keeps a Graphify source map and an Obsidian note/canvas export in `graphify-out/` and `knowledge-map/`. After source changes, rebuild it with `graphify update . --force --no-cluster`. Query a focused part of the code instead of loading the whole repository, for example:
+The project keeps a Graphify source map and an Obsidian note/canvas export in `graphify-out/` and `knowledge-map/`. After source changes, refresh both with:
+
+```sh
+graphify update . --force --no-cluster
+graphify export obsidian --graph graphify-out/graph.json --dir knowledge-map
+```
+
+Open `knowledge-map/` as a vault in Obsidian to browse the generated notes and `graph.canvas`. The vault enables Obsidian's graph, canvas, backlinks, and navigation plugins. The source-only map ignores planning docs, local agent setup, editor state, and installed dependencies. Query a focused part of the code instead of loading the whole repository, for example:
 
 ```sh
 graphify query "control flow graph error nodes" --seed buildGraph --budget 400
 ```
-
-The source-only map ignores planning docs, local agent setup, editor state, and installed dependencies.
