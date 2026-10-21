@@ -12,8 +12,11 @@ tags:
 # App.tsx
 
 ## Connections
+- [[AiBriefing()]] - `contains` [EXTRACTED]
+- [[AiStatus]] - `imports` [EXTRACTED]
 - [[ApiError]] - `imports` [EXTRACTED]
 - [[App()]] - `contains` [EXTRACTED]
+- [[Briefing_1]] - `imports` [EXTRACTED]
 - [[Dialog()]] - `imports` [EXTRACTED]
 - [[EMPTY]] - `contains` [EXTRACTED]
 - [[FILTERS]] - `contains` [EXTRACTED]
@@ -45,6 +48,7 @@ tags:
 - [[describe()]] - `imports` [EXTRACTED]
 - [[downloadVault()]] - `imports` [EXTRACTED]
 - [[friendlyScanError()]] - `imports` [EXTRACTED]
+- [[getAiStatus()]] - `imports` [EXTRACTED]
 - [[getSampleInfo()]] - `imports` [EXTRACTED]
 - [[groupIssues()]] - `imports` [EXTRACTED]
 - [[hostname()]] - `contains` [EXTRACTED]
@@ -75,5 +79,6 @@ tags:
 - [[traceJourney()]] - `imports` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[waitForScan()_1]] - `imports` [EXTRACTED]
+- [[writeBriefing()_1]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

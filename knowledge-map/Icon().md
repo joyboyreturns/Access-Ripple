@@ -12,6 +12,7 @@ tags:
 # Icon()
 
 ## Connections
+- [[AiBriefing()]] - `calls` [EXTRACTED]
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]

@@ -12,8 +12,10 @@ tags:
 # api.ts
 
 ## Connections
+- [[AiStatus]] - `contains` [EXTRACTED]
 - [[ApiError]] - `contains` [EXTRACTED]
 - [[App.tsx]] - `imports_from` [EXTRACTED]
+- [[Briefing_1]] - `contains` [EXTRACTED]
 - [[SampleInfo]] - `imports` [EXTRACTED]
 - [[ScanComparison_1]] - `imports` [EXTRACTED]
 - [[ScanResult_1]] - `imports` [EXTRACTED]
@@ -23,6 +25,7 @@ tags:
 - [[compareScans()_1]] - `contains` [EXTRACTED]
 - [[createScan()]] - `contains` [EXTRACTED]
 - [[downloadVault()]] - `contains` [EXTRACTED]
+- [[getAiStatus()]] - `contains` [EXTRACTED]
 - [[getSampleInfo()]] - `contains` [EXTRACTED]
 - [[listScans()]] - `contains` [EXTRACTED]
 - [[readGraph()]] - `contains` [EXTRACTED]
@@ -33,5 +36,6 @@ tags:
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[waitForScan()_1]] - `contains` [EXTRACTED]
 - [[web-api.test.ts]] - `imports_from` [EXTRACTED]
+- [[writeBriefing()_1]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

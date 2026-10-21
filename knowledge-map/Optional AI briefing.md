@@ -1,17 +1,17 @@
 ---
-source_file: "AGENTS.md"
+source_file: "README.md"
 type: "document"
 community: "Community None"
-location: "L1"
+location: "L17"
 tags:
   - graphify/document
   - graphify/EXTRACTED
   - community/Community_None
 ---
 
-# graphify
+# Optional AI briefing
 
 ## Connections
-- [[AGENTS]] - `contains` [EXTRACTED]
+- [[AccessRipple]] - `contains` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None
