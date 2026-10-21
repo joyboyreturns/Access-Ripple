@@ -17,6 +17,7 @@ tags:
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
+- [[scanStory()_1]] - `calls` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

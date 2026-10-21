@@ -20,6 +20,7 @@ tags:
 - [[Icons.tsx]] - `contains` [EXTRACTED]
 - [[Landing()]] - `calls` [EXTRACTED]
 - [[Landing.tsx]] - `imports` [EXTRACTED]
+- [[ScanStory()]] - `calls` [EXTRACTED]
 - [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[SelectMenu.tsx]] - `imports` [EXTRACTED]
 

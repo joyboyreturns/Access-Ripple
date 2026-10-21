@@ -20,6 +20,7 @@ tags:
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]
 - [[presentation.test.ts]] - `imports_from` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
+- [[tour.test.ts]] - `imports_from` [EXTRACTED]
 - [[url-safety.test.ts]] - `imports_from` [EXTRACTED]
 - [[vitest.config.ts]] - `imports_from` [EXTRACTED]
 - [[web-api.test.ts]] - `imports_from` [EXTRACTED]

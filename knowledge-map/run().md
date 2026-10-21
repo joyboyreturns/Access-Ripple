@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L49"
+location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -19,6 +19,7 @@ tags:
 - [[friendlyScanError()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]
+- [[scanDemo()]] - `calls` [EXTRACTED]
 - [[storageSet()]] - `calls` [EXTRACTED]
 - [[submit()]] - `calls` [EXTRACTED]
 - [[waitForScan()_1]] - `calls` [EXTRACTED]

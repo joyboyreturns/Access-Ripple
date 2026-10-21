@@ -2,7 +2,7 @@
 source_file: "README.md"
 type: "document"
 community: "Community None"
-location: "L27"
+location: "L31"
 tags:
   - graphify/document
   - graphify/EXTRACTED
@@ -12,7 +12,6 @@ tags:
 # Run the backend
 
 ## Connections
-- [[AccessRipple]] - `contains` [EXTRACTED]
-- [[Beforeafter repair loop on the sample]] - `contains` [EXTRACTED]
+- [[Run the full app]] - `contains` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None
