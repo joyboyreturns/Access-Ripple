@@ -1,17 +1,19 @@
 ---
-source_file: "src/api/app.ts"
+source_file: "src/sample/sandbox.ts"
 type: "code"
 community: "Community None"
-location: "L26"
+location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
   - community/Community_None
 ---
 
-# allowedOrigins
+# replaceMarkup()
 
 ## Connections
-- [[app.ts]] - `contains` [EXTRACTED]
+- [[applyPatch()]] - `calls` [EXTRACTED]
+- [[fix.test.ts]] - `imports` [EXTRACTED]
+- [[sandbox.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

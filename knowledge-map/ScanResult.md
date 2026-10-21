@@ -2,7 +2,7 @@
 source_file: "src/graph/schema.ts"
 type: "code"
 community: "Community None"
-location: "L165"
+location: "L167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -17,6 +17,7 @@ tags:
 - [[briefing.test.ts]] - `imports` [EXTRACTED]
 - [[briefing.ts]] - `imports` [EXTRACTED]
 - [[build-graph.ts]] - `imports` [EXTRACTED]
+- [[compare.test.ts]] - `imports` [EXTRACTED]
 - [[compare.ts]] - `imports` [EXTRACTED]
 - [[disk.ts]] - `imports` [EXTRACTED]
 - [[export.test.ts]] - `imports` [EXTRACTED]

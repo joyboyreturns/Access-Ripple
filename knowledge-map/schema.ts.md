@@ -38,6 +38,7 @@ tags:
 - [[briefing.test.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.ts]] - `imports_from` [EXTRACTED]
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
+- [[compare.test.ts]] - `imports_from` [EXTRACTED]
 - [[compare.ts]] - `imports_from` [EXTRACTED]
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[evidence.ts]] - `imports_from` [EXTRACTED]

@@ -2,7 +2,7 @@
 source_file: "web/src/tour.ts"
 type: "code"
 community: "Community None"
-location: "L19"
+location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED

@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[app.ts]] - `imports` [EXTRACTED]
+- [[timing.test.ts]] - `imports` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

@@ -2,7 +2,7 @@
 source_file: "src/ai/fix.ts"
 type: "code"
 community: "Community None"
-location: "L59"
+location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,7 @@ tags:
 # parseProposal()
 
 ## Connections
+- [[fix.test.ts]] - `imports` [EXTRACTED]
 - [[fix.ts]] - `contains` [EXTRACTED]
 - [[writeFixProposal()]] - `calls` [EXTRACTED]
 
