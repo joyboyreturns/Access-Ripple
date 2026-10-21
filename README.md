@@ -53,6 +53,8 @@ npm run demo
 
 `npm run demo` starts the app and opens the studio straight into a scan of the built-in demo shop. It takes about ten seconds, needs no internet connection, and always produces the same result.
 
+`npm run prepare:demo` prepares this computer for a recorded demo: it clears the saved history, scans a set of well-known public sites, and leaves the demo shop in its broken state with the pair of scans that proves a repair.
+
 **The core demo needs no account, no key and no network.** The optional AI briefing and the proposed change need a model provider key, but the app is complete without one: it says so where the button would be, and shows the deterministic summary instead.
 
 If `npm run demo` does not open, start the two servers yourself and open `http://127.0.0.1:5173/`:
