@@ -22,10 +22,10 @@ import { createObsidianZip } from '../export/obsidian.js';
 import type { InteractionMode, ScanResult } from '../graph/schema.js';
 
 const createBody = z.union([
-  z.object({ url: z.string().min(1).max(2048), authorizeSubmit: z.boolean().optional() }).strict(),
-  z.object({ sample: z.literal('checkout'), authorizeSubmit: z.boolean().optional() }).strict(),
+  z.object({ url: z.string().min(1).max(2048), authorizeSubmit: z.boolean().optional(), allowPrivateNetwork: z.boolean().optional() }).strict(),
+  z.object({ sample: z.literal('checkout'), authorizeSubmit: z.boolean().optional(), allowPrivateNetwork: z.boolean().optional() }).strict(),
 ]);
-const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
+const rescanBody = z.object({ authorizeSubmit: z.boolean().optional(), allowPrivateNetwork: z.boolean().optional() }).strict();
 const fixBody = z.object({ nodeId: z.string().min(1).max(200) }).strict();
 // The contracts a model committed to, kept per scan and finding so the
 // rescan can check them. They are written to this computer as well, so a
@@ -85,7 +85,7 @@ function canStartScan(address: string): boolean {
   return true;
 }
 
-function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode }, baseUrl: string): ScanResult {
+function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode; allowPrivateNetwork?: boolean }, baseUrl: string): ScanResult {
   const id = randomUUID();
   const url = options.sample ? `${baseUrl}/sample/checkout` : options.url;
   const now = new Date().toISOString();
@@ -95,13 +95,14 @@ function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?
     sample: options.sample, limits: { ...DEFAULT_LIMITS },
     progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' }, pages: [], previousScanId: options.previousScanId,
     interactionPolicy: { mode, tested: 0, skipped: 0 },
+    addressScope: options.allowPrivateNetwork ? 'private' : 'public',
   };
   scanStore.set(scan);
   schedule(async () => {
     const active = scanStore.get(id);
     if (!active) return;
     try {
-      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, onUpdate: (updated) => scanStore.set(updated) });
+      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, allowPrivateNetwork: options.allowPrivateNetwork, onUpdate: (updated) => scanStore.set(updated) });
     } catch (error) {
       scanStore.set({ ...active, status: 'failed', error: { code: 'SCAN_WORKER_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan worker could not start.', retryable: true }, updatedAt: new Date().toISOString() });
     } finally {
@@ -256,17 +257,18 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SCAN_REQUEST', message: 'Provide either a public website URL or the built-in checkout sample.', retryable: false } });
     if (!canStartScan(request.ip)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
+    const allowPrivateNetwork = body.data.allowPrivateNetwork === true;
     if ('sample' in body.data) {
-      const scan = launchScan({ sample: 'checkout', url: '', interactionMode }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', interactionMode, allowPrivateNetwork }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;
-    try { url = await assertSafeUrl(body.data.url); }
+    try { url = await assertSafeUrl(body.data.url, { allowPrivateNetwork }); }
     catch (error) {
       const unsafe = error instanceof UnsafeUrlError ? error : new UnsafeUrlError('The website address is not allowed.');
       return reply.code(422).send({ error: { code: unsafe.code, message: unsafe.message, retryable: unsafe.code === 'HOST_NOT_FOUND' } });
     }
-    const scan = launchScan({ url: url.toString(), interactionMode }, baseUrl);
+    const scan = launchScan({ url: url.toString(), interactionMode, allowPrivateNetwork }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
 
@@ -301,16 +303,20 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits'
       : body.data.authorizeSubmit === false ? 'safe'
       : previous.interactionPolicy?.mode ?? 'safe';
+    // A rescan of a private address keeps the permission that address needed.
+    const allowPrivateNetwork = body.data.allowPrivateNetwork === true ? true
+      : body.data.allowPrivateNetwork === false ? false
+      : previous.addressScope === 'private';
     if (previous.sample) {
-      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode, allowPrivateNetwork }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;
-    try { url = await assertSafeUrl(previous.inputUrl); }
+    try { url = await assertSafeUrl(previous.inputUrl, { allowPrivateNetwork }); }
     catch {
       return reply.code(422).send({ error: { code: 'URL_NO_LONGER_ALLOWED', message: 'The original address is no longer allowed by the scan safety policy.', retryable: false } });
     }
-    const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode }, baseUrl);
+    const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode, allowPrivateNetwork }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
 

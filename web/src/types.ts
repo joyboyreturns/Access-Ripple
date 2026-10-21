@@ -86,6 +86,8 @@ export interface ScanResult {
   /** Present when the scan ran against the built-in local demo site rather than a public address. */
   sample?: 'checkout';
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
+  /** Present when the scan reached an address on the scanner's own computer, with the person's permission. */
+  addressScope?: 'public' | 'private';
   coverage?: ScanCoverage;
 }
 

@@ -11,6 +11,13 @@ export class UnsafeUrlError extends Error {
 const blockedHostSuffixes = ['.localhost', '.local', '.internal', '.home.arpa'];
 const blockedHostnames = new Set(['localhost', 'metadata.google.internal', 'metadata']);
 
+/**
+ * These are never scanned, even when the private-network opt-in is on. They
+ * hand out cloud credentials, and no personal page lives at one of them.
+ */
+const neverScanHostnames = new Set(['metadata.google.internal', 'metadata']);
+const neverScanAddresses = new Set(['169.254.169.254', 'fd00:ec2::254']);
+
 function inV4Range(address: string, base: string, mask: number): boolean {
   const value = address.split('.').reduce((acc, part) => (acc << 8n) | BigInt(Number(part)), 0n);
   const network = base.split('.').reduce((acc, part) => (acc << 8n) | BigInt(Number(part)), 0n);
@@ -34,12 +41,69 @@ export function isPublicIp(address: string): boolean {
   const words = parseIpv6(address);
   if (!words) return false;
   const first = words[0]!;
+  const second = words[1]!;
+  const third = words[2]!;
+
+  // Some public IPv6 addresses carry an IPv4 address inside them. They are
+  // not private, and treating them as private refuses ordinary public
+  // websites on a network that reaches IPv4 through IPv6.
+  //
+  // IPv4-mapped (::ffff:a.b.c.d) and the deprecated IPv4-compatible form
+  // (::a.b.c.d) keep the IPv4 address in the last 32 bits. ::1 lands here as
+  // 0.0.0.1, which is refused below like any other loopback address.
+  if (first === 0 && second === 0 && third === 0 && words[3] === 0 && words[4] === 0 && (words[5] === 0xffff || words[5] === 0)) {
+    return isPublicIp(ipv4FromWords(words, 6));
+  }
+
+  // NAT64 well-known prefix 64:ff9b::/96, and the local-use prefix
+  // 64:ff9b:1::/48, translate IPv4 into IPv6. The IPv4 address is in the last
+  // 32 bits, so the answer is the answer for that IPv4 address.
+  if (first === 0x0064 && second === 0xff9b && (third === 0 || third === 1)) {
+    return isPublicIp(ipv4FromWords(words, 6));
+  }
+
+  // 6to4 (2002::/16) embeds the IPv4 address in bytes two to five.
+  if (first === 0x2002) {
+    return isPublicIp(ipv4FromWords(words, 1));
+  }
+
+  // Teredo (2001:0000::/32) hides the server IPv4 address in bytes eight to
+  // eleven and the client IPv4 address, inverted, in the last 32 bits.
+  if (first === 0x2001 && second === 0x0000) {
+    return isPublicIp(ipv4FromWords(words, 4)) && isPublicIp(invertedIpv4FromWords(words, 6));
+  }
+
   // Only global unicast 2000::/3 is eligible; also reject transition/documentation ranges.
   if ((first & 0xe000) !== 0x2000) return false;
-  if (words[0] === 0x2001 && words[1] === 0x0db8) return false; // documentation
-  if (words[0] === 0x2002) return false; // 6to4 embeds IPv4 destinations
-  if (words[0] === 0x2001 && words[1] === 0x0010) return false; // ORCHID
+  if (first === 0x2001 && second === 0x0db8) return false; // documentation
+  if (first === 0x3fff && (second & 0xf000) === 0x0000) return false; // documentation
+  if (first === 0x2001 && second === 0x0002) return false; // benchmarking
+  if (first === 0x2001 && second === 0x0010) return false; // ORCHID
+  if (first === 0x2001 && (second & 0xfff0) === 0x0020) return false; // ORCHIDv2
   return true;
+}
+
+/**
+ * The IPv4 address held in two 16-bit words, most significant byte first.
+ */
+function ipv4FromWords(words: number[], offset: number): string {
+  const bytes: number[] = [];
+  for (let index = offset; index < offset + 2; index += 1) {
+    const word = words[index]!;
+    bytes.push((word >> 8) & 0xff, word & 0xff);
+  }
+  return bytes.join('.');
+}
+
+/**
+ * Teredo hides the client IPv4 address in the last 32 bits, with every bit
+ * inverted.
+ */
+function invertedIpv4FromWords(words: number[], offset: number): string {
+  return ipv4FromWords(words, offset)
+    .split('.')
+    .map((part) => 255 - Number(part))
+    .join('.');
 }
 
 function parseIpv6(input: string): number[] | null {
@@ -68,6 +132,12 @@ export interface UrlSafetyOptions {
   allowLocalSample?: boolean;
   sampleOrigin?: string;
   resolveHostname?: (hostname: string) => Promise<Array<{ address: string; family: number }>>;
+  /**
+   * Set only when the person scanning asked to reach an address on their own
+   * computer. It lifts the private-network and custom-port rules, and nothing
+   * else: the cloud metadata addresses stay refused either way.
+   */
+  allowPrivateNetwork?: boolean;
 }
 
 export async function assertSafeUrl(rawUrl: string, options: UrlSafetyOptions = {}): Promise<URL> {
@@ -88,12 +158,21 @@ export async function assertSafeUrl(rawUrl: string, options: UrlSafetyOptions = 
     const sample = new URL(options.sampleOrigin);
     if (url.origin === sample.origin) return url;
   }
+  if (neverScanHostnames.has(hostname)) {
+    throw new UnsafeUrlError('That address is never scanned. It is not a website.', 'NEVER_SCANNED');
+  }
+  const privateNetwork = options.allowPrivateNetwork === true;
   if (blockedHostnames.has(hostname) || blockedHostSuffixes.some((suffix) => hostname.endsWith(suffix))) {
-    throw new UnsafeUrlError('Local and private network addresses cannot be scanned.');
+    if (!privateNetwork) throw new UnsafeUrlError('Local and private network addresses cannot be scanned.');
   }
   const ipVersion = isIP(hostname);
-  if (ipVersion && !isPublicIp(hostname)) throw new UnsafeUrlError('Local, private, and reserved IP addresses cannot be scanned.');
-  if (url.port && !['80', '443'].includes(url.port)) {
+  if (ipVersion && neverScanAddresses.has(hostname)) {
+    throw new UnsafeUrlError('That address is never scanned. It is not a website.', 'NEVER_SCANNED');
+  }
+  if (ipVersion && !isPublicIp(hostname) && !privateNetwork) {
+    throw new UnsafeUrlError('Local, private, and reserved IP addresses cannot be scanned.');
+  }
+  if (url.port && !['80', '443'].includes(url.port) && !privateNetwork) {
     throw new UnsafeUrlError('Custom port numbers are not supported in this scan.');
   }
   if (ipVersion) return url;
@@ -110,7 +189,13 @@ export async function assertSafeUrl(rawUrl: string, options: UrlSafetyOptions = 
   } finally {
     if (timeout) clearTimeout(timeout);
   }
-  if (records.length === 0 || records.some((record) => !isPublicIp(record.address))) {
+  if (records.length === 0) {
+    throw new UnsafeUrlError('The website address could not be resolved.', 'HOST_NOT_FOUND');
+  }
+  if (records.every((record) => neverScanAddresses.has(record.address))) {
+    throw new UnsafeUrlError('That address is never scanned. It is not a website.', 'NEVER_SCANNED');
+  }
+  if (!privateNetwork && records.some((record) => !isPublicIp(record.address))) {
     throw new UnsafeUrlError('This website resolves to a local, private, or reserved network address.');
   }
   return url;

@@ -178,6 +178,8 @@ export interface ScanResult {
   graph?: SiteGraph;
   previousScanId?: string;
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
+  /** Whether this scan reached a public address, or one on the scanner's own computer. */
+  addressScope?: 'public' | 'private';
   coverage?: ScanCoverage;
   error?: { code: string; message: string; retryable: boolean };
 }

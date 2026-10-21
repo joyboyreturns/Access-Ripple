@@ -69,6 +69,8 @@ export interface ScanInput {
   sample?: 'checkout';
   previousScanId?: string;
   interactionMode?: InteractionMode;
+  /** Set when the person scanning asked to reach an address on their own computer. */
+  allowPrivateNetwork?: boolean;
   onUpdate: (scan: ScanResult) => void;
 }
 
@@ -87,6 +89,7 @@ function initialResult(input: ScanInput): ScanResult {
     pages: [],
     previousScanId: input.previousScanId,
     interactionPolicy: { mode: input.interactionMode ?? 'safe', tested: 0, skipped: 0 },
+    addressScope: input.allowPrivateNetwork ? 'private' : 'public',
   };
 }
 
@@ -291,7 +294,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
       const next = queue.shift()!;
       let normalized: URL;
       try {
-        normalized = await assertSafeUrl(next.url, { allowLocalSample: Boolean(input.sample), sampleOrigin });
+        normalized = await assertSafeUrl(next.url, { allowLocalSample: Boolean(input.sample), sampleOrigin, allowPrivateNetwork: input.allowPrivateNetwork });
       } catch (error) {
         const pageUrl = safeDisplayUrl(next.url);
         if (visited.has(pageUrl)) continue;
@@ -343,7 +346,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             errors.push(errorEvidence('request', `Blocked a ${request.method().toUpperCase()} request the page tried to send.`, safeDisplayUrl(requestUrl)));
             return await route.abort('blockedbyclient');
           }
-          await assertSafeUrl(requestUrl, { allowLocalSample: Boolean(input.sample), sampleOrigin });
+          await assertSafeUrl(requestUrl, { allowLocalSample: Boolean(input.sample), sampleOrigin, allowPrivateNetwork: input.allowPrivateNetwork });
           await route.continue();
         } catch {
           errors.push(errorEvidence('request', 'Request blocked by URL safety policy.', route.request().url()));
@@ -420,6 +423,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             mode: input.interactionMode ?? 'safe',
             isSample: Boolean(input.sample),
             origin,
+            allowPrivateNetwork: input.allowPrivateNetwork,
             maxPerPage: scan.limits.maxInteractionsPerPage,
             maxPerScanRemaining: remaining,
             deadline: Math.min(startedAt + scan.limits.totalTimeoutMs * 0.9, interactionStarted + (interactionBudget - interactionMsUsed)),

@@ -14,5 +14,6 @@ tags:
 ## Connections
 - [[AccessRipple]] - `contains` [EXTRACTED]
 - [[The demo shop]] - `contains` [EXTRACTED]
+- [[Your own sites]] - `contains` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None

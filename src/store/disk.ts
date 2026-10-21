@@ -28,6 +28,7 @@ export interface ScanSummary {
   previousScanId?: string;
   pages: number;
   actionsTested: number;
+  addressScope?: 'public' | 'private';
 }
 
 export function summarizeScan(scan: ScanResult): ScanSummary {
@@ -40,6 +41,7 @@ export function summarizeScan(scan: ScanResult): ScanSummary {
     previousScanId: scan.previousScanId,
     pages: scan.pages?.length ?? 0,
     actionsTested: scan.interactionPolicy?.tested ?? 0,
+    addressScope: scan.addressScope,
   };
 }
 

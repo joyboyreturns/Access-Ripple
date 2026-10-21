@@ -31,7 +31,7 @@ export function checkApi() {
   return request<{ status: string; localOnly: boolean }>('/api/health');
 }
 
-export function createScan(input: { url: string; authorizeSubmit?: boolean } | { sample: 'checkout'; authorizeSubmit?: boolean }) {
+export function createScan(input: { url: string; authorizeSubmit?: boolean; allowPrivateNetwork?: boolean } | { sample: 'checkout'; authorizeSubmit?: boolean; allowPrivateNetwork?: boolean }) {
   return request<{ scanId: string; status: string }>('/api/scans', { method: 'POST', body: JSON.stringify(input) });
 }
 
@@ -95,7 +95,7 @@ export function listScans() {
   return request<{ scans: ScanSummary[] }>('/api/scans');
 }
 
-export function rescan(scanId: string, input?: { authorizeSubmit?: boolean }) {
+export function rescan(scanId: string, input?: { authorizeSubmit?: boolean; allowPrivateNetwork?: boolean }) {
   return request<{ scanId: string }>(`/api/scans/${encodeURIComponent(scanId)}/rescan`, { method: 'POST', ...(input ? { body: JSON.stringify(input) } : {}) });
 }
 
