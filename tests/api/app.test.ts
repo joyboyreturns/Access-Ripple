@@ -32,6 +32,16 @@ describe('local scan API', () => {
     expect(result.statusCode).toBe(403);
   });
 
+  it('allows the studio served from the same address as the scanner', async () => {
+    // Once the studio is built, the scanner serves it itself, and the browser
+    // then sends that address as the origin of every asset request.
+    const app = await buildApp({ baseUrl: 'http://127.0.0.1:4321' }); apps.push(app);
+    const same = await app.inject({ method: 'GET', url: '/api/health', headers: { origin: 'http://127.0.0.1:4321' } });
+    expect(same.statusCode).toBe(200);
+    const development = await app.inject({ method: 'GET', url: '/api/health', headers: { origin: 'http://127.0.0.1:5173' } });
+    expect(development.statusCode).toBe(200);
+  });
+
   it('describes the built-in demo shop so the studio can offer it without a network address', async () => {
     const app = await buildApp(); apps.push(app);
     const info = await app.inject({ method: 'GET', url: '/api/sample/info' });

@@ -3,12 +3,22 @@ import type { FixProposal, SampleInfo, ScanComparison, ScanResult, ScanSummary, 
 export interface AiStatus { configured: boolean; model: string; provider: string }
 export interface Briefing { text: string; citations: Array<{ id: string; label: string; gap?: boolean }>; model: string; source: 'ai' }
 
+/**
+ * The scanner allows a scan to run for 100 seconds, and the server allows a
+ * model call up to 25 seconds per model in a chain of three. The waits here
+ * are deliberately longer than both, so the browser never gives up while the
+ * work is still running.
+ */
+const SCAN_WAIT_MS = 140_000;
+const MODEL_WAIT_MS = 100_000;
+const DEFAULT_WAIT_MS = 20_000;
+
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(path, { ...init, signal: init?.signal ?? AbortSignal.timeout(15000), headers: { ...(init?.body !== undefined ? { 'content-type': 'application/json' } : {}), ...init?.headers } });
+async function request<T>(path: string, init?: RequestInit, options?: { timeout?: number }): Promise<T> {
+  const response = await fetch(path, { ...init, signal: init?.signal ?? AbortSignal.timeout(options?.timeout ?? DEFAULT_WAIT_MS), headers: { ...(init?.body !== undefined ? { 'content-type': 'application/json' } : {}), ...init?.headers } });
   const body = await response.json().catch(() => ({}));
   if (!response.ok) {
     const message = body?.error?.message || `Request failed (${response.status}).`;
@@ -47,12 +57,22 @@ export function getProof() {
 
 /** Ask the configured model for a grounded plain-language read of the scan. */
 export function writeBriefing(scanId: string) {
-  return request<Briefing>(`/api/scans/${encodeURIComponent(scanId)}/briefing`, { method: 'POST', body: '{}' });
+  return request<Briefing>(`/api/scans/${encodeURIComponent(scanId)}/briefing`, { method: 'POST', body: '{}' }, { timeout: MODEL_WAIT_MS });
+}
+
+/** Apply an accepted proposal to the built-in demo shop, so the next scan measures it. */
+export function applyProposal(input: { file: string; before: string; after: string; summary?: string }) {
+  return request<{ applied: boolean; file: string; summary: string; before: string; after: string; appliedAt: string }>('/api/sample/apply', { method: 'POST', body: JSON.stringify(input) });
+}
+
+/** Put the demo shop back the way it was. */
+export function resetDemoShop() {
+  return request<{ reset: boolean }>('/api/sample/reset', { method: 'POST', body: '{}' });
 }
 
 /** Ask the configured model for a concrete change that fixes one finding. */
 export function proposeFix(scanId: string, nodeId: string) {
-  return request<FixProposal>(`/api/scans/${encodeURIComponent(scanId)}/fix`, { method: 'POST', body: JSON.stringify({ nodeId }) });
+  return request<FixProposal>(`/api/scans/${encodeURIComponent(scanId)}/fix`, { method: 'POST', body: JSON.stringify({ nodeId }) }, { timeout: MODEL_WAIT_MS });
 }
 
 export function readScan(scanId: string, signal?: AbortSignal) {
@@ -76,10 +96,10 @@ export function compareScans(currentId: string, previousId: string) {
 }
 
 export async function waitForScan(scanId: string, onProgress: (scan: ScanResult) => void, signal: AbortSignal) {
-  const deadline = Date.now() + 90000;
+  const deadline = Date.now() + SCAN_WAIT_MS;
   while (Date.now() < deadline) {
     signal.throwIfAborted();
-    const scan = await readScan(scanId, AbortSignal.any([signal, AbortSignal.timeout(15000)]));
+    const scan = await readScan(scanId, AbortSignal.any([signal, AbortSignal.timeout(SCAN_WAIT_MS)]));
     onProgress(scan);
     if (['complete', 'partial', 'failed'].includes(scan.status)) return scan;
     await new Promise<void>((resolve, reject) => { const done=()=>{signal.removeEventListener('abort',abort);resolve();};const timer=window.setTimeout(done,800);const abort=()=>{window.clearTimeout(timer);reject(new DOMException('Aborted','AbortError'));};signal.addEventListener('abort',abort,{once:true}); });

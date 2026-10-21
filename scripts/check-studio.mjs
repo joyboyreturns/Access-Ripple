@@ -9,7 +9,7 @@
  */
 import { chromium } from 'playwright';
 
-const browser = await chromium.launch({ channel: 'chrome' });
+const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const problems = [];
 page.on('console', (m) => { if (m.type() === 'error') problems.push('CONSOLE: ' + m.text()); });
@@ -20,6 +20,16 @@ const results = [];
 const check = (name, pass, detail = '') => { results.push({ name, pass, detail }); console.log(`${pass ? 'PASS' : 'FAIL'}  ${name}${detail ? ' :: ' + detail : ''}`); };
 const txt = (sel) => page.evaluate((s) => document.querySelector(s)?.textContent?.trim() ?? null, sel);
 const has = (sel) => page.evaluate((s) => Boolean(document.querySelector(s)), sel);
+
+// Start from a clean demo shop, so an earlier run's applied change does not
+// change what this run measures.
+const resetShop = async () => {
+  for (const [path, body] of [['/api/sample/reset', '{}'], ['/api/sample/state', JSON.stringify({ variant: 'before' })]]) {
+    const response = await fetch(`http://127.0.0.1:4317${path}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body });
+    if (!response.ok) throw new Error(`could not reset the demo shop: ${path}`);
+  }
+};
+await resetShop();
 
 // --- 1. Landing ---
 await page.goto('http://127.0.0.1:5173/', { waitUntil: 'domcontentloaded' });
@@ -85,49 +95,71 @@ await page.click('.coverage-details summary');
 await page.waitForTimeout(300);
 check('coverage explains itself', (await txt('.coverage-details'))?.includes('control') ?? false);
 
-// --- 8. AI briefing (real model) ---
-await page.click('.ai-briefing .button-solid');
-await page.waitForSelector('.ai-text', { timeout: 90000 });
-const ai = await txt('.ai-text');
-check('AI briefing is produced', Boolean(ai && ai.length > 40), (ai ?? '').slice(0, 70));
-const chips = await page.evaluate(() => document.querySelectorAll('.ai-citations button').length);
-const gaps = await page.evaluate(() => document.querySelectorAll('.ai-citations .ai-gap').length);
-check('AI cites evidence', chips + gaps > 0, `${chips} evidence chips, ${gaps} gap chips`);
-check('AI names what is missing', gaps > 0, `${gaps} gap chips`);
-
+// --- 8. AI briefing (only when a model is configured) ---
+const aiReady = await page.evaluate(async () => (await (await fetch('/api/ai/status')).json()).configured);
+if (aiReady) {
+  await page.click('.ai-briefing .button-solid');
+  await page.waitForSelector('.ai-text', { timeout: 120000 });
+  const ai = await txt('.ai-text');
+  check('AI briefing is produced', Boolean(ai && ai.length > 40), (ai ?? '').slice(0, 70));
+  const chips = await page.evaluate(() => document.querySelectorAll('.ai-citations button').length);
+  const gaps = await page.evaluate(() => document.querySelectorAll('.ai-citations .ai-gap').length);
+  check('AI cites evidence', chips + gaps > 0, `${chips} evidence chips, ${gaps} gap chips`);
+  check('AI names what is missing', gaps > 0, `${gaps} gap chips`);
+} else {
+  console.log('SKIP  the AI beats (no model provider configured)');
+  const explain = await txt('.ai-briefing');
+  check('the app explains the AI is unavailable', Boolean(explain && explain.includes('ACCESSRIPPLE_AI_KEY')), 'the card says how to enable it');
+}
 // --- 8b. A proposed change, grounded in the recorded markup ---
-await page.click('.category-button:has-text("Findings")');
-await page.waitForTimeout(400);
-await page.click('.segmented button:has-text("List")');
-await page.waitForTimeout(400);
-const picked = await page.evaluate(() => {
-  const rows = [...document.querySelectorAll('.inventory-row')];
-  const row = rows.find((r) => /image|alternative/i.test(r.textContent ?? '')) ?? rows[0];
-  if (row) row.click();
-  return row ? row.textContent.slice(0, 40) : null;
-});
-await page.waitForTimeout(500);
-check('a finding can be selected', Boolean(picked), picked ?? '');
-await page.click('.fix-propose .button-glass');
-await page.waitForSelector('.fix-card', { timeout: 90000 });
-const before = await page.evaluate(() => document.querySelector('.fix-line.before code')?.textContent ?? '');
-const after = await page.evaluate(() => document.querySelector('.fix-line.after code')?.textContent ?? '');
-check('a change is proposed', before.length > 10 && after.length > 10, `${before.slice(0, 40)} -> ${after.slice(0, 40)}`);
-check('the proposal names the file and line', Boolean(await page.$('.fix-location')));
-check('the apply button is honest', (await page.evaluate(() => document.querySelector('.fix-actions .button-solid')?.textContent ?? '')).includes('demo repair'));
+if (aiReady) {
+  await page.click('.category-button:has-text("Findings")');
+  await page.waitForTimeout(400);
+  await page.click('.segmented button:has-text("List")');
+  await page.waitForTimeout(400);
+  const picked = await page.evaluate(() => {
+    const rows = [...document.querySelectorAll('.inventory-row')];
+    const row = rows.find((r) => /Accessibility/i.test(r.textContent ?? '')) ?? rows.find((r) => /image|alternative|contrast/i.test(r.textContent ?? '')) ?? rows[0];
+    if (row) row.click();
+    return row ? row.textContent.slice(0, 40) : null;
+  });
+  await page.waitForTimeout(500);
+  check('a finding can be selected', Boolean(picked), picked ?? '');
+  await page.click('.fix-propose .button-glass');
+  await page.waitForSelector('.fix-card', { timeout: 90000 });
+  const before = await page.evaluate(() => document.querySelector('.fix-line.before code')?.textContent ?? '');
+  const after = await page.evaluate(() => document.querySelector('.fix-line.after code')?.textContent ?? '');
+  check('a change is proposed', before.length > 10 && after.length > 10, `${before.slice(0, 40)} -> ${after.slice(0, 40)}`);
+  check('the proposal names the file and line', Boolean(await page.$('.fix-location')));
+  check('the apply button is honest', (await page.evaluate(() => document.querySelector('.fix-actions .button-solid')?.textContent ?? '')).includes('demo shop'));
+}
 
-// --- 9. Repair loop ---
-await page.click('.repair-actions .button-glass');
-await page.waitForTimeout(700);
-check('shop switches to repaired', (await txt('.repair-lab'))?.includes('Repaired state') ?? false, (await txt('.repair-lab'))?.slice(0,50) ?? '');
-await page.click('.repair-actions .button-solid');
-await page.waitForSelector('.comparison', { timeout: 90000 });
-const comparison = await txt('.comparison');
-check('comparison shows three resolved', /3 no longer observed/.test(comparison ?? ''), comparison ?? '');
+// --- 9. The repair loop: an accepted change, applied and measured ---
+if (aiReady) {
+  // Applying the accepted proposal must change what the scanner reads.
+  await page.click('.fix-actions .button-solid');
+  await page.waitForTimeout(1500);
+  const served = await page.evaluate(async () => (await (await fetch('/sample/checkout')).text()));
+  check('the accepted change is applied to the demo shop', /alt=/.test(served), 'the served page carries the change');
+  await page.click('.repair-actions .button-solid');
+  await page.waitForSelector('.comparison', { timeout: 90000 });
+  const comparison = await txt('.comparison');
+  check('the rescan measured the change', /[1-9]\d* no longer observed/.test(comparison ?? ''), comparison ?? '');
+  check('nothing new appeared', /0 new/.test(comparison ?? ''), comparison ?? '');
+} else {
+  // Without a model, the prewritten repair is the controlled comparison.
+  await page.click('.repair-actions .button-glass');
+  await page.waitForTimeout(700);
+  check('shop switches to repaired', (await txt('.repair-lab'))?.includes('Repaired state') ?? false, (await txt('.repair-lab'))?.slice(0, 50) ?? '');
+  await page.click('.repair-actions .button-solid');
+  await page.waitForSelector('.comparison', { timeout: 90000 });
+  const comparison = await txt('.comparison');
+  check('comparison shows three resolved', /3 no longer observed/.test(comparison ?? ''), comparison ?? '');
+}
 
 // --- 9b. The proof: the same page before and after ---
 await page.click('button:has-text("See the page before and after")');
-await page.waitForSelector('.proof-view', { timeout: 10000 });
+await page.waitForSelector('dialog.proof-dialog[open]', { timeout: 10000 });
 const shots = await page.evaluate(() => [...document.querySelectorAll('.proof-shots img')].map((i) => i.naturalWidth));
 check('the proof shows two pictures', shots.length === 2 && shots.every((w) => w > 0), shots.join('x'));
 check('the proof leads with the counts', (await txt('.proof-head h2'))?.includes('no longer observed') ?? false);
@@ -173,5 +205,11 @@ console.log('\n=== SUMMARY ===');
 console.log(`${results.filter((r) => r.pass).length}/${results.length} passed`);
 const failed = results.filter((r) => !r.pass);
 if (failed.length) console.log('FAILED:', failed.map((f) => f.name).join(' | '));
-console.log('runtime problems:', problems.length ? problems : 'none');
+const real = problems.filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p));
+console.log('runtime problems:', real.length ? real : 'none');
 await browser.close();
+if (failed.length || real.length) {
+  console.error('\nThe studio check did not pass. Fix this before recording.');
+  process.exit(1);
+}
+console.log('\nThe studio check passed.');

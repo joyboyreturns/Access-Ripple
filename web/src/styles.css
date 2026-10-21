@@ -250,3 +250,17 @@ body{min-width:320px}
 /* The small line under a row title is also on the raised surface of a selected row. */
 .inventory-row small{color:var(--muted)}
 .fix-honest{color:var(--muted)}
+
+/* The workflow a finding is meant to start. */
+.what-next{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:var(--surface2)}
+.what-next .eyebrow{font-size:9.5px;margin-bottom:8px}
+.what-next ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.what-next li{font-size:12.5px;line-height:1.55;color:var(--muted)}
+
+/* The proof is a real modal dialog, so it behaves like one. */
+.proof-dialog{width:min(1180px,calc(100% - 32px));max-height:92dvh;overflow:auto;padding:30px clamp(20px,3vw,40px);gap:0}
+.proof-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}
+.proof-dialog .proof-head{max-width:none}
+.proof-dialog .proof-shots{max-width:none}
+.proof-dialog .proof-resolved{max-width:none}
+.proof-dialog .proof-rest{max-width:none}

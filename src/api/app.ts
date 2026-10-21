@@ -1,14 +1,17 @@
 import Fastify, { LogController, type FastifyInstance } from 'fastify';
+import fastifyStatic from '@fastify/static';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
 import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/briefing.js';
 import { readFixConfig, writeFixProposal } from '../ai/fix.js';
+import { appliedPatches, applyPatch, clearPatches, isDemoFixture, patchedContent } from '../sample/sandbox.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
@@ -22,8 +25,9 @@ const createBody = z.union([
 ]);
 const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
 const fixBody = z.object({ nodeId: z.string().min(1).max(200) }).strict();
+const applyBody = z.object({ file: z.string().min(1).max(200), before: z.string().min(1).max(4000), after: z.string().min(1).max(4000), summary: z.string().max(300).optional() }).strict();
 const sampleStateBody = z.object({ variant: z.enum(['before', 'after']) }).strict();
-const allowedOrigins = new Set(['http://localhost:5173', 'http://127.0.0.1:5173']);
+const DEFAULT_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
 const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
 let workerBusy = false;
@@ -115,6 +119,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     logController: new LogController({ disableRequestLogging: true }),
   });
   const baseUrl = options.baseUrl ?? 'http://127.0.0.1:4317';
+  // The studio is served from the development server in development, and from
+  // this same address once it has been built. Both are allowed.
+  const allowedOrigins = new Set(DEFAULT_ORIGINS);
+  try { allowedOrigins.add(new URL(baseUrl).origin); } catch { /* The base address is not a URL. */ }
   // The checkout sample ships in two states so you can demo a real before/after repair loop.
   let sampleVariant: 'before' | 'after' = 'before';
 
@@ -210,7 +218,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     return { variant: sampleVariant };
   });
 
-  app.get('/sample/checkout', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), sampleVariant === 'after' ? 'src/sample/site/checkout-fixed.html' : 'src/sample/site/checkout.html'), 'utf8')));
+  app.get('/sample/checkout', async (_request, reply) => {
+    // A patched demo shop is served instead of the file on disk, so the next
+    // scan reads the change that was actually accepted.
+    const file = `src/sample/site/${sampleVariant === 'after' ? 'checkout-fixed.html' : 'checkout.html'}`;
+    const patched = patchedContent(file);
+    if (patched !== null) return reply.type('text/html; charset=utf-8').send(patched);
+    return reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), file), 'utf8'));
+  });
   app.get('/sample/product.svg', async (_request, reply) => reply.type('image/svg+xml').send(await readFile(resolve(process.cwd(), 'src/sample/site/product.svg'), 'utf8')));
   app.get('/sample/payment', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/payment.html'), 'utf8')));
   app.get('/sample/catalog', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/catalog.html'), 'utf8')));
@@ -297,6 +312,25 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     }
   });
 
+  // Applying an accepted proposal. Only the tool's own fixture may change,
+  // and only in memory, so the next scan can measure the change.
+  app.post('/api/sample/apply', async (request, reply) => {
+    const body = applyBody.safeParse(request.body ?? {});
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_APPLY_REQUEST', message: 'Provide the file, the original markup, and the replacement.', retryable: false } });
+    const { file, before, after, summary } = body.data;
+    if (!isDemoFixture(file)) return reply.code(403).send({ error: { code: 'FIXTURE_ONLY', message: 'Only the built-in demo shop can be changed by the tool.', retryable: false } });
+    const patch = applyPatch(file, before, after, summary ?? 'A change that was accepted in the studio.');
+    if (!patch) return reply.code(422).send({ error: { code: 'PATCH_DOES_NOT_APPLY', message: 'The recorded markup was not found in that file, so the change was not applied.', retryable: false } });
+    return { applied: true, file: patch.file, summary: patch.summary, before: patch.before, after: patch.after, appliedAt: patch.appliedAt };
+  });
+
+  app.get('/api/sample/patches', async () => ({ patches: appliedPatches() }));
+
+  app.post('/api/sample/reset', async () => {
+    clearPatches();
+    return { reset: true };
+  });
+
   app.get<{ Params: { scanId: string; otherScanId: string } }>('/api/scans/:scanId/compare/:otherScanId', async (request, reply) => {
     const current = await getScan(request.params.scanId);
     const previous = await getScan(request.params.otherScanId);
@@ -319,6 +353,20 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     }
   });
 
-  app.get('/', async () => ({ name: 'AccessRipple API', docs: '/docs', health: '/api/health', sample: '/sample/checkout' }));
+  // When the studio has been built, serve it from this same address, so one
+  // command gives a working application rather than an API with no interface.
+  const webRoot = resolve(process.cwd(), 'dist/web');
+  const studioBuilt = existsSync(join(webRoot, 'index.html'));
+  if (studioBuilt) {
+    await app.register(fastifyStatic, { root: webRoot, prefix: '/' });
+    app.setNotFoundHandler((request, reply) => {
+      if (request.url.startsWith('/api') || request.url.startsWith('/sample') || request.url.startsWith('/docs')) {
+        return reply.code(404).send({ error: { code: 'NOT_FOUND', message: 'That address does not exist.', retryable: false } });
+      }
+      return reply.type('text/html; charset=utf-8').send(readFileSync(join(webRoot, 'index.html')));
+    });
+  } else {
+    app.get('/', async () => ({ name: 'AccessRipple API', docs: '/docs', health: '/api/health', sample: '/sample/checkout' }));
+  }
   return app;
 }

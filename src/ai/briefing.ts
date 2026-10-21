@@ -38,6 +38,9 @@ export interface Briefing {
   model: string;
 }
 
+/** How long one model in the chain may take. The browser waits longer than the whole chain. */
+const MODEL_TIMEOUT_MS = 25_000;
+
 export class BriefingError extends Error {
   constructor(message: string, public readonly code: 'NOT_CONFIGURED' | 'REQUEST_FAILED' | 'NO_GROUNDED_SENTENCE') {
     super(message);
@@ -215,7 +218,7 @@ export async function writeBriefing(scan: ScanResult, graph: SiteGraph, config: 
 
 async function requestCompletion(model: string, config: AiConfig, scan: ScanResult, graph: SiteGraph, digest: DigestItem[]): Promise<string> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 45000);
+  const timer = setTimeout(() => controller.abort(), MODEL_TIMEOUT_MS);
   const body: Record<string, unknown> = {
     model,
     temperature: 0,

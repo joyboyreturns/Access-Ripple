@@ -323,8 +323,15 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
           return route.abort('blockedbyclient').catch(() => undefined);
         }
         try {
-          const requestUrl = route.request().url();
+          const request = route.request();
+          const requestUrl = request.url();
           if (!requestUrl.startsWith('http://') && !requestUrl.startsWith('https://')) return await route.abort('blockedbyclient');
+          // The page the user asked for is loaded; anything the page tries to
+          // send on its own is stopped, so the scan never changes data.
+          if (!['GET', 'HEAD'].includes(request.method().toUpperCase()) && request.resourceType() !== 'document') {
+            errors.push(errorEvidence('request', `Blocked a ${request.method().toUpperCase()} request the page tried to send.`, safeDisplayUrl(requestUrl)));
+            return await route.abort('blockedbyclient');
+          }
           await assertSafeUrl(requestUrl, { allowLocalSample: Boolean(input.sample), sampleOrigin });
           await route.continue();
         } catch {
@@ -373,7 +380,9 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             findings: [], outgoingLinks: [], interactions: [], screenshot: shot, errorMessage: 'The site refused the automated browser. Some sites answer automated browsers with a challenge page instead of the site.',
           };
         } else {
-          entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
+          // The live array is kept, because a request can be blocked after the page
+          // has loaded and that block still belongs to this page.
+          entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors, findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
         }
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {
@@ -420,6 +429,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             if (entry.errors.length >= 120) break;
             if (!entry.errors.some((existing) => existing.id === error.id)) entry.errors.push(error);
           }
+          if (entry.errors.length > 120) entry.errors.length = 120;
           if (next.depth < scan.limits.maxDepth) {
             for (const href of batch.revealedLinks) {
               if (shouldCrawlLink(href, origin, Boolean(input.sample))) enqueue(href, next.depth + 1);
