@@ -17,5 +17,6 @@ tags:
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[breakDemo()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
+- [[scanDemo()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

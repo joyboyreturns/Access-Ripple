@@ -29,5 +29,6 @@ tags:
 - [[resetDemoShop()]] - `calls` [EXTRACTED]
 - [[setSampleState()]] - `calls` [EXTRACTED]
 - [[writeBriefing()_1]] - `calls` [EXTRACTED]
+- [[writeContract()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

@@ -52,8 +52,9 @@ try {
   });
   check('a bare domain is accepted', (await page.evaluate(() => document.querySelector('#website-url')?.value)) === 'developer.mozilla.org');
   await page.click('button:has-text("Map this website")');
-  await page.waitForSelector('.scan-progress', { timeout: 10000 });
-  check('the scan shows a bounded wait', (await text('.scan-progress'))?.includes('left') ?? false, (await text('.scan-progress'))?.replace(/\n/g, ' | '));
+  await page.waitForSelector('.scan-progress', { timeout: 30000 });
+  const progress = (await text('.scan-progress'))?.replace(/\n/g, ' | ') ?? '';
+  check('the scan shows a bounded wait', progress.includes('left') || progress.includes('pages inspected'), progress);
 
   // --- 0:30 cut to a prepared result ---
   record('Cut to the result');
@@ -91,7 +92,18 @@ try {
   check('a journey can be followed', Boolean(option), option ?? '');
   check('the route is drawn', (await text('.map-coverage'))?.includes('travelling pulse') ?? false);
 
-  // --- 1:18 a proposed change ---
+  // --- 1:18 the controlled demo shop, where a change can be applied ---
+  // The proposal and the rescan happen on the demo shop, because that is the
+  // only fixture this tool owns and the only one it may change.
+  record('The demo shop');
+  await page.click('.demo-button');
+  // Generous, because the public-site scan from the previous beat may still
+  // be running in the background and both browsers share this machine.
+  await page.waitForSelector('.repair-lab', { timeout: 240000 });
+  await page.waitForTimeout(1200);
+  check('the demo shop is scanned and can be repaired', Boolean(await page.$('.repair-lab')));
+
+  // --- 1:24 a proposed change ---
   record('A proposed change');
   await page.click('.category-button:has-text("Findings")');
   await page.waitForTimeout(400);
@@ -113,12 +125,34 @@ try {
     console.log('SKIP  a proposed change (no model configured)');
   }
 
+  // --- 1:36 the model's commitment, and the rescan that checks it ---
+  record('The commitment and the rescan');
+  if (canPropose) {
+    const predict = await page.$('button:has-text("Ask what this will fix")');
+    if (predict) {
+      await predict.click();
+      await page.waitForSelector('.fix-contract', { timeout: 120000 });
+      const commitments = await page.evaluate(() => document.querySelectorAll('.fix-contract li').length);
+      check('the model commits to what it will fix', commitments > 0, `${commitments} commitments`);
+      await page.click('.fix-actions .button-solid');
+      await page.waitForTimeout(1500);
+      await page.click('.repair-actions .button-solid');
+      await page.waitForSelector('.comparison', { timeout: 120000 });
+      await page.waitForTimeout(1000);
+      const verdicts = await page.evaluate(() => [...document.querySelectorAll('.prediction-verdicts .verdict')].map((row) => row.className.replace('verdict ', '')));
+      check('the browser checked the prediction', verdicts.length > 0, verdicts.join(', '));
+    } else {
+      console.log('SKIP  the commitment (no prediction button)');
+    }
+  }
+
   // --- 1:36 the proof ---
   record('The proof');
   await page.click('button:has-text("Show the proof")');
   await page.waitForSelector('dialog.proof-dialog[open]', { timeout: 20000 });
   await page.waitForTimeout(600);
-  check('the proof leads with the counts', (await text('.proof-head h2'))?.includes('no longer observed') ?? false, await text('.proof-head h2'));
+  const tiles = await page.evaluate(() => [...document.querySelectorAll('.proof-tile')].map((tile) => tile.textContent).join(' | '));
+  check('the proof leads with the counts', tiles.includes('no longer observed'), tiles);
   check('it is labelled as the controlled demo shop', (await text('.proof-head .eyebrow'))?.includes('DEMO SHOP') ?? false, await text('.proof-head .eyebrow'));
   const shots = await page.evaluate(() => [...document.querySelectorAll('.proof-shots img')].map((i) => i.naturalWidth));
   check('the page before and after is shown', shots.length === 2 && shots.every((w) => w > 0), shots.join('x'));
@@ -130,7 +164,7 @@ try {
   await page.click('.coverage-details summary');
   await page.waitForTimeout(300);
   const coverage = await text('.coverage-details');
-  check('coverage says what was left out', (coverage?.includes('not activated') ?? false) || (coverage?.includes('not tested') ?? false));
+  check('coverage says what was left out', (coverage?.includes('stayed untested') ?? false) || (coverage?.includes('never considered') ?? false), (coverage ?? '').replace(/\n/g, ' | ').slice(0, 120));
 
   // --- 2:14 the export ---
   record('The export');

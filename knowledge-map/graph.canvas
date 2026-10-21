@@ -7,7 +7,7 @@
       "x": 0,
       "y": 0,
       "width": 5060,
-      "height": 2320,
+      "height": 2420,
       "color": "1"
     },
     {
@@ -29,7 +29,7 @@
       "height": 60
     },
     {
-      "id": "n_src_scan_url_safety_unsafeurlerror_constructor",
+      "id": "n_src_ai_contract_contracterror_constructor",
       "type": "file",
       "file": "dot-constructor()_1.md",
       "x": 420,
@@ -38,7 +38,7 @@
       "height": 60
     },
     {
-      "id": "n_web_src_api_apierror_constructor",
+      "id": "n_src_scan_url_safety_unsafeurlerror_constructor",
       "type": "file",
       "file": "dot-constructor()_2.md",
       "x": 620,
@@ -47,10 +47,19 @@
       "height": 60
     },
     {
+      "id": "n_web_src_api_apierror_constructor",
+      "type": "file",
+      "file": "dot-constructor()_3.md",
+      "x": 820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_package_dependencies_fastify_static",
       "type": "file",
       "file": "@fastifystatic.md",
-      "x": 820,
+      "x": 1020,
       "y": 80,
       "width": 180,
       "height": 60
@@ -59,7 +68,7 @@
       "id": "n_ref_fastify_static",
       "type": "file",
       "file": "@fastifystatic_1.md",
-      "x": 1020,
+      "x": 1220,
       "y": 80,
       "width": 180,
       "height": 60
@@ -68,7 +77,7 @@
       "id": "n_package_dependencies_fastify_swagger",
       "type": "file",
       "file": "@fastifyswagger.md",
-      "x": 1220,
+      "x": 1420,
       "y": 80,
       "width": 180,
       "height": 60
@@ -77,7 +86,7 @@
       "id": "n_ref_fastify_swagger",
       "type": "file",
       "file": "@fastifyswagger_1.md",
-      "x": 1420,
+      "x": 1620,
       "y": 80,
       "width": 180,
       "height": 60
@@ -86,7 +95,7 @@
       "id": "n_package_dependencies_fastify_swagger_ui",
       "type": "file",
       "file": "@fastifyswagger-ui.md",
-      "x": 1620,
+      "x": 1820,
       "y": 80,
       "width": 180,
       "height": 60
@@ -95,7 +104,7 @@
       "id": "n_ref_fastify_swagger_ui",
       "type": "file",
       "file": "@fastifyswagger-ui_1.md",
-      "x": 1820,
+      "x": 2020,
       "y": 80,
       "width": 180,
       "height": 60
@@ -104,7 +113,7 @@
       "id": "n_package_devdependencies_types_node",
       "type": "file",
       "file": "@typesnode.md",
-      "x": 2020,
+      "x": 2220,
       "y": 80,
       "width": 180,
       "height": 60
@@ -113,7 +122,7 @@
       "id": "n_ref_types_node",
       "type": "file",
       "file": "@typesnode_1.md",
-      "x": 2220,
+      "x": 2420,
       "y": 80,
       "width": 180,
       "height": 60
@@ -122,7 +131,7 @@
       "id": "n_package_devdependencies_types_react",
       "type": "file",
       "file": "@typesreact.md",
-      "x": 2420,
+      "x": 2620,
       "y": 80,
       "width": 180,
       "height": 60
@@ -131,7 +140,7 @@
       "id": "n_ref_types_react",
       "type": "file",
       "file": "@typesreact_1.md",
-      "x": 2620,
+      "x": 2820,
       "y": 80,
       "width": 180,
       "height": 60
@@ -140,7 +149,7 @@
       "id": "n_package_devdependencies_types_react_dom",
       "type": "file",
       "file": "@typesreact-dom.md",
-      "x": 2820,
+      "x": 3020,
       "y": 80,
       "width": 180,
       "height": 60
@@ -149,7 +158,7 @@
       "id": "n_ref_types_react_dom",
       "type": "file",
       "file": "@typesreact-dom_1.md",
-      "x": 3020,
+      "x": 3220,
       "y": 80,
       "width": 180,
       "height": 60
@@ -158,7 +167,7 @@
       "id": "n_package_devdependencies_vitejs_plugin_react",
       "type": "file",
       "file": "@vitejsplugin-react.md",
-      "x": 3220,
+      "x": 3420,
       "y": 80,
       "width": 180,
       "height": 60
@@ -167,7 +176,7 @@
       "id": "n_ref_vitejs_plugin_react",
       "type": "file",
       "file": "@vitejsplugin-react_1.md",
-      "x": 3420,
+      "x": 3620,
       "y": 80,
       "width": 180,
       "height": 60
@@ -176,7 +185,7 @@
       "id": "n_readme_accessripple",
       "type": "file",
       "file": "AccessRipple.md",
-      "x": 3620,
+      "x": 3820,
       "y": 80,
       "width": 180,
       "height": 60
@@ -185,7 +194,7 @@
       "id": "n_src_graph_schema_accessibilityevidence",
       "type": "file",
       "file": "AccessibilityEvidence.md",
-      "x": 3820,
+      "x": 4020,
       "y": 80,
       "width": 180,
       "height": 60
@@ -194,7 +203,7 @@
       "id": "n_src_scan_interaction_actionclass",
       "type": "file",
       "file": "ActionClass.md",
-      "x": 4020,
+      "x": 4220,
       "y": 80,
       "width": 180,
       "height": 60
@@ -203,7 +212,7 @@
       "id": "n_web_src_app_aibriefing",
       "type": "file",
       "file": "AiBriefing().md",
-      "x": 4220,
+      "x": 4420,
       "y": 80,
       "width": 180,
       "height": 60
@@ -212,8 +221,8 @@
       "id": "n_src_ai_briefing_aiconfig",
       "type": "file",
       "file": "AiConfig.md",
-      "x": 4420,
-      "y": 80,
+      "x": 20,
+      "y": 160,
       "width": 180,
       "height": 60
     },
@@ -221,7 +230,7 @@
       "id": "n_web_src_api_aistatus",
       "type": "file",
       "file": "AiStatus.md",
-      "x": 20,
+      "x": 220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -230,7 +239,7 @@
       "id": "n_web_src_api_apierror",
       "type": "file",
       "file": "ApiError.md",
-      "x": 220,
+      "x": 420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -239,7 +248,7 @@
       "id": "n_web_src_app_app",
       "type": "file",
       "file": "App().md",
-      "x": 420,
+      "x": 620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -248,7 +257,7 @@
       "id": "n_web_src_app",
       "type": "file",
       "file": "App.tsx.md",
-      "x": 620,
+      "x": 820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -257,7 +266,7 @@
       "id": "n_src_api_app_appoptions",
       "type": "file",
       "file": "AppOptions.md",
-      "x": 820,
+      "x": 1020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -266,7 +275,7 @@
       "id": "n_src_sample_sandbox_appliedpatch",
       "type": "file",
       "file": "AppliedPatch.md",
-      "x": 1020,
+      "x": 1220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -275,7 +284,7 @@
       "id": "n_src_scan_interaction_blocked_path",
       "type": "file",
       "file": "BLOCKED_PATH.md",
-      "x": 1220,
+      "x": 1420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -284,7 +293,7 @@
       "id": "n_readme_before_after_repair_loop_on_the_sample",
       "type": "file",
       "file": "Beforeafter repair loop on the sample.md",
-      "x": 1420,
+      "x": 1620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -293,7 +302,7 @@
       "id": "n_src_ai_briefing_briefing",
       "type": "file",
       "file": "Briefing.md",
-      "x": 1620,
+      "x": 1820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -302,7 +311,7 @@
       "id": "n_web_src_api_briefing",
       "type": "file",
       "file": "Briefing_1.md",
-      "x": 1820,
+      "x": 2020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -311,7 +320,7 @@
       "id": "n_src_ai_briefing_briefingcitation",
       "type": "file",
       "file": "BriefingCitation.md",
-      "x": 2020,
+      "x": 2220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -320,7 +329,16 @@
       "id": "n_src_ai_briefing_briefingerror",
       "type": "file",
       "file": "BriefingError.md",
-      "x": 2220,
+      "x": 2420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_checkedprediction",
+      "type": "file",
+      "file": "CheckedPrediction.md",
+      "x": 2620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -329,7 +347,16 @@
       "id": "n_readme_compact_architecture_map",
       "type": "file",
       "file": "Compact architecture map.md",
-      "x": 2420,
+      "x": 2820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_contracterror",
+      "type": "file",
+      "file": "ContractError.md",
+      "x": 3020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -338,7 +365,7 @@
       "id": "n_src_graph_schema_controlevidence",
       "type": "file",
       "file": "ControlEvidence.md",
-      "x": 2620,
+      "x": 3220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -347,7 +374,7 @@
       "id": "n_web_src_presentation_copy",
       "type": "file",
       "file": "Copy.md",
-      "x": 2820,
+      "x": 3420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -356,7 +383,7 @@
       "id": "n_readme_current_build",
       "type": "file",
       "file": "Current build.md",
-      "x": 3020,
+      "x": 3620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -365,7 +392,7 @@
       "id": "n_src_scan_worker_default_limits",
       "type": "file",
       "file": "DEFAULT_LIMITS.md",
-      "x": 3220,
+      "x": 3820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -374,7 +401,7 @@
       "id": "n_src_api_app_default_origins",
       "type": "file",
       "file": "DEFAULT_ORIGINS.md",
-      "x": 3420,
+      "x": 4020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -383,7 +410,7 @@
       "id": "n_web_src_api_default_wait_ms",
       "type": "file",
       "file": "DEFAULT_WAIT_MS.md",
-      "x": 3620,
+      "x": 4220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -392,7 +419,7 @@
       "id": "n_web_src_landing_dialog",
       "type": "file",
       "file": "Dialog().md",
-      "x": 3820,
+      "x": 4420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -401,8 +428,8 @@
       "id": "n_src_ai_briefing_digestitem",
       "type": "file",
       "file": "DigestItem.md",
-      "x": 4020,
-      "y": 160,
+      "x": 20,
+      "y": 240,
       "width": 180,
       "height": 60
     },
@@ -410,8 +437,8 @@
       "id": "n_web_src_app_empty",
       "type": "file",
       "file": "EMPTY.md",
-      "x": 4220,
-      "y": 160,
+      "x": 220,
+      "y": 240,
       "width": 180,
       "height": 60
     },
@@ -419,8 +446,8 @@
       "id": "n_src_graph_schema_evidencelabel",
       "type": "file",
       "file": "EvidenceLabel.md",
-      "x": 4420,
-      "y": 160,
+      "x": 420,
+      "y": 240,
       "width": 180,
       "height": 60
     },
@@ -428,7 +455,7 @@
       "id": "n_web_src_types_evidencelabel",
       "type": "file",
       "file": "EvidenceLabel_1.md",
-      "x": 20,
+      "x": 620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -437,7 +464,7 @@
       "id": "n_src_scan_worker_extractedcontrol",
       "type": "file",
       "file": "ExtractedControl.md",
-      "x": 220,
+      "x": 820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -446,7 +473,7 @@
       "id": "n_web_src_app_filters",
       "type": "file",
       "file": "FILTERS.md",
-      "x": 420,
+      "x": 1020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -455,7 +482,7 @@
       "id": "n_src_ai_fix_fixconfig",
       "type": "file",
       "file": "FixConfig.md",
-      "x": 620,
+      "x": 1220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -464,7 +491,7 @@
       "id": "n_src_ai_fix_fixproposal",
       "type": "file",
       "file": "FixProposal.md",
-      "x": 820,
+      "x": 1420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -473,7 +500,7 @@
       "id": "n_web_src_types_fixproposal",
       "type": "file",
       "file": "FixProposal_1.md",
-      "x": 1020,
+      "x": 1620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -482,7 +509,7 @@
       "id": "n_web_src_app_fixproposalcard",
       "type": "file",
       "file": "FixProposalCard().md",
-      "x": 1220,
+      "x": 1820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -491,7 +518,7 @@
       "id": "n_web_src_graphcanvas_graphcanvas",
       "type": "file",
       "file": "GraphCanvas().md",
-      "x": 1420,
+      "x": 2020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -500,7 +527,7 @@
       "id": "n_web_src_graphcanvas",
       "type": "file",
       "file": "GraphCanvas.tsx.md",
-      "x": 1620,
+      "x": 2220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -509,7 +536,7 @@
       "id": "n_src_graph_schema_graphedge",
       "type": "file",
       "file": "GraphEdge.md",
-      "x": 1820,
+      "x": 2420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -518,7 +545,7 @@
       "id": "n_web_src_types_graphedge",
       "type": "file",
       "file": "GraphEdge_1.md",
-      "x": 2020,
+      "x": 2620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -527,7 +554,7 @@
       "id": "n_src_graph_schema_graphedgekind",
       "type": "file",
       "file": "GraphEdgeKind.md",
-      "x": 2220,
+      "x": 2820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -536,7 +563,7 @@
       "id": "n_web_src_presentation_graphfilter",
       "type": "file",
       "file": "GraphFilter.md",
-      "x": 2420,
+      "x": 3020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -545,7 +572,7 @@
       "id": "n_src_graph_schema_graphnode",
       "type": "file",
       "file": "GraphNode.md",
-      "x": 2620,
+      "x": 3220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -554,7 +581,7 @@
       "id": "n_web_src_types_graphnode",
       "type": "file",
       "file": "GraphNode_1.md",
-      "x": 2820,
+      "x": 3420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -563,7 +590,7 @@
       "id": "n_src_graph_schema_graphnodekind",
       "type": "file",
       "file": "GraphNodeKind.md",
-      "x": 3020,
+      "x": 3620,
       "y": 240,
       "width": 180,
       "height": 60
@@ -572,7 +599,7 @@
       "id": "n_web_src_types_graphnodekind",
       "type": "file",
       "file": "GraphNodeKind_1.md",
-      "x": 3220,
+      "x": 3820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -581,7 +608,7 @@
       "id": "n_src_scan_interaction_ignored_roles",
       "type": "file",
       "file": "IGNORED_ROLES.md",
-      "x": 3420,
+      "x": 4020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -590,7 +617,7 @@
       "id": "n_web_src_graphcanvas_initial",
       "type": "file",
       "file": "INITIAL.md",
-      "x": 3620,
+      "x": 4220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -599,7 +626,7 @@
       "id": "n_web_src_icons_icon",
       "type": "file",
       "file": "Icon().md",
-      "x": 3820,
+      "x": 4420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -608,8 +635,8 @@
       "id": "n_web_src_icons",
       "type": "file",
       "file": "Icons.tsx.md",
-      "x": 4020,
-      "y": 240,
+      "x": 20,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -617,8 +644,8 @@
       "id": "n_src_scan_interaction_interactionbatch",
       "type": "file",
       "file": "InteractionBatch.md",
-      "x": 4220,
-      "y": 240,
+      "x": 220,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -626,8 +653,8 @@
       "id": "n_src_graph_schema_interactionevidence",
       "type": "file",
       "file": "InteractionEvidence.md",
-      "x": 4420,
-      "y": 240,
+      "x": 420,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -635,7 +662,7 @@
       "id": "n_web_src_types_interactionevidenceview",
       "type": "file",
       "file": "InteractionEvidenceView.md",
-      "x": 20,
+      "x": 620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -644,7 +671,7 @@
       "id": "n_src_graph_schema_interactionexclusion",
       "type": "file",
       "file": "InteractionExclusion.md",
-      "x": 220,
+      "x": 820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -653,7 +680,7 @@
       "id": "n_src_graph_schema_interactionexclusionreason",
       "type": "file",
       "file": "InteractionExclusionReason.md",
-      "x": 420,
+      "x": 1020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -662,7 +689,7 @@
       "id": "n_src_graph_schema_interactionmode",
       "type": "file",
       "file": "InteractionMode.md",
-      "x": 620,
+      "x": 1220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -671,7 +698,7 @@
       "id": "n_web_src_types_interactionmode",
       "type": "file",
       "file": "InteractionMode_1.md",
-      "x": 820,
+      "x": 1420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -680,7 +707,7 @@
       "id": "n_src_graph_schema_interactionoutcome",
       "type": "file",
       "file": "InteractionOutcome.md",
-      "x": 1020,
+      "x": 1620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -689,7 +716,7 @@
       "id": "n_web_src_types_interactionoutcome",
       "type": "file",
       "file": "InteractionOutcome_1.md",
-      "x": 1220,
+      "x": 1820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -698,7 +725,7 @@
       "id": "n_src_scan_interaction_interactionrunoptions",
       "type": "file",
       "file": "InteractionRunOptions.md",
-      "x": 1420,
+      "x": 2020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -707,7 +734,7 @@
       "id": "n_src_graph_schema_interactionstep",
       "type": "file",
       "file": "InteractionStep.md",
-      "x": 1620,
+      "x": 2220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -716,7 +743,7 @@
       "id": "n_web_src_types_interactionstepview",
       "type": "file",
       "file": "InteractionStepView.md",
-      "x": 1820,
+      "x": 2420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -725,7 +752,7 @@
       "id": "n_src_scan_interaction_interactiontarget",
       "type": "file",
       "file": "InteractionTarget.md",
-      "x": 2020,
+      "x": 2620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -734,7 +761,7 @@
       "id": "n_web_src_presentation_journey",
       "type": "file",
       "file": "Journey.md",
-      "x": 2220,
+      "x": 2820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -743,7 +770,7 @@
       "id": "n_web_src_presentation_journeyfinding",
       "type": "file",
       "file": "JourneyFinding.md",
-      "x": 2420,
+      "x": 3020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -752,7 +779,7 @@
       "id": "n_web_src_landing_landing",
       "type": "file",
       "file": "Landing().md",
-      "x": 2620,
+      "x": 3220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -761,7 +788,7 @@
       "id": "n_web_src_landing",
       "type": "file",
       "file": "Landing.tsx.md",
-      "x": 2820,
+      "x": 3420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -770,7 +797,7 @@
       "id": "n_web_src_api_model_wait_ms",
       "type": "file",
       "file": "MODEL_WAIT_MS.md",
-      "x": 3020,
+      "x": 3620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -779,7 +806,7 @@
       "id": "n_web_src_icons_mark",
       "type": "file",
       "file": "Mark().md",
-      "x": 3220,
+      "x": 3820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -788,7 +815,7 @@
       "id": "n_readme_media_provenance",
       "type": "file",
       "file": "Media provenance.md",
-      "x": 3420,
+      "x": 4020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -797,7 +824,7 @@
       "id": "n_src_scan_interaction_named_roles",
       "type": "file",
       "file": "NAMED_ROLES.md",
-      "x": 3620,
+      "x": 4220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -806,7 +833,7 @@
       "id": "n_src_scan_interaction_observationevent",
       "type": "file",
       "file": "ObservationEvent.md",
-      "x": 3820,
+      "x": 4420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -815,8 +842,8 @@
       "id": "n_readme_optional_ai_briefing_and_proposed_changes",
       "type": "file",
       "file": "Optional AI briefing and proposed changes.md",
-      "x": 4020,
-      "y": 320,
+      "x": 20,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -824,8 +851,8 @@
       "id": "n_src_graph_schema_pageevidence",
       "type": "file",
       "file": "PageEvidence.md",
-      "x": 4220,
-      "y": 320,
+      "x": 220,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -833,8 +860,26 @@
       "id": "n_src_scan_interaction_pagesnapshot",
       "type": "file",
       "file": "PageSnapshot.md",
-      "x": 4420,
-      "y": 320,
+      "x": 420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_predictionexpectation",
+      "type": "file",
+      "file": "PredictionExpectation.md",
+      "x": 620,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_predictionoutcome",
+      "type": "file",
+      "file": "PredictionOutcome.md",
+      "x": 820,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -842,7 +887,7 @@
       "id": "n_readme_project_planning",
       "type": "file",
       "file": "Project planning.md",
-      "x": 20,
+      "x": 1020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -851,7 +896,7 @@
       "id": "n_web_src_app_proofview",
       "type": "file",
       "file": "ProofView().md",
-      "x": 220,
+      "x": 1220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -860,7 +905,7 @@
       "id": "n_web_src_graphcanvas_props",
       "type": "file",
       "file": "Props.md",
-      "x": 420,
+      "x": 1420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -869,7 +914,7 @@
       "id": "n_web_src_selectmenu_props",
       "type": "file",
       "file": "Props_1.md",
-      "x": 620,
+      "x": 1620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -878,7 +923,43 @@
       "id": "n_readme",
       "type": "file",
       "file": "README.md",
-      "x": 820,
+      "x": 1820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_repaircontract",
+      "type": "file",
+      "file": "RepairContract.md",
+      "x": 2020,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_api_repaircontract",
+      "type": "file",
+      "file": "RepairContract_1.md",
+      "x": 2220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_repairprediction",
+      "type": "file",
+      "file": "RepairPrediction.md",
+      "x": 2420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_api_repairprediction",
+      "type": "file",
+      "file": "RepairPrediction_1.md",
+      "x": 2620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -887,7 +968,7 @@
       "id": "n_src_graph_schema_revealedcontrolevidence",
       "type": "file",
       "file": "RevealedControlEvidence.md",
-      "x": 1020,
+      "x": 2820,
       "y": 400,
       "width": 180,
       "height": 60
@@ -896,7 +977,7 @@
       "id": "n_web_src_presentation_routetofinding",
       "type": "file",
       "file": "RouteToFinding.md",
-      "x": 1220,
+      "x": 3020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -905,7 +986,7 @@
       "id": "n_readme_run_the_backend",
       "type": "file",
       "file": "Run the backend.md",
-      "x": 1420,
+      "x": 3220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -914,7 +995,7 @@
       "id": "n_readme_run_the_full_app",
       "type": "file",
       "file": "Run the full app.md",
-      "x": 1620,
+      "x": 3420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -923,7 +1004,7 @@
       "id": "n_src_graph_schema_runtimeerrorevidence",
       "type": "file",
       "file": "RuntimeErrorEvidence.md",
-      "x": 1820,
+      "x": 3620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -932,7 +1013,16 @@
       "id": "n_web_src_api_scan_wait_ms",
       "type": "file",
       "file": "SCAN_WAIT_MS.md",
-      "x": 2020,
+      "x": 3820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo_sites",
+      "type": "file",
+      "file": "SITES.md",
+      "x": 4020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -941,7 +1031,16 @@
       "id": "n_src_ai_briefing_system_prompt",
       "type": "file",
       "file": "SYSTEM_PROMPT.md",
-      "x": 2220,
+      "x": 4220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_system_prompt",
+      "type": "file",
+      "file": "SYSTEM_PROMPT_1.md",
+      "x": 4420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -949,9 +1048,9 @@
     {
       "id": "n_src_ai_fix_system_prompt",
       "type": "file",
-      "file": "SYSTEM_PROMPT_1.md",
-      "x": 2420,
-      "y": 400,
+      "file": "SYSTEM_PROMPT_2.md",
+      "x": 20,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -959,8 +1058,8 @@
       "id": "n_web_src_types_sampleinfo",
       "type": "file",
       "file": "SampleInfo.md",
-      "x": 2620,
-      "y": 400,
+      "x": 220,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -968,8 +1067,8 @@
       "id": "n_web_src_app_saved",
       "type": "file",
       "file": "Saved.md",
-      "x": 2820,
-      "y": 400,
+      "x": 420,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -977,8 +1076,8 @@
       "id": "n_readme_scan_boundaries",
       "type": "file",
       "file": "Scan boundaries.md",
-      "x": 3020,
-      "y": 400,
+      "x": 620,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -986,8 +1085,8 @@
       "id": "n_src_graph_compare_scancomparison",
       "type": "file",
       "file": "ScanComparison.md",
-      "x": 3220,
-      "y": 400,
+      "x": 820,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -995,8 +1094,8 @@
       "id": "n_web_src_types_scancomparison",
       "type": "file",
       "file": "ScanComparison_1.md",
-      "x": 3420,
-      "y": 400,
+      "x": 1020,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1004,8 +1103,8 @@
       "id": "n_src_graph_schema_scancoverage",
       "type": "file",
       "file": "ScanCoverage.md",
-      "x": 3620,
-      "y": 400,
+      "x": 1220,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1013,8 +1112,8 @@
       "id": "n_web_src_types_scancoverage",
       "type": "file",
       "file": "ScanCoverage_1.md",
-      "x": 3820,
-      "y": 400,
+      "x": 1420,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1022,8 +1121,8 @@
       "id": "n_src_scan_worker_scaninput",
       "type": "file",
       "file": "ScanInput.md",
-      "x": 4020,
-      "y": 400,
+      "x": 1620,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1031,8 +1130,8 @@
       "id": "n_src_graph_schema_scanlimits",
       "type": "file",
       "file": "ScanLimits.md",
-      "x": 4220,
-      "y": 400,
+      "x": 1820,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1040,8 +1139,8 @@
       "id": "n_src_graph_schema_scanprogress",
       "type": "file",
       "file": "ScanProgress.md",
-      "x": 4420,
-      "y": 400,
+      "x": 2020,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -1049,7 +1148,7 @@
       "id": "n_src_graph_schema_scanresult",
       "type": "file",
       "file": "ScanResult.md",
-      "x": 20,
+      "x": 2220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1058,7 +1157,7 @@
       "id": "n_web_src_types_scanresult",
       "type": "file",
       "file": "ScanResult_1.md",
-      "x": 220,
+      "x": 2420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1067,7 +1166,7 @@
       "id": "n_src_graph_schema_scanstatus",
       "type": "file",
       "file": "ScanStatus.md",
-      "x": 420,
+      "x": 2620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1076,7 +1175,7 @@
       "id": "n_web_src_app_scanstory",
       "type": "file",
       "file": "ScanStory().md",
-      "x": 620,
+      "x": 2820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1085,7 +1184,7 @@
       "id": "n_src_store_disk_scansummary",
       "type": "file",
       "file": "ScanSummary.md",
-      "x": 820,
+      "x": 3020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1094,7 +1193,7 @@
       "id": "n_web_src_types_scansummary",
       "type": "file",
       "file": "ScanSummary_1.md",
-      "x": 1020,
+      "x": 3220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1103,7 +1202,7 @@
       "id": "n_web_src_selectmenu_selectmenu",
       "type": "file",
       "file": "SelectMenu().md",
-      "x": 1220,
+      "x": 3420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1112,7 +1211,7 @@
       "id": "n_web_src_selectmenu",
       "type": "file",
       "file": "SelectMenu.tsx.md",
-      "x": 1420,
+      "x": 3620,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1121,7 +1220,7 @@
       "id": "n_web_src_selectmenu_selectoption",
       "type": "file",
       "file": "SelectOption.md",
-      "x": 1620,
+      "x": 3820,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1130,7 +1229,7 @@
       "id": "n_src_graph_schema_sitegraph",
       "type": "file",
       "file": "SiteGraph.md",
-      "x": 1820,
+      "x": 4020,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1139,7 +1238,7 @@
       "id": "n_web_src_types_sitegraph",
       "type": "file",
       "file": "SiteGraph_1.md",
-      "x": 2020,
+      "x": 4220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1148,7 +1247,7 @@
       "id": "n_src_scan_interaction_snapshotitem",
       "type": "file",
       "file": "SnapshotItem.md",
-      "x": 2220,
+      "x": 4420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1157,8 +1256,8 @@
       "id": "n_web_src_tour_tour",
       "type": "file",
       "file": "TOUR.md",
-      "x": 2420,
-      "y": 480,
+      "x": 20,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1166,8 +1265,17 @@
       "id": "n_readme_the_demo_shop",
       "type": "file",
       "file": "The demo shop.md",
-      "x": 2620,
-      "y": 480,
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_the_model_has_to_put_its_claim_on_trial",
+      "type": "file",
+      "file": "The model has to put its claim on trial.md",
+      "x": 420,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1175,8 +1283,8 @@
       "id": "n_web_src_tour_tourcontext",
       "type": "file",
       "file": "TourContext.md",
-      "x": 2820,
-      "y": 480,
+      "x": 620,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1184,8 +1292,8 @@
       "id": "n_web_src_tour_tourstep",
       "type": "file",
       "file": "TourStep.md",
-      "x": 3020,
-      "y": 480,
+      "x": 820,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1193,8 +1301,8 @@
       "id": "n_src_scan_url_safety_unsafeurlerror",
       "type": "file",
       "file": "UnsafeUrlError.md",
-      "x": 3220,
-      "y": 480,
+      "x": 1020,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1202,8 +1310,8 @@
       "id": "n_src_scan_url_safety_urlsafetyoptions",
       "type": "file",
       "file": "UrlSafetyOptions.md",
-      "x": 3420,
-      "y": 480,
+      "x": 1220,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1211,8 +1319,8 @@
       "id": "n_readme_verification",
       "type": "file",
       "file": "Verification.md",
-      "x": 3620,
-      "y": 480,
+      "x": 1420,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1220,8 +1328,8 @@
       "id": "n_web_src_presentation_viewnode",
       "type": "file",
       "file": "ViewNode.md",
-      "x": 3820,
-      "y": 480,
+      "x": 1620,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1229,8 +1337,8 @@
       "id": "n_web_src_app_app_accept",
       "type": "file",
       "file": "accept().md",
-      "x": 4020,
-      "y": 480,
+      "x": 1820,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1238,8 +1346,8 @@
       "id": "n_web_src_app_app_acceptproposal",
       "type": "file",
       "file": "acceptProposal().md",
-      "x": 4220,
-      "y": 480,
+      "x": 2020,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1247,8 +1355,8 @@
       "id": "n_src_scan_interaction_activate",
       "type": "file",
       "file": "activate().md",
-      "x": 4420,
-      "y": 480,
+      "x": 2220,
+      "y": 560,
       "width": 180,
       "height": 60
     },
@@ -1256,7 +1364,7 @@
       "id": "n_src_ai_briefing_aistatus",
       "type": "file",
       "file": "aiStatus().md",
-      "x": 20,
+      "x": 2420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1265,7 +1373,7 @@
       "id": "n_src_store_disk_allsummaries",
       "type": "file",
       "file": "allSummaries().md",
-      "x": 220,
+      "x": 2620,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1274,7 +1382,7 @@
       "id": "n_web_src_api",
       "type": "file",
       "file": "api.ts.md",
-      "x": 420,
+      "x": 2820,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1283,7 +1391,7 @@
       "id": "n_tests_api_app_test",
       "type": "file",
       "file": "app.test.ts.md",
-      "x": 620,
+      "x": 3020,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1292,7 +1400,7 @@
       "id": "n_src_api_app",
       "type": "file",
       "file": "app.ts.md",
-      "x": 820,
+      "x": 3220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1301,7 +1409,7 @@
       "id": "n_src_sample_sandbox_appliedpatches",
       "type": "file",
       "file": "appliedPatches().md",
-      "x": 1020,
+      "x": 3420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1310,7 +1418,7 @@
       "id": "n_src_api_app_applybody",
       "type": "file",
       "file": "applyBody.md",
-      "x": 1220,
+      "x": 3620,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1319,7 +1427,7 @@
       "id": "n_src_sample_sandbox_applypatch",
       "type": "file",
       "file": "applyPatch().md",
-      "x": 1420,
+      "x": 3820,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1328,7 +1436,16 @@
       "id": "n_web_src_api_applyproposal",
       "type": "file",
       "file": "applyProposal().md",
-      "x": 1620,
+      "x": 4020,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_app_app_askforcontract",
+      "type": "file",
+      "file": "askForContract().md",
+      "x": 4220,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1337,7 +1454,7 @@
       "id": "n_web_src_app_app_askforproposal",
       "type": "file",
       "file": "askForProposal().md",
-      "x": 1820,
+      "x": 4420,
       "y": 560,
       "width": 180,
       "height": 60
@@ -1346,8 +1463,8 @@
       "id": "n_src_scan_url_safety_assertsafeurl",
       "type": "file",
       "file": "assertSafeUrl().md",
-      "x": 2020,
-      "y": 560,
+      "x": 20,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1355,8 +1472,8 @@
       "id": "n_package_dependencies_axe_core",
       "type": "file",
       "file": "axe-core.md",
-      "x": 2220,
-      "y": 560,
+      "x": 220,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1364,8 +1481,8 @@
       "id": "n_ref_axe_core",
       "type": "file",
       "file": "axe-core_1.md",
-      "x": 2420,
-      "y": 560,
+      "x": 420,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1373,8 +1490,8 @@
       "id": "n_src_scan_worker_axesource",
       "type": "file",
       "file": "axeSource.md",
-      "x": 2620,
-      "y": 560,
+      "x": 620,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1382,8 +1499,8 @@
       "id": "n_scripts_rehearse_beat",
       "type": "file",
       "file": "beat.md",
-      "x": 2820,
-      "y": 560,
+      "x": 820,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1391,8 +1508,8 @@
       "id": "n_src_scan_url_safety_blockedhostsuffixes",
       "type": "file",
       "file": "blockedHostSuffixes.md",
-      "x": 3020,
-      "y": 560,
+      "x": 1020,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1400,8 +1517,8 @@
       "id": "n_src_scan_url_safety_blockedhostnames",
       "type": "file",
       "file": "blockedHostnames.md",
-      "x": 3220,
-      "y": 560,
+      "x": 1220,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1409,8 +1526,8 @@
       "id": "n_web_src_presentation_blockedshort",
       "type": "file",
       "file": "blockedShort().md",
-      "x": 3420,
-      "y": 560,
+      "x": 1420,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1418,8 +1535,8 @@
       "id": "n_web_src_app_app_breakdemo",
       "type": "file",
       "file": "breakDemo().md",
-      "x": 3620,
-      "y": 560,
+      "x": 1620,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1427,8 +1544,8 @@
       "id": "n_tests_unit_briefing_test",
       "type": "file",
       "file": "briefing.test.ts.md",
-      "x": 3820,
-      "y": 560,
+      "x": 1820,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1436,8 +1553,8 @@
       "id": "n_src_ai_briefing",
       "type": "file",
       "file": "briefing.ts.md",
-      "x": 4020,
-      "y": 560,
+      "x": 2020,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1445,8 +1562,8 @@
       "id": "n_package_scripts_build",
       "type": "file",
       "file": "build.md",
-      "x": 4220,
-      "y": 560,
+      "x": 2220,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1454,8 +1571,8 @@
       "id": "n_src_graph_build_graph",
       "type": "file",
       "file": "build-graph.ts.md",
-      "x": 4420,
-      "y": 560,
+      "x": 2420,
+      "y": 640,
       "width": 180,
       "height": 60
     },
@@ -1463,7 +1580,7 @@
       "id": "n_src_api_app_buildapp",
       "type": "file",
       "file": "buildApp().md",
-      "x": 20,
+      "x": 2620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1472,7 +1589,7 @@
       "id": "n_src_ai_briefing_builddigest",
       "type": "file",
       "file": "buildDigest().md",
-      "x": 220,
+      "x": 2820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1481,7 +1598,7 @@
       "id": "n_src_graph_build_graph_buildgraph",
       "type": "file",
       "file": "buildGraph().md",
-      "x": 420,
+      "x": 3020,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1490,7 +1607,7 @@
       "id": "n_src_api_app_canstartscan",
       "type": "file",
       "file": "canStartScan().md",
-      "x": 620,
+      "x": 3220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1499,7 +1616,7 @@
       "id": "n_src_scan_worker_capturescreenshot",
       "type": "file",
       "file": "captureScreenshot().md",
-      "x": 820,
+      "x": 3420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1508,7 +1625,7 @@
       "id": "n_web_src_app_app_changefilter",
       "type": "file",
       "file": "changeFilter().md",
-      "x": 1020,
+      "x": 3620,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1517,7 +1634,7 @@
       "id": "n_scripts_check_studio_check",
       "type": "file",
       "file": "check().md",
-      "x": 1220,
+      "x": 3820,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1526,7 +1643,7 @@
       "id": "n_scripts_rehearse_check",
       "type": "file",
       "file": "check()_1.md",
-      "x": 1420,
+      "x": 4020,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1535,7 +1652,7 @@
       "id": "n_scripts_check_studio",
       "type": "file",
       "file": "check-studio.mjs.md",
-      "x": 1620,
+      "x": 4220,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1544,7 +1661,7 @@
       "id": "n_package_scripts_check_studio",
       "type": "file",
       "file": "checkstudio.md",
-      "x": 1820,
+      "x": 4420,
       "y": 640,
       "width": 180,
       "height": 60
@@ -1553,8 +1670,17 @@
       "id": "n_web_src_api_checkapi",
       "type": "file",
       "file": "checkApi().md",
-      "x": 2020,
-      "y": 640,
+      "x": 20,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_checkpredictions",
+      "type": "file",
+      "file": "checkPredictions().md",
+      "x": 220,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1562,8 +1688,8 @@
       "id": "n_scripts_demo_child",
       "type": "file",
       "file": "child.md",
-      "x": 2220,
-      "y": 640,
+      "x": 420,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1571,8 +1697,8 @@
       "id": "n_web_src_selectmenu_selectmenu_choose",
       "type": "file",
       "file": "choose().md",
-      "x": 2420,
-      "y": 640,
+      "x": 620,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1580,8 +1706,8 @@
       "id": "n_src_scan_interaction_choosefollowup",
       "type": "file",
       "file": "chooseFollowUp().md",
-      "x": 2620,
-      "y": 640,
+      "x": 820,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1589,8 +1715,8 @@
       "id": "n_src_scan_interaction_classifyaction",
       "type": "file",
       "file": "classifyAction().md",
-      "x": 2820,
-      "y": 640,
+      "x": 1020,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1598,8 +1724,8 @@
       "id": "n_web_src_presentation_cleanlabel",
       "type": "file",
       "file": "cleanLabel().md",
-      "x": 3020,
-      "y": 640,
+      "x": 1220,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1607,8 +1733,8 @@
       "id": "n_web_src_presentation_cleanquoted",
       "type": "file",
       "file": "cleanQuoted().md",
-      "x": 3220,
-      "y": 640,
+      "x": 1420,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1616,8 +1742,8 @@
       "id": "n_src_sample_sandbox_clearpatches",
       "type": "file",
       "file": "clearPatches().md",
-      "x": 3420,
-      "y": 640,
+      "x": 1620,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1625,8 +1751,8 @@
       "id": "n_web_src_selectmenu_selectmenu_closemenu",
       "type": "file",
       "file": "closeMenu().md",
-      "x": 3620,
-      "y": 640,
+      "x": 1820,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1634,8 +1760,8 @@
       "id": "n_tests_unit_compare_test",
       "type": "file",
       "file": "compare.test.ts.md",
-      "x": 3820,
-      "y": 640,
+      "x": 2020,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1643,8 +1769,8 @@
       "id": "n_src_graph_compare",
       "type": "file",
       "file": "compare.ts.md",
-      "x": 4020,
-      "y": 640,
+      "x": 2220,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1652,8 +1778,8 @@
       "id": "n_src_graph_compare_comparescans",
       "type": "file",
       "file": "compareScans().md",
-      "x": 4220,
-      "y": 640,
+      "x": 2420,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1661,8 +1787,8 @@
       "id": "n_web_src_api_comparescans",
       "type": "file",
       "file": "compareScans()_1.md",
-      "x": 4420,
-      "y": 640,
+      "x": 2620,
+      "y": 720,
       "width": 180,
       "height": 60
     },
@@ -1670,7 +1796,7 @@
       "id": "n_tsconfig_build_compileroptions",
       "type": "file",
       "file": "compilerOptions.md",
-      "x": 20,
+      "x": 2820,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1679,7 +1805,7 @@
       "id": "n_tsconfig_compileroptions",
       "type": "file",
       "file": "compilerOptions_1.md",
-      "x": 220,
+      "x": 3020,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1688,7 +1814,7 @@
       "id": "n_tsconfig_web_compileroptions",
       "type": "file",
       "file": "compilerOptions_2.md",
-      "x": 420,
+      "x": 3220,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1697,7 +1823,7 @@
       "id": "n_package_devdependencies_concurrently",
       "type": "file",
       "file": "concurrently.md",
-      "x": 620,
+      "x": 3420,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1706,7 +1832,7 @@
       "id": "n_ref_concurrently",
       "type": "file",
       "file": "concurrently_1.md",
-      "x": 820,
+      "x": 3620,
       "y": 720,
       "width": 180,
       "height": 60
@@ -1715,8 +1841,80 @@
       "id": "n_tests_unit_tour_test_context",
       "type": "file",
       "file": "context().md",
-      "x": 1020,
+      "x": 3820,
       "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_contract_test",
+      "type": "file",
+      "file": "contract.test.ts.md",
+      "x": 4020,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract",
+      "type": "file",
+      "file": "contract.ts.md",
+      "x": 4220,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_api_app_contractkey",
+      "type": "file",
+      "file": "contractKey().md",
+      "x": 4420,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_store_contracts_contractpath",
+      "type": "file",
+      "file": "contractPath().md",
+      "x": 20,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_store_contracts_contractstore",
+      "type": "file",
+      "file": "contractStore.md",
+      "x": 220,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_contractuserprompt",
+      "type": "file",
+      "file": "contractUserPrompt().md",
+      "x": 420,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_store_contracts",
+      "type": "file",
+      "file": "contracts.ts.md",
+      "x": 620,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_api_app_contractsfor",
+      "type": "file",
+      "file": "contractsFor().md",
+      "x": 820,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1724,8 +1922,8 @@
       "id": "n_tests_unit_graph_shape_test_control",
       "type": "file",
       "file": "control().md",
-      "x": 1220,
-      "y": 720,
+      "x": 1020,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1733,8 +1931,8 @@
       "id": "n_tests_unit_interaction_test_control",
       "type": "file",
       "file": "control()_1.md",
-      "x": 1420,
-      "y": 720,
+      "x": 1220,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1742,8 +1940,8 @@
       "id": "n_web_src_presentation_copies",
       "type": "file",
       "file": "copies.md",
-      "x": 1620,
-      "y": 720,
+      "x": 1420,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1751,8 +1949,8 @@
       "id": "n_src_api_app_createbody",
       "type": "file",
       "file": "createBody.md",
-      "x": 1820,
-      "y": 720,
+      "x": 1620,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1760,8 +1958,8 @@
       "id": "n_src_export_obsidian_createobsidianzip",
       "type": "file",
       "file": "createObsidianZip().md",
-      "x": 2020,
-      "y": 720,
+      "x": 1820,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1769,8 +1967,8 @@
       "id": "n_web_src_api_createscan",
       "type": "file",
       "file": "createScan().md",
-      "x": 2220,
-      "y": 720,
+      "x": 2020,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1778,8 +1976,8 @@
       "id": "n_package_scripts_demo",
       "type": "file",
       "file": "demo.md",
-      "x": 2420,
-      "y": 720,
+      "x": 2220,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1787,8 +1985,8 @@
       "id": "n_scripts_demo",
       "type": "file",
       "file": "demo.mjs.md",
-      "x": 2620,
-      "y": 720,
+      "x": 2420,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1796,8 +1994,8 @@
       "id": "n_package_dependencies",
       "type": "file",
       "file": "dependencies.md",
-      "x": 2820,
-      "y": 720,
+      "x": 2620,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1805,8 +2003,17 @@
       "id": "n_web_src_presentation_describe",
       "type": "file",
       "file": "describe().md",
+      "x": 2820,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_app_describeid",
+      "type": "file",
+      "file": "describeId().md",
       "x": 3020,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1815,7 +2022,7 @@
       "type": "file",
       "file": "destinationLabel().md",
       "x": 3220,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1824,7 +2031,7 @@
       "type": "file",
       "file": "dev.md",
       "x": 3420,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1833,7 +2040,7 @@
       "type": "file",
       "file": "devapi.md",
       "x": 3620,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1842,7 +2049,7 @@
       "type": "file",
       "file": "devweb.md",
       "x": 3820,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1851,7 +2058,7 @@
       "type": "file",
       "file": "devDependencies.md",
       "x": 4020,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1860,7 +2067,7 @@
       "type": "file",
       "file": "disk.ts.md",
       "x": 4220,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1869,7 +2076,7 @@
       "type": "file",
       "file": "diskStore.md",
       "x": 4420,
-      "y": 720,
+      "y": 800,
       "width": 180,
       "height": 60
     },
@@ -1878,7 +2085,7 @@
       "type": "file",
       "file": "displayPath().md",
       "x": 20,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1887,7 +2094,7 @@
       "type": "file",
       "file": "down().md",
       "x": 220,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1896,7 +2103,7 @@
       "type": "file",
       "file": "downloadVault().md",
       "x": 420,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1905,7 +2112,7 @@
       "type": "file",
       "file": "emptyGraph.md",
       "x": 620,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1914,7 +2121,7 @@
       "type": "file",
       "file": "engines.md",
       "x": 820,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1923,7 +2130,7 @@
       "type": "file",
       "file": "errorEvidence().md",
       "x": 1020,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1932,7 +2139,7 @@
       "type": "file",
       "file": "esModuleInterop.md",
       "x": 1220,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1941,7 +2148,7 @@
       "type": "file",
       "file": "evidence.ts.md",
       "x": 1420,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1950,7 +2157,7 @@
       "type": "file",
       "file": "exclude.md",
       "x": 1620,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1959,7 +2166,7 @@
       "type": "file",
       "file": "exclusionLabel().md",
       "x": 1820,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1968,7 +2175,7 @@
       "type": "file",
       "file": "export.test.ts.md",
       "x": 2020,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1977,7 +2184,7 @@
       "type": "file",
       "file": "exportScan().md",
       "x": 2220,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1986,7 +2193,7 @@
       "type": "file",
       "file": "extends.md",
       "x": 2420,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1995,7 +2202,7 @@
       "type": "file",
       "file": "failed.md",
       "x": 2620,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2004,7 +2211,7 @@
       "type": "file",
       "file": "fastify.md",
       "x": 2820,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2013,7 +2220,7 @@
       "type": "file",
       "file": "fastify_1.md",
       "x": 3020,
-      "y": 800,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2022,16 +2229,25 @@
       "type": "file",
       "file": "finding().md",
       "x": 3220,
-      "y": 800,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_contract_test_finding",
+      "type": "file",
+      "file": "finding()_1.md",
+      "x": 3420,
+      "y": 880,
       "width": 180,
       "height": 60
     },
     {
       "id": "n_tests_unit_presentation_test_finding",
       "type": "file",
-      "file": "finding()_1.md",
-      "x": 3420,
-      "y": 800,
+      "file": "finding()_2.md",
+      "x": 3620,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2039,8 +2255,8 @@
       "id": "n_src_scan_interaction_firstblockkind",
       "type": "file",
       "file": "firstBlockKind().md",
-      "x": 3620,
-      "y": 800,
+      "x": 3820,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2048,8 +2264,8 @@
       "id": "n_tests_unit_fix_test",
       "type": "file",
       "file": "fix.test.ts.md",
-      "x": 3820,
-      "y": 800,
+      "x": 4020,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2057,8 +2273,8 @@
       "id": "n_src_ai_fix",
       "type": "file",
       "file": "fix.ts.md",
-      "x": 4020,
-      "y": 800,
+      "x": 4220,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2066,8 +2282,8 @@
       "id": "n_src_api_app_fixbody",
       "type": "file",
       "file": "fixBody.md",
-      "x": 4220,
-      "y": 800,
+      "x": 4420,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -2075,8 +2291,8 @@
       "id": "n_web_src_presentation_flowshort",
       "type": "file",
       "file": "flowShort().md",
-      "x": 4420,
-      "y": 800,
+      "x": 20,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2084,8 +2300,8 @@
       "id": "n_tsconfig_compileroptions_forceconsistentcasinginfilenames",
       "type": "file",
       "file": "forceConsistentCasingInFileNames.md",
-      "x": 20,
-      "y": 880,
+      "x": 220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2093,8 +2309,8 @@
       "id": "n_web_src_presentation_friendlyscanerror",
       "type": "file",
       "file": "friendlyScanError().md",
-      "x": 220,
-      "y": 880,
+      "x": 420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2102,8 +2318,8 @@
       "id": "n_src_export_obsidian_frontmatter",
       "type": "file",
       "file": "frontmatter().md",
-      "x": 420,
-      "y": 880,
+      "x": 620,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2111,8 +2327,8 @@
       "id": "n_web_src_api_getaistatus",
       "type": "file",
       "file": "getAiStatus().md",
-      "x": 620,
-      "y": 880,
+      "x": 820,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2120,8 +2336,8 @@
       "id": "n_web_src_api_getproof",
       "type": "file",
       "file": "getProof().md",
-      "x": 820,
-      "y": 880,
+      "x": 1020,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2129,8 +2345,8 @@
       "id": "n_web_src_api_getsampleinfo",
       "type": "file",
       "file": "getSampleInfo().md",
-      "x": 1020,
-      "y": 880,
+      "x": 1220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2138,8 +2354,8 @@
       "id": "n_src_api_app_getscan",
       "type": "file",
       "file": "getScan().md",
-      "x": 1220,
-      "y": 880,
+      "x": 1420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2147,8 +2363,8 @@
       "id": "n_tests_unit_briefing_test_graph",
       "type": "file",
       "file": "graph.md",
-      "x": 1420,
-      "y": 880,
+      "x": 1620,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2156,8 +2372,8 @@
       "id": "n_tests_unit_presentation_test_graph",
       "type": "file",
       "file": "graph().md",
-      "x": 1620,
-      "y": 880,
+      "x": 1820,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2165,8 +2381,8 @@
       "id": "n_tests_unit_graph_shape_test",
       "type": "file",
       "file": "graph-shape.test.ts.md",
-      "x": 1820,
-      "y": 880,
+      "x": 2020,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2174,8 +2390,8 @@
       "id": "n_tests_unit_graph_test",
       "type": "file",
       "file": "graph.test.ts.md",
-      "x": 2020,
-      "y": 880,
+      "x": 2220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2183,8 +2399,8 @@
       "id": "n_src_ai_briefing_groundsentences",
       "type": "file",
       "file": "groundSentences().md",
-      "x": 2220,
-      "y": 880,
+      "x": 2420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2192,8 +2408,8 @@
       "id": "n_web_src_presentation_groupissues",
       "type": "file",
       "file": "groupIssues().md",
-      "x": 2420,
-      "y": 880,
+      "x": 2620,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2201,8 +2417,8 @@
       "id": "n_scripts_check_studio_has",
       "type": "file",
       "file": "has().md",
-      "x": 2620,
-      "y": 880,
+      "x": 2820,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2210,8 +2426,8 @@
       "id": "n_web_src_app_hostname",
       "type": "file",
       "file": "hostname().md",
-      "x": 2820,
-      "y": 880,
+      "x": 3020,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2219,8 +2435,8 @@
       "id": "n_web_src_app_httpurl",
       "type": "file",
       "file": "httpUrl().md",
-      "x": 3020,
-      "y": 880,
+      "x": 3220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2228,8 +2444,8 @@
       "id": "n_src_graph_build_graph_id",
       "type": "file",
       "file": "id().md",
-      "x": 3220,
-      "y": 880,
+      "x": 3420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2237,8 +2453,8 @@
       "id": "n_src_scan_url_safety_inv4range",
       "type": "file",
       "file": "inV4Range().md",
-      "x": 3420,
-      "y": 880,
+      "x": 3620,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2246,8 +2462,8 @@
       "id": "n_tsconfig_build_include",
       "type": "file",
       "file": "include.md",
-      "x": 3620,
-      "y": 880,
+      "x": 3820,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2255,8 +2471,8 @@
       "id": "n_tsconfig_include",
       "type": "file",
       "file": "include_1.md",
-      "x": 3820,
-      "y": 880,
+      "x": 4020,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2264,8 +2480,8 @@
       "id": "n_tsconfig_web_include",
       "type": "file",
       "file": "include_2.md",
-      "x": 4020,
-      "y": 880,
+      "x": 4220,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2273,8 +2489,8 @@
       "id": "n_src_scan_worker_initialresult",
       "type": "file",
       "file": "initialResult().md",
-      "x": 4220,
-      "y": 880,
+      "x": 4420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -2282,8 +2498,8 @@
       "id": "n_src_scan_worker_inspectcontrols",
       "type": "file",
       "file": "inspectControls().md",
-      "x": 4420,
-      "y": 880,
+      "x": 20,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2291,8 +2507,8 @@
       "id": "n_tests_unit_interaction_test",
       "type": "file",
       "file": "interaction.test.ts.md",
-      "x": 20,
-      "y": 960,
+      "x": 220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2300,8 +2516,8 @@
       "id": "n_src_scan_interaction",
       "type": "file",
       "file": "interaction.ts.md",
-      "x": 220,
-      "y": 960,
+      "x": 420,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2309,8 +2525,8 @@
       "id": "n_src_sample_sandbox_isdemofixture",
       "type": "file",
       "file": "isDemoFixture().md",
-      "x": 420,
-      "y": 960,
+      "x": 620,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2318,8 +2534,8 @@
       "id": "n_src_ai_fix_isgrounded",
       "type": "file",
       "file": "isGrounded().md",
-      "x": 620,
-      "y": 960,
+      "x": 820,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2327,8 +2543,8 @@
       "id": "n_web_src_presentation_isissue",
       "type": "file",
       "file": "isIssue().md",
-      "x": 820,
-      "y": 960,
+      "x": 1020,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2336,8 +2552,8 @@
       "id": "n_src_scan_url_safety_ispublicip",
       "type": "file",
       "file": "isPublicIp().md",
-      "x": 1020,
-      "y": 960,
+      "x": 1220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2345,8 +2561,17 @@
       "id": "n_web_src_presentation_istestedflow",
       "type": "file",
       "file": "isTestedFlow().md",
-      "x": 1220,
-      "y": 960,
+      "x": 1420,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_issuesonpage",
+      "type": "file",
+      "file": "issuesOnPage().md",
+      "x": 1620,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2354,8 +2579,8 @@
       "id": "n_src_scan_interaction_itemkey",
       "type": "file",
       "file": "itemKey().md",
-      "x": 1420,
-      "y": 960,
+      "x": 1820,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2363,8 +2588,8 @@
       "id": "n_src_api_app_jobs",
       "type": "file",
       "file": "jobs.md",
-      "x": 1620,
-      "y": 960,
+      "x": 2020,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2372,8 +2597,8 @@
       "id": "n_tsconfig_web_compileroptions_jsx",
       "type": "file",
       "file": "jsx.md",
-      "x": 1820,
-      "y": 960,
+      "x": 2220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2381,8 +2606,8 @@
       "id": "n_package_dependencies_jszip",
       "type": "file",
       "file": "jszip.md",
-      "x": 2020,
-      "y": 960,
+      "x": 2420,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2390,8 +2615,8 @@
       "id": "n_ref_jszip",
       "type": "file",
       "file": "jszip_1.md",
-      "x": 2220,
-      "y": 960,
+      "x": 2620,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2399,8 +2624,8 @@
       "id": "n_web_src_graphcanvas_graphcanvas_keydown",
       "type": "file",
       "file": "keyDown().md",
-      "x": 2420,
-      "y": 960,
+      "x": 2820,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2408,8 +2633,8 @@
       "id": "n_web_src_presentation_kindname",
       "type": "file",
       "file": "kindName().md",
-      "x": 2620,
-      "y": 960,
+      "x": 3020,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2417,8 +2642,17 @@
       "id": "n_web_src_presentation_labelparts",
       "type": "file",
       "file": "labelParts().md",
-      "x": 2820,
-      "y": 960,
+      "x": 3220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_api_app_lastproposals",
+      "type": "file",
+      "file": "lastProposals.md",
+      "x": 3420,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2426,8 +2660,8 @@
       "id": "n_src_graph_build_graph_laststep",
       "type": "file",
       "file": "lastStep().md",
-      "x": 3020,
-      "y": 960,
+      "x": 3620,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2435,8 +2669,8 @@
       "id": "n_web_src_presentation_laststepof",
       "type": "file",
       "file": "lastStepOf().md",
-      "x": 3220,
-      "y": 960,
+      "x": 3820,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2444,8 +2678,8 @@
       "id": "n_src_api_app_launchscan",
       "type": "file",
       "file": "launchScan().md",
-      "x": 3420,
-      "y": 960,
+      "x": 4020,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2453,8 +2687,8 @@
       "id": "n_tsconfig_compileroptions_lib",
       "type": "file",
       "file": "lib.md",
-      "x": 3620,
-      "y": 960,
+      "x": 4220,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2462,8 +2696,8 @@
       "id": "n_tsconfig_web_compileroptions_lib",
       "type": "file",
       "file": "lib_1.md",
-      "x": 3820,
-      "y": 960,
+      "x": 4420,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -2471,8 +2705,8 @@
       "id": "n_src_graph_build_graph_linklabel",
       "type": "file",
       "file": "linkLabel().md",
-      "x": 4020,
-      "y": 960,
+      "x": 20,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2480,8 +2714,8 @@
       "id": "n_web_src_api_listscans",
       "type": "file",
       "file": "listScans().md",
-      "x": 4220,
-      "y": 960,
+      "x": 220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2489,8 +2723,8 @@
       "id": "n_web_src_app_app_loadhistory",
       "type": "file",
       "file": "loadHistory().md",
-      "x": 4420,
-      "y": 960,
+      "x": 420,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2498,8 +2732,8 @@
       "id": "n_src_scan_interaction_locate",
       "type": "file",
       "file": "locate().md",
-      "x": 20,
-      "y": 1040,
+      "x": 620,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2507,8 +2741,8 @@
       "id": "n_src_api_app_locateindemoshop",
       "type": "file",
       "file": "locateInDemoShop().md",
-      "x": 220,
-      "y": 1040,
+      "x": 820,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2516,8 +2750,8 @@
       "id": "n_src_scan_worker_lookslikerefusal",
       "type": "file",
       "file": "looksLikeRefusal().md",
-      "x": 420,
-      "y": 1040,
+      "x": 1020,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2525,8 +2759,8 @@
       "id": "n_web_src_main",
       "type": "file",
       "file": "main.tsx.md",
-      "x": 620,
-      "y": 1040,
+      "x": 1220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2534,8 +2768,8 @@
       "id": "n_web_src_presentation_matches",
       "type": "file",
       "file": "matches().md",
-      "x": 820,
-      "y": 1040,
+      "x": 1420,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2543,8 +2777,8 @@
       "id": "n_src_export_obsidian_md",
       "type": "file",
       "file": "md().md",
-      "x": 1020,
-      "y": 1040,
+      "x": 1620,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2552,8 +2786,8 @@
       "id": "n_src_store_memory",
       "type": "file",
       "file": "memory.ts.md",
-      "x": 1220,
-      "y": 1040,
+      "x": 1820,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2561,8 +2795,8 @@
       "id": "n_tsconfig_compileroptions_module",
       "type": "file",
       "file": "module.md",
-      "x": 1420,
-      "y": 1040,
+      "x": 2020,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2570,8 +2804,8 @@
       "id": "n_tsconfig_web_compileroptions_module",
       "type": "file",
       "file": "module_1.md",
-      "x": 1620,
-      "y": 1040,
+      "x": 2220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2579,8 +2813,8 @@
       "id": "n_tsconfig_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution.md",
-      "x": 1820,
-      "y": 1040,
+      "x": 2420,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2588,8 +2822,8 @@
       "id": "n_tsconfig_web_compileroptions_moduleresolution",
       "type": "file",
       "file": "moduleResolution_1.md",
-      "x": 2020,
-      "y": 1040,
+      "x": 2620,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2597,8 +2831,8 @@
       "id": "n_package_dependencies_motion",
       "type": "file",
       "file": "motion.md",
-      "x": 2220,
-      "y": 1040,
+      "x": 2820,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2606,8 +2840,8 @@
       "id": "n_ref_motion",
       "type": "file",
       "file": "motion_1.md",
-      "x": 2420,
-      "y": 1040,
+      "x": 3020,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2615,8 +2849,8 @@
       "id": "n_web_src_graphcanvas_graphcanvas_move",
       "type": "file",
       "file": "move().md",
-      "x": 2620,
-      "y": 1040,
+      "x": 3220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2624,8 +2858,8 @@
       "id": "n_package_name",
       "type": "file",
       "file": "name.md",
-      "x": 2820,
-      "y": 1040,
+      "x": 3420,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2633,8 +2867,8 @@
       "id": "n_web_src_presentation_nextobservedhop",
       "type": "file",
       "file": "nextObservedHop().md",
-      "x": 3020,
-      "y": 1040,
+      "x": 3620,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2642,8 +2876,8 @@
       "id": "n_tests_e2e_no_data_test",
       "type": "file",
       "file": "no-data.test.ts.md",
-      "x": 3220,
-      "y": 1040,
+      "x": 3820,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2651,8 +2885,8 @@
       "id": "n_tsconfig_web_compileroptions_noemit",
       "type": "file",
       "file": "noEmit.md",
-      "x": 3420,
-      "y": 1040,
+      "x": 4020,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2660,8 +2894,8 @@
       "id": "n_tsconfig_compileroptions_nouncheckedindexedaccess",
       "type": "file",
       "file": "noUncheckedIndexedAccess.md",
-      "x": 3620,
-      "y": 1040,
+      "x": 4220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2669,8 +2903,8 @@
       "id": "n_tsconfig_web_compileroptions_nounusedlocals",
       "type": "file",
       "file": "noUnusedLocals.md",
-      "x": 3820,
-      "y": 1040,
+      "x": 4420,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -2678,8 +2912,8 @@
       "id": "n_tsconfig_web_compileroptions_nounusedparameters",
       "type": "file",
       "file": "noUnusedParameters.md",
-      "x": 4020,
-      "y": 1040,
+      "x": 20,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2687,8 +2921,8 @@
       "id": "n_package_engines_node",
       "type": "file",
       "file": "node.md",
-      "x": 4220,
-      "y": 1040,
+      "x": 220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2696,8 +2930,8 @@
       "id": "n_web_src_presentation_nodecolor",
       "type": "file",
       "file": "nodeColor().md",
-      "x": 4420,
-      "y": 1040,
+      "x": 420,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2705,8 +2939,8 @@
       "id": "n_web_src_presentation_nonpagedestination",
       "type": "file",
       "file": "nonPageDestination().md",
-      "x": 20,
-      "y": 1120,
+      "x": 620,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2714,8 +2948,8 @@
       "id": "n_web_src_app_normalize",
       "type": "file",
       "file": "normalize().md",
-      "x": 220,
-      "y": 1120,
+      "x": 820,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2723,8 +2957,8 @@
       "id": "n_tests_unit_presentation_test_observedgraph",
       "type": "file",
       "file": "observedGraph().md",
-      "x": 420,
-      "y": 1120,
+      "x": 1020,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2732,8 +2966,8 @@
       "id": "n_tests_unit_graph_test_observedinteraction",
       "type": "file",
       "file": "observedInteraction().md",
-      "x": 620,
-      "y": 1120,
+      "x": 1220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2741,8 +2975,8 @@
       "id": "n_src_export_obsidian",
       "type": "file",
       "file": "obsidian.ts.md",
-      "x": 820,
-      "y": 1120,
+      "x": 1420,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2750,8 +2984,8 @@
       "id": "n_web_src_selectmenu_selectmenu_onkeydown",
       "type": "file",
       "file": "onKeyDown().md",
-      "x": 1020,
-      "y": 1120,
+      "x": 1620,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2759,8 +2993,8 @@
       "id": "n_web_src_selectmenu_selectmenu_openmenu",
       "type": "file",
       "file": "openMenu().md",
-      "x": 1220,
-      "y": 1120,
+      "x": 1820,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2768,8 +3002,8 @@
       "id": "n_web_src_app_app_openscan",
       "type": "file",
       "file": "openScan().md",
-      "x": 1420,
-      "y": 1120,
+      "x": 2020,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2777,8 +3011,8 @@
       "id": "n_tsconfig_build_compileroptions_outdir",
       "type": "file",
       "file": "outDir.md",
-      "x": 1620,
-      "y": 1120,
+      "x": 2220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2786,8 +3020,8 @@
       "id": "n_tsconfig_compileroptions_outdir",
       "type": "file",
       "file": "outDir_1.md",
-      "x": 1820,
-      "y": 1120,
+      "x": 2420,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2795,8 +3029,8 @@
       "id": "n_web_src_presentation_outcomecaption",
       "type": "file",
       "file": "outcomeCaption().md",
-      "x": 2020,
-      "y": 1120,
+      "x": 2620,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2804,8 +3038,8 @@
       "id": "n_web_src_presentation_outcomecaptionof",
       "type": "file",
       "file": "outcomeCaptionOf().md",
-      "x": 2220,
-      "y": 1120,
+      "x": 2820,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2813,8 +3047,8 @@
       "id": "n_web_src_presentation_outcomecaptions",
       "type": "file",
       "file": "outcomeCaptions.md",
-      "x": 2420,
-      "y": 1120,
+      "x": 3020,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2822,8 +3056,8 @@
       "id": "n_src_scan_interaction_outcomelabel",
       "type": "file",
       "file": "outcomeLabel().md",
-      "x": 2620,
-      "y": 1120,
+      "x": 3220,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2831,8 +3065,8 @@
       "id": "n_web_src_presentation_outcomeshorts",
       "type": "file",
       "file": "outcomeShorts.md",
-      "x": 2820,
-      "y": 1120,
+      "x": 3420,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2840,8 +3074,8 @@
       "id": "n_src_graph_build_graph_outcomestatus",
       "type": "file",
       "file": "outcomeStatus().md",
-      "x": 3020,
-      "y": 1120,
+      "x": 3620,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2849,8 +3083,8 @@
       "id": "n_package",
       "type": "file",
       "file": "package.json.md",
-      "x": 3220,
-      "y": 1120,
+      "x": 3820,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2858,8 +3092,8 @@
       "id": "n_tests_unit_presentation_test_page",
       "type": "file",
       "file": "page.md",
-      "x": 3420,
-      "y": 1120,
+      "x": 4020,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2867,8 +3101,17 @@
       "id": "n_tests_unit_compare_test_page",
       "type": "file",
       "file": "page().md",
-      "x": 3620,
-      "y": 1120,
+      "x": 4220,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_contract_test_page",
+      "type": "file",
+      "file": "page()_1.md",
+      "x": 4420,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
@@ -2876,8 +3119,26 @@
       "id": "n_web_src_presentation_pagefor",
       "type": "file",
       "file": "pageFor().md",
-      "x": 3820,
-      "y": 1120,
+      "x": 20,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_parsecontract",
+      "type": "file",
+      "file": "parseContract().md",
+      "x": 220,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_parseexpectation",
+      "type": "file",
+      "file": "parseExpectation().md",
+      "x": 420,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2885,8 +3146,8 @@
       "id": "n_src_scan_url_safety_parseipv6",
       "type": "file",
       "file": "parseIpv6().md",
-      "x": 4020,
-      "y": 1120,
+      "x": 620,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2894,8 +3155,8 @@
       "id": "n_src_ai_fix_parseproposal",
       "type": "file",
       "file": "parseProposal().md",
-      "x": 4220,
-      "y": 1120,
+      "x": 820,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2903,8 +3164,8 @@
       "id": "n_src_sample_sandbox_patchedcontent",
       "type": "file",
       "file": "patchedContent().md",
-      "x": 4420,
-      "y": 1120,
+      "x": 1020,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2912,8 +3173,8 @@
       "id": "n_src_sample_sandbox_patches",
       "type": "file",
       "file": "patches.md",
-      "x": 20,
-      "y": 1200,
+      "x": 1220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2921,8 +3182,8 @@
       "id": "n_src_scan_worker_performscan",
       "type": "file",
       "file": "performScan().md",
-      "x": 220,
-      "y": 1200,
+      "x": 1420,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2930,8 +3191,8 @@
       "id": "n_tests_unit_persistence_test",
       "type": "file",
       "file": "persistence.test.ts.md",
-      "x": 420,
-      "y": 1200,
+      "x": 1620,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2939,8 +3200,8 @@
       "id": "n_package_dependencies_playwright",
       "type": "file",
       "file": "playwright.md",
-      "x": 620,
-      "y": 1200,
+      "x": 1820,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2948,8 +3209,8 @@
       "id": "n_ref_playwright",
       "type": "file",
       "file": "playwright_1.md",
-      "x": 820,
-      "y": 1200,
+      "x": 2020,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2957,8 +3218,8 @@
       "id": "n_playwright",
       "type": "file",
       "file": "playwright_2.md",
-      "x": 1020,
-      "y": 1200,
+      "x": 2220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2966,8 +3227,26 @@
       "id": "n_src_api_server_port",
       "type": "file",
       "file": "port.md",
-      "x": 1220,
-      "y": 1200,
+      "x": 2420,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo",
+      "type": "file",
+      "file": "prepare-demo.mjs.md",
+      "x": 2620,
+      "y": 1280,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_scripts_prepare_demo",
+      "type": "file",
+      "file": "preparedemo.md",
+      "x": 2820,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2975,8 +3254,8 @@
       "id": "n_tests_unit_presentation_test",
       "type": "file",
       "file": "presentation.test.ts.md",
-      "x": 1420,
-      "y": 1200,
+      "x": 3020,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2984,8 +3263,8 @@
       "id": "n_web_src_presentation",
       "type": "file",
       "file": "presentation.ts.md",
-      "x": 1620,
-      "y": 1200,
+      "x": 3220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -2993,8 +3272,8 @@
       "id": "n_src_scan_interaction_priority",
       "type": "file",
       "file": "priority().md",
-      "x": 1820,
-      "y": 1200,
+      "x": 3420,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3002,8 +3281,8 @@
       "id": "n_package_private",
       "type": "file",
       "file": "private.md",
-      "x": 2020,
-      "y": 1200,
+      "x": 3620,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3011,8 +3290,8 @@
       "id": "n_scripts_check_studio_problems",
       "type": "file",
       "file": "problems.md",
-      "x": 2220,
-      "y": 1200,
+      "x": 3820,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3020,8 +3299,8 @@
       "id": "n_scripts_rehearse_problems",
       "type": "file",
       "file": "problems_1.md",
-      "x": 2420,
-      "y": 1200,
+      "x": 4020,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3029,8 +3308,8 @@
       "id": "n_web_src_api_proposefix",
       "type": "file",
       "file": "proposeFix().md",
-      "x": 2620,
-      "y": 1200,
+      "x": 4220,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3038,8 +3317,8 @@
       "id": "n_src_api_app_pumpqueue",
       "type": "file",
       "file": "pumpQueue().md",
-      "x": 2820,
-      "y": 1200,
+      "x": 4420,
+      "y": 1280,
       "width": 180,
       "height": 60
     },
@@ -3047,8 +3326,8 @@
       "id": "n_src_scan_interaction_pushexclusion",
       "type": "file",
       "file": "pushExclusion().md",
-      "x": 3020,
-      "y": 1200,
+      "x": 20,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3056,8 +3335,8 @@
       "id": "n_package_dependencies_react",
       "type": "file",
       "file": "react.md",
-      "x": 3220,
-      "y": 1200,
+      "x": 220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3065,8 +3344,8 @@
       "id": "n_ref_react",
       "type": "file",
       "file": "react_1.md",
-      "x": 3420,
-      "y": 1200,
+      "x": 420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3074,8 +3353,8 @@
       "id": "n_package_dependencies_react_dom",
       "type": "file",
       "file": "react-dom.md",
-      "x": 3620,
-      "y": 1200,
+      "x": 620,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3083,8 +3362,8 @@
       "id": "n_ref_react_dom",
       "type": "file",
       "file": "react-dom_1.md",
-      "x": 3820,
-      "y": 1200,
+      "x": 820,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3092,8 +3371,17 @@
       "id": "n_src_ai_briefing_readaiconfig",
       "type": "file",
       "file": "readAiConfig().md",
-      "x": 4020,
-      "y": 1200,
+      "x": 1020,
+      "y": 1360,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_store_contracts_readall",
+      "type": "file",
+      "file": "readAll().md",
+      "x": 1220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3101,8 +3389,8 @@
       "id": "n_src_ai_fix_readfixconfig",
       "type": "file",
       "file": "readFixConfig().md",
-      "x": 4220,
-      "y": 1200,
+      "x": 1420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3110,8 +3398,8 @@
       "id": "n_src_sample_sandbox_readfixture",
       "type": "file",
       "file": "readFixture().md",
-      "x": 4420,
-      "y": 1200,
+      "x": 1620,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3119,8 +3407,8 @@
       "id": "n_web_src_api_readgraph",
       "type": "file",
       "file": "readGraph().md",
-      "x": 20,
-      "y": 1280,
+      "x": 1820,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3128,8 +3416,8 @@
       "id": "n_web_src_api_readscan",
       "type": "file",
       "file": "readScan().md",
-      "x": 220,
-      "y": 1280,
+      "x": 2020,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3137,8 +3425,8 @@
       "id": "n_scripts_check_studio_real",
       "type": "file",
       "file": "real.md",
-      "x": 420,
-      "y": 1280,
+      "x": 2220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3146,8 +3434,8 @@
       "id": "n_scripts_rehearse_record",
       "type": "file",
       "file": "record().md",
-      "x": 620,
-      "y": 1280,
+      "x": 2420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3155,8 +3443,8 @@
       "id": "n_src_scan_evidence_redactmessage",
       "type": "file",
       "file": "redactMessage().md",
-      "x": 820,
-      "y": 1280,
+      "x": 2620,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3164,8 +3452,8 @@
       "id": "n_ref_node_child_process",
       "type": "file",
       "file": "ref_node_child_process.md",
-      "x": 1020,
-      "y": 1280,
+      "x": 2820,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3173,8 +3461,8 @@
       "id": "n_ref_node_crypto",
       "type": "file",
       "file": "ref_node_crypto.md",
-      "x": 1220,
-      "y": 1280,
+      "x": 3020,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3182,8 +3470,8 @@
       "id": "n_ref_node_dns",
       "type": "file",
       "file": "ref_node_dns.md",
-      "x": 1420,
-      "y": 1280,
+      "x": 3220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3191,8 +3479,8 @@
       "id": "n_ref_node_fs",
       "type": "file",
       "file": "ref_node_fs.md",
-      "x": 1620,
-      "y": 1280,
+      "x": 3420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3200,8 +3488,8 @@
       "id": "n_ref_node_http",
       "type": "file",
       "file": "ref_node_http.md",
-      "x": 1820,
-      "y": 1280,
+      "x": 3620,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3209,8 +3497,8 @@
       "id": "n_ref_node_module",
       "type": "file",
       "file": "ref_node_module.md",
-      "x": 2020,
-      "y": 1280,
+      "x": 3820,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3218,8 +3506,8 @@
       "id": "n_ref_node_net",
       "type": "file",
       "file": "ref_node_net.md",
-      "x": 2220,
-      "y": 1280,
+      "x": 4020,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3227,8 +3515,8 @@
       "id": "n_ref_node_os",
       "type": "file",
       "file": "ref_node_os.md",
-      "x": 2420,
-      "y": 1280,
+      "x": 4220,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3236,8 +3524,8 @@
       "id": "n_ref_node_path",
       "type": "file",
       "file": "ref_node_path.md",
-      "x": 2620,
-      "y": 1280,
+      "x": 4420,
+      "y": 1360,
       "width": 180,
       "height": 60
     },
@@ -3245,8 +3533,8 @@
       "id": "n_ref_node_url",
       "type": "file",
       "file": "ref_node_url.md",
-      "x": 2820,
-      "y": 1280,
+      "x": 20,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3254,8 +3542,8 @@
       "id": "n_tests_unit_refusal_test",
       "type": "file",
       "file": "refusal.test.ts.md",
-      "x": 3020,
-      "y": 1280,
+      "x": 220,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3263,8 +3551,8 @@
       "id": "n_tests_unit_refusal_test_refusedscan",
       "type": "file",
       "file": "refusedScan().md",
-      "x": 3220,
-      "y": 1280,
+      "x": 420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3272,8 +3560,8 @@
       "id": "n_package_scripts_rehearse",
       "type": "file",
       "file": "rehearse.md",
-      "x": 3420,
-      "y": 1280,
+      "x": 620,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3281,8 +3569,17 @@
       "id": "n_scripts_rehearse",
       "type": "file",
       "file": "rehearse.mjs.md",
-      "x": 3620,
-      "y": 1280,
+      "x": 820,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_presentation_remainingsummary",
+      "type": "file",
+      "file": "remainingSummary().md",
+      "x": 1020,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3290,8 +3587,17 @@
       "id": "n_web_src_app_app_repairdemo",
       "type": "file",
       "file": "repairDemo().md",
-      "x": 3820,
-      "y": 1280,
+      "x": 1220,
+      "y": 1440,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo_repaired",
+      "type": "file",
+      "file": "repaired.md",
+      "x": 1420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3299,8 +3605,8 @@
       "id": "n_src_sample_sandbox_replacemarkup",
       "type": "file",
       "file": "replaceMarkup().md",
-      "x": 4020,
-      "y": 1280,
+      "x": 1620,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3308,8 +3614,8 @@
       "id": "n_web_src_api_request",
       "type": "file",
       "file": "request().md",
-      "x": 4220,
-      "y": 1280,
+      "x": 1820,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3317,8 +3623,8 @@
       "id": "n_src_ai_briefing_requestcompletion",
       "type": "file",
       "file": "requestCompletion().md",
-      "x": 4420,
-      "y": 1280,
+      "x": 2020,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3326,8 +3632,8 @@
       "id": "n_src_api_app_requestsbyaddress",
       "type": "file",
       "file": "requestsByAddress.md",
-      "x": 20,
-      "y": 1360,
+      "x": 2220,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3335,8 +3641,8 @@
       "id": "n_src_scan_worker_require",
       "type": "file",
       "file": "require.md",
-      "x": 220,
-      "y": 1360,
+      "x": 2420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3344,8 +3650,8 @@
       "id": "n_web_src_api_rescan",
       "type": "file",
       "file": "rescan().md",
-      "x": 420,
-      "y": 1360,
+      "x": 2620,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3353,8 +3659,8 @@
       "id": "n_src_api_app_rescanbody",
       "type": "file",
       "file": "rescanBody.md",
-      "x": 620,
-      "y": 1360,
+      "x": 2820,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3362,8 +3668,8 @@
       "id": "n_web_src_api_resetdemoshop",
       "type": "file",
       "file": "resetDemoShop().md",
-      "x": 820,
-      "y": 1360,
+      "x": 3020,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3371,8 +3677,8 @@
       "id": "n_scripts_check_studio_resetshop",
       "type": "file",
       "file": "resetShop().md",
-      "x": 1020,
-      "y": 1360,
+      "x": 3220,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3380,8 +3686,8 @@
       "id": "n_tsconfig_compileroptions_resolvejsonmodule",
       "type": "file",
       "file": "resolveJsonModule.md",
-      "x": 1220,
-      "y": 1360,
+      "x": 3420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3389,8 +3695,8 @@
       "id": "n_scripts_check_studio_results",
       "type": "file",
       "file": "results.md",
-      "x": 1420,
-      "y": 1360,
+      "x": 3620,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3398,8 +3704,8 @@
       "id": "n_tsconfig_build_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir.md",
-      "x": 1620,
-      "y": 1360,
+      "x": 3820,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3407,8 +3713,8 @@
       "id": "n_tsconfig_compileroptions_rootdir",
       "type": "file",
       "file": "rootDir_1.md",
-      "x": 1820,
-      "y": 1360,
+      "x": 4020,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3416,8 +3722,8 @@
       "id": "n_web_src_presentation_routestofinding",
       "type": "file",
       "file": "routesToFinding().md",
-      "x": 2020,
-      "y": 1360,
+      "x": 4220,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3425,8 +3731,8 @@
       "id": "n_web_src_app_app_run",
       "type": "file",
       "file": "run().md",
-      "x": 2220,
-      "y": 1360,
+      "x": 4420,
+      "y": 1440,
       "width": 180,
       "height": 60
     },
@@ -3434,8 +3740,8 @@
       "id": "n_src_scan_worker_runaxe",
       "type": "file",
       "file": "runAxe().md",
-      "x": 2420,
-      "y": 1360,
+      "x": 20,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3443,8 +3749,8 @@
       "id": "n_src_scan_interaction_runinteractions",
       "type": "file",
       "file": "runInteractions().md",
-      "x": 2620,
-      "y": 1360,
+      "x": 220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3452,8 +3758,8 @@
       "id": "n_src_scan_interaction_runsingleinteraction",
       "type": "file",
       "file": "runSingleInteraction().md",
-      "x": 2820,
-      "y": 1360,
+      "x": 420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3461,8 +3767,8 @@
       "id": "n_src_scan_url_safety_safedisplayurl",
       "type": "file",
       "file": "safeDisplayUrl().md",
-      "x": 3020,
-      "y": 1360,
+      "x": 620,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3470,8 +3776,8 @@
       "id": "n_src_export_obsidian_safename",
       "type": "file",
       "file": "safeName().md",
-      "x": 3220,
-      "y": 1360,
+      "x": 820,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3479,8 +3785,8 @@
       "id": "n_tests_unit_graph_test_sample",
       "type": "file",
       "file": "sample().md",
-      "x": 3420,
-      "y": 1360,
+      "x": 1020,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3488,8 +3794,8 @@
       "id": "n_tests_e2e_sample_scan_test",
       "type": "file",
       "file": "sample-scan.test.ts.md",
-      "x": 3620,
-      "y": 1360,
+      "x": 1220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3497,8 +3803,8 @@
       "id": "n_src_api_app_samplestatebody",
       "type": "file",
       "file": "sampleStateBody.md",
-      "x": 3820,
-      "y": 1360,
+      "x": 1420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3506,8 +3812,8 @@
       "id": "n_src_sample_sandbox",
       "type": "file",
       "file": "sandbox.ts.md",
-      "x": 4020,
-      "y": 1360,
+      "x": 1620,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3515,8 +3821,8 @@
       "id": "n_tests_unit_briefing_test_scan",
       "type": "file",
       "file": "scan.md",
-      "x": 4220,
-      "y": 1360,
+      "x": 1820,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3524,8 +3830,8 @@
       "id": "n_tests_unit_export_test_scan",
       "type": "file",
       "file": "scan_1.md",
-      "x": 4420,
-      "y": 1360,
+      "x": 2020,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3533,26 +3839,35 @@
       "id": "n_tests_unit_compare_test_scan",
       "type": "file",
       "file": "scan().md",
-      "x": 20,
-      "y": 1440,
+      "x": 2220,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_contract_test_scan",
+      "type": "file",
+      "file": "scan()_1.md",
+      "x": 2420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
     {
       "id": "n_tests_unit_graph_shape_test_scan",
       "type": "file",
-      "file": "scan()_1.md",
-      "x": 220,
-      "y": 1440,
+      "file": "scan()_2.md",
+      "x": 2620,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
     {
       "id": "n_tests_unit_persistence_test_scan",
       "type": "file",
-      "file": "scan()_2.md",
-      "x": 420,
-      "y": 1440,
+      "file": "scan()_3.md",
+      "x": 2820,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3560,8 +3875,8 @@
       "id": "n_web_src_app_app_scandemo",
       "type": "file",
       "file": "scanDemo().md",
-      "x": 620,
-      "y": 1440,
+      "x": 3020,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3569,8 +3884,8 @@
       "id": "n_src_store_disk_scandirectory",
       "type": "file",
       "file": "scanDirectory().md",
-      "x": 820,
-      "y": 1440,
+      "x": 3220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3578,8 +3893,8 @@
       "id": "n_src_store_disk_scanpath",
       "type": "file",
       "file": "scanPath().md",
-      "x": 1020,
-      "y": 1440,
+      "x": 3420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3587,8 +3902,8 @@
       "id": "n_src_store_memory_scanstore",
       "type": "file",
       "file": "scanStore.md",
-      "x": 1220,
-      "y": 1440,
+      "x": 3620,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3596,8 +3911,8 @@
       "id": "n_web_src_presentation_scanstory",
       "type": "file",
       "file": "scanStory()_1.md",
-      "x": 1420,
-      "y": 1440,
+      "x": 3820,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3605,8 +3920,8 @@
       "id": "n_src_store_memory_scans",
       "type": "file",
       "file": "scans.md",
-      "x": 1620,
-      "y": 1440,
+      "x": 4020,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3614,8 +3929,8 @@
       "id": "n_web_src_presentation_scenegraph",
       "type": "file",
       "file": "sceneGraph().md",
-      "x": 1820,
-      "y": 1440,
+      "x": 4220,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3623,8 +3938,8 @@
       "id": "n_src_api_app_schedule",
       "type": "file",
       "file": "schedule().md",
-      "x": 2020,
-      "y": 1440,
+      "x": 4420,
+      "y": 1520,
       "width": 180,
       "height": 60
     },
@@ -3632,8 +3947,8 @@
       "id": "n_src_graph_schema",
       "type": "file",
       "file": "schema.ts.md",
-      "x": 2220,
-      "y": 1440,
+      "x": 20,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3641,8 +3956,8 @@
       "id": "n_package_scripts",
       "type": "file",
       "file": "scripts.md",
-      "x": 2420,
-      "y": 1440,
+      "x": 220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3650,8 +3965,8 @@
       "id": "n_scripts_rehearse_seconds",
       "type": "file",
       "file": "seconds().md",
-      "x": 2620,
-      "y": 1440,
+      "x": 420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3659,8 +3974,8 @@
       "id": "n_web_src_app_app_select",
       "type": "file",
       "file": "select().md",
-      "x": 2820,
-      "y": 1440,
+      "x": 620,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3668,8 +3983,8 @@
       "id": "n_src_api_server",
       "type": "file",
       "file": "server.ts.md",
-      "x": 3020,
-      "y": 1440,
+      "x": 820,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3677,8 +3992,17 @@
       "id": "n_web_src_api_setsamplestate",
       "type": "file",
       "file": "setSampleState().md",
-      "x": 3220,
-      "y": 1440,
+      "x": 1020,
+      "y": 1600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo_setstate",
+      "type": "file",
+      "file": "setState().md",
+      "x": 1220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3686,8 +4010,8 @@
       "id": "n_web_src_presentation_severity",
       "type": "file",
       "file": "severity().md",
-      "x": 3420,
-      "y": 1440,
+      "x": 1420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3695,8 +4019,8 @@
       "id": "n_web_src_presentation_shortcutof",
       "type": "file",
       "file": "shortcutOf().md",
-      "x": 3620,
-      "y": 1440,
+      "x": 1620,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3704,8 +4028,8 @@
       "id": "n_src_scan_worker_shouldcrawllink",
       "type": "file",
       "file": "shouldCrawlLink().md",
-      "x": 3820,
-      "y": 1440,
+      "x": 1820,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3713,8 +4037,17 @@
       "id": "n_web_src_app_app_showproof",
       "type": "file",
       "file": "showProof().md",
-      "x": 4020,
-      "y": 1440,
+      "x": 2020,
+      "y": 1600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_tests_unit_contract_test_signal",
+      "type": "file",
+      "file": "signal().md",
+      "x": 2220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3722,8 +4055,8 @@
       "id": "n_tests_unit_presentation_test_site",
       "type": "file",
       "file": "site.md",
-      "x": 4220,
-      "y": 1440,
+      "x": 2420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3731,8 +4064,8 @@
       "id": "n_web_src_app_sitename",
       "type": "file",
       "file": "siteName().md",
-      "x": 4420,
-      "y": 1440,
+      "x": 2620,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3740,8 +4073,8 @@
       "id": "n_tsconfig_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck.md",
-      "x": 20,
-      "y": 1520,
+      "x": 2820,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3749,8 +4082,8 @@
       "id": "n_tsconfig_web_compileroptions_skiplibcheck",
       "type": "file",
       "file": "skipLibCheck_1.md",
-      "x": 220,
-      "y": 1520,
+      "x": 3020,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3758,8 +4091,8 @@
       "id": "n_src_scan_interaction_snapshot",
       "type": "file",
       "file": "snapshot().md",
-      "x": 420,
-      "y": 1520,
+      "x": 3220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3767,8 +4100,8 @@
       "id": "n_src_scan_evidence_stableid",
       "type": "file",
       "file": "stableId().md",
-      "x": 620,
-      "y": 1520,
+      "x": 3420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3776,8 +4109,17 @@
       "id": "n_package_scripts_start",
       "type": "file",
       "file": "start.md",
-      "x": 820,
-      "y": 1520,
+      "x": 3620,
+      "y": 1600,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo_start",
+      "type": "file",
+      "file": "start().md",
+      "x": 3820,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3785,8 +4127,8 @@
       "id": "n_package_scripts_start_api",
       "type": "file",
       "file": "startapi.md",
-      "x": 1020,
-      "y": 1520,
+      "x": 4020,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3794,8 +4136,8 @@
       "id": "n_web_src_app_app_starttour",
       "type": "file",
       "file": "startTour().md",
-      "x": 1220,
-      "y": 1520,
+      "x": 4220,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3803,8 +4145,8 @@
       "id": "n_web_src_presentation_stepsof",
       "type": "file",
       "file": "stepsOf().md",
-      "x": 1420,
-      "y": 1520,
+      "x": 4420,
+      "y": 1600,
       "width": 180,
       "height": 60
     },
@@ -3812,8 +4154,8 @@
       "id": "n_scripts_demo_stop",
       "type": "file",
       "file": "stop().md",
-      "x": 1620,
-      "y": 1520,
+      "x": 20,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3821,8 +4163,8 @@
       "id": "n_web_src_app_storageget",
       "type": "file",
       "file": "storageGet().md",
-      "x": 1820,
-      "y": 1520,
+      "x": 220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3830,8 +4172,8 @@
       "id": "n_web_src_app_storageset",
       "type": "file",
       "file": "storageSet().md",
-      "x": 2020,
-      "y": 1520,
+      "x": 420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3839,8 +4181,8 @@
       "id": "n_web_src_presentation_str",
       "type": "file",
       "file": "str().md",
-      "x": 2220,
-      "y": 1520,
+      "x": 620,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3848,8 +4190,8 @@
       "id": "n_tsconfig_compileroptions_strict",
       "type": "file",
       "file": "strict.md",
-      "x": 2420,
-      "y": 1520,
+      "x": 820,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3857,8 +4199,8 @@
       "id": "n_tsconfig_web_compileroptions_strict",
       "type": "file",
       "file": "strict_1.md",
-      "x": 2620,
-      "y": 1520,
+      "x": 1020,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3866,8 +4208,8 @@
       "id": "n_web_src_app_app_studio",
       "type": "file",
       "file": "studio().md",
-      "x": 2820,
-      "y": 1520,
+      "x": 1220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3875,8 +4217,8 @@
       "id": "n_tests_e2e_studio_flow_test",
       "type": "file",
       "file": "studio-flow.test.ts.md",
-      "x": 3020,
-      "y": 1520,
+      "x": 1420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3884,8 +4226,8 @@
       "id": "n_web_src_app_app_submit",
       "type": "file",
       "file": "submit().md",
-      "x": 3220,
-      "y": 1520,
+      "x": 1620,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3893,8 +4235,8 @@
       "id": "n_src_scan_worker_summarizecoverage",
       "type": "file",
       "file": "summarizeCoverage().md",
-      "x": 3420,
-      "y": 1520,
+      "x": 1820,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3902,8 +4244,8 @@
       "id": "n_src_scan_interaction_summarizeinteraction",
       "type": "file",
       "file": "summarizeInteraction().md",
-      "x": 3620,
-      "y": 1520,
+      "x": 2020,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3911,8 +4253,8 @@
       "id": "n_src_store_disk_summarizescan",
       "type": "file",
       "file": "summarizeScan().md",
-      "x": 3820,
-      "y": 1520,
+      "x": 2220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3920,8 +4262,8 @@
       "id": "n_tsconfig_compileroptions_target",
       "type": "file",
       "file": "target.md",
-      "x": 4020,
-      "y": 1520,
+      "x": 2420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3929,8 +4271,8 @@
       "id": "n_tsconfig_web_compileroptions_target",
       "type": "file",
       "file": "target_1.md",
-      "x": 4220,
-      "y": 1520,
+      "x": 2620,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3938,8 +4280,8 @@
       "id": "n_package_scripts_test",
       "type": "file",
       "file": "test.md",
-      "x": 4420,
-      "y": 1520,
+      "x": 2820,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3947,8 +4289,8 @@
       "id": "n_package_scripts_test_watch",
       "type": "file",
       "file": "testwatch.md",
-      "x": 20,
-      "y": 1600,
+      "x": 3020,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3956,8 +4298,8 @@
       "id": "n_web_src_presentation_testedflowfor",
       "type": "file",
       "file": "testedFlowFor().md",
-      "x": 220,
-      "y": 1600,
+      "x": 3220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3965,8 +4307,8 @@
       "id": "n_scripts_rehearse_text",
       "type": "file",
       "file": "text().md",
-      "x": 420,
-      "y": 1600,
+      "x": 3420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3974,8 +4316,8 @@
       "id": "n_tests_unit_timing_test",
       "type": "file",
       "file": "timing.test.ts.md",
-      "x": 620,
-      "y": 1600,
+      "x": 3620,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3983,8 +4325,8 @@
       "id": "n_tests_unit_tour_test",
       "type": "file",
       "file": "tour.test.ts.md",
-      "x": 820,
-      "y": 1600,
+      "x": 3820,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -3992,8 +4334,8 @@
       "id": "n_web_src_tour",
       "type": "file",
       "file": "tour.ts.md",
-      "x": 1020,
-      "y": 1600,
+      "x": 4020,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -4001,8 +4343,8 @@
       "id": "n_web_src_presentation_tracejourney",
       "type": "file",
       "file": "traceJourney().md",
-      "x": 1220,
-      "y": 1600,
+      "x": 4220,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -4010,8 +4352,8 @@
       "id": "n_tsconfig_build",
       "type": "file",
       "file": "tsconfig.build.json.md",
-      "x": 1420,
-      "y": 1600,
+      "x": 4420,
+      "y": 1680,
       "width": 180,
       "height": 60
     },
@@ -4019,8 +4361,8 @@
       "id": "n_tsconfig",
       "type": "file",
       "file": "tsconfig.json.md",
-      "x": 1620,
-      "y": 1600,
+      "x": 20,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4028,8 +4370,8 @@
       "id": "n_tsconfig_web",
       "type": "file",
       "file": "tsconfig.web.json.md",
-      "x": 1820,
-      "y": 1600,
+      "x": 220,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4037,8 +4379,8 @@
       "id": "n_package_devdependencies_tsx",
       "type": "file",
       "file": "tsx.md",
-      "x": 2020,
-      "y": 1600,
+      "x": 420,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4046,8 +4388,8 @@
       "id": "n_ref_tsx",
       "type": "file",
       "file": "tsx_1.md",
-      "x": 2220,
-      "y": 1600,
+      "x": 620,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4055,8 +4397,8 @@
       "id": "n_scripts_check_studio_txt",
       "type": "file",
       "file": "txt().md",
-      "x": 2420,
-      "y": 1600,
+      "x": 820,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4064,8 +4406,8 @@
       "id": "n_package_type",
       "type": "file",
       "file": "type.md",
-      "x": 2620,
-      "y": 1600,
+      "x": 1020,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4073,8 +4415,8 @@
       "id": "n_package_scripts_typecheck",
       "type": "file",
       "file": "typecheck.md",
-      "x": 2820,
-      "y": 1600,
+      "x": 1220,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4082,8 +4424,8 @@
       "id": "n_tsconfig_build_compileroptions_types",
       "type": "file",
       "file": "types.md",
-      "x": 3020,
-      "y": 1600,
+      "x": 1420,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4091,8 +4433,8 @@
       "id": "n_tsconfig_compileroptions_types",
       "type": "file",
       "file": "types_1.md",
-      "x": 3220,
-      "y": 1600,
+      "x": 1620,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4100,8 +4442,8 @@
       "id": "n_tsconfig_web_compileroptions_types",
       "type": "file",
       "file": "types_2.md",
-      "x": 3420,
-      "y": 1600,
+      "x": 1820,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4109,8 +4451,8 @@
       "id": "n_web_src_types",
       "type": "file",
       "file": "types.ts.md",
-      "x": 3620,
-      "y": 1600,
+      "x": 2020,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4118,8 +4460,8 @@
       "id": "n_package_devdependencies_typescript",
       "type": "file",
       "file": "typescript.md",
-      "x": 3820,
-      "y": 1600,
+      "x": 2220,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4127,8 +4469,8 @@
       "id": "n_ref_typescript",
       "type": "file",
       "file": "typescript_1.md",
-      "x": 4020,
-      "y": 1600,
+      "x": 2420,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4136,8 +4478,8 @@
       "id": "n_scripts_demo_up",
       "type": "file",
       "file": "up().md",
-      "x": 4220,
-      "y": 1600,
+      "x": 2620,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4145,8 +4487,8 @@
       "id": "n_web_src_graphcanvas_graphcanvas_up",
       "type": "file",
       "file": "up()_1.md",
-      "x": 4420,
-      "y": 1600,
+      "x": 2820,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4154,8 +4496,8 @@
       "id": "n_tests_unit_url_safety_test",
       "type": "file",
       "file": "url-safety.test.ts.md",
-      "x": 20,
-      "y": 1680,
+      "x": 3020,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4163,8 +4505,8 @@
       "id": "n_src_scan_url_safety",
       "type": "file",
       "file": "url-safety.ts.md",
-      "x": 220,
-      "y": 1680,
+      "x": 3220,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4172,8 +4514,8 @@
       "id": "n_src_ai_briefing_userprompt",
       "type": "file",
       "file": "userPrompt().md",
-      "x": 420,
-      "y": 1680,
+      "x": 3420,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4181,8 +4523,8 @@
       "id": "n_src_ai_fix_userprompt",
       "type": "file",
       "file": "userPrompt()_1.md",
-      "x": 620,
-      "y": 1680,
+      "x": 3620,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4190,8 +4532,8 @@
       "id": "n_tests_unit_persistence_test_uuidfor",
       "type": "file",
       "file": "uuidFor().md",
-      "x": 820,
-      "y": 1680,
+      "x": 3820,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4199,8 +4541,8 @@
       "id": "n_src_scan_interaction_validationissue",
       "type": "file",
       "file": "validationIssue().md",
-      "x": 1020,
-      "y": 1680,
+      "x": 4020,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4208,8 +4550,8 @@
       "id": "n_package_version",
       "type": "file",
       "file": "version.md",
-      "x": 1220,
-      "y": 1680,
+      "x": 4220,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4217,8 +4559,8 @@
       "id": "n_package_devdependencies_vite",
       "type": "file",
       "file": "vite.md",
-      "x": 1420,
-      "y": 1680,
+      "x": 4420,
+      "y": 1760,
       "width": 180,
       "height": 60
     },
@@ -4226,8 +4568,8 @@
       "id": "n_ref_vite",
       "type": "file",
       "file": "vite_1.md",
-      "x": 1620,
-      "y": 1680,
+      "x": 20,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4235,8 +4577,8 @@
       "id": "n_vite_config",
       "type": "file",
       "file": "vite.config.ts.md",
-      "x": 1820,
-      "y": 1680,
+      "x": 220,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4244,8 +4586,8 @@
       "id": "n_package_devdependencies_vitest",
       "type": "file",
       "file": "vitest.md",
-      "x": 2020,
-      "y": 1680,
+      "x": 420,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4253,8 +4595,8 @@
       "id": "n_ref_vitest",
       "type": "file",
       "file": "vitest_1.md",
-      "x": 2220,
-      "y": 1680,
+      "x": 620,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4262,8 +4604,8 @@
       "id": "n_vitest_config",
       "type": "file",
       "file": "vitest.config.ts.md",
-      "x": 2420,
-      "y": 1680,
+      "x": 820,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4271,8 +4613,17 @@
       "id": "n_scripts_demo_wait",
       "type": "file",
       "file": "wait().md",
-      "x": 2620,
-      "y": 1680,
+      "x": 1020,
+      "y": 1840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scripts_prepare_demo_wait",
+      "type": "file",
+      "file": "wait()_1.md",
+      "x": 1220,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4280,8 +4631,8 @@
       "id": "n_scripts_demo_waitfor",
       "type": "file",
       "file": "waitFor().md",
-      "x": 2820,
-      "y": 1680,
+      "x": 1420,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4289,8 +4640,8 @@
       "id": "n_tests_e2e_sample_scan_test_waitforscan",
       "type": "file",
       "file": "waitForScan().md",
-      "x": 3020,
-      "y": 1680,
+      "x": 1620,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4298,8 +4649,8 @@
       "id": "n_web_src_api_waitforscan",
       "type": "file",
       "file": "waitForScan()_1.md",
-      "x": 3220,
-      "y": 1680,
+      "x": 1820,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4307,8 +4658,8 @@
       "id": "n_tests_unit_web_api_test",
       "type": "file",
       "file": "web-api.test.ts.md",
-      "x": 3420,
-      "y": 1680,
+      "x": 2020,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4316,8 +4667,8 @@
       "id": "n_vite_config_webroot",
       "type": "file",
       "file": "webRoot.md",
-      "x": 3620,
-      "y": 1680,
+      "x": 2220,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4325,8 +4676,8 @@
       "id": "n_web_src_styles",
       "type": "file",
       "file": "web_src_styles.md",
-      "x": 3820,
-      "y": 1680,
+      "x": 2420,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4334,8 +4685,8 @@
       "id": "n_src_scan_interaction_withouthash",
       "type": "file",
       "file": "withoutHash().md",
-      "x": 4020,
-      "y": 1680,
+      "x": 2620,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4343,8 +4694,8 @@
       "id": "n_src_scan_worker",
       "type": "file",
       "file": "worker.ts.md",
-      "x": 4220,
-      "y": 1680,
+      "x": 2820,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4352,8 +4703,8 @@
       "id": "n_src_ai_briefing_writebriefing",
       "type": "file",
       "file": "writeBriefing().md",
-      "x": 4420,
-      "y": 1680,
+      "x": 3020,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4361,8 +4712,17 @@
       "id": "n_web_src_api_writebriefing",
       "type": "file",
       "file": "writeBriefing()_1.md",
-      "x": 20,
-      "y": 1760,
+      "x": 3220,
+      "y": 1840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_web_src_api_writecontract",
+      "type": "file",
+      "file": "writeContract().md",
+      "x": 3420,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4370,8 +4730,17 @@
       "id": "n_src_ai_fix_writefixproposal",
       "type": "file",
       "file": "writeFixProposal().md",
-      "x": 220,
-      "y": 1760,
+      "x": 3620,
+      "y": 1840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_ai_contract_writerepaircontract",
+      "type": "file",
+      "file": "writeRepairContract().md",
+      "x": 3820,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4379,8 +4748,8 @@
       "id": "n_package_dependencies_zod",
       "type": "file",
       "file": "zod.md",
-      "x": 420,
-      "y": 1760,
+      "x": 4020,
+      "y": 1840,
       "width": 180,
       "height": 60
     },
@@ -4388,8 +4757,8 @@
       "id": "n_ref_zod",
       "type": "file",
       "file": "zod_1.md",
-      "x": 620,
-      "y": 1760,
+      "x": 4220,
+      "y": 1840,
       "width": 180,
       "height": 60
     }
@@ -4639,6 +5008,12 @@
       "id": "e_package_scripts_package_scripts_start",
       "fromNode": "n_package_scripts",
       "toNode": "n_package_scripts_start",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_scripts_package_scripts_prepare_demo",
+      "fromNode": "n_package_scripts",
+      "toNode": "n_package_scripts_prepare_demo",
       "label": "contains [EXTRACTED]"
     },
     {
@@ -4942,6 +5317,12 @@
       "label": "imports_from [EXTRACTED]"
     },
     {
+      "id": "e_tests_unit_contract_test_ref_vitest",
+      "fromNode": "n_tests_unit_contract_test",
+      "toNode": "n_ref_vitest",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
       "id": "e_tests_unit_export_test_ref_vitest",
       "fromNode": "n_tests_unit_export_test",
       "toNode": "n_ref_vitest",
@@ -5120,6 +5501,42 @@
       "fromNode": "n_scripts_demo_waitfor",
       "toNode": "n_scripts_demo_up",
       "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_ref_node_fs",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_ref_node_fs",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_scripts_prepare_demo_sites",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_scripts_prepare_demo_sites",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_scripts_prepare_demo_wait",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_scripts_prepare_demo_wait",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_scripts_prepare_demo_start",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_scripts_prepare_demo_start",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_scripts_prepare_demo_setstate",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_scripts_prepare_demo_setstate",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scripts_prepare_demo_scripts_prepare_demo_repaired",
+      "fromNode": "n_scripts_prepare_demo",
+      "toNode": "n_scripts_prepare_demo_repaired",
+      "label": "contains [EXTRACTED]"
     },
     {
       "id": "e_scripts_rehearse_scripts_rehearse_beat",
@@ -5440,159 +5857,111 @@
       "label": "calls [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_graph_schema",
-      "fromNode": "n_src_ai_fix",
+      "id": "e_src_ai_contract_src_graph_schema",
+      "fromNode": "n_src_ai_contract",
       "toNode": "n_src_graph_schema",
       "label": "imports_from [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_graph_schema_scanresult",
-      "fromNode": "n_src_ai_fix",
+      "id": "e_src_ai_contract_src_graph_schema_graphnode",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_graph_schema_graphnode",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_contract_src_graph_schema_scanresult",
+      "fromNode": "n_src_ai_contract",
       "toNode": "n_src_graph_schema_scanresult",
       "label": "imports [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_graph_schema_sitegraph",
-      "fromNode": "n_src_ai_fix",
+      "id": "e_src_ai_contract_src_graph_schema_sitegraph",
+      "fromNode": "n_src_ai_contract",
       "toNode": "n_src_graph_schema_sitegraph",
       "label": "imports [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_fixproposal",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_fixproposal",
+      "id": "e_src_ai_contract_src_ai_contract_predictionexpectation",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_predictionexpectation",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_fixconfig",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_fixconfig",
+      "id": "e_src_ai_contract_src_ai_contract_repairprediction",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_repairprediction",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_readfixconfig",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_readfixconfig",
+      "id": "e_src_ai_contract_src_ai_contract_repaircontract",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_repaircontract",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_system_prompt",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_system_prompt",
+      "id": "e_src_ai_contract_src_ai_contract_predictionoutcome",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_predictionoutcome",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_userprompt",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_userprompt",
+      "id": "e_src_ai_contract_src_ai_contract_checkedprediction",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_checkedprediction",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_parseproposal",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_parseproposal",
+      "id": "e_src_ai_contract_src_ai_contract_system_prompt",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_system_prompt",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_isgrounded",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_isgrounded",
+      "id": "e_src_ai_contract_src_ai_contract_contracterror",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_contracterror",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_ai_fix_src_ai_fix_writefixproposal",
-      "fromNode": "n_src_ai_fix",
-      "toNode": "n_src_ai_fix_writefixproposal",
+      "id": "e_src_ai_contract_src_ai_contract_parseexpectation",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_parseexpectation",
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_src_api_app_src_ai_fix",
+      "id": "e_src_ai_contract_src_ai_contract_parsecontract",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_parsecontract",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_contract_src_ai_contract_issuesonpage",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_issuesonpage",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_contract_src_ai_contract_contractuserprompt",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_contractuserprompt",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_contract_src_ai_contract_writerepaircontract",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_writerepaircontract",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_ai_contract_src_ai_contract_checkpredictions",
+      "fromNode": "n_src_ai_contract",
+      "toNode": "n_src_ai_contract_checkpredictions",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_api_app_src_ai_contract",
       "fromNode": "n_src_api_app",
-      "toNode": "n_src_ai_fix",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_unit_fix_test_src_ai_fix",
-      "fromNode": "n_tests_unit_fix_test",
-      "toNode": "n_src_ai_fix",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_ai_fix_readfixconfig",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_ai_fix_readfixconfig",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_ai_fix_readfixconfig",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_ai_fix_readfixconfig",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_userprompt",
-      "fromNode": "n_src_ai_fix_writefixproposal",
-      "toNode": "n_src_ai_fix_userprompt",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_parseproposal",
-      "fromNode": "n_src_ai_fix_writefixproposal",
-      "toNode": "n_src_ai_fix_parseproposal",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_unit_fix_test_src_ai_fix_parseproposal",
-      "fromNode": "n_tests_unit_fix_test",
-      "toNode": "n_src_ai_fix_parseproposal",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_src_ai_fix_writefixproposal_src_ai_fix_isgrounded",
-      "fromNode": "n_src_ai_fix_writefixproposal",
-      "toNode": "n_src_ai_fix_isgrounded",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_tests_unit_fix_test_src_ai_fix_isgrounded",
-      "fromNode": "n_tests_unit_fix_test",
-      "toNode": "n_src_ai_fix_isgrounded",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_ai_fix_writefixproposal",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_ai_fix_writefixproposal",
-      "label": "imports [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_buildapp_src_ai_fix_writefixproposal",
-      "fromNode": "n_src_api_app_buildapp",
-      "toNode": "n_src_ai_fix_writefixproposal",
-      "label": "calls [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_ref_node_fs",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_ref_node_fs",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_ref_node_path",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_ref_node_path",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_ref_node_crypto",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_ref_node_crypto",
-      "label": "imports_from [EXTRACTED]"
-    },
-    {
-      "id": "e_src_api_app_src_scan_url_safety",
-      "fromNode": "n_src_api_app",
-      "toNode": "n_src_scan_url_safety",
+      "toNode": "n_src_ai_contract",
       "label": "imports_from [EXTRACTED]"
     }
   ]

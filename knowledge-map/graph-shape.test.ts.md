@@ -16,7 +16,7 @@ tags:
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
 - [[buildGraph()]] - `imports` [EXTRACTED]
 - [[control()]] - `contains` [EXTRACTED]
-- [[scan()_1]] - `contains` [EXTRACTED]
+- [[scan()_2]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 

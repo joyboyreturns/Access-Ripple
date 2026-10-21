@@ -19,6 +19,7 @@ tags:
 - [[devapi]] - `contains` [EXTRACTED]
 - [[devweb]] - `contains` [EXTRACTED]
 - [[package.json]] - `contains` [EXTRACTED]
+- [[preparedemo]] - `contains` [EXTRACTED]
 - [[rehearse]] - `contains` [EXTRACTED]
 - [[start]] - `contains` [EXTRACTED]
 - [[startapi]] - `contains` [EXTRACTED]

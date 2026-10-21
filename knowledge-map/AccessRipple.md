@@ -20,6 +20,7 @@ tags:
 - [[README]] - `contains` [EXTRACTED]
 - [[Run the full app]] - `contains` [EXTRACTED]
 - [[Scan boundaries]] - `contains` [EXTRACTED]
+- [[The model has to put its claim on trial]] - `contains` [EXTRACTED]
 - [[Verification]] - `contains` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None

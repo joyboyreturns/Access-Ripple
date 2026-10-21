@@ -21,12 +21,14 @@ tags:
 - [[blockedShort()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
+- [[describeId()]] - `calls` [EXTRACTED]
 - [[destinationLabel()]] - `calls` [EXTRACTED]
 - [[flowShort()]] - `calls` [EXTRACTED]
 - [[isTestedFlow()]] - `calls` [EXTRACTED]
 - [[lastStepOf()]] - `calls` [EXTRACTED]
 - [[presentation.test.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
+- [[remainingSummary()]] - `calls` [EXTRACTED]
 - [[scanStory()_1]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

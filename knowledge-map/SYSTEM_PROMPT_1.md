@@ -1,8 +1,8 @@
 ---
-source_file: "src/ai/fix.ts"
+source_file: "src/ai/contract.ts"
 type: "code"
 community: "Community None"
-location: "L35"
+location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,6 @@ tags:
 # SYSTEM_PROMPT
 
 ## Connections
-- [[fix.ts]] - `contains` [EXTRACTED]
+- [[contract.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

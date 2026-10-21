@@ -12,7 +12,7 @@ tags:
 # ApiError
 
 ## Connections
-- [[dot-constructor()_2]] - `method` [EXTRACTED]
+- [[dot-constructor()_3]] - `method` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]

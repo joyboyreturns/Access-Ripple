@@ -12,8 +12,10 @@ tags:
 
 ## Connections
 - [[app.ts]] - `imports_from` [EXTRACTED]
+- [[contracts.ts]] - `imports_from` [EXTRACTED]
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]
+- [[prepare-demo.mjs]] - `imports_from` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
 - [[sandbox.ts]] - `imports_from` [EXTRACTED]
 - [[studio-flow.test.ts]] - `imports_from` [EXTRACTED]

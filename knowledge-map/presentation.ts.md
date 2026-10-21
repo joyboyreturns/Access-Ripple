@@ -49,6 +49,7 @@ tags:
 - [[pageFor()]] - `contains` [EXTRACTED]
 - [[presentation.test.ts]] - `imports_from` [EXTRACTED]
 - [[refusal.test.ts]] - `imports_from` [EXTRACTED]
+- [[remainingSummary()]] - `contains` [EXTRACTED]
 - [[routesToFinding()]] - `contains` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
 - [[scanStory()_1]] - `contains` [EXTRACTED]
