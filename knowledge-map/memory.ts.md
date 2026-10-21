@@ -15,6 +15,7 @@ tags:
 - [[ScanResult]] - `imports` [EXTRACTED]
 - [[app.test.ts]] - `imports_from` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
+- [[no-data.test.ts]] - `imports_from` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
 - [[scanStore]] - `contains` [EXTRACTED]
 - [[scans]] - `contains` [EXTRACTED]

@@ -16,6 +16,7 @@ tags:
 - [[ScanComparison]] - `contains` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
+- [[compare.test.ts]] - `imports_from` [EXTRACTED]
 - [[compareScans()]] - `contains` [EXTRACTED]
 - [[graph.test.ts]] - `imports_from` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]

@@ -17,6 +17,7 @@ tags:
 - [[lastStepOf()]] - `calls` [EXTRACTED]
 - [[outcomeCaption()]] - `calls` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
+- [[routesToFinding()]] - `calls` [EXTRACTED]
 - [[testedFlowFor()]] - `calls` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 

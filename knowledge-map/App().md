@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L94"
+location: "L97"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -24,7 +24,10 @@ tags:
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[accept()]] - `contains` [EXTRACTED]
+- [[acceptProposal()]] - `contains` [EXTRACTED]
+- [[applyProposal()]] - `calls` [EXTRACTED]
 - [[askForProposal()]] - `contains` [EXTRACTED]
+- [[breakDemo()]] - `contains` [EXTRACTED]
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
@@ -54,6 +57,8 @@ tags:
 - [[readScan()]] - `calls` [EXTRACTED]
 - [[repairDemo()]] - `contains` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]
+- [[resetDemoShop()]] - `calls` [EXTRACTED]
+- [[routesToFinding()]] - `calls` [EXTRACTED]
 - [[run()]] - `contains` [EXTRACTED]
 - [[scanDemo()]] - `contains` [EXTRACTED]
 - [[select()]] - `contains` [EXTRACTED]

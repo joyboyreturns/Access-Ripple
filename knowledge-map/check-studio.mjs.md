@@ -17,6 +17,8 @@ tags:
 - [[has()]] - `contains` [EXTRACTED]
 - [[playwright_1]] - `imports_from` [EXTRACTED]
 - [[problems]] - `contains` [EXTRACTED]
+- [[real]] - `contains` [EXTRACTED]
+- [[resetShop()]] - `contains` [EXTRACTED]
 - [[results]] - `contains` [EXTRACTED]
 - [[txt()]] - `contains` [EXTRACTED]
 

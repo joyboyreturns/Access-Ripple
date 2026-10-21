@@ -17,6 +17,7 @@ tags:
 - [[nonPageDestination()]] - `calls` [EXTRACTED]
 - [[outcomeCaptionOf()]] - `calls` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
+- [[routesToFinding()]] - `calls` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

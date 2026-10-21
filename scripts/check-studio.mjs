@@ -48,11 +48,27 @@ check('repair lab appears for the sample', await has('.repair-lab'));
 check('site is named', (await txt('.result-site h2')) === 'Northstar demo shop');
 
 // --- 3. Filters ---
-for (const [filter, expect] of [['Pages', 'pages'], ['Findings', 'findings'], ['Controls', 'controls'], ['Journeys', 'journeys']]) {
+// The map always shows the site and its pages for context, so a filter adds
+// its own kind rather than replacing the structure.
+for (const [filter, kinds] of [['Pages', ['page']], ['Findings', ['accessibility-finding', 'runtime-error']], ['Controls', ['control']], ['Journeys', ['flow']]]) {
   await page.click(`.category-button:has-text("${filter}")`);
   await page.waitForTimeout(350);
   const caption = await txt('.map-coverage');
   check(`filter ${filter} renders a scene`, Boolean(caption), caption ?? '');
+  // The scene must actually contain what the filter promises.
+  const kindsOk = await page.evaluate(async (expected) => {
+    const ids = [...document.querySelectorAll('[data-node]')].map((node) => node.getAttribute('data-node'));
+    if (!ids.length) return false;
+    const scanId = sessionStorage.getItem('accessripple-last-scan');
+    if (!scanId) return false;
+    const graph = await (await fetch(`/api/scans/${scanId}/graph`)).json();
+    const shown = new Set(graph.nodes.filter((node) => ids.includes(node.id)).map((node) => node.kind));
+    // Pages and the site are always shown for context, so they do not count.
+    const specific = [...shown].filter((entry) => entry !== 'page' && entry !== 'site');
+    if (expected.includes('page')) return shown.has('page');
+    return specific.length > 0 && specific.every((entry) => expected.includes(entry));
+  }, kinds);
+  check(`filter ${filter} shows only ${kinds.join(' or ')}`, kindsOk);
 }
 await page.click('.category-button:has-text("Overview")');
 await page.waitForTimeout(300);

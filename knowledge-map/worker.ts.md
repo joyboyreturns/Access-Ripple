@@ -48,6 +48,7 @@ tags:
 - [[shouldCrawlLink()]] - `contains` [EXTRACTED]
 - [[stableId()]] - `imports` [EXTRACTED]
 - [[summarizeCoverage()]] - `contains` [EXTRACTED]
+- [[timing.test.ts]] - `imports_from` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None
