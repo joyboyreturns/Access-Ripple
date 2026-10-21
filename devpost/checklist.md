@@ -129,3 +129,11 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Rewrite the guided tour to the new beat sheet, and grow the browser sweep to 36 checks.
 - [x] Keep the suite green: 86 tests across 13 files, typecheck, production build, axe-core 0 violations.
 - [ ] Learner records the three-minute demo following `devpost/demo-script.md`.
+
+### Real public sites
+- [x] Scan ten famous public sites and confirm every one produces a well-formed graph, with no repeated node id and no dangling edge.
+- [x] Report a site that refuses the scanner as refused, not as an inspected page with a finding on it.
+- [x] Give interaction testing a fixed slice of the budget so a heavy site still reaches more than one page.
+- [x] Widen the total budget to 100 seconds and shorten the interaction reopen wait; the demo shop is unaffected.
+- [x] Record which sites are worth showing, how long they take, and which ones answer automated browsers with a challenge page.
+- [ ] Learner records the real-site beat with the site they choose.

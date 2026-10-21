@@ -173,3 +173,27 @@ Verified on 21 October 2026 with a live free provider and a real third-party sit
 - **The guided tour was rewritten to the new beat sheet** and is now the caption track for the recording: proof, scan, finding, journey, proposal, repair, limits.
 - **The browser sweep grew to 36 checks** and passes 36 of 36 with no console errors, including the proposal, the honest apply label, the proof's two pictures, and the counts that lead it.
 - axe-core reports 0 violations on the proof view, the proposal card, and the new landing line. The suite is 86 tests across 13 files, typecheck and production build pass.
+
+## Real public sites, and two failures the sweep found
+
+Ten famous sites were scanned through the running service. Every one produced a well-formed graph: no repeated node id, no dangling edge, and the studio opened a 2506-node scan in about two seconds.
+
+| Site | Time | Pages | Controls | Findings | Browser signals | Actions tested |
+| --- | --- | --- | --- | --- | --- | --- |
+| google.com | 21s | 4 | 39 | 14 | 12 | 8 |
+| en.wikipedia.org | 108s | 4 | 790 | 229 | 2 | 3 |
+| github.com | 49s | 5 | 315 | 4 | 14 | 8 |
+| developer.mozilla.org | 24s | 4 | 681 | 4 | 11 | 10 |
+| stackoverflow.com | 3s | 1 | 0 | 0 | 1 | 0 |
+| devpost.com | 2s | 1 | 0 | 0 | 1 | 0 |
+| gov.uk | 64s | 1 | 88 | 1 | 4 | 1 |
+| w3.org | 33s | 5 | 187 | 3 | 2 | 10 |
+| bbc.co.uk/news | 77s | 1 | 171 | 31 | 0 | 2 |
+| news.ycombinator.com | 35s | 5 | 1000 | 500 | 0 | 10 |
+
+Two failures came out of it, and both were fixed.
+
+- **A site that refuses the scanner was reported as if it had been scanned.** Stack Overflow and Devpost answer an automated browser with a Cloudflare challenge page, and the scan reported one inspected page with a finding on it. A refused page is now recognised, marked as blocked rather than inspected, and the story says plainly that the site refused the automated browser and that nothing on it could be inspected. It is a property of the site, not a fault in the scan, and the interface says that too.
+- **Interaction testing ate the whole budget on a heavy site.** Wikipedia, GOV.UK and the BBC reached one page and then ran out of time, because each interaction opens its own disposable page and waits for it. Interactions now get a fixed 35% slice of the budget and the crawl keeps the rest, the total budget is 100 seconds, and the reopen wait is shorter. Wikipedia went from one page to four, GOV.UK from one to five, and the BBC from one to five. The demo shop is unaffected: it still activates nine actions in about ten seconds.
+
+A quick site still finishes as soon as it is done, so the demo shop scan is not slowed by the wider budget. The recordings guide now names MDN, W3C, Google, GitHub and Hacker News as the sites worth showing, and warns against Stack Overflow and Devpost, which answer automated browsers with a challenge page.
