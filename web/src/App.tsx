@@ -4,7 +4,7 @@ import GraphCanvas from './GraphCanvas';
 import SelectMenu from './SelectMenu';
 import Landing, { Dialog } from './Landing';
 import Icon, { Mark } from './Icons';
-import { ApiError, checkApi, compareScans, createScan, downloadVault, getSampleInfo, listScans, readGraph, readScan, rescan, setSampleState, waitForScan } from './api';
+import { ApiError, checkApi, compareScans, createScan, downloadVault, getAiStatus, getSampleInfo, listScans, readGraph, readScan, rescan, setSampleState, waitForScan, writeBriefing, type AiStatus, type Briefing } from './api';
 import { cleanLabel, describe, friendlyScanError, groupIssues, isIssue, kindName, matches, nodeColor, pageFor, scanStory, severity, shortcutOf, str, traceJourney, type GraphFilter, type ViewNode } from './presentation';
 import { TOUR, type TourContext } from './tour';
 import type { SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types';
@@ -31,6 +31,24 @@ function ScanStory({ scan, graph, onOpen }: { scan: ScanResult; graph: SiteGraph
   return <div className={`scan-story tone-${story.tone}`}><div className="story-head"><span className="eyebrow">WHAT WE FOUND</span><span className="story-tone">{story.tone==='clear'?'Nothing blocking':story.tone==='critical'?'Needs attention':'Worth a look'}</span></div><p className="story-headline">{story.headline}</p><p className="story-detail">{story.detail}</p>{first&&<button className="story-link" onClick={()=>onOpen(first)}>Open “{describe(first).title}” <Icon name="arrow" size={15}/></button>}</div>;
 }
 
+/**
+ * The optional AI briefing. It only ever appears when a model provider is
+ * configured, and every sentence it shows is tied to recorded evidence.
+ */
+function AiBriefing({ scan, status, onOpen }: { scan: ScanResult; status: AiStatus | null; onOpen: (id: string) => void }) {
+  const [briefing,setBriefing]=useState<Briefing|null>(null);
+  const [busy,setBusy]=useState(false);
+  const [error,setError]=useState('');
+  const ask=async()=>{
+    setBusy(true);setError('');
+    try{setBriefing(await writeBriefing(scan.id));}
+    catch(cause){setError(cause instanceof Error?cause.message:'The briefing could not be written.');}
+    finally{setBusy(false);}
+  };
+  if(!status?.configured) return <div className="ai-briefing"><div className="ai-head"><Icon name="spark" size={17}/><strong>Ask a model to read this scan</strong></div><p>No model provider is configured on this computer, so the summary above is the only one. Add <code>ACCESSRIPPLE_AI_KEY</code> to a local <code>.env</code> file to enable a model-written briefing. Nothing else changes, and the key never leaves this computer.</p></div>;
+  return <div className="ai-briefing"><div className="ai-head"><Icon name="spark" size={17}/><strong>A model read of this scan</strong>{briefing&&<span className="ai-model">{briefing.model}</span>}</div>{busy&&<p className="ai-loading"><span className="spinner"/> Reading the recorded evidence…</p>}{!busy&&!briefing&&!error&&<p className="ai-detail">A model writes the summary in plain language, using only what the browser recorded. Every sentence links back to the evidence it came from.</p>}{error&&<p className="ai-error">{error}</p>}{briefing&&<><p className="ai-text">{briefing.text}</p><div className="ai-citations">{briefing.citations.map(c=><button key={c.id} onClick={()=>onOpen(c.id)} title={c.id}><Icon name="target" size={13}/>{c.label}</button>)}</div></>}<div className="ai-actions">{briefing&&<button className="button button-glass compact" disabled={busy} onClick={()=>void ask()}>Write it again</button>}{!briefing&&<button className="button button-solid compact" disabled={busy} onClick={()=>void ask()}>{busy?'Writing…':'Write a briefing'} <Icon name="arrow" size={15}/></button>}</div></div>;
+}
+
 export default function App() {
   const [screen,setScreen]=useState(location.hash==='#studio'||location.hash==='#demo'?'studio':'home');
   const [theme,setTheme]=useState(storageGet('accessripple-theme')==='light'?'light':'dark');
@@ -45,6 +63,7 @@ export default function App() {
   const [sample,setSample]=useState<SampleInfo|null>(null),[guideOpen,setGuideOpen]=useState(false),[privateUrl,setPrivateUrl]=useState(false);
   const [tourStep,setTourStep]=useState<number|null>(null);
   const [beats,setBeats]=useState({finding:0,journey:0,compared:0});
+  const [aiStatus,setAiStatus]=useState<AiStatus|null>(null);
   const controller=useRef<AbortController|null>(null),urlInput=useRef<HTMLInputElement>(null),inspector=useRef<HTMLElement>(null),demoStarted=useRef(false);
   const reduced=useReducedMotion();
   useEffect(()=>{const sync=()=>{if(location.hash==='#studio'||location.hash==='#demo')setScreen('studio');else if(!location.hash||location.hash==='#')setScreen('home');};window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);
@@ -55,6 +74,7 @@ export default function App() {
   useEffect(()=>{setListLimit(40);},[filter,query]);
   useEffect(()=>{void loadHistory();},[]);
   useEffect(()=>{void getSampleInfo().then(setSample).catch(()=>{/* The demo shop is a convenience; a public address still works without it. */});},[]);
+  useEffect(()=>{void getAiStatus().then(setAiStatus).catch(()=>setAiStatus({configured:false,model:'',provider:''}));},[]);
   // The landing page can open the studio straight into a demo-shop scan, so a first
   // look never depends on a public website being reachable.
   useEffect(()=>{
@@ -168,6 +188,7 @@ export default function App() {
       {busy&&<div className="scan-progress" role="status" aria-live="polite"><div className="scan-progress-orbit"><Icon name="orbit" size={28}/></div><div><strong>{progress?.status==='running'?'Following the connections…':'Preparing the browser…'}</strong><span>{progress?.progress.currentUrl?hostname(progress.progress.currentUrl):'Opening a bounded browser session'}</span></div><div className="progress-status"><span>{progress?.progress.completedPages??0} pages inspected</span><div className="progress-track"><i style={{width:`${Math.max(8,Math.min(94,((progress?.progress.completedPages??0)+.5)/5*100))}%`}}/></div></div></div>}
       {scan&&<div className="result-summary"><div className="result-site"><span className="site-symbol"><Icon name="globe" size={22}/></span><div><span className="eyebrow">{scan.status==='partial'?'PARTIAL SCAN':'SCAN COMPLETE'}</span><h2>{scan.sample?(sample?.name??'Northstar demo shop'):hostname(scan.inputUrl)}</h2></div></div><div className="summary-metrics"><button onClick={()=>changeFilter('pages')}><strong>{counts.pages}</strong><span>pages inspected</span></button><button onClick={()=>changeFilter('controls')}><strong>{counts.controls}</strong><span>visible controls</span></button><button className="finding-metric" onClick={()=>changeFilter('issues')}><strong>{counts.findings}</strong><span>accessibility findings</span></button><button onClick={()=>changeFilter('flows')}><strong>{counts.testedFlows}</strong><span>actions tested</span></button></div><div className="result-actions"><button className="icon-btn" title="Rescan and compare" aria-label="Rescan and compare" disabled={busy} onClick={()=>void run(scan.sample?{sample:'checkout'}:{url:scan.inputUrl},true)}><Icon name="refresh"/></button><button className="button button-glass compact" disabled={busy||exporting} onClick={()=>void exportScan()}><Icon name="download" size={17}/>{exporting?'Preparing…':'Export vault'}</button></div></div>}
       {scan&&<ScanStory scan={scan} graph={graph} onOpen={node=>{setSelected(node);setFilter('issues');setBeats(b=>({...b,finding:b.finding+1}));}}/>}
+      {scan&&<AiBriefing scan={scan} status={aiStatus} onOpen={id=>{const node=graph.nodes.find(n=>n.id===id);if(node)select(node);}}/>}
       {scan?.sample&&sample&&<div className="repair-lab" role="region" aria-label="Demo shop repair lab"><div className="repair-head"><Icon name="spark" size={18}/><div><strong>Prove a repair</strong><span>{sample.variant==='before'?sample.brokenNote:sample.fixedNote}</span></div></div><div className="repair-actions"><span className={`repair-state ${sample.variant}`}>{sample.variant==='before'?'Broken state':'Repaired state'}</span><button className="button button-glass compact" disabled={busy} onClick={()=>void repairDemo()}>{sample.variant==='before'?'Repair the demo shop':'Break the demo shop again'}</button><button className="button button-solid compact" disabled={busy} onClick={()=>void run({sample:'checkout'},true)}><Icon name="refresh" size={16}/>Rescan and compare</button></div></div>}
       {scan&&scan.interactionPolicy&&<div className="interaction-report" role="status"><Icon name="target" size={18}/><strong>{scan.interactionPolicy.tested} action{scan.interactionPolicy.tested===1?'':'s'} activated once in a disposable browser</strong><span>{scan.interactionPolicy.mode==='include-submits'?'Form controls were included with your permission. ':'Form and submit controls were not activated. '}{scan.interactionPolicy.skipped>0?`${scan.interactionPolicy.skipped} control${scan.interactionPolicy.skipped===1?'':'s'} stayed untested (permission, safety, or scan budget).`:''}</span></div>}
       {scan&&scan.coverage&&<details className="coverage-details"><summary><Icon name="shield" size={16}/> What this scan covered — and what it left out</summary><ul><li><b>{scan.coverage.pagesInspected}</b> page{scan.coverage.pagesInspected===1?'':'s'} inspected{scan.coverage.pagesBlocked>0?`, ${scan.coverage.pagesBlocked} blocked by the safety policy`:''}{scan.coverage.pagesFailed>0?`, ${scan.coverage.pagesFailed} could not be inspected`:''}.</li>{scan.coverage.destinationsNotReached>0&&<li><b>{scan.coverage.destinationsNotReached}</b> destination{scan.coverage.destinationsNotReached===1?' was':'s were'} found but not reached{scan.coverage.stoppedBy==='page-limit'?' because the five-page limit was reached':scan.coverage.stoppedBy==='time-limit'?' because the time limit was reached':''}.</li>}{scan.coverage.destinationsBeyondDepth>0&&<li><b>{scan.coverage.destinationsBeyondDepth}</b> link{scan.coverage.destinationsBeyondDepth===1?'':'s'} sat deeper than the two-link limit and were not followed.</li>}<li><b>{scan.coverage.interactionsTested}</b> control{scan.coverage.interactionsTested===1?' was':'s were'} activated once · <b>{scan.coverage.interactionsSkipped}</b> stayed untested. Each control shows its own reason.</li><li>Data-changing requests and other websites were always blocked — nothing was sent or changed.</li></ul></details>}

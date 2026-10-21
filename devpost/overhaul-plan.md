@@ -41,10 +41,11 @@ The four beats are recorded in `devpost/demo-script.md` and mirrored in the stud
 
 ## What still stands between this and a submission
 
-1. **The public repository is twelve commits behind.** `github.com/joyboyreturns/Access-Ripple` was last pushed on 19 October, before the observed-interaction work, the animated routes, the saved history, the repair loop, and everything in this pass. A judge reading the repository today reads an older and weaker product than the one in this video. This is the single highest-value remaining action.
+1. **The public repository was twelve commits behind** and has now been pushed. `github.com/joyboyreturns/Access-Ripple` carries the observed-interaction work, the animated routes, the saved history, the repair loop, and the demo revision. Confirm it before the submission.
 2. **The video is not recorded.** The guided tour removes the script problem; what remains is pressing record and narrating.
 3. **The Devpost form is the learner's to write.** The project name, the short description, the reflection answers, and the exit survey are written by the learner, not drafted here. `6-ship` is explicit about this.
 4. **The checklist still has open learner-owned items.** Final Review and the Code Tour / App Map are learning activities, not engineering gaps, and they belong to the learner.
+5. **The AI briefing needs a key.** Copy `.env.example` to `.env`, add a provider key, and restart the scanner before recording, or skip that beat entirely.
 
 ## Planned work, in priority order
 
@@ -56,12 +57,17 @@ The four beats are recorded in `devpost/demo-script.md` and mirrored in the stud
 - Record the video with the tour running. The caption bar does the explaining; the narration is optional.
 - Keep the recording at a single window size. The layout is verified at 1440×960 and 390×844.
 
-### Phase B — optional, only if it can be done without risking the demo
+### Phase B — the optional AI briefing (built, needs a key to switch on)
 
-- **An AI-written briefing of the scan.** A local, optional endpoint that asks a model to summarise the findings in plain language, with every claim tied to a node id that exists in the scan, and the deterministic scan story as the fallback when no key is configured. It answers the "Build With AI" brief directly, but it needs a provider key, a network call at demo time, and careful handling of a model that might overstate what was observed. It is worth doing only if the key is available and tested beforehand; a failed AI call during a recording is worse than no AI at all.
-- **A generated fallback video.** A scripted screen recording with narration would guarantee a submission artefact even if the learner cannot record one. It is a large piece of work and the result is rarely better than a human recording, so it is a fallback, not a goal.
+- **An AI-written briefing of the scan.** A local endpoint asks a model to summarise the findings in plain language, and the studio shows the result under the deterministic summary as **A model read of this scan**. It is off until `ACCESSRIPPLE_AI_KEY` is set in a local `.env`, and any OpenAI-compatible chat-completions endpoint works, including a local one. Two rules keep it honest: the model only sees a digest of recorded evidence, and every sentence must cite an evidence id that exists in the scan. A sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary. The citations appear as buttons that open the evidence the sentence came from. The default model is a free OpenRouter one, and the whole path is covered by unit and API tests against a local mock provider.
+- To use it: `cp .env.example .env`, fill in a key, and restart the scanner. The key never leaves the computer and the file is ignored by git.
+- The risk is the one that matters: it needs a provider key and a working network at recording time. The deterministic summary above it is generated locally and always works, so a failed model call costs one beat and nothing else. Configure it before recording, never during.
 
-### Phase C — after the hackathon
+### Phase C — a generated fallback video, only if there is no time to record
+
+A scripted screen recording with narration would guarantee a submission artefact even if the learner cannot record one. It is a large piece of work and the result is rarely better than a human recording, so it is a fallback, not a goal.
+
+### Phase D — after the hackathon
 
 The "Later" list in `devpost/scope.md` stays as it is: deeper page coverage, signed-in workflows, source inspection, more browsers, and shared team scan history. None of it changes the kernel, and none of it should be started before the submission is in.
 

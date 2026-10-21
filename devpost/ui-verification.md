@@ -131,3 +131,15 @@ Verified on 21 October 2026 against the running local service.
 - **Demo guide**: a header button lists the four beats of the recording with the exact control to press in each.
 - `npm run typecheck`, `npm run build`, and `npm test` (64 tests across 9 files) pass. New tests cover the sample-info endpoint, the sample scan path, and the scan story's claims and its no-barrier case.
 - Not verified here: a screen recording of the route, a phone-width pass over the new panels, and an axe pass on the new story, repair, and guide surfaces.
+
+## Optional AI briefing
+
+Verified on 21 October 2026 against a local mock provider that speaks the OpenAI chat-completions shape.
+
+- `GET /api/ai/status` reports `configured: false` with no key present, and the studio shows a card explaining how to enable it. `POST /api/scans/{scanId}/briefing` answers 503 `AI_NOT_CONFIGURED`, and the deterministic scan summary above it is untouched.
+- With a key and endpoint configured, the status endpoint reports the model and provider, and the studio shows **A model read of this scan** with a **Write a briefing** button.
+- A grounded model answer is shown with its citation markers removed from the prose and the cited evidence listed underneath as buttons. Clicking a citation opens that node in the inspector: the inspector moved from "An image needs a text alternative" to "A resource returned an error (404)" when the 404 citation was pressed.
+- A model answer that cites only evidence the scan never recorded is rejected with 502 `BRIEFING_FAILED`, and nothing unverified is shown. A sentence with no citation at all is dropped, and a sentence with a mix of a valid and an invalid citation is kept with the valid one.
+- The key is read from a local `.env` file, which is ignored by git, and is never sent to the browser. `.env.example` carries placeholders only.
+- axe-core reports 0 violations on the briefing card in both the unconfigured and configured states.
+- Not verified here: a real model provider, because no key was available on this machine. The provider response shape is covered by the mock provider, but a real model's compliance with the citation format has not been observed. The grounding rules make a non-compliant model fail safely rather than show an unverified claim.

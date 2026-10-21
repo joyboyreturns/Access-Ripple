@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
+import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/briefing.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
@@ -117,6 +118,26 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   await app.register(swaggerUi, { routePrefix: '/docs' });
 
   app.get('/api/health', async () => ({ status: 'ok', localOnly: true, graphSchemaVersion: '1.0' }));
+
+  // The optional AI briefing. It is off unless a provider key is configured,
+  // and the deterministic scan story always remains available without one.
+  app.get('/api/ai/status', async () => aiStatus());
+
+  app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/briefing', async (request, reply) => {
+    const scan = await getScan(request.params.scanId);
+    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
+    if (!scan.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'The briefing will be available after scanning finishes.', retryable: true } });
+    const config = readAiConfig();
+    if (!config) return reply.code(503).send({ error: { code: 'AI_NOT_CONFIGURED', message: 'No model provider is configured. The scan summary is still shown above.', retryable: false } });
+    try {
+      const briefing = await writeBriefing(scan, scan.graph, config);
+      return { ...briefing, source: 'ai' as const };
+    } catch (error) {
+      const code = error instanceof BriefingError ? error.code : 'REQUEST_FAILED';
+      request.log.warn({ err: { code } }, 'briefing failed');
+      return reply.code(code === 'NO_GROUNDED_SENTENCE' ? 502 : 502).send({ error: { code: 'BRIEFING_FAILED', message: error instanceof Error ? error.message : 'The briefing could not be written.', retryable: true } });
+    }
+  });
 
   // The checkout sample can switch between its "before" and "fixed" states so a rescan
   // compares a real repair on a site you control. Everything else stays identical.

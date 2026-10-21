@@ -14,6 +14,26 @@ Every result also explains its coverage — pages inspected, destinations not re
 
 A built-in four-page checkout fixture is available directly in the studio. **Scan the demo shop** opens it in a real browser, always from its broken state, so the result is identical on every run and needs no internet connection. **Prove a repair** switches the same fixture between its broken and repaired states and rescans, so the before-and-after comparison happens in the interface. The landing page's **See it in 60 seconds** opens the studio straight into that scan. A guide in the studio header lists the beats of a three-minute recording.
 
+## Optional AI briefing
+
+The studio can also show a short, model-written read of a finished scan. It is off by default, and the deterministic scan summary is always shown whether or not it is enabled.
+
+To enable it, copy `.env.example` to `.env` and fill in a key:
+
+```sh
+cp .env.example .env
+```
+
+```sh
+ACCESSRIPPLE_AI_KEY=your-key
+ACCESSRIPPLE_AI_BASE_URL=https://openrouter.ai/api/v1
+ACCESSRIPPLE_AI_MODEL=minimax/minimax-m3.1-flash:free
+```
+
+Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it.
+
+Two rules keep the briefing honest, because an overconfident summary is worse than no summary. The model only ever sees a compact digest of evidence the browser recorded, and every sentence it writes must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives, the request fails and the studio keeps the deterministic summary. The citations appear under the briefing as buttons that open the evidence they came from.
+
 ## Run the full app
 
 Requirements: Node.js 22 and npm.

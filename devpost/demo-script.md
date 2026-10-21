@@ -26,6 +26,12 @@ Export the vault once before recording so the download is not a surprise. Close 
 - **1:45–2:20 — Prove a repair.** In **Prove a repair**, press **Repair the demo shop**, then **Rescan and compare**. “The image now loads and carries a text alternative. Three items stop being observed — the missing image description and its two failed requests — with nothing new and nothing changed.” Say plainly: a comparison is evidence of what the browser no longer sees, not a certification.
 - **2:20–2:45 — The purpose and the boundary.** “Automated checks start the conversation. Keyboard, screen-reader, and human testing complete it. Everything runs on this computer, and nothing on a scanned site is sent or changed.”
 
+## Optional beat: the model-written read
+
+If a model provider is configured, the studio also shows **A model read of this scan** under the summary. Press **Write a briefing** and read it aloud: “A model writes this, but it only ever sees the evidence the browser recorded, and every sentence has to cite an id that exists in the scan. Click a citation and it opens the evidence the sentence came from.”
+
+This is the strongest beat for a “Build With AI” brief, and it is also the riskiest: it needs a provider key and a working network at recording time. The summary above it is generated locally and always works, so if the model call is slow or fails, the demo simply continues. Configure it before recording, never during.
+
 ## Optional extra
 
 If you have a few seconds, show **Export vault** and open the downloaded zip: every node becomes a linked note in an Obsidian vault, and the raw graph ships with it. That is the artefact a developer keeps after the meeting.

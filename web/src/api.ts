@@ -1,5 +1,8 @@
 import type { SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
+export interface AiStatus { configured: boolean; model: string; provider: string }
+export interface Briefing { text: string; citations: Array<{ id: string; label: string }>; model: string; source: 'ai' }
+
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }
 }
@@ -30,6 +33,16 @@ export function getSampleInfo() {
 /** Switches the demo site between its broken and repaired state so a rescan can prove a fix. */
 export function setSampleState(variant: 'before' | 'after') {
   return request<{ variant: 'before' | 'after' }>('/api/sample/state', { method: 'POST', body: JSON.stringify({ variant }) });
+}
+
+/** Whether a model provider is configured for the optional AI briefing. */
+export function getAiStatus() {
+  return request<AiStatus>('/api/ai/status');
+}
+
+/** Ask the configured model for a grounded plain-language read of the scan. */
+export function writeBriefing(scanId: string) {
+  return request<Briefing>(`/api/scans/${encodeURIComponent(scanId)}/briefing`, { method: 'POST', body: '{}' });
 }
 
 export function readScan(scanId: string, signal?: AbortSignal) {
