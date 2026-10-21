@@ -34,6 +34,22 @@ suite('the AI briefing digest', () => {
     expect(digest.find((item) => item.id === 'finding:1')?.detail).toContain('severity=critical');
     expect(digest.find((item) => item.id === 'runtime-error:1')?.detail).toContain('status=404');
   });
+
+  it('includes what the scan did not check, so a summary cannot overstate the coverage', () => {
+    const digest = buildDigest(scan, graph);
+    const gaps = digest.filter((item) => item.gap === true);
+    const ids = gaps.map((item) => item.id);
+    expect(ids).toContain('gap:untested-controls');
+    expect(ids).toContain('gap:manual-testing');
+    expect(gaps.find((item) => item.id === 'gap:untested-controls')?.label).toContain('1 control');
+  });
+
+  it('reports the pages and links the scan never reached', () => {
+    const partial = { ...scan, coverage: { pagesInspected: 2, pagesBlocked: 0, pagesFailed: 0, destinationsNotReached: 3, destinationsBeyondDepth: 2, stoppedBy: 'page-limit' as const, interactionsTested: 4, interactionsSkipped: 0 } };
+    const ids = buildDigest(partial, graph).filter((item) => item.gap).map((item) => item.id);
+    expect(ids).toContain('gap:destinations-not-reached');
+    expect(ids).toContain('gap:beyond-depth-limit');
+  });
 });
 
 suite('grounding the model summary', () => {
@@ -62,6 +78,25 @@ suite('grounding the model summary', () => {
     const { sentences } = groundSentences('The site is completely inaccessible to everyone. It has an image problem [finding:1].', digest);
     expect(sentences).toHaveLength(1);
     expect(sentences[0]).toContain('image problem');
+  });
+
+  it('keeps a citation that the model placed after the full stop', () => {
+    // Models write the id after the sentence, which a plain split would tear away.
+    const { sentences, citations } = groundSentences('The checkout image has no text alternative. [finding:1]', digest);
+    expect(sentences).toHaveLength(1);
+    expect(sentences[0]).toContain('no text alternative');
+    expect(citations.map((c) => c.id)).toEqual(['finding:1']);
+  });
+
+  it('keeps several citations that trail one sentence', () => {
+    const { sentences, citations } = groundSentences('Two pages were inspected. [page:1] [finding:1]', digest);
+    expect(sentences).toHaveLength(1);
+    expect(citations.map((c) => c.id).sort()).toEqual(['finding:1', 'page:1']);
+  });
+
+  it('drops a trailing citation that was cut off mid-id', () => {
+    const { sentences } = groundSentences('A request failed. [runtime-error:trunca', digest);
+    expect(sentences).toHaveLength(0);
   });
 
   it('returns nothing when the model invents every claim', () => {

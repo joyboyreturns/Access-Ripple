@@ -28,11 +28,18 @@ cp .env.example .env
 ACCESSRIPPLE_AI_KEY=your-key
 ACCESSRIPPLE_AI_BASE_URL=https://openrouter.ai/api/v1
 ACCESSRIPPLE_AI_MODEL=minimax/minimax-m3.1-flash:free
+ACCESSRIPPLE_AI_FALLBACK_MODELS=openrouter/free,cohere/north-mini-code:free
 ```
 
-Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it.
+Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it. Free-tier capacity is shared and a single model can be busy at any moment, so a chain of fallbacks is used: the models are tried in order and the first usable answer wins.
 
-Two rules keep the briefing honest, because an overconfident summary is worse than no summary. The model only ever sees a compact digest of evidence the browser recorded, and every sentence it writes must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives, the request fails and the studio keeps the deterministic summary. The citations appear under the briefing as buttons that open the evidence they came from.
+Three rules keep the briefing honest, because an overconfident summary is worse than no summary.
+
+1. The model only ever sees a compact digest of evidence the browser recorded, and is told that the evidence is data rather than instructions.
+2. Every sentence must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary.
+3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps appear as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
+
+The citations appear under the briefing as buttons that open the evidence they came from.
 
 ## Run the full app
 

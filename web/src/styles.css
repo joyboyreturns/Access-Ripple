@@ -178,3 +178,26 @@ body{min-width:320px}
 .ai-citations button:hover{border-color:var(--subtle);color:var(--text)}
 .ai-actions{margin-top:13px;display:flex;gap:9px}
 @media(max-width:900px){.ai-briefing{padding:15px 16px}}
+.ai-gap{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px dashed var(--line2);border-radius:20px;color:var(--subtle);font-size:11.5px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---- Graph atmosphere: the map should read as a space, not a chart ---- */
+.graph-stage{background-image:radial-gradient(ellipse 64% 50% at 50% 40%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%),radial-gradient(ellipse 42% 36% at 20% 80%,color-mix(in srgb,#b5a5f5 9%,transparent),transparent 72%),radial-gradient(ellipse 38% 32% at 80% 20%,color-mix(in srgb,#83b9dd 8%,transparent),transparent 72%),radial-gradient(var(--line) .7px,transparent .7px);background-size:100% 100%,100% 100%,100% 100%,22px 22px}
+.graph-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 38%,rgba(0,0,0,.45) 100%)}
+[data-theme=light] .graph-stage::after{background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 46%,rgba(31,64,44,.09) 100%)}
+.canvas-glow{position:absolute;inset:6%;background:radial-gradient(ellipse at 50% 45%,color-mix(in srgb,var(--accent) 6%,transparent),transparent 62%);pointer-events:none;z-index:0}
+.node-bloom{opacity:.3;filter:blur(7px);pointer-events:none}
+[data-theme=light] .node-bloom{opacity:.22}
+.node-pulse{fill:none;stroke:var(--node-color);stroke-width:1.3;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);pointer-events:none}
+.map-node.selected .node-pulse{animation:node-pulse 2.8s cubic-bezier(.2,.6,.35,1) infinite}
+@keyframes node-pulse{0%{transform:scale(.4);opacity:.85}70%{opacity:.12}100%{transform:scale(2.1);opacity:0}}
+.node-dot{filter:drop-shadow(0 0 9px var(--node-color)) drop-shadow(0 0 22px color-mix(in srgb,var(--node-color) 45%,transparent))}
+.node-card rect{fill:color-mix(in srgb,var(--surface) 90%,transparent);filter:drop-shadow(0 10px 22px rgba(0,0,0,.55))}
+[data-theme=light] .node-card rect{filter:drop-shadow(0 8px 18px rgba(31,64,44,.16))}
+.node-card text{fill:var(--text)}
+.label-leader{stroke:var(--node-color);stroke-width:.7;opacity:.5}
+.connection-path.observed{stroke-dasharray:3 10;animation:edge-flow 26s linear infinite;opacity:.42;stroke-width:1.15}
+.connection-path.observed.selected{stroke-dasharray:5 5;animation:flow 16s linear infinite;stroke-width:1.7;opacity:.95;stroke:var(--accent)}
+.connection-path.inferred{stroke-dasharray:4 5;stroke:#94afcb;opacity:.42;animation:none}
+.connection-path.observed.inferred{stroke-dasharray:4 5;animation:none;opacity:.45}
+.scene-rings ellipse{stroke:color-mix(in srgb,var(--accent) 16%,transparent);stroke-width:1;stroke-dasharray:1 9}
+@media(prefers-reduced-motion:reduce){.connection-path.observed{stroke-dasharray:none;animation:none}.map-node.selected .node-pulse{animation:none;opacity:.5;transform:scale(1)}}

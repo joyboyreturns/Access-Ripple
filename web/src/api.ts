@@ -1,7 +1,7 @@
 import type { SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
 export interface AiStatus { configured: boolean; model: string; provider: string }
-export interface Briefing { text: string; citations: Array<{ id: string; label: string }>; model: string; source: 'ai' }
+export interface Briefing { text: string; citations: Array<{ id: string; label: string; gap?: boolean }>; model: string; source: 'ai' }
 
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }
