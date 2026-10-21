@@ -2,7 +2,7 @@
 source_file: "web/src/api.ts"
 type: "code"
 community: "Community None"
-location: "L82"
+location: "L90"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[accept()]] - `calls` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[openScan()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]

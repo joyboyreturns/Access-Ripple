@@ -15,6 +15,7 @@ tags:
 - [[ScanComparison]] - `references` [EXTRACTED]
 - [[build-graph.ts]] - `imports` [EXTRACTED]
 - [[compare.ts]] - `imports` [EXTRACTED]
+- [[contract.ts]] - `imports` [EXTRACTED]
 - [[obsidian.ts]] - `imports` [EXTRACTED]
 - [[schema.ts]] - `contains` [EXTRACTED]
 

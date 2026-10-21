@@ -2,7 +2,7 @@
 source_file: "package.json"
 type: "concept"
 community: "Community None"
-location: "L45"
+location: "L46"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
@@ -15,6 +15,7 @@ tags:
 - [[app.test.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.test.ts]] - `imports_from` [EXTRACTED]
 - [[compare.test.ts]] - `imports_from` [EXTRACTED]
+- [[contract.test.ts]] - `imports_from` [EXTRACTED]
 - [[export.test.ts]] - `imports_from` [EXTRACTED]
 - [[fix.test.ts]] - `imports_from` [EXTRACTED]
 - [[graph-shape.test.ts]] - `imports_from` [EXTRACTED]

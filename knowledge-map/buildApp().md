@@ -2,7 +2,7 @@
 source_file: "src/api/app.ts"
 type: "code"
 community: "Community None"
-location: "L115"
+location: "L126"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -20,11 +20,15 @@ tags:
 - [[applyPatch()]] - `calls` [EXTRACTED]
 - [[assertSafeUrl()]] - `calls` [EXTRACTED]
 - [[canStartScan()]] - `calls` [EXTRACTED]
+- [[checkPredictions()]] - `calls` [EXTRACTED]
 - [[clearPatches()]] - `calls` [EXTRACTED]
 - [[compareScans()]] - `calls` [EXTRACTED]
+- [[contractKey()]] - `calls` [EXTRACTED]
+- [[contractsFor()]] - `calls` [EXTRACTED]
 - [[createObsidianZip()]] - `calls` [EXTRACTED]
 - [[getScan()]] - `calls` [EXTRACTED]
 - [[isDemoFixture()]] - `calls` [EXTRACTED]
+- [[issuesOnPage()]] - `calls` [EXTRACTED]
 - [[launchScan()]] - `calls` [EXTRACTED]
 - [[locateInDemoShop()]] - `calls` [EXTRACTED]
 - [[no-data.test.ts]] - `imports` [EXTRACTED]
@@ -37,5 +41,6 @@ tags:
 - [[summarizeScan()]] - `indirect_call` [INFERRED]
 - [[writeBriefing()]] - `calls` [EXTRACTED]
 - [[writeFixProposal()]] - `calls` [EXTRACTED]
+- [[writeRepairContract()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

@@ -12,7 +12,7 @@ tags:
 # UnsafeUrlError
 
 ## Connections
-- [[dot-constructor()_1]] - `method` [EXTRACTED]
+- [[dot-constructor()_2]] - `method` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[assertSafeUrl()]] - `calls` [EXTRACTED]
 - [[buildApp()]] - `calls` [EXTRACTED]

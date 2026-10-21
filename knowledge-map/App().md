@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L97"
+location: "L126"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -26,6 +26,7 @@ tags:
 - [[accept()]] - `contains` [EXTRACTED]
 - [[acceptProposal()]] - `contains` [EXTRACTED]
 - [[applyProposal()]] - `calls` [EXTRACTED]
+- [[askForContract()]] - `contains` [EXTRACTED]
 - [[askForProposal()]] - `contains` [EXTRACTED]
 - [[breakDemo()]] - `contains` [EXTRACTED]
 - [[changeFilter()]] - `contains` [EXTRACTED]
@@ -34,6 +35,7 @@ tags:
 - [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
+- [[describeId()]] - `calls` [EXTRACTED]
 - [[downloadVault()]] - `calls` [EXTRACTED]
 - [[exportScan()]] - `contains` [EXTRACTED]
 - [[friendlyScanError()]] - `calls` [EXTRACTED]
@@ -75,5 +77,6 @@ tags:
 - [[submit()]] - `contains` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 - [[waitForScan()_1]] - `calls` [EXTRACTED]
+- [[writeContract()]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

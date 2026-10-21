@@ -2,7 +2,7 @@
 source_file: "src/ai/briefing.ts"
 type: "code"
 community: "Community None"
-location: "L177"
+location: "L184"
 tags:
   - graphify/code
   - graphify/EXTRACTED

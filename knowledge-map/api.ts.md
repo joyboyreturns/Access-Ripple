@@ -19,6 +19,8 @@ tags:
 - [[DEFAULT_WAIT_MS]] - `contains` [EXTRACTED]
 - [[FixProposal_1]] - `imports` [EXTRACTED]
 - [[MODEL_WAIT_MS]] - `contains` [EXTRACTED]
+- [[RepairContract_1]] - `contains` [EXTRACTED]
+- [[RepairPrediction_1]] - `contains` [EXTRACTED]
 - [[SCAN_WAIT_MS]] - `contains` [EXTRACTED]
 - [[SampleInfo]] - `imports` [EXTRACTED]
 - [[ScanComparison_1]] - `imports` [EXTRACTED]
@@ -46,5 +48,6 @@ tags:
 - [[waitForScan()_1]] - `contains` [EXTRACTED]
 - [[web-api.test.ts]] - `imports_from` [EXTRACTED]
 - [[writeBriefing()_1]] - `contains` [EXTRACTED]
+- [[writeContract()]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None
