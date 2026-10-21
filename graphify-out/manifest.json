@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "src/scan/worker.ts": {
-    "mtime": 1792563603.3950737,
-    "seen": 1792563809.573101,
-    "ast_hash": "80e82c7697a72fbc686f2e4cfc32c1aa",
+    "mtime": 1792563945.9182026,
+    "seen": 1792564539.1734452,
+    "ast_hash": "79c963c4339a38c1110f3d61e9e64b47",
     "semantic_hash": ""
   },
   "src/store/memory.ts": {
@@ -192,9 +192,9 @@
     "semantic_hash": ""
   },
   "web/src/presentation.ts": {
-    "mtime": 1792562348.982029,
-    "seen": 1792563809.573149,
-    "ast_hash": "6b0f908e2f638177c18a4d064be1a96b",
+    "mtime": 1792563958.867808,
+    "seen": 1792564539.173485,
+    "ast_hash": "2e3e9103af7c1bbaf18e649dec7b831c",
     "semantic_hash": ""
   },
   "web/src/types.ts": {
