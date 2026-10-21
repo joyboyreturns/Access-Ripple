@@ -81,8 +81,20 @@ export interface ScanResult {
   previousScanId?: string;
   canonicalOrigin?: string;
   createdAt?: string;
+  /** Present when the scan ran against the built-in local demo site rather than a public address. */
+  sample?: 'checkout';
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
   coverage?: ScanCoverage;
+}
+
+export interface SampleInfo {
+  id: 'checkout';
+  name: string;
+  tagline: string;
+  url: string;
+  variant: 'before' | 'after';
+  brokenNote: string;
+  fixedNote: string;
 }
 
 export interface ScanComparison {

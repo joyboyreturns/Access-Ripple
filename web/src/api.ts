@@ -1,4 +1,4 @@
-import type { ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
+import type { SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types.js';
 
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }
@@ -18,8 +18,18 @@ export function checkApi() {
   return request<{ status: string; localOnly: boolean }>('/api/health');
 }
 
-export function createScan(input: { url: string; authorizeSubmit?: boolean } | { sample: 'checkout' }) {
+export function createScan(input: { url: string; authorizeSubmit?: boolean } | { sample: 'checkout'; authorizeSubmit?: boolean }) {
   return request<{ scanId: string; status: string }>('/api/scans', { method: 'POST', body: JSON.stringify(input) });
+}
+
+/** Describes the built-in demo site, so the studio can offer a scan that needs no network. */
+export function getSampleInfo() {
+  return request<SampleInfo>('/api/sample/info');
+}
+
+/** Switches the demo site between its broken and repaired state so a rescan can prove a fix. */
+export function setSampleState(variant: 'before' | 'after') {
+  return request<{ variant: 'before' | 'after' }>('/api/sample/state', { method: 'POST', body: JSON.stringify({ variant }) });
 }
 
 export function readScan(scanId: string, signal?: AbortSignal) {

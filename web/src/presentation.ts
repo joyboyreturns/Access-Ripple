@@ -1,4 +1,4 @@
-import type { GraphNode, InteractionStepView, SiteGraph } from './types.js';
+import type { GraphNode, InteractionStepView, ScanResult, SiteGraph } from './types.js';
 
 export type GraphFilter = 'overview' | 'pages' | 'controls' | 'issues' | 'flows';
 export type ViewNode = GraphNode & { memberIds?: string[] };
@@ -205,6 +205,35 @@ export function groupIssues(nodes: GraphNode[]): ViewNode[] {
     if (!first) return [];
     return [{ ...first, memberIds: items.map(n => n.id), data: { ...first.data, groupCount: items.length, targets: [...new Set(items.flatMap(n => Array.isArray(n.data.targets) ? n.data.targets.map(String) : []))] } }];
   });
+}
+
+/**
+ * Turns a finished scan into one plain paragraph a person can read in a second.
+ * Every number here comes from evidence the browser actually recorded, so the
+ * sentence never claims more than the scan observed.
+ */
+export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: string; detail: string; tone: 'clear' | 'attention' | 'critical' } {
+  const findings = groupIssues(graph.nodes.filter(n => n.kind === 'accessibility-finding'));
+  const signals = graph.nodes.filter(n => n.kind === 'runtime-error');
+  const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'inspected').length ?? 0;
+  const tested = scan.interactionPolicy?.tested ?? 0;
+  const site = graph.nodes.find(n => n.kind === 'site')?.label ?? 'this website';
+  const order = ['critical', 'serious', 'moderate', 'minor'];
+  const top = [...findings].sort((a, b) => order.indexOf(severity(a)) - order.indexOf(severity(b)))[0];
+  const topPage = top ? pageFor(top, graph)?.label : undefined;
+
+  const headline = findings.length
+    ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${findings.length} accessibility barrier${findings.length === 1 ? '' : 's'}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`
+    : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility barriers in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`;
+
+  const detail = top
+    ? `The first to look at is “${describe(top).title}”${topPage ? ` on ${topPage}` : ''}. ${describe(top).fix}${signals.length ? ` The browser also reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading.` : ''}`
+    : signals.length
+      ? `The browser reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading. Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.`
+      : 'Automated checks cover a useful subset of barriers, so manual keyboard and screen-reader testing still matter.';
+
+  const tone = findings.some(f => severity(f) === 'critical') ? 'critical' : findings.length || signals.length ? 'attention' : 'clear';
+  return { headline, detail, tone };
 }
 
 export function sceneGraph(graph: SiteGraph, filter: GraphFilter, focusId?: string) {
