@@ -1,12 +1,21 @@
 # AccessRipple — a demo in about 2 minutes 45 seconds
 
+## Before you press record
+
+- [ ] `npm run demo` starts the app and opens the studio straight into a demo-shop scan.
+- [ ] The studio header shows **Local scanner ready**.
+- [ ] The **▶ guided tour** button opens a caption bar, and the caption bar advances on its own as you scan, open a barrier, follow a journey, and run the repair loop.
+- [ ] You have read `devpost/learner-profile.md` and confirmed the repository contains nothing private. It is ignored by git by default, but check before publishing.
+- [ ] The public repository is up to date. It was last pushed on 19 October, before the observed-journey work and the repair loop.
+- [ ] You have rehearsed the whole route once without recording.
+
 ## Prepare
 
-Start the app with `npm run dev` and open `http://127.0.0.1:5173/`. The whole demo now runs on the built-in demo shop, so it needs no internet connection and returns the same numbers every time you record.
+Start the app with `npm run demo` (or `npm run dev` and open `http://127.0.0.1:5173/#demo`). The whole demo now runs on the built-in demo shop, so it needs no internet connection and returns the same numbers every time you record.
 
 Check the demo shop is in its broken state before you start. Press **Scan the demo shop** in the studio: it always resets the shop to that broken state first, so you do not need a terminal to prepare anything. If you want to confirm it yourself, `curl http://127.0.0.1:4317/api/sample/state` should report `{"variant":"before"}`.
 
-Export the vault once before recording so the download is not a surprise. Close unrelated windows. The demo guide inside the studio (the ▶ button in the header) repeats these four beats.
+Export the vault once before recording so the download is not a surprise. Close unrelated windows. The demo guide inside the studio (the ▶ button in the header) repeats these four beats, and the guided tour carries the sentence to say for each step.
 
 ## Recording route
 
