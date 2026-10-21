@@ -7,6 +7,8 @@ export interface ScanComparison {
   remaining: GraphNode[];
   new: GraphNode[];
   changed: Array<{ before: GraphNode; after: GraphNode }>;
+  /** The same page before and after, so a repair can be shown rather than only counted. */
+  pages: Array<{ url: string; title?: string; before?: string; after?: string }>;
 }
 
 export function compareScans(previous: ScanResult, current: ScanResult): ScanComparison {
@@ -29,5 +31,25 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
     if (!issueKinds.has(newNode.kind) || before.has(id)) continue;
     fresh.push(newNode);
   }
-  return { previousScanId: previous.id, currentScanId: current.id, resolved, remaining, new: fresh, changed };
+
+  // Pair the pictures of the same page across the two scans.
+  const pages: ScanComparison['pages'] = [];
+  const urls = new Set([...previous.pages, ...current.pages].map((page) => page.url));
+  for (const url of urls) {
+    const oldPage = previous.pages.find((page) => page.url === url);
+    const newPage = current.pages.find((page) => page.url === url);
+    const oldShot = oldPage?.screenshot?.dataUrl;
+    const newShot = newPage?.screenshot?.dataUrl;
+    if (!oldShot && !newShot) continue;
+    pages.push({ url, title: newPage?.title ?? oldPage?.title, before: oldShot, after: newShot });
+  }
+  // The page a repair actually touched comes first, because that is the one a
+  // reviewer needs to see.
+  const pageUrl = new Map<string, string>();
+  for (const node of [...(previous.graph?.nodes ?? []), ...(current.graph?.nodes ?? [])]) {
+    if (node.kind === 'page' && typeof node.data.url === 'string') pageUrl.set(node.id, node.data.url);
+  }
+  const touched = new Set([...resolved, ...fresh].map((node) => pageUrl.get(node.pageId ?? '')).filter(Boolean));
+  pages.sort((a, b) => Number(touched.has(b.url)) - Number(touched.has(a.url)));
+  return { previousScanId: previous.id, currentScanId: current.id, resolved, remaining, new: fresh, changed, pages };
 }

@@ -117,3 +117,15 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Keep a browser sweep of the whole studio as `npm run check:studio` (30 checks), and add an end-to-end test for the demo path and the graph's internal consistency.
 - [x] Keep the suite green: 83 tests across 12 files, typecheck, production build, axe-core 0 violations.
 - [ ] Learner reads the real briefing and decides whether the model beat belongs in the recording.
+
+### A demo that opens on the result
+- [x] Capture a small picture of every inspected page, and keep the picture of a page that no longer has a finding.
+- [x] Show the same page before and after one change, with the counts above it, as a full-screen proof.
+- [x] Propose a concrete change for a finding, grounded in the recorded markup, as a diff with the file and line it came from.
+- [x] Label the apply action honestly: the model proposes, a human decides, and the demo repair is the tool's own fixture.
+- [x] Record the markup of a failing element, which the developer evidence panel had always claimed to show but never captured.
+- [x] Give every element a path that matches exactly one element, so two links can never collapse into one node, and refuse to build a graph with a repeated node id.
+- [x] Keep a recorded scan of a real public site in the history, and label it as recorded rather than live.
+- [x] Rewrite the guided tour to the new beat sheet, and grow the browser sweep to 36 checks.
+- [x] Keep the suite green: 86 tests across 13 files, typecheck, production build, axe-core 0 violations.
+- [ ] Learner records the three-minute demo following `devpost/demo-script.md`.

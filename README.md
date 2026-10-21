@@ -12,13 +12,13 @@ Every result also explains its coverage — pages inspected, destinations not re
 
 ### The demo shop
 
-A built-in four-page checkout fixture is available directly in the studio. **Scan the demo shop** opens it in a real browser, always from its broken state, so the result is identical on every run and needs no internet connection. **Prove a repair** switches the same fixture between its broken and repaired states and rescans, so the before-and-after comparison happens in the interface. The landing page's **See it in 60 seconds** opens the studio straight into that scan. A guide in the studio header lists the beats of a three-minute recording.
+A built-in four-page checkout fixture is available directly in the studio. **Scan the demo shop** opens it in a real browser, always from its broken state, so the result is identical on every run and needs no internet connection. **Prove a repair** switches the same fixture between its broken and repaired states and rescans, so the before-and-after comparison happens in the interface. **Show the proof** then shows the same page before and after, side by side, with the counts. The landing page's **See it in 60 seconds** opens the studio straight into that scan. A guide in the studio header lists the beats of a three-minute recording.
 
-## Optional AI briefing
+## Optional AI briefing and proposed changes
 
-The studio can also show a short, model-written read of a finished scan. It is off by default, and the deterministic scan summary is always shown whether or not it is enabled.
+The studio can also show a short, model-written read of a finished scan, and it can propose a concrete code change for a finding. Both are off by default, and the deterministic scan summary is always shown whether or not they are enabled.
 
-To enable it, copy `.env.example` to `.env` and fill in a key:
+To enable them, copy `.env.example` to `.env` and fill in a key:
 
 ```sh
 cp .env.example .env
@@ -33,13 +33,13 @@ ACCESSRIPPLE_AI_FALLBACK_MODELS=openrouter/free,cohere/north-mini-code:free
 
 Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it. Free-tier capacity is shared and a single model can be busy at any moment, so a chain of fallbacks is used: the models are tried in order and the first usable answer wins.
 
-Three rules keep the briefing honest, because an overconfident summary is worse than no summary.
+Three rules keep the output honest, because an overconfident summary is worse than no summary.
 
 1. The model only ever sees a compact digest of evidence the browser recorded, and is told that the evidence is data rather than instructions.
 2. Every sentence must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary.
 3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps appear as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
 
-The citations appear under the briefing as buttons that open the evidence they came from.
+A proposed change is grounded the same way: the model receives the failing rule, the CSS selector, and the markup the browser recorded, and the proposal is dropped unless it matches that markup. The tool proposes; it never edits a scanned website. On the built-in demo shop, which this tool owns, the same proposal can be applied so a rescan can prove whether it worked.
 
 ## Run the full app
 

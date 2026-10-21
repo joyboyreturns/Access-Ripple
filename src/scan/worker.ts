@@ -8,6 +8,22 @@ import { buildGraph } from '../graph/build-graph.js';
 
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
+
+/**
+ * A small picture of the rendered page, so a repair can be seen and not only
+ * counted. It is kept small on purpose: the scan is stored on disk and sent
+ * to the browser as JSON.
+ */
+async function captureScreenshot(page: import('playwright').Page): Promise<{ dataUrl: string } | undefined> {
+  try {
+    const buffer = await page.screenshot({ type: 'jpeg', quality: 52, scale: 'css', timeout: 8000 });
+    if (buffer.length > 220_000) return undefined;
+    return { dataUrl: `data:image/jpeg;base64,${buffer.toString('base64')}` };
+  } catch {
+    return undefined;
+  }
+}
+
 const DEFAULT_LIMITS: ScanLimits = {
   maxPages: 5,
   maxDepth: 2,
@@ -18,6 +34,7 @@ const DEFAULT_LIMITS: ScanLimits = {
   maxFindingsPerPage: 100,
   maxInteractionsPerPage: 4,
   maxInteractionsPerScan: 10,
+  maxScreenshots: 5,
 };
 
 interface ExtractedControl {
@@ -76,16 +93,36 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
       let selector = '';
       if (element.id) selector = '#' + CSS.escape(element.id);
       else {
+        // The path has to point at exactly one element. A short path is not
+        // enough on a list-heavy page, where many rows share the same shape
+        // and would otherwise collapse into one control.
         const parts = [];
         let current = element;
-        while (current && current !== document.body && parts.length < 4) {
-          const tag = current.tagName.toLowerCase();
-          const siblings = current.parentElement ? Array.from(current.parentElement.children).filter((child) => child.tagName === current.tagName) : [];
-          const nth = siblings.length > 1 ? ':nth-of-type(' + (siblings.indexOf(current) + 1) + ')' : '';
-          parts.unshift(tag + nth);
+        const step = (node) => {
+          const tag = node.tagName.toLowerCase();
+          const siblings = node.parentElement ? Array.from(node.parentElement.children).filter((child) => child.tagName === node.tagName) : [];
+          const nth = siblings.length > 1 ? ':nth-of-type(' + (siblings.indexOf(node) + 1) + ')' : '';
+          return tag + nth;
+        };
+        while (current && current !== document.body && parts.length < 10) {
+          parts.unshift(step(current));
           current = current.parentElement;
         }
         selector = parts.join(' > ');
+        // Still ambiguous: keep climbing until the path is unique.
+        let guard = 0;
+        while (current && current !== document.body && document.querySelectorAll(selector).length > 1 && guard < 6) {
+          parts.unshift(step(current));
+          current = current.parentElement;
+          selector = parts.join(' > ');
+          guard += 1;
+        }
+        if (document.querySelectorAll(selector).length > 1) {
+          // The last resort: mark this one element so the selector is exact.
+          const mark = 'data-accessripple-ref';
+          element.setAttribute(mark, String(document.querySelectorAll('[' + mark + ']').length));
+          selector = '[' + mark + '="' + element.getAttribute(mark) + '"]';
+        }
       }
       return {
         role: element.getAttribute('role') || (anchor ? 'link' : input?.type || element.tagName.toLowerCase()),
@@ -134,6 +171,9 @@ async function runAxe(page: import('playwright').Page, pageId: string, maxFindin
             help: String(item.help ?? item.id).slice(0, 240),
             helpUrl: String(item.helpUrl ?? '').slice(0, 400),
             targets: (node.target ?? []).slice(0, 5).map((target: unknown) => String(target).slice(0, 240)),
+            // The markup of the failing element, so a developer can see what
+            // the check was actually looking at.
+            snippet: String(node.html ?? '').replace(/\s+/g, ' ').trim().slice(0, 400) || undefined,
             evidenceLabel: 'observed',
           });
         }
@@ -209,6 +249,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
   const browser = await chromium.launch({ headless: true });  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
   const pages: PageEvidence[] = [];
   let interactionsUsed = 0;
+  let screenshotsTaken = 0;
   let exclusionsTotal = 0;
 
   try {
@@ -290,7 +331,12 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             targets.some(target => c.elements[0] === target || c.elements[0].contains(target))).map(c => c.id) }; });
         })()`) as {id:string;controlIds:string[]}[];
         for (const finding of findings) finding.affectedControlIds = affected.find(a => a.id === finding.id)?.controlIds ?? [];
-        entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [] };
+        // Keep a small picture of every page that was inspected, so a repair
+        // can be seen and not only counted. A page that no longer has a
+        // finding is exactly the one worth showing after the repair.
+        const shot = screenshotsTaken < (scan.limits.maxScreenshots ?? 5) ? await captureScreenshot(page) : undefined;
+        if (shot) screenshotsTaken += 1;
+        entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors: errors.slice(0, 120), findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {
             if (shouldCrawlLink(href, origin, Boolean(input.sample))) enqueue(href, next.depth + 1);

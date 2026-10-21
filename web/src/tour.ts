@@ -1,3 +1,4 @@
+
 /**
  * The guided tour doubles as the recording script and as on-screen captions.
  * Each step carries the sentence to say out loud, so a silent recording still
@@ -9,6 +10,8 @@ export type TourContext = {
   findingOpened: number;
   /** Counts how many times the viewer traced a journey. */
   journeyTraced: number;
+  /** Counts how many times a change was proposed. */
+  changeProposed: number;
   /** Counts how many times a rescan produced a comparison. */
   compared: number;
 };
@@ -23,15 +26,21 @@ export type TourStep = {
 
 export const TOUR: TourStep[] = [
   {
+    id: 'proof',
+    title: 'The proof, first',
+    say: 'We changed one image on a checkout page. AccessRipple checked what the browser actually stopped reporting. Three things are no longer observed, and nothing new appeared.',
+    done: (context) => context.compared > 0,
+  },
+  {
     id: 'scan',
-    title: 'Map the demo shop',
-    say: 'AccessRipple turns a website into a map of its pages, journeys, and accessibility barriers. Every point on that map is backed by something a real browser actually recorded.',
+    title: 'A real scan, in ten seconds',
+    say: 'This is a real browser session on this computer. It opened four pages, activated nine safe controls once each in disposable pages, and recorded what actually happened.',
     done: (context) => context.hasScan,
   },
   {
     id: 'finding',
     title: 'Open the first barrier',
-    say: 'The story names the first barrier to look at and where it was found. Open it, and the rule, the exact element, and the change to make sit together.',
+    say: 'A finding tells you a check failed. This is the control it belongs to, the element it ran on, and what a person misses because of it.',
     done: (context) => context.findingOpened > 0,
   },
   {
@@ -41,15 +50,21 @@ export const TOUR: TourStep[] = [
     done: (context) => context.journeyTraced > 0,
   },
   {
+    id: 'proposal',
+    title: 'Let the model propose a change',
+    say: 'A model proposes the smallest change that fixes the rule, grounded in the markup the browser recorded. It is a grounded proposal, not a verified fix.',
+    done: (context) => context.changeProposed > 0,
+  },
+  {
     id: 'repair',
-    title: 'Prove a repair',
-    say: 'I fix the missing image, rescan, and the comparison shows three items the browser no longer reports — with nothing new and nothing changed.',
+    title: 'Prove the repair',
+    say: 'I rescan the same site. The proposal was not the proof, the rescan was: three things the browser no longer reports, with nothing new.',
     done: (context) => context.compared > 0,
   },
   {
-    id: 'export',
-    title: 'Keep the result',
-    say: 'And the whole map exports as a linked Obsidian vault, so a team keeps the evidence, not a screenshot. Automated checks start the conversation; people complete it.',
+    id: 'limits',
+    title: 'Say what is still missing',
+    say: 'Automated checks cover a useful subset of barriers. Keyboard, screen-reader, and human testing complete the picture, and everything here ran on this computer.',
     done: () => false,
   },
 ];

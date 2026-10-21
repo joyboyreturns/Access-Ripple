@@ -123,6 +123,8 @@ export interface PageEvidence {
   interactions: InteractionEvidence[];
   interactionExclusions?: InteractionExclusion[];
   errorMessage?: string;
+  /** A small picture of the rendered page, kept only for pages that have something to show. */
+  screenshot?: { dataUrl: string };
 }
 
 export interface ScanLimits {
@@ -135,6 +137,8 @@ export interface ScanLimits {
   maxFindingsPerPage: number;
   maxInteractionsPerPage: number;
   maxInteractionsPerScan: number;
+  /** How many page pictures a scan keeps. */
+  maxScreenshots?: number;
 }
 
 export interface ScanProgress {

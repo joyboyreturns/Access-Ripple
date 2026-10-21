@@ -2,11 +2,13 @@ import Fastify, { LogController, type FastifyInstance } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
 import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/briefing.js';
+import { readFixConfig, writeFixProposal } from '../ai/fix.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
@@ -19,12 +21,33 @@ const createBody = z.union([
   z.object({ sample: z.literal('checkout'), authorizeSubmit: z.boolean().optional() }).strict(),
 ]);
 const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
+const fixBody = z.object({ nodeId: z.string().min(1).max(200) }).strict();
 const sampleStateBody = z.object({ variant: z.enum(['before', 'after']) }).strict();
 const allowedOrigins = new Set(['http://localhost:5173', 'http://127.0.0.1:5173']);
 const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
 let workerBusy = false;
 const requestsByAddress = new Map<string, number[]>();
+
+/**
+ * Find the recorded markup in the local demo shop's source, so a proposal can
+ * point at a real file and line. Only the tool's own fixture is searched.
+ */
+function locateInDemoShop(snippet: string): { file: string; line: number } | undefined {
+  const needle = snippet.replace(/\s+/g, ' ').trim();
+  if (needle.length < 12) return undefined;
+  for (const file of ['checkout.html', 'checkout-fixed.html', 'catalog.html', 'cart.html', 'payment.html']) {
+    const path = resolve(process.cwd(), 'src/sample/site', file);
+    let text: string;
+    try { text = readFileSync(path, 'utf8'); } catch { continue; }
+    const flat = text.replace(/\s+/g, ' ');
+    const at = flat.indexOf(needle);
+    if (at < 0) continue;
+    const line = text.slice(0, at).split('\n').length;
+    return { file: `src/sample/site/${file}`, line };
+  }
+  return undefined;
+}
 
 function schedule(job: () => Promise<void>): void {
   jobs.push(job);
@@ -228,6 +251,24 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     }
     const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
+  });
+
+  app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/fix', async (request, reply) => {
+    const scan = await getScan(request.params.scanId);
+    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
+    if (!scan.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'A change can only be proposed after the scan finishes.', retryable: true } });
+    const body = fixBody.safeParse(request.body ?? {});
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_FIX_REQUEST', message: 'Provide the id of an accessibility finding.', retryable: false } });
+    const config = readFixConfig();
+    if (!config) return reply.code(503).send({ error: { code: 'AI_NOT_CONFIGURED', message: 'No model provider is configured. The suggested change is still shown without a model.', retryable: false } });
+    try {
+      const proposal = await writeFixProposal(scan, scan.graph, body.data.nodeId, config, (snippet) => locateInDemoShop(snippet));
+      return proposal;
+    } catch (error) {
+      const code = error instanceof BriefingError ? error.code : 'REQUEST_FAILED';
+      request.log.warn({ err: { code } }, 'fix proposal failed');
+      return reply.code(502).send({ error: { code: 'FIX_PROPOSAL_FAILED', message: error instanceof Error ? error.message : 'A change could not be proposed.', retryable: true } });
+    }
   });
 
   app.get<{ Params: { scanId: string; otherScanId: string } }>('/api/scans/:scanId/compare/:otherScanId', async (request, reply) => {

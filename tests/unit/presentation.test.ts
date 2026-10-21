@@ -178,7 +178,7 @@ suite('the scan story',()=>{
   it('does not claim a barrier when the scan observed none',()=>{
     const graph:SiteGraph={schemaVersion:'1.0',nodes:[site,page],edges:[]};
     const story=scanStory(scan,graph);
-    expect(story.headline).toContain('found no accessibility barriers');
+    expect(story.headline).toContain('found no accessibility findings');
     expect(story.tone).toBe('clear');
   });
 });
