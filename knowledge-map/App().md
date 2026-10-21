@@ -54,6 +54,7 @@ tags:
 - [[severity()]] - `calls` [EXTRACTED]
 - [[shortcutOf()]] - `calls` [EXTRACTED]
 - [[siteName()]] - `calls` [EXTRACTED]
+- [[startTour()]] - `contains` [EXTRACTED]
 - [[storageGet()]] - `calls` [EXTRACTED]
 - [[storageSet()]] - `calls` [EXTRACTED]
 - [[str()]] - `calls` [EXTRACTED]

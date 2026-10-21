@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1792419775.91609,
-    "seen": 1792422461.917618,
-    "ast_hash": "c7b08c83ae2813dac24f004123853c92",
+    "mtime": 1792553842.1178882,
+    "seen": 1792554118.073122,
+    "ast_hash": "b7563acf2debeaf6f04906ea88cf12e6",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792552896.7619152,
-    "seen": 1792553022.7427242,
-    "ast_hash": "d931ca946419a78eeaa93a192190ccc3",
+    "mtime": 1792553870.270173,
+    "seen": 1792554118.073175,
+    "ast_hash": "fd5041e117af5a96141e88b53c2b72a8",
     "semantic_hash": ""
   },
   "src/sample/site/checkout.html": {
@@ -156,9 +156,9 @@
     "semantic_hash": ""
   },
   "web/src/App.tsx": {
-    "mtime": 1792553586.6957495,
-    "seen": 1792553740.129784,
-    "ast_hash": "f93911c91ecde842a5b4eaaef4727e8c",
+    "mtime": 1792553998.6767797,
+    "seen": 1792554118.073164,
+    "ast_hash": "b17c361ca11c00128d593b46ab5515d8",
     "semantic_hash": ""
   },
   "web/src/GraphCanvas.tsx": {
@@ -285,6 +285,12 @@
     "mtime": 1792553432.4778538,
     "seen": 1792553740.1297941,
     "ast_hash": "8c73c0929312f91e438ea3b39cc03bfa",
+    "semantic_hash": ""
+  },
+  "scripts/demo.mjs": {
+    "mtime": 1792553836.337689,
+    "seen": 1792554118.0731251,
+    "ast_hash": "e4d33f49c532cb0a57a95e3de741e66e",
     "semantic_hash": ""
   }
 }
