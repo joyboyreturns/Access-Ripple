@@ -150,3 +150,14 @@ body{min-width:320px}
 [data-theme=light] .scan-story.tone-clear .story-tone{color:#2a6b45;border-color:#2a6b4544}
 [data-theme=light] .repair-state.before{color:#943e44;border-color:#943e4433;background:#fff4f3}
 [data-theme=light] .repair-state.after{color:#2a6b45;border-color:#2a6b4533;background:#f1f8f3}
+
+/* ---- Guided tour: doubles as the recording script and as on-screen captions ---- */
+.tour-bar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:120;display:flex;align-items:center;gap:22px;width:min(880px,calc(100% - 32px));padding:14px 16px 14px 20px;border:1px solid var(--line2);border-radius:14px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(18px);box-shadow:0 24px 60px #00000059,0 0 0 1px #ffffff08 inset}
+.tour-copy{flex:1;min-width:0}
+.tour-step{display:block;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.tour-copy p{margin:0;font-size:14.5px;line-height:1.55;color:var(--text);letter-spacing:-.012em}
+.tour-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tour-script{border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:0 4px}
+.tour-script:hover{color:var(--text)}
+.studio.touring .studio-main{padding-bottom:150px}
+@media(max-width:900px){.tour-bar{flex-direction:column;align-items:stretch;gap:12px;bottom:10px;padding:14px}.tour-copy p{font-size:13.5px}.tour-actions{justify-content:flex-end}}
