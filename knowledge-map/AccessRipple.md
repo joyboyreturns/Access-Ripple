@@ -15,6 +15,7 @@ tags:
 - [[Compact architecture map]] - `contains` [EXTRACTED]
 - [[Current build]] - `contains` [EXTRACTED]
 - [[Media provenance]] - `contains` [EXTRACTED]
+- [[Optional AI briefing]] - `contains` [EXTRACTED]
 - [[Project planning]] - `contains` [EXTRACTED]
 - [[README]] - `contains` [EXTRACTED]
 - [[Run the full app]] - `contains` [EXTRACTED]

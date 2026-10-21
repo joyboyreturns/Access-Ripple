@@ -2,7 +2,7 @@
 source_file: "web/src/api.ts"
 type: "code"
 community: "Community None"
-location: "L3"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,7 +12,7 @@ tags:
 # ApiError
 
 ## Connections
-- [[dot-constructor()_1]] - `method` [EXTRACTED]
+- [[dot-constructor()_2]] - `method` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]

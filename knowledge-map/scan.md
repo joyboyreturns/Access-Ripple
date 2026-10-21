@@ -1,8 +1,8 @@
 ---
-source_file: "tests/unit/export.test.ts"
+source_file: "tests/unit/briefing.test.ts"
 type: "code"
 community: "Community None"
-location: "L7"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,6 @@ tags:
 # scan
 
 ## Connections
-- [[export.test.ts]] - `contains` [EXTRACTED]
+- [[briefing.test.ts]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

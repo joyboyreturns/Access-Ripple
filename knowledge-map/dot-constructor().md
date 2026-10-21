@@ -1,8 +1,8 @@
 ---
-source_file: "src/scan/url-safety.ts"
+source_file: "src/ai/briefing.ts"
 type: "code"
 community: "Community None"
-location: "L5"
+location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,6 @@ tags:
 # .constructor()
 
 ## Connections
-- [[UnsafeUrlError]] - `method` [EXTRACTED]
+- [[BriefingError]] - `method` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

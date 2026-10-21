@@ -2,7 +2,7 @@
 source_file: "web/src/App.tsx"
 type: "code"
 community: "Community None"
-location: "L34"
+location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -12,6 +12,7 @@ tags:
 # App()
 
 ## Connections
+- [[AiBriefing()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
@@ -30,6 +31,7 @@ tags:
 - [[downloadVault()]] - `calls` [EXTRACTED]
 - [[exportScan()]] - `contains` [EXTRACTED]
 - [[friendlyScanError()]] - `calls` [EXTRACTED]
+- [[getAiStatus()]] - `calls` [EXTRACTED]
 - [[getSampleInfo()]] - `calls` [EXTRACTED]
 - [[groupIssues()]] - `calls` [EXTRACTED]
 - [[hostname()]] - `calls` [EXTRACTED]

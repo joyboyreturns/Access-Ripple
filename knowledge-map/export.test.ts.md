@@ -18,7 +18,7 @@ tags:
 - [[createObsidianZip()]] - `imports` [EXTRACTED]
 - [[jszip_1]] - `imports_from` [EXTRACTED]
 - [[obsidian.ts]] - `imports_from` [EXTRACTED]
-- [[scan]] - `contains` [EXTRACTED]
+- [[scan_1]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
