@@ -17,7 +17,6 @@ tags:
 - [[Media provenance]] - `contains` [EXTRACTED]
 - [[Project planning]] - `contains` [EXTRACTED]
 - [[README]] - `contains` [EXTRACTED]
-- [[Run the backend]] - `contains` [EXTRACTED]
 - [[Run the full app]] - `contains` [EXTRACTED]
 - [[Scan boundaries]] - `contains` [EXTRACTED]
 - [[Verification]] - `contains` [EXTRACTED]

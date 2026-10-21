@@ -16,6 +16,7 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
+- [[ScanStory()]] - `calls` [EXTRACTED]
 - [[blockedShort()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
@@ -25,5 +26,6 @@ tags:
 - [[lastStepOf()]] - `calls` [EXTRACTED]
 - [[presentation.test.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
+- [[scanStory()_1]] - `calls` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

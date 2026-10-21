@@ -22,6 +22,7 @@ tags:
 - [[InteractionMode_1]] - `contains` [EXTRACTED]
 - [[InteractionOutcome_1]] - `contains` [EXTRACTED]
 - [[InteractionStepView]] - `contains` [EXTRACTED]
+- [[SampleInfo]] - `contains` [EXTRACTED]
 - [[ScanComparison_1]] - `contains` [EXTRACTED]
 - [[ScanCoverage_1]] - `contains` [EXTRACTED]
 - [[ScanResult_1]] - `contains` [EXTRACTED]

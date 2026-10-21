@@ -6,6 +6,7 @@ test-results/
 .agents/
 .claude/
 agent/
+.opencode/
 .obsidian/
 devpost/
 graphify-out/

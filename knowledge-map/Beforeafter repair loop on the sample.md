@@ -2,7 +2,7 @@
 source_file: "README.md"
 type: "document"
 community: "Community None"
-location: "L49"
+location: "L53"
 tags:
   - graphify/document
   - graphify/EXTRACTED
@@ -12,6 +12,6 @@ tags:
 # Before/after repair loop on the sample
 
 ## Connections
-- [[Run the backend]] - `contains` [EXTRACTED]
+- [[Run the full app]] - `contains` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None
