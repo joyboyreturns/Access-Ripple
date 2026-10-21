@@ -12,6 +12,7 @@ import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safet
 import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/briefing.js';
 import { readFixConfig, writeFixProposal } from '../ai/fix.js';
 import { appliedPatches, applyPatch, clearPatches, isDemoFixture, patchedContent } from '../sample/sandbox.js';
+import { checkPredictions, issuesOnPage, writeRepairContract, type RepairContract } from '../ai/contract.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
 import { diskStore, summarizeScan, type ScanSummary } from '../store/disk.js';
@@ -25,6 +26,11 @@ const createBody = z.union([
 ]);
 const rescanBody = z.object({ authorizeSubmit: z.boolean().optional() }).strict();
 const fixBody = z.object({ nodeId: z.string().min(1).max(200) }).strict();
+// The contracts a model committed to, kept per scan and finding so the
+// rescan can check them.
+const contracts = new Map<string, RepairContract>();
+const lastProposals = new Map<string, { summary: string; before: string; after: string }>();
+const contractKey = (scanId: string, nodeId: string) => `${scanId}:${nodeId}`;
 const applyBody = z.object({ file: z.string().min(1).max(200), before: z.string().min(1).max(4000), after: z.string().min(1).max(4000), summary: z.string().max(300).optional() }).strict();
 const sampleStateBody = z.object({ variant: z.enum(['before', 'after']) }).strict();
 const DEFAULT_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
@@ -307,11 +313,38 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (!config) return reply.code(503).send({ error: { code: 'AI_NOT_CONFIGURED', message: 'No model provider is configured. The suggested change is still shown without a model.', retryable: false } });
     try {
       const proposal = await writeFixProposal(scan, scan.graph, body.data.nodeId, config, (snippet) => locateInDemoShop(snippet));
+      // Kept so the prediction can be about this exact change.
+      lastProposals.set(contractKey(request.params.scanId, body.data.nodeId), proposal);
       return proposal;
     } catch (error) {
       const code = error instanceof BriefingError ? error.code : 'REQUEST_FAILED';
       request.log.warn({ err: { code } }, 'fix proposal failed');
       return reply.code(502).send({ error: { code: 'FIX_PROPOSAL_FAILED', message: error instanceof Error ? error.message : 'A change could not be proposed.', retryable: true } });
+    }
+  });
+
+  // The model commits, in advance, to what its change will and will not fix.
+  // The browser checks those commitments against the rescan afterwards.
+  app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/contract', async (request, reply) => {
+    const scan = await getScan(request.params.scanId);
+    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
+    if (!scan.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'A change can only be proposed after the scan finishes.', retryable: true } });
+    const body = fixBody.safeParse(request.body ?? {});
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_CONTRACT_REQUEST', message: 'Provide the id of an accessibility finding.', retryable: false } });
+    const config = readFixConfig();
+    if (!config) return reply.code(503).send({ error: { code: 'AI_NOT_CONFIGURED', message: 'No model provider is configured, so there is no prediction to check.', retryable: false } });
+    const target = scan.graph.nodes.find((node) => node.id === body.data.nodeId);
+    if (!target || target.kind !== 'accessibility-finding') return reply.code(400).send({ error: { code: 'NOT_A_FINDING', message: 'That point is not an accessibility finding.', retryable: false } });
+    // The change the model proposed, so the prediction is about that change.
+    const proposal = lastProposals.get(contractKey(request.params.scanId, body.data.nodeId));
+    if (!proposal) return reply.code(409).send({ error: { code: 'NO_PROPOSAL', message: 'Ask for a proposed change first, so the prediction is about it.', retryable: true } });
+    try {
+      const contract = await writeRepairContract(proposal, body.data.nodeId, issuesOnPage(scan.graph, target.pageId), { model: config.model, fallbackModels: config.fallbackModels, key: config.key, baseUrl: config.baseUrl });
+      contracts.set(contractKey(request.params.scanId, body.data.nodeId), contract);
+      return contract;
+    } catch (error) {
+      request.log.warn({ err: { code: error instanceof Error ? error.name : 'unknown' } }, 'repair contract failed');
+      return reply.code(502).send({ error: { code: 'CONTRACT_FAILED', message: error instanceof Error ? error.message : 'The model did not make a prediction.', retryable: true } });
     }
   });
 
@@ -340,7 +373,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (!current || !previous) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'One of the scans is unavailable.', retryable: false } });
     if (!current.graph || !previous.graph) return reply.code(409).send({ error: { code: 'GRAPH_NOT_READY', message: 'Both scans must finish before comparison.', retryable: true } });
     if (current.canonicalOrigin !== previous.canonicalOrigin) return reply.code(400).send({ error: { code: 'SCAN_ORIGIN_MISMATCH', message: 'Only scans of the same site can be compared.', retryable: false } });
-    return compareScans(previous, current);
+    const comparison = compareScans(previous, current);
+    // Any prediction the model made about this scan is now checked against
+    // what the browser actually recorded.
+    const checked = [...contracts.entries()]
+      .filter(([key]) => key.startsWith(`${previous.id}:`))
+      .map(([, contract]) => checkPredictions(contract, previous, current))
+      .flat();
+    return { ...comparison, predictions: checked };
   });
 
   app.get<{ Params: { scanId: string } }>('/api/scans/:scanId/export/obsidian', async (request, reply) => {
