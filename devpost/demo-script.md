@@ -1,16 +1,29 @@
-# AccessRipple — a demo in about 2 minutes 40 seconds
+# AccessRipple — a demo in about 2 minutes 45 seconds
 
 ## Prepare
 
-Start the full app with `npm run dev`. Run a real Google scan once and keep the scanner running. This supplies the previous result for comparison; do not present it as a scan that just occurred. Check the internet connection and export once before recording. Results and counts can change as Google changes its rendered content. Confirm the sample is in its broken state with `curl http://127.0.0.1:4317/api/sample/state` (expect `{"variant":"before"}`); after recording set it back with `curl -X POST http://127.0.0.1:4317/api/sample/state -H 'content-type: application/json' -d '{"variant":"before"}'`.
+Start the app with `npm run dev` and open `http://127.0.0.1:5173/`. The whole demo now runs on the built-in demo shop, so it needs no internet connection and returns the same numbers every time you record.
+
+Check the demo shop is in its broken state before you start. Press **Scan the demo shop** in the studio: it always resets the shop to that broken state first, so you do not need a terminal to prepare anything. If you want to confirm it yourself, `curl http://127.0.0.1:4317/api/sample/state` should report `{"variant":"before"}`.
+
+Export the vault once before recording so the download is not a surprise. Close unrelated windows. The demo guide inside the studio (the ▶ button in the header) repeats these four beats.
 
 ## Recording route
 
-- **0:00–0:15 — The idea.** Show the video-led introduction. “AccessRipple helps developers see website journeys and accessibility barriers as connected, understandable evidence.”
-- **0:15–1:00 — A real browser scan.** Open the studio and choose **Rescan and compare**. “This earlier result came from a real scan. I’m checking the same public URL again now.” Allow up to a minute for the bounded scan; narrate the five-page limit, that safe controls are activated once each in a disposable browser while form submissions need permission, and open **What this scan covered — and what it left out** to show that skipped destinations and untested controls are explained, not hidden. Mention that scans are saved on this computer, so **Recent scans** survives restarts.
-- **1:00–1:30 — Understand an issue.** Select a grouped finding. Read its human impact and suggested change. Open developer evidence to show its real target. Rotate the map and focus the neighborhood.
-- **1:30–1:55 — Follow an observed journey.** Switch to **Controls** and select a button such as **Add to cart** or **Continue to payment**. Walk the numbered route: “activated in a controlled browser”, “observed navigation”, “destination independently inspected”. Point out the pulse that travels the recorded route and that steps beyond it stay untested.
-- **1:55–2:25 — Fix something you own and prove it.** On the built-in checkout sample: “The product image has no alternative text and its file is missing.” Run the one-line state toggle to apply the fixed sample, rescan from the same result, and open the comparison: “Three items resolved — the missing image description and two 404 signals — nothing new, nothing changed.” Explain that a comparison is evidence of what the browser no longer observes, not a certification.
-- **2:25–2:40 — The purpose and boundary.** “The goal is a web that more people can use. Automated checks help us start; keyboard, screen-reader, and human testing complete the picture.”
+- **0:00–0:15 — The idea.** Show the video-led introduction. “AccessRipple turns a website into a map of its pages, journeys, and accessibility barriers — and every point on that map is backed by something a real browser actually recorded.” Press **See it in 60 seconds**.
+- **0:15–0:40 — A real scan, in ten seconds.** The studio opens and scans the demo shop on its own. “This is a real Chromium session. It opened four pages, activated nine safe controls once each in a disposable browser, and recorded what happened.” Point at the story paragraph: it states the numbers in one sentence. Mention that form and submit controls need explicit permission and that data-changing requests stay blocked.
+- **0:40–1:10 — Understand the barrier.** Click **Open “An image needs a text alternative”**. Read the human impact and the suggested change. Open **Developer evidence** to show the real target. Rotate the map and focus the neighbourhood. “The same point carries the rule, the element, and the evidence — that is what a linked map buys you over a list of warnings.”
+- **1:10–1:45 — Follow an observed journey.** Open **Controls**, choose **Add to cart**, and walk the numbered route. “Each step says it was observed in a disposable browser, and the pulse travels the exact path that was recorded.” Point out that steps beyond the recorded route stay untested, and that the payment step was never submitted.
+- **1:45–2:20 — Prove a repair.** In **Prove a repair**, press **Repair the demo shop**, then **Rescan and compare**. “The image now loads and carries a text alternative. Three items stop being observed — the missing image description and its two failed requests — with nothing new and nothing changed.” Say plainly: a comparison is evidence of what the browser no longer sees, not a certification.
+- **2:20–2:45 — The purpose and the boundary.** “Automated checks start the conversation. Keyboard, screen-reader, and human testing complete it. Everything runs on this computer, and nothing on a scanned site is sent or changed.”
 
-This is a recording guide, not evidence that a submission video has been recorded or uploaded. If the live site is slow or unavailable, state the limitation and use the previously exported real result transparently. The sample repair loop is a mechanical before/after on a controlled fixture; record it honestly as such.
+## Optional extra
+
+If you have a few seconds, show **Export vault** and open the downloaded zip: every node becomes a linked note in an Obsidian vault, and the raw graph ships with it. That is the artefact a developer keeps after the meeting.
+
+## Honesty notes
+
+- The demo shop is a controlled local fixture that ships with a deliberate fault. Say so; do not present it as a third-party site.
+- Counts in this script are the values the current build produces for the demo shop. Re-check them once after any change to the fixture.
+- If you also want to show a public website, scan it separately and present it as a second, optional example. Do not make the live demo depend on it.
+- This is a recording guide, not evidence that a submission video has been recorded or uploaded.

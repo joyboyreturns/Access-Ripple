@@ -88,3 +88,14 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Ship a before/after repair loop on the controlled checkout sample (`/api/sample/state`) and verify 3 resolved items (image alternative text and two 404 signals) with 0 new and 0 changed.
 - [x] Keep the suite green: 53 tests across 9 files, typecheck, production build.
 - [ ] Learner review of the animated route, coverage wording, saved-history behavior, and the recorded demo route.
+
+### Demo reliability: a three-minute recording that cannot fail
+- [x] Scan the built-in demo shop from the studio in one click, with no network address and an identical result on every run.
+- [x] Open the studio straight into that scan from the landing page, and keep it working across a reload.
+- [x] State the scan result in one plain paragraph: observed counts, the first barrier to look at, and its suggested change.
+- [x] Move the before/after repair loop into the interface, so the comparison needs no terminal during a recording.
+- [x] Replace the dead end on a private or local address with an explanation and an offer to scan the demo shop.
+- [x] Name the demo shop in the graph, the result panel, the history list, and the exported vault instead of showing a loopback address.
+- [x] Record the four beats of the recording as a guide inside the studio.
+- [x] Keep the suite green: 64 tests across 9 files, typecheck, production build.
+- [ ] Learner review of the demo shop, the scan story, the repair lab, and the demo guide.

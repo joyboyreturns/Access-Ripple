@@ -140,3 +140,13 @@ body{min-width:320px}
 .guide-foot{margin:0;color:var(--subtle);font-size:12.5px;line-height:1.6;border-top:1px solid var(--line);padding-top:15px}
 @media(max-width:900px){.scan-story{padding:16px}.story-headline{font-size:16px}.repair-lab{padding:15px 16px}}
 @media(max-width:650px){.scan-bar .demo-button{min-width:100%;min-height:40px;font-size:13px}.repair-actions{width:100%}.repair-actions .button{flex:1;justify-content:center}.story-head{flex-wrap:wrap;gap:8px}}
+
+/* Light theme needs darker tones for the story badge, repair badge, and accent border. */
+[data-theme=light] .scan-story.tone-critical{border-left-color:#8e5d22}
+[data-theme=light] .scan-story.tone-attention{border-left-color:#1d5b7d}
+[data-theme=light] .scan-story.tone-clear{border-left-color:#2a6b45}
+[data-theme=light] .scan-story.tone-critical .story-tone{color:#8e5d22;border-color:#8e5d2244}
+[data-theme=light] .scan-story.tone-attention .story-tone{color:#1d5b7d;border-color:#1d5b7d44}
+[data-theme=light] .scan-story.tone-clear .story-tone{color:#2a6b45;border-color:#2a6b4544}
+[data-theme=light] .repair-state.before{color:#943e44;border-color:#943e4433;background:#fff4f3}
+[data-theme=light] .repair-state.after{color:#2a6b45;border-color:#2a6b4533;background:#f1f8f3}
