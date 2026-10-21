@@ -35,7 +35,7 @@ export const TOUR: TourStep[] = [
   {
     id: 'scan',
     title: 'A real scan, in ten seconds',
-    say: 'This is a real browser session on this computer. It opened four pages, activated nine safe controls once each in disposable pages, and recorded what actually happened.',
+    say: 'A real browser, on this computer. It opens pages, clicks safe controls once each in disposable pages, and records what actually happened.',
     done: (context) => context.hasScan,
   },
   {
@@ -47,25 +47,25 @@ export const TOUR: TourStep[] = [
   {
     id: 'journey',
     title: 'Follow one journey',
-    say: 'This is the path the browser took, not a diagram of what might happen. Anything past the recorded route stays marked untested.',
+    say: 'These are the observations the browser recorded. Each one really happened. How they join into one route is the tool\'s reading of them, and anything untested stays marked.',
     done: (context) => context.journeyTraced > 0,
   },
   {
     id: 'proposal',
     title: 'Let the model propose a change',
-    say: 'A model proposes the smallest change that fixes the rule, grounded in the markup the browser recorded. That is a suggestion, not proof. Here is how I check it.',
+    say: 'AI proposes a change, using the markup the browser actually recorded. A suggestion, not a proof. Here is how I check it.',
     done: (context) => context.changeProposed > 0,
   },
   {
     id: 'verify',
     title: 'Verify it with a rescan',
-    say: 'I apply the change to the controlled demo shop and rescan. The proposal was not the proof, the rescan was: the finding the change addressed is no longer observed, and the two failures it did not touch are still there.',
+    say: 'The rescan is the proof, not the proposal. The finding it targeted is no longer observed. The failures it did not touch are still there.',
     done: (context) => context.compared,
   },
   {
     id: 'limits',
     title: 'Say what is still missing',
-    say: 'Automated checks cover a useful subset of barriers. Keyboard, screen-reader, and human testing complete the picture, and everything here ran on this computer.',
+    say: 'Automated checks cover part of the picture. Keyboard, screen reader, and human testing finish it. Everything here ran on this computer.',
     done: () => false,
   },
 ];

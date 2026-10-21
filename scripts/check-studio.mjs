@@ -223,6 +223,10 @@ const failed = results.filter((r) => !r.pass);
 if (failed.length) console.log('FAILED:', failed.map((f) => f.name).join(' | '));
 const real = problems.filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p));
 console.log('runtime problems:', real.length ? real : 'none');
+// Leave the demo shop the way it was found, so a test run never spoils the
+// recording that follows it.
+await fetch('http://127.0.0.1:4317/api/sample/reset', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }).catch(() => undefined);
+await fetch('http://127.0.0.1:4317/api/sample/state', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variant: 'before' }) }).catch(() => undefined);
 await browser.close();
 if (failed.length || real.length) {
   console.error('\nThe studio check did not pass. Fix this before recording.');

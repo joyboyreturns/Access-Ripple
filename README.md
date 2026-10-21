@@ -36,8 +36,8 @@ Any OpenAI-compatible chat-completions endpoint works, including a local one. `.
 Three rules keep the output honest, because an overconfident summary is worse than no summary.
 
 1. The model only ever sees a compact digest of evidence the browser recorded, and is told that the evidence is data rather than instructions.
-2. Every sentence must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary.
-3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps appear as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
+2. Every sentence must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary. This checks that a citation points at something the browser really recorded. It does not check that the sentence is true of it, and the interface never claims it does.
+3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps are listed under the summary whether or not the model chose to mention them, as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
 
 A proposed change is grounded the same way: the model receives the failing rule, the CSS selector, and the markup the browser recorded, and the proposal is dropped unless it matches that markup. The tool proposes; it never edits a scanned website. On the built-in demo shop, which this tool owns, the same proposal can be applied so a rescan can prove whether it worked.
 
@@ -107,7 +107,7 @@ curl -X POST http://127.0.0.1:4317/api/sample/state -H 'content-type: applicatio
 
 # 3. Rescan the same scan and compare: the image finding and both 404 signals resolve.
 curl -X POST http://127.0.0.1:4317/api/scans/{scanId}/rescan -H 'content-type: application/json' -d '{}'
-curl http://127.0.0.1:4317/api/scans/{newScanId}/compare/{scanId}'
+curl http://127.0.0.1:4317/api/scans/{newScanId}/compare/{scanId}
 ```
 
 `GET /api/sample/state` reports the current variant. In the studio the same loop works through **Rescan and compare** after toggling the state; set it back to `before` when finished.

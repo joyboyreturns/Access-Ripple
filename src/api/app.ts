@@ -207,6 +207,9 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     tagline: 'A four-page checkout flow that ships with a real accessibility fault and a real 404.',
     url: `${baseUrl}/sample/checkout`,
     variant: sampleVariant,
+    // A change accepted in the studio is still applied, so the demo shop is
+    // not yet in its broken state and the interface has to say so.
+    patched: appliedPatches().length > 0,
     brokenNote: 'The product image has no text alternative and its file is missing.',
     fixedNote: 'The product image loads and carries a text alternative.',
   }));
