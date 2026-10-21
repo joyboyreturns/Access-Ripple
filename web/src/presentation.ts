@@ -213,8 +213,12 @@ export function groupIssues(nodes: GraphNode[]): ViewNode[] {
  * sentence never claims more than the scan observed.
  */
 export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: string; detail: string; tone: 'clear' | 'attention' | 'critical' } {
-  const findings = groupIssues(graph.nodes.filter(n => n.kind === 'accessibility-finding'));
-  const rawCount = graph.nodes.filter(n => n.kind === 'accessibility-finding').length;
+  // A page whose checks could not run is not a finding. Counting it as one
+  // would tell a developer their site has a problem it may not have.
+  const allFindings = graph.nodes.filter(n => n.kind === 'accessibility-finding');
+  const incomplete = allFindings.filter(n => n.data.ruleId === 'accessibility-check-incomplete').length;
+  const findings = groupIssues(allFindings.filter(n => n.data.ruleId !== 'accessibility-check-incomplete'));
+  const rawCount = allFindings.length - incomplete;
   const signals = graph.nodes.filter(n => n.kind === 'runtime-error');
   const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'inspected').length ?? 0;
   const blocked = scan.coverage?.pagesBlocked ?? scan.pages.filter(p => p.status === 'skipped').length;
@@ -236,9 +240,10 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
     };
   }
 
+  const couldNotRun = incomplete ? ` The automated checks could not run on ${incomplete} page${incomplete === 1 ? '' : 's'} of this site, so that page is unchecked rather than clear.` : '';
   const headline = rawCount
-    ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${rawCount} accessibility finding${rawCount === 1 ? '' : 's'}${kinds}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`
-    : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility findings in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.`;
+    ? `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found ${rawCount} accessibility finding${rawCount === 1 ? '' : 's'}${kinds}${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.${couldNotRun}`
+    : `We inspected ${pages} page${pages === 1 ? '' : 's'} of ${site} and found no accessibility findings in the checks we ran${tested ? `, after activating ${tested} control${tested === 1 ? '' : 's'} in a disposable browser` : ''}.${couldNotRun}`;
 
   const detail = top
     ? `The first to look at is “${describe(top).title}”${topPage ? ` on ${topPage}` : ''}${topCount > 1 ? `, ${topCount} elements affected` : ''}. ${describe(top).fix}${signals.length ? ` The browser also reported ${signals.length} signal${signals.length === 1 ? '' : 's'} worth reading.` : ''}`

@@ -197,3 +197,22 @@ Two failures came out of it, and both were fixed.
 - **Interaction testing ate the whole budget on a heavy site.** Wikipedia, GOV.UK and the BBC reached one page and then ran out of time, because each interaction opens its own disposable page and waits for it. Interactions now get a fixed 35% slice of the budget and the crawl keeps the rest, the total budget is 100 seconds, and the reopen wait is shorter. Wikipedia went from one page to four, GOV.UK from one to five, and the BBC from one to five. The demo shop is unaffected: it still activates nine actions in about ten seconds.
 
 A quick site still finishes as soon as it is done, so the demo shop scan is not slowed by the wider budget. The recordings guide now names MDN, W3C, Google, GitHub and Hacker News as the sites worth showing, and warns against Stack Overflow and Devpost, which answer automated browsers with a challenge page.
+
+## A site that blocked the checks, and a finding that was not a finding
+
+The real-site sweep found a third failure, and it was the worst kind for this product.
+
+- **A strict Content Security Policy stopped the accessibility checks from running at all.** The check source was added to the page with `addScriptTag`, which a Content Security Policy blocks. Four of MDN's five pages answered with a policy error, so no check ran on them. The source is now installed with `addInitScript` before any of the site's own scripts run, which a policy cannot block, with the ordinary method kept as a fallback. MDN went from zero real findings to 40.
+- **A page whose checks could not run was being reported as a finding.** The four MDN pages above were counted as "4 accessibility findings" when the truth was that four pages had not been checked at all. That is the one thing an accessibility tool must never say. A page whose checks could not run is now a separate, clearly labelled item that is never counted as a finding, and the scan story says so in words: the automated checks could not run on that page, so the page is unchecked rather than clear. The reason is kept in the evidence, not in the title.
+
+The real sites, re-scanned after both fixes:
+
+| Site | Pages | Real findings | Kinds of barrier | Checks that could not run | Actions tested |
+| --- | --- | --- | --- | --- | --- |
+| developer.mozilla.org | 4 | 40 | 4 | 0 | 10 |
+| www.w3.org | 5 | 3 | 2 | 0 | 10 |
+| news.ycombinator.com | 5 | 500 | 1 | 0 | 10 |
+| www.google.com | 4 | 14 | 4 | 0 | 8 |
+| github.com | 5 | 33 | 2 | 0 | 4 |
+
+MDN's findings are real and interesting: "All touch targets must be 24px large, or leave sufficient space" on its featured article tags and news sources. That is a WCAG 2.2 target-size barrier on the world's most-read developer documentation site, found by an automated check, and reported honestly.

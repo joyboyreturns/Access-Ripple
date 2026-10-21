@@ -137,3 +137,10 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Widen the total budget to 100 seconds and shorten the interaction reopen wait; the demo shop is unaffected.
 - [x] Record which sites are worth showing, how long they take, and which ones answer automated browsers with a challenge page.
 - [ ] Learner records the real-site beat with the site they choose.
+
+### Checks that could not run
+- [x] Install the check source before the site's own scripts, so a strict Content Security Policy cannot stop the checks from running.
+- [x] Never count a page whose checks could not run as a finding, and say in the story that the page is unchecked rather than clear.
+- [x] Keep the reason in the evidence rather than in the title.
+- [x] Re-scan the five real sites and confirm no page is left unchecked.
+- [ ] Learner checks the MDN finding against the live site before showing it on camera.

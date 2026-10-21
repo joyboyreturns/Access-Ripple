@@ -14,17 +14,17 @@ The shape of the recording: **landing page → type a URL → cut to the result 
 
 ## Choosing the site you type
 
-Not every famous site behaves the same. These were measured on this machine:
+Not every famous site behaves the same. These were measured on this machine, after the fixes:
 
 | Site | Time | Pages | What it gives you |
 | --- | --- | --- | --- |
-| **developer.mozilla.org** | about 40s | 4 | 681 controls, 4 findings, 10 actions activated. Fast, dense, and the most credible name on the list |
-| **news.ycombinator.com** | about 35s | 5 | 1000 controls, 500 findings in 5 kinds. The most dramatic numbers |
+| **developer.mozilla.org** | about 45s | 4 | 681 controls, **40 real findings in 4 kinds**, 10 actions activated. The best of both: fast enough, and it has a genuine barrier to point at |
+| **news.ycombinator.com** | about 35s | 5 | 1000 controls, 500 findings. The most dramatic numbers |
 | **www.w3.org** | about 33s | 5 | 187 controls, 3 findings. Scanning the accessibility authority itself is a good line |
 | **www.google.com** | about 30s | 4 | 39 controls, 14 findings, 8 actions. The most famous name, and it finds real things |
-| **github.com** | about 50s | 5 | 315 controls, 4 findings |
+| **github.com** | about 50s | 5 | 307 controls, 33 findings |
 
-**Use MDN or W3C.** They scan in well under a minute, they are unmistakably real, and their names make the credibility beat land on their own.
+**Use MDN.** It scans in well under a minute, it is unmistakably real, and it has a genuine, specific barrier to show: *“All touch targets must be 24px large”* on its featured article tags — a WCAG 2.2 target-size problem on the world's most-read developer documentation site. The name makes the credibility beat land on its own.
 
 Two sites to avoid on camera: **stackoverflow.com** and **devpost.com** answer automated browsers with a Cloudflare challenge page. The tool now reports that honestly, but it is a distraction in a three-minute video. Wikipedia, GOV.UK and the BBC scan correctly but take over a minute.
 
@@ -42,7 +42,7 @@ Cut straight to the result. Do not show the wait. The scan was run before you st
 
 **0:40–0:58 — The result.**
 The scan summary is on screen: pages inspected, visible controls, accessibility findings, actions tested. The story paragraph underneath states it in one sentence.
-Say: “Forty controls were inspected, four accessibility barriers were found, and ten actions were actually activated and recorded.”
+Say: “Four pages, 681 controls, 40 accessibility findings in 4 kinds of barrier, and 10 actions actually activated and recorded. These are the MDN docs, and the target-size rule is failing on their featured article tags.”
 
 **0:58–1:18 — The map, and a journey.**
 Switch to **Controls**, choose a control, and watch the pulse travel the recorded route.
