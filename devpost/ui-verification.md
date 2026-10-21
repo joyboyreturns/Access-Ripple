@@ -216,3 +216,24 @@ The real sites, re-scanned after both fixes:
 | github.com | 5 | 33 | 2 | 0 | 4 |
 
 MDN's findings are real and interesting: "All touch targets must be 24px large, or leave sufficient space" on its featured article tags and news sources. That is a WCAG 2.2 target-size barrier on the world's most-read developer documentation site, found by an automated check, and reported honestly.
+
+## A review of the code, and what it changed
+
+A senior review was asked to read the project and say what a judge would find impressive, weak, or dishonest. It found more than one thing, and the honest ones mattered most.
+
+- **The proposed change was never applied.** The studio said "Apply the demo repair" and the server swapped in a prewritten file, so the model's suggestion and the measured improvement were two unrelated things. An accepted proposal is now applied to an in-memory copy of the tool's own fixture, and the next scan reads that copy. For the demo shop the model proposes adding alt text, that change is applied, and the rescan reports exactly one finding no longer observed — the one the change addressed. The two failed requests stay, because a description does not bring back a missing file.
+- **The scanner did not block data-changing requests on the page it loaded**, only on the pages it activated controls in. It does now, and the block is recorded as evidence. A new end-to-end test serves a page that posts to itself on load and asserts that nothing arrives.
+- **"Nothing is sent or changed" was not true** and became "Only reading requests are sent".
+- **A page whose checks could not run was excluded from the story but counted in the metric**, so the interface contradicted itself. It is counted apart now, and the coverage panel says the page is unchecked rather than clear.
+- **A finding could be called "resolved" when its page had failed or was never revisited.** There is a "not rechecked" state now, and it is never counted as fixed.
+- **The key does go to the provider**, so "never leaves this computer" became "never sent to the browser".
+- **The proof claimed to be a modal dialog without being one.** It is a real dialog now, with focus and Escape.
+- **The browser gave up on a scan after 90 seconds while the scanner allows 100, and gave up on a model call after 15 seconds while the server allows 25 per model.** Both waits are now longer than the work they wait for, and a test keeps them aligned.
+- **A proposal that merely mentioned the CSS selector counted as grounded.** The selector is only accepted when the recorded markup really carries it.
+- **An error recorded after a page finished loading was silently dropped**, because the page's errors were copied before the copy was made. The live list is kept now.
+- **The coverage understated itself.** Only the controls the scanner deliberately skipped were counted, so a page with two hundred controls and a ten-control budget reported a handful untested. The controls that were never even considered are now counted too.
+- **The digest called every flow an observed journey**, including the inferred ones. A flow that was inferred is a possible route now.
+- **The map could not answer "how do I reach this barrier?"** The inspector lists the routes to the selected finding, each marked observed or not tested, and one click traces it. For the demo shop's missing image description that is three observed routes.
+- **The scanner did not serve the built studio**, so `npm start` gave an API with no interface, and the origin check blocked the studio's own assets with a 403. Both are fixed, and `npm start` now gives a working application on one address.
+
+The browser sweep is now 37 checks that use the bundled Chromium, skip the model beats when none is configured, and fail the process when something is wrong. A rehearsal script walks the whole recording route and prints how long each beat takes. The suite is 111 tests across 18 files.

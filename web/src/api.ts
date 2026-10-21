@@ -9,9 +9,9 @@ export interface Briefing { text: string; citations: Array<{ id: string; label: 
  * are deliberately longer than both, so the browser never gives up while the
  * work is still running.
  */
-const SCAN_WAIT_MS = 140_000;
-const MODEL_WAIT_MS = 100_000;
-const DEFAULT_WAIT_MS = 20_000;
+export const SCAN_WAIT_MS = 140_000;
+export const MODEL_WAIT_MS = 100_000;
+export const DEFAULT_WAIT_MS = 20_000;
 
 export class ApiError extends Error {
   constructor(message: string, public status: number, public code: string) { super(message); this.name = 'ApiError'; }

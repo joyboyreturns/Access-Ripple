@@ -12,6 +12,8 @@ export interface ScanCoverage {
   stoppedBy: 'page-limit' | 'time-limit' | null;
   interactionsTested: number;
   interactionsSkipped: number;
+  /** Controls the scan never had the budget to consider. */
+  controlsNotReached?: number;
 }
 
 export interface ScanSummary {

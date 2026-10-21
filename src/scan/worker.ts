@@ -234,6 +234,15 @@ function summarizeCoverage(pages: PageEvidence[], queueRemaining: number, visite
   }
   const visited = new Set(pages.map((page) => page.url));
   const timeExpired = Date.now() - startedAt >= limits.totalTimeoutMs;
+  // Every control the scan saw, and how it was dealt with. A control that was
+  // neither activated nor deliberately skipped was never considered, because
+  // the budget ran out, and saying so is more honest than leaving it out.
+  let controlsNotReached = 0;
+  for (const page of pages) {
+    const activated = page.interactions.length;
+    const excluded = page.interactionExclusions?.length ?? 0;
+    controlsNotReached += Math.max(0, page.controls.length - activated - excluded);
+  }
   return {
     pagesInspected: pages.filter((page) => page.status === 'complete').length,
     pagesBlocked: pages.filter((page) => page.status === 'skipped').length,
@@ -243,6 +252,7 @@ function summarizeCoverage(pages: PageEvidence[], queueRemaining: number, visite
     stoppedBy: queueRemaining === 0 ? null : timeExpired ? 'time-limit' : visitedCount >= limits.maxPages ? 'page-limit' : null,
     interactionsTested: interactions.tested,
     interactionsSkipped: interactions.skipped,
+    controlsNotReached,
   };
 }
 

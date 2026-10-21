@@ -160,6 +160,8 @@ export interface ScanCoverage {
   stoppedBy: 'page-limit' | 'time-limit' | null;
   interactionsTested: number;
   interactionsSkipped: number;
+  /** Controls the scan never had the budget to consider, beyond the ones it deliberately skipped. */
+  controlsNotReached?: number;
 }
 
 export interface ScanResult {
