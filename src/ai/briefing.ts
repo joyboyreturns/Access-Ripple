@@ -250,7 +250,7 @@ async function requestCompletion(model: string, config: AiConfig, scan: ScanResu
     });
     if (!response.ok) {
       const text = await response.text().catch(() => '');
-      throw new BriefingError(`The model provider answered ${response.status}. ${text.slice(0, 160)}`.trim(), 'REQUEST_FAILED');
+      throw new BriefingError(response.status === 429 ? 'The free model is busy right now. Ask again in a moment.' : `The model provider answered ${response.status}. ${text.slice(0, 160)}`.trim(), 'REQUEST_FAILED');
     }
     const payload = await response.json() as { choices?: Array<{ message?: { content?: string | null }; finish_reason?: string }> };
     const content = payload.choices?.[0]?.message?.content ?? '';
