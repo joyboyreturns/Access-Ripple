@@ -1,17 +1,19 @@
 ---
-source_file: "src/graph/schema.ts"
+source_file: "web/src/types.ts"
 type: "code"
-community: "Community None"
+community: "Community 6"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_6
 ---
 
 # EvidenceLabel
 
 ## Connections
-- [[schema.ts]] - `contains` [EXTRACTED]
+- [[EdgeExplanation]] - `references` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
+- [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_6

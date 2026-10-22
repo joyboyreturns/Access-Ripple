@@ -68,7 +68,7 @@ describe('evidence graph', () => {
     expect(c2?.evidenceLabel).toBe('untested');
     const c3 = graph.nodes.find((node) => node.kind === 'flow' && node.data.sourceControlId === 'c3');
     expect(c3?.data.reason).toBe('consequential-action');
-    expect(graph.nodes.find((node) => node.id === 'c2')?.status).toBe('clear');
+    expect(graph.nodes.find((node) => node.id === 'c2')?.status).toBe('untested');
   });
 
   it('describes script and email links in plain language instead of raw addresses', () => {

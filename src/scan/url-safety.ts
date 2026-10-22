@@ -67,10 +67,10 @@ export function isPublicIp(address: string): boolean {
     return isPublicIp(ipv4FromWords(words, 1));
   }
 
-  // Teredo (2001:0000::/32) hides the server IPv4 address in bytes eight to
-  // eleven and the client IPv4 address, inverted, in the last 32 bits.
+  // Teredo (2001:0000::/32) holds the server IPv4 address in bytes four to
+  // seven and the client IPv4 address, inverted, in the last 32 bits.
   if (first === 0x2001 && second === 0x0000) {
-    return isPublicIp(ipv4FromWords(words, 4)) && isPublicIp(invertedIpv4FromWords(words, 6));
+    return isPublicIp(ipv4FromWords(words, 2)) && isPublicIp(invertedIpv4FromWords(words, 6));
   }
 
   // Only global unicast 2000::/3 is eligible; also reject transition/documentation ranges.
@@ -128,6 +128,21 @@ function parseIpv6(input: string): number[] | null {
   return words.length === 8 && words.every((word) => Number.isInteger(word) && word >= 0 && word <= 0xffff) ? words : null;
 }
 
+/** Metadata remains forbidden through aliases and IPv4-in-IPv6 transports. */
+function isNeverScannedAddress(address: string): boolean {
+  if (neverScanAddresses.has(address.toLowerCase())) return true;
+  if (isIP(address) !== 6) return false;
+  const words = parseIpv6(address);
+  if (!words) return false;
+  if (words[0] === 0xfd00 && words[1] === 0xec2 && words.slice(2, 7).every((word) => word === 0) && words[7] === 0x254) return true;
+  const metadataV4 = (value: string) => neverScanAddresses.has(value);
+  if (words.slice(0, 5).every((word) => word === 0) && (words[5] === 0xffff || words[5] === 0)) return metadataV4(ipv4FromWords(words, 6));
+  if (words[0] === 0x64 && words[1] === 0xff9b && (words[2] === 0 || words[2] === 1)) return metadataV4(ipv4FromWords(words, 6));
+  if (words[0] === 0x2002) return metadataV4(ipv4FromWords(words, 1));
+  if (words[0] === 0x2001 && words[1] === 0) return metadataV4(ipv4FromWords(words, 2)) || metadataV4(invertedIpv4FromWords(words, 6));
+  return false;
+}
+
 export interface UrlSafetyOptions {
   allowLocalSample?: boolean;
   sampleOrigin?: string;
@@ -166,7 +181,7 @@ export async function assertSafeUrl(rawUrl: string, options: UrlSafetyOptions = 
     if (!privateNetwork) throw new UnsafeUrlError('Local and private network addresses cannot be scanned.');
   }
   const ipVersion = isIP(hostname);
-  if (ipVersion && neverScanAddresses.has(hostname)) {
+  if (ipVersion && isNeverScannedAddress(hostname)) {
     throw new UnsafeUrlError('That address is never scanned. It is not a website.', 'NEVER_SCANNED');
   }
   if (ipVersion && !isPublicIp(hostname) && !privateNetwork) {
@@ -192,7 +207,7 @@ export async function assertSafeUrl(rawUrl: string, options: UrlSafetyOptions = 
   if (records.length === 0) {
     throw new UnsafeUrlError('The website address could not be resolved.', 'HOST_NOT_FOUND');
   }
-  if (records.every((record) => neverScanAddresses.has(record.address))) {
+  if (records.some((record) => isNeverScannedAddress(record.address))) {
     throw new UnsafeUrlError('That address is never scanned. It is not a website.', 'NEVER_SCANNED');
   }
   if (!privateNetwork && records.some((record) => !isPublicIp(record.address))) {
@@ -212,4 +227,17 @@ export function safeDisplayUrl(rawUrl: string): string {
   } catch {
     return rawUrl.slice(0, 300);
   }
+}
+
+/**
+ * A page fetched by the scanner itself fails with the reason the browser would
+ * have given, so "that address could not be found" still reads as such and is
+ * never mistaken for a safety refusal.
+ */
+export function abortReasonFor(error: unknown): 'namenotresolved' | 'connectionrefused' | 'timedout' | 'failed' {
+  const text = error instanceof Error ? error.message : String(error);
+  if (/ENOTFOUND|EAI_AGAIN|getaddrinfo|name_not_resolved/i.test(text)) return 'namenotresolved';
+  if (/ECONNREFUSED|connection_refused/i.test(text)) return 'connectionrefused';
+  if (/timeout|timed out|ETIMEDOUT/i.test(text)) return 'timedout';
+  return 'failed';
 }

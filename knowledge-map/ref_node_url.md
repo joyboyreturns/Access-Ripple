@@ -1,11 +1,11 @@
 ---
 source_file: ""
 type: "concept"
-community: "Community None"
+community: "Community 30"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_30
 ---
 
 # ref_node_url
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[vite.config.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_30

@@ -1,23 +1,23 @@
 ---
 source_file: "src/ai/briefing.ts"
 type: "code"
-community: "Community None"
+community: "Community 2"
 location: "L46"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_2
 ---
 
 # BriefingError
 
 ## Connections
-- [[dot-constructor()]] - `method` [EXTRACTED]
+- [[dot-constructor()_3]] - `method` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[briefing.ts]] - `contains` [EXTRACTED]
 - [[fix.ts]] - `imports` [EXTRACTED]
 - [[requestCompletion()]] - `calls` [EXTRACTED]
-- [[writeBriefing()]] - `calls` [EXTRACTED]
+- [[writeBriefing()_1]] - `calls` [EXTRACTED]
 - [[writeFixProposal()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_2

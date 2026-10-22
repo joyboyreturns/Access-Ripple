@@ -144,3 +144,12 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Keep the reason in the evidence rather than in the title.
 - [x] Re-scan the five real sites and confirm no page is left unchecked.
 - [ ] Learner checks the MDN finding against the live site before showing it on camera.
+
+### The ripple of a barrier, and a demo that survives rehearsal
+- [x] Show a finding's ripple: its page in the middle, the pages one and two recorded actions away on rings, every arrow named after the control the browser activated and openable for its evidence. Links the browser never activated are left out, and the summary says where the barrier sits on a journey, not that it stops one.
+- [x] Say who each check protects, in the words of the rule behind it.
+- [x] Order **A good place to start** by severity, then recorded actions through the page, then elements affected, and show those facts on each card instead of a score. The scan story names the same first finding.
+- [x] Stop a page redirect from carrying the scan to another server: pages are fetched without following redirects and the target is checked first. This was the one failing test.
+- [x] Exempt the demo shop from the five-scans-a-minute limit, which was making the one-click demo fail with "Too many scans" after a rehearsal.
+- [x] Verify: 200 tests across 22 files, typecheck, production build, two back-to-back browser sweeps at 56/56, axe-core with no violations in both themes at 1440 px and 390 px, and a real developer.mozilla.org scan with its ripple.
+- [ ] Learner review of the ripple and the revised demo beat in `devpost/demo-script.md`.

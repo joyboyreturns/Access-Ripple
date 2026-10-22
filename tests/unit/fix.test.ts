@@ -49,6 +49,12 @@ suite('grounding a proposed change', () => {
   it('rejects a proposal when nothing was recorded', () => {
     expect(isGrounded({ before: '<img>' }, '', ['img'])).toBe(false);
   });
+
+  it('rejects fragments and unrelated markup even when the selector appears in the evidence', () => {
+    expect(isGrounded({ before: '<img' }, SNIPPET, ['img'])).toBe(false);
+    expect(isGrounded({ before: `<div>${SNIPPET}</div>` }, SNIPPET, [])).toBe(false);
+    expect(isGrounded({ before: '<button>unrelated</button>' }, '<img class="product-art">', ['product-art'])).toBe(false);
+  });
 });
 
 suite('the demo shop sandbox', () => {

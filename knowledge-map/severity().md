@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # severity()
@@ -15,7 +15,12 @@ tags:
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
+- [[buildExplorerScene()]] - `calls` [EXTRACTED]
+- [[byPriority()]] - `calls` [EXTRACTED]
+- [[explorerFacets()]] - `calls` [EXTRACTED]
+- [[explorerNodeColor()]] - `calls` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[scanStory()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

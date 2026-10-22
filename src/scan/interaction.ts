@@ -1,5 +1,5 @@
 import type { BrowserContext, Locator, Page } from 'playwright';
-import { assertSafeUrl, safeDisplayUrl } from './url-safety.js';
+import { abortReasonFor, assertSafeUrl, safeDisplayUrl } from './url-safety.js';
 import { errorEvidence, redactMessage, stableId } from './evidence.js';
 import type {
   ControlEvidence, InteractionEvidence, InteractionExclusion, InteractionMode, InteractionOutcome,
@@ -288,6 +288,24 @@ async function runSingleInteraction(
     }
     if (request.isNavigationRequest() && new URL(requestUrl).origin !== options.origin) {
       return block(`navigation outside the tested website to ${safeDisplayUrl(requestUrl)}`, 'external-navigation');
+    }
+    // The browser follows a redirect without asking the route again, so the
+    // redirect target of a page is checked here before the browser may go.
+    if (request.isNavigationRequest()) {
+      const response = await route.fetch({ maxRedirects: 0, timeout: options.reopenTimeoutMs ?? 12_000 }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
+      // A page that cannot be fetched fails as it would in the browser.
+      if (response instanceof Error) return route.abort(abortReasonFor(response)).catch(() => undefined);
+      const location = response.status() >= 300 && response.status() < 400 ? response.headers()['location'] : undefined;
+      if (location) {
+        const target = new URL(location, requestUrl);
+        if (target.origin !== options.origin) return block(`navigation outside the tested website to ${safeDisplayUrl(target.toString())}`, 'external-navigation');
+        try {
+          await assertSafeUrl(target.toString(), { allowLocalSample: options.isSample, sampleOrigin: options.isSample ? options.origin : undefined, allowPrivateNetwork: options.allowPrivateNetwork });
+        } catch {
+          return block(`unsafe request ${safeDisplayUrl(target.toString())}`, 'unsafe-url');
+        }
+      }
+      return route.fulfill({ response }).catch(() => undefined);
     }
     return route.continue();
   });

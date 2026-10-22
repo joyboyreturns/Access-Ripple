@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
-location: "L431"
+community: "Community 3"
+location: "L449"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # summarizeInteraction()
@@ -19,4 +19,4 @@ tags:
 - [[interaction.ts]] - `contains` [EXTRACTED]
 - [[runInteractions()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

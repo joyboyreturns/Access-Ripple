@@ -1,11 +1,11 @@
 ---
 source_file: ""
 type: "concept"
-community: "Community None"
+community: "Community 8"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # ref_node_crypto
@@ -15,4 +15,4 @@ tags:
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
 - [[evidence.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_8

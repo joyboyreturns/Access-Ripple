@@ -42,7 +42,6 @@ const DEFAULT_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
 const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
 let workerBusy = false;
-const requestsByAddress = new Map<string, number[]>();
 
 /**
  * Find the recorded markup in the local demo shop's source, so a proposal can
@@ -76,7 +75,7 @@ async function pumpQueue(): Promise<void> {
   try { await next(); } finally { workerBusy = false; void pumpQueue(); }
 }
 
-function canStartScan(address: string): boolean {
+function canStartScan(address: string, requestsByAddress: Map<string, number[]>): boolean {
   const now = Date.now();
   const fresh = (requestsByAddress.get(address) ?? []).filter((time) => now - time < 60_000);
   if (fresh.length >= 5) { requestsByAddress.set(address, fresh); return false; }
@@ -125,6 +124,7 @@ async function getScan(id: string): Promise<ScanResult | undefined> {
 export interface AppOptions { baseUrl?: string; logger?: boolean; }
 
 export async function buildApp(options: AppOptions = {}): Promise<FastifyInstance> {
+  const requestsByAddress = new Map<string, number[]>();
   const app = Fastify({
     logger: options.logger ? { level: 'info', serializers: { req: (req) => ({ method: req.method, host: 'local', remoteAddress: req.socket.remoteAddress }) } } : false,
     bodyLimit: 16 * 1024,
@@ -248,14 +248,17 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     return reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), file), 'utf8'));
   });
   app.get('/sample/product.svg', async (_request, reply) => reply.type('image/svg+xml').send(await readFile(resolve(process.cwd(), 'src/sample/site/product.svg'), 'utf8')));
-  app.get('/sample/payment', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/payment.html'), 'utf8')));
-  app.get('/sample/catalog', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/catalog.html'), 'utf8')));
-  app.get('/sample/cart', async (_request, reply) => reply.type('text/html; charset=utf-8').send(await readFile(resolve(process.cwd(), 'src/sample/site/cart.html'), 'utf8')));
+  for (const name of ['payment', 'catalog', 'cart']) {
+    app.get(`/sample/${name}`, async (_request, reply) => reply.type('text/html; charset=utf-8').send(patchedContent(`src/sample/site/${name}.html`)));
+  }
 
   app.post('/api/scans', async (request, reply) => {
     const body = createBody.safeParse(request.body);
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SCAN_REQUEST', message: 'Provide either a public website URL or the built-in checkout sample.', retryable: false } });
-    if (!canStartScan(request.ip)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
+    // The limit protects other people's websites from being hammered. The demo
+    // shop is this tool's own page on this computer, and a rehearsal that scans
+    // it five times in a minute must not end a recording on an error.
+    if (!('sample' in body.data) && !canStartScan(request.ip, requestsByAddress)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
     const allowPrivateNetwork = body.data.allowPrivateNetwork === true;
     if ('sample' in body.data) {
@@ -299,7 +302,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (!previous) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
     const body = rescanBody.safeParse(request.body ?? {});
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_RESCAN_REQUEST', message: 'The rescan request could not be read.', retryable: false } });
-    if (!canStartScan(request.ip)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
+    if (!previous.sample && !canStartScan(request.ip, requestsByAddress)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits'
       : body.data.authorizeSubmit === false ? 'safe'
       : previous.interactionPolicy?.mode ?? 'safe';

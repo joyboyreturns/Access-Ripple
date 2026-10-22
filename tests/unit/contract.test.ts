@@ -56,6 +56,11 @@ suite('reading the model’s commitment', () => {
     const many = JSON.stringify({ predictions: ['f1', 'e1', 'e2', 'e3', 'e4'].map((id) => ({ issueId: id, expected: 'absent', reason: '' })) });
     expect(parseContract(many, ['f1', 'e1', 'e2', 'e3', 'e4'], 'f1')).toHaveLength(3);
   });
+
+  it('retains the required target when the model lists it fourth', () => {
+    const many = JSON.stringify({ predictions: ['e1', 'e2', 'e3', 'f1'].map((id) => ({ issueId: id, expected: 'absent', reason: '' })) });
+    expect(parseContract(many, ['f1', 'e1', 'e2', 'e3'], 'f1').map((prediction) => prediction.issueId)).toContain('f1');
+  });
 });
 
 suite('checking the commitment against the browser', () => {
@@ -103,5 +108,9 @@ suite('checking the commitment against the browser', () => {
     const before = scan([page('p1', 'complete')], [finding('f1', 'p1')]);
     const after = scan([page('p1', 'complete')], []);
     expect(checkPredictions(contract, before, after)[0]?.label).toBe('Images must have alternative text');
+  });
+
+  it('does not validate a prediction whose baseline evidence is missing', () => {
+    expect(checkPredictions(contract, scan([], []), scan([], [])).every((prediction) => prediction.outcome === 'not rechecked')).toBe(true);
   });
 });

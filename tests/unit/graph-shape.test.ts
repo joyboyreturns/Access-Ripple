@@ -42,4 +42,26 @@ suite('the graph is well formed', () => {
     const ids = graph.edges.map((edge) => edge.id);
     expect(ids.length).toBe(new Set(ids).size);
   });
+
+  it('deduplicates repeated evidence and drops missing interaction errors', () => {
+    const entry: ScanResult['pages'][number] = { id: 'p1', url: 'https://example.com/a', status: 'complete', depth: 0,
+      controls: [control('c1', 'p1', 'Link'), control('c1', 'p1', 'Link')], errors: [], findings: [], outgoingLinks: [],
+      interactions: [{ id: 'i1', rootControlId: 'c1', mode: 'safe', evidenceLabel: 'observed', steps: [{ controlId: 'c1', label: 'Link', action: 'click', outcome: 'failed', summary: 'failed', errorIds: ['missing'] }] }],
+    };
+    const graph = buildGraph(scan([entry, entry]));
+    expect(new Set(graph.edges.map((edge) => edge.id)).size).toBe(graph.edges.length);
+    const ids = new Set(graph.nodes.map((node) => node.id));
+    expect(graph.edges.every((edge) => ids.has(edge.source) && ids.has(edge.target))).toBe(true);
+  });
+
+  it('never marks skipped pages, failed checks, or untested links clear', () => {
+    const entry: ScanResult['pages'][number] = { id: 'p1', url: 'https://example.com/a', status: 'skipped', depth: 0,
+      controls: [{ ...control('c1', 'p1', 'Link'), href: 'https://example.com/b' }], errors: [], findings: [], outgoingLinks: [], interactions: [],
+    };
+    expect(buildGraph(scan([entry])).nodes.find((node) => node.kind === 'page')?.status).toBe('untested');
+    expect(buildGraph(scan([entry])).nodes.find((node) => node.kind === 'control')?.status).toBe('untested');
+    entry.status = 'complete';
+    entry.findings = [{ id: 'incomplete', ruleId: 'accessibility-check-incomplete', impact: 'unknown', status: 'needs-review', help: 'Checks unavailable', helpUrl: '', targets: [], evidenceLabel: 'observed' }];
+    expect(buildGraph(scan([entry])).nodes.find((node) => node.kind === 'page')?.status).toBe('needs-review');
+  });
 });

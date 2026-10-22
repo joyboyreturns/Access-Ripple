@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/briefing.ts"
 type: "code"
-community: "Community None"
+community: "Community 2"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_2
 ---
 
 # readAiConfig()
@@ -20,4 +20,4 @@ tags:
 - [[fix.ts]] - `imports` [EXTRACTED]
 - [[readFixConfig()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_2

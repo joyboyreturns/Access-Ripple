@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L126"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # App()
@@ -28,11 +28,13 @@ tags:
 - [[applyProposal()]] - `calls` [EXTRACTED]
 - [[askForContract()]] - `contains` [EXTRACTED]
 - [[askForProposal()]] - `contains` [EXTRACTED]
+- [[barrierRipple()]] - `calls` [EXTRACTED]
 - [[breakDemo()]] - `contains` [EXTRACTED]
+- [[byPriority()]] - `calls` [EXTRACTED]
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
-- [[compareScans()_1]] - `calls` [EXTRACTED]
+- [[compareScans()]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
@@ -60,6 +62,7 @@ tags:
 - [[repairDemo()]] - `contains` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]
 - [[resetDemoShop()]] - `calls` [EXTRACTED]
+- [[rippleReach()]] - `calls` [EXTRACTED]
 - [[routesToFinding()]] - `calls` [EXTRACTED]
 - [[run()]] - `contains` [EXTRACTED]
 - [[scanDemo()]] - `contains` [EXTRACTED]
@@ -68,6 +71,7 @@ tags:
 - [[severity()]] - `calls` [EXTRACTED]
 - [[shortcutOf()]] - `calls` [EXTRACTED]
 - [[showProof()]] - `contains` [EXTRACTED]
+- [[showRipple()]] - `contains` [EXTRACTED]
 - [[siteName()]] - `calls` [EXTRACTED]
 - [[startTour()]] - `contains` [EXTRACTED]
 - [[storageGet()]] - `calls` [EXTRACTED]
@@ -76,7 +80,8 @@ tags:
 - [[studio()]] - `contains` [EXTRACTED]
 - [[submit()]] - `contains` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
-- [[waitForScan()_1]] - `calls` [EXTRACTED]
+- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[whoItProtects()]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

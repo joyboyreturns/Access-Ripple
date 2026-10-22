@@ -41,7 +41,7 @@ export const TOUR: TourStep[] = [
   {
     id: 'finding',
     title: 'The barrier, and the route to it',
-    say: 'Here is the barrier, the element the check ran on, and the controls whose recorded journeys lead to this page. That is how I choose what to investigate.',
+    say: 'Here is the barrier, who the check protects, and its ripple: every recorded action that leads a visitor to this page and on from it. That is how I choose what to investigate.',
     done: (context) => context.findingOpened > 0,
   },
   {

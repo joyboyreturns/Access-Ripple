@@ -1,21 +1,17 @@
 ---
-source_file: "web/src/GraphCanvas.tsx"
+source_file: "web/src/SelectMenu.tsx"
 type: "code"
-community: "Community None"
-location: "L6"
+community: "Community 0"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # Props
 
 ## Connections
-- [[GraphCanvas.tsx]] - `contains` [EXTRACTED]
-- [[GraphFilter]] - `references` [EXTRACTED]
-- [[Journey]] - `references` [EXTRACTED]
-- [[SiteGraph_1]] - `references` [EXTRACTED]
-- [[ViewNode]] - `references` [EXTRACTED]
+- [[SelectMenu.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

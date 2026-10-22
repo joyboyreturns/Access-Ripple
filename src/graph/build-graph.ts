@@ -58,14 +58,16 @@ export function buildGraph(scan: ScanResult): SiteGraph {
   for (const page of scan.pages) {
     const pageId = id('page', page.url);
     pageIds.set(page.url, pageId);
-    addNode({ id: pageId, kind: 'page', label: page.title || new URL(page.url).pathname || '/', status: page.status === 'failed' ? 'error' : 'clear', evidenceLabel: 'observed', pageId, data: { url: page.url, depth: page.depth, status: page.status, errorMessage: page.errorMessage } });
+    const pageStatus = page.status === 'failed' ? 'error' : page.status === 'skipped' ? 'untested'
+      : page.findings.some((finding) => finding.ruleId === 'accessibility-check-incomplete') ? 'needs-review' : 'clear';
+    addNode({ id: pageId, kind: 'page', label: page.title || new URL(page.url).pathname || '/', status: pageStatus, evidenceLabel: 'observed', pageId, data: { url: page.url, depth: page.depth, status: page.status, errorMessage: page.errorMessage } });
     edges.push({ id: id('edge', `${siteId}|contains|${pageId}`), kind: 'contains', source: siteId, target: pageId, evidenceLabel: 'observed' });
   }
 
   const addFinding = (page: PageEvidence, finding: AccessibilityEvidence): string => {
     const findingId = id('finding', `${page.url}|${finding.ruleId}|${finding.targets.join(',')}`);
     const pageId = pageIds.get(page.url)!;
-    addNode({ id: findingId, kind: 'accessibility-finding', label: finding.help, status: finding.status === 'detected' ? 'detected' : 'needs-review', evidenceLabel: 'observed', pageId: page.id, data: { ...finding, snippet: finding.snippet?.slice(0, 220) } });
+    addNode({ id: findingId, kind: 'accessibility-finding', label: finding.help, status: finding.status === 'detected' ? 'detected' : 'needs-review', evidenceLabel: 'observed', pageId: page.id, data: { ...finding } });
     edges.push({ id: id('edge', `${pageId}|has-finding|${findingId}`), kind: 'has-finding', source: pageId, target: findingId, evidenceLabel: 'observed' });
     for (const controlId of finding.affectedControlIds ?? []) {
       if (!page.controls.some(control => control.id === controlId)) continue;
@@ -93,7 +95,7 @@ export function buildGraph(scan: ScanResult): SiteGraph {
       const interactionData = interaction
         ? { tested: true, outcome: step?.outcome, summary: summarizeInteraction(interaction.steps).slice(0, 220) }
         : exclusion ? { tested: false, reason: exclusion.reason } : undefined;
-      const status = interaction ? outcomeStatus(step?.outcome) : control.href || control.formAction ? 'clear' : 'untested';
+      const status = interaction ? outcomeStatus(step?.outcome) : 'untested';
       addNode({ id: controlId, kind: 'control', label: control.accessibleName || control.role, status, evidenceLabel: 'observed', pageId: page.id, data: { ...control, href: control.href ? safeDisplayUrl(control.href) : undefined, formAction: control.formAction ? safeDisplayUrl(control.formAction) : undefined, interaction: interactionData } });
       edges.push({ id: id('edge', `${pageId}|has-control|${controlId}`), kind: 'has-control', source: pageId, target: controlId, evidenceLabel: 'observed' });
       if (interaction) continue;
@@ -160,5 +162,7 @@ export function buildGraph(scan: ScanResult): SiteGraph {
     }
   }
 
-  return { schemaVersion: '1.0', nodes, edges };
+  // Incomplete/repeated evidence must not create orphan or duplicate edges.
+  const uniqueEdges = new Map(edges.filter((edge) => seen.has(edge.source) && seen.has(edge.target)).map((edge) => [edge.id, edge]));
+  return { schemaVersion: '1.0', nodes, edges: [...uniqueEdges.values()] };
 }

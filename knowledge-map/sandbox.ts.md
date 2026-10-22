@@ -1,12 +1,12 @@
 ---
 source_file: "src/sample/sandbox.ts"
 type: "code"
-community: "Community None"
+community: "Community 22"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_22
 ---
 
 # sandbox.ts
@@ -27,4 +27,4 @@ tags:
 - [[ref_node_path]] - `imports_from` [EXTRACTED]
 - [[replaceMarkup()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_22

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # readScan()
@@ -17,6 +17,6 @@ tags:
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[openScan()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
-- [[waitForScan()_1]] - `calls` [EXTRACTED]
+- [[waitForScan()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

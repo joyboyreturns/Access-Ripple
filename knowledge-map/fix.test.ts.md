@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/fix.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 22"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_22
 ---
 
 # fix.test.ts
@@ -23,4 +23,4 @@ tags:
 - [[sandbox.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_22

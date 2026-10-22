@@ -1,12 +1,12 @@
 ---
 source_file: "src/export/obsidian.ts"
 type: "code"
-community: "Community None"
+community: "Community 7"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_7
 ---
 
 # safeName()
@@ -15,4 +15,4 @@ tags:
 - [[createObsidianZip()]] - `calls` [EXTRACTED]
 - [[obsidian.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_7

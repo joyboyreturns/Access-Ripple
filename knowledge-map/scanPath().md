@@ -1,12 +1,12 @@
 ---
 source_file: "src/store/disk.ts"
 type: "code"
-community: "Community None"
+community: "Community 18"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_18
 ---
 
 # scanPath()
@@ -15,4 +15,4 @@ tags:
 - [[disk.ts]] - `contains` [EXTRACTED]
 - [[scanDirectory()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_18

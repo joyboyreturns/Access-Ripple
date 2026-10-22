@@ -1,17 +1,18 @@
 ---
-source_file: "web/src/GraphCanvas.tsx"
+source_file: "scripts/demo.mjs"
 type: "code"
-community: "Community None"
-location: "L81"
+community: "Community 23"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_23
 ---
 
 # up()
 
 ## Connections
-- [[GraphCanvas()]] - `contains` [EXTRACTED]
+- [[demo.mjs]] - `contains` [EXTRACTED]
+- [[waitFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_23

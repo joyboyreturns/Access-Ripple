@@ -1,28 +1,28 @@
 ---
 source_file: "src/api/app.ts"
 type: "code"
-community: "Community None"
+community: "Community 5"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_5
 ---
 
 # app.ts
 
 ## Connections
-- [[@fastifystatic_1]] - `imports_from` [EXTRACTED]
-- [[@fastifyswagger_1]] - `imports_from` [EXTRACTED]
-- [[@fastifyswagger-ui_1]] - `imports_from` [EXTRACTED]
+- [[@fastifystatic]] - `imports_from` [EXTRACTED]
+- [[@fastifyswagger]] - `imports_from` [EXTRACTED]
+- [[@fastifyswagger-ui]] - `imports_from` [EXTRACTED]
 - [[AppOptions]] - `contains` [EXTRACTED]
 - [[BriefingError]] - `imports` [EXTRACTED]
 - [[DEFAULT_LIMITS]] - `imports` [EXTRACTED]
 - [[DEFAULT_ORIGINS]] - `contains` [EXTRACTED]
-- [[InteractionMode]] - `imports` [EXTRACTED]
-- [[RepairContract]] - `imports` [EXTRACTED]
-- [[ScanResult]] - `imports` [EXTRACTED]
-- [[ScanSummary]] - `imports` [EXTRACTED]
+- [[InteractionMode_1]] - `imports` [EXTRACTED]
+- [[RepairContract_1]] - `imports` [EXTRACTED]
+- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanSummary_1]] - `imports` [EXTRACTED]
 - [[UnsafeUrlError]] - `imports` [EXTRACTED]
 - [[aiStatus()]] - `imports` [EXTRACTED]
 - [[app.test.ts]] - `imports_from` [EXTRACTED]
@@ -36,7 +36,7 @@ tags:
 - [[checkPredictions()]] - `imports` [EXTRACTED]
 - [[clearPatches()]] - `imports` [EXTRACTED]
 - [[compare.ts]] - `imports_from` [EXTRACTED]
-- [[compareScans()]] - `imports` [EXTRACTED]
+- [[compareScans()_1]] - `imports` [EXTRACTED]
 - [[contract.ts]] - `imports_from` [EXTRACTED]
 - [[contractKey()]] - `contains` [EXTRACTED]
 - [[contractStore]] - `imports` [EXTRACTED]
@@ -46,7 +46,7 @@ tags:
 - [[createObsidianZip()]] - `imports` [EXTRACTED]
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[diskStore]] - `imports` [EXTRACTED]
-- [[fastify_1]] - `imports_from` [EXTRACTED]
+- [[fastify]] - `imports_from` [EXTRACTED]
 - [[fix.ts]] - `imports_from` [EXTRACTED]
 - [[fixBody]] - `contains` [EXTRACTED]
 - [[getScan()]] - `contains` [EXTRACTED]
@@ -67,7 +67,6 @@ tags:
 - [[ref_node_crypto]] - `imports_from` [EXTRACTED]
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]
 - [[ref_node_path]] - `imports_from` [EXTRACTED]
-- [[requestsByAddress]] - `contains` [EXTRACTED]
 - [[rescanBody]] - `contains` [EXTRACTED]
 - [[safeDisplayUrl()]] - `imports` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
@@ -81,9 +80,9 @@ tags:
 - [[summarizeScan()]] - `imports` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
-- [[writeBriefing()]] - `imports` [EXTRACTED]
+- [[writeBriefing()_1]] - `imports` [EXTRACTED]
 - [[writeFixProposal()]] - `imports` [EXTRACTED]
 - [[writeRepairContract()]] - `imports` [EXTRACTED]
-- [[zod_1]] - `imports_from` [EXTRACTED]
+- [[zod]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_5

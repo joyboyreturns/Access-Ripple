@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { safeDisplayUrl, assertSafeUrl } from './url-safety.js';
+import { abortReasonFor, safeDisplayUrl, assertSafeUrl } from './url-safety.js';
 import { errorEvidence, stableId } from './evidence.js';
 import { BLOCKED_PATH, runInteractions } from './interaction.js';
 import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanCoverage, ScanLimits, ScanResult } from '../graph/schema.js';
@@ -181,7 +181,7 @@ async function runAxe(page: import('playwright').Page, pageId: string, maxFindin
       if (!axe) return null;
       return axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } });
     });
-    if (!results) return [];
+    if (!results) throw new Error('The accessibility checker did not return a result.');
     const output: AccessibilityEvidence[] = [];
     for (const [items, status] of [[results.violations, 'detected'], [results.incomplete, 'needs-review']] as const) {
       for (const item of items ?? []) {
@@ -343,13 +343,35 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
           // request, including a document: a page that submits a form by
           // itself is stopped too, so the promise holds for the whole page.
           if (!['GET', 'HEAD'].includes(request.method().toUpperCase())) {
-            errors.push(errorEvidence('request', `Blocked a ${request.method().toUpperCase()} request the page tried to send.`, safeDisplayUrl(requestUrl)));
+            recordError(errorEvidence('request', `Blocked a ${request.method().toUpperCase()} request the page tried to send.`, safeDisplayUrl(requestUrl)));
+            return await route.abort('blockedbyclient');
+          }
+          if (request.isNavigationRequest() && new URL(requestUrl).origin !== origin) {
+            recordError(errorEvidence('request', 'Navigation outside the scanned website was blocked before it was sent.', requestUrl));
             return await route.abort('blockedbyclient');
           }
           await assertSafeUrl(requestUrl, { allowLocalSample: Boolean(input.sample), sampleOrigin, allowPrivateNetwork: input.allowPrivateNetwork });
+          // The browser follows a redirect without asking the route again, so
+          // a page could bounce the scanner to another server after the check
+          // above. A page is fetched here without following redirects, and the
+          // redirect target is checked before the browser is allowed to go.
+          if (request.isNavigationRequest()) {
+            const response = await route.fetch({ maxRedirects: 0, timeout: scan.limits.navigationTimeoutMs }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
+            if (response instanceof Error) return await route.abort(abortReasonFor(response));
+            const location = response.status() >= 300 && response.status() < 400 ? response.headers()['location'] : undefined;
+            if (location) {
+              const target = new URL(location, requestUrl);
+              if (target.origin !== origin) {
+                recordError(errorEvidence('request', 'Navigation outside the scanned website was blocked before it was sent.', safeDisplayUrl(target.toString())));
+                return await route.abort('blockedbyclient');
+              }
+              await assertSafeUrl(target.toString(), { allowLocalSample: Boolean(input.sample), sampleOrigin, allowPrivateNetwork: input.allowPrivateNetwork });
+            }
+            return await route.fulfill({ response });
+          }
           await route.continue();
         } catch {
-          errors.push(errorEvidence('request', 'Request blocked by URL safety policy.', route.request().url()));
+          recordError(errorEvidence('request', 'Request blocked by URL safety policy.', route.request().url()));
           await route.abort('blockedbyclient').catch(() => undefined);
         }
       });

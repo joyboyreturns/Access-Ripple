@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community None"
-location: "L93"
+community: "Community 2"
+location: "L88"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_2
 ---
 
 # writeFixProposal()
@@ -20,4 +20,4 @@ tags:
 - [[parseProposal()]] - `calls` [EXTRACTED]
 - [[userPrompt()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_2

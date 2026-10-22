@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
-location: "L448"
+community: "Community 3"
+location: "L466"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # outcomeLabel()
@@ -18,4 +18,4 @@ tags:
 - [[interaction.test.ts]] - `imports` [EXTRACTED]
 - [[interaction.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

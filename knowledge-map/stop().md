@@ -1,17 +1,17 @@
 ---
 source_file: "scripts/demo.mjs"
 type: "code"
-community: "Community None"
+community: "Community 23"
 location: "L33"
 tags:
   - graphify/code
-  - graphify/EXTRACTED
-  - community/Community_None
+  - graphify/INFERRED
+  - community/Community_23
 ---
 
 # stop()
 
 ## Connections
-- [[demo.mjs]] - `contains` [EXTRACTED]
+- [[demo.mjs]] - `indirect_call` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/INFERRED #community/Community_23

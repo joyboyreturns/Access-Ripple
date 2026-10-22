@@ -1,12 +1,12 @@
 ---
 source_file: "tests/e2e/sample-scan.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 13"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_13
 ---
 
 # sample-scan.test.ts
@@ -14,7 +14,7 @@ tags:
 ## Connections
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[buildApp()]] - `imports` [EXTRACTED]
-- [[fastify_1]] - `imports_from` [EXTRACTED]
+- [[fastify]] - `imports_from` [EXTRACTED]
 - [[memory.ts]] - `imports_from` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]
@@ -24,6 +24,6 @@ tags:
 - [[scanStore]] - `imports` [EXTRACTED]
 - [[traceJourney()]] - `imports` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
-- [[waitForScan()]] - `contains` [EXTRACTED]
+- [[waitForScan()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_13

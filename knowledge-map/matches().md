@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L202"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # matches()
@@ -14,8 +14,10 @@ tags:
 ## Connections
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[buildExplorerScene()]] - `calls` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
 - [[isIssue()]] - `calls` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[sceneGraph()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

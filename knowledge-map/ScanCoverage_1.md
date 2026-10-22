@@ -1,17 +1,18 @@
 ---
-source_file: "web/src/types.ts"
+source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community None"
-location: "L6"
+community: "Community 8"
+location: "L154"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # ScanCoverage
 
 ## Connections
-- [[types.ts]] - `contains` [EXTRACTED]
+- [[schema.ts]] - `contains` [EXTRACTED]
+- [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8
