@@ -134,7 +134,7 @@ export async function writeRepairContract(
   proposal: { summary: string; before: string; after: string },
   targetId: string,
   issues: GraphNode[],
-  config: { model: string; fallbackModels: string[]; key: string; baseUrl?: string },
+  config: { model: string; fallbackModels: string[]; key: string; baseUrl?: string; reasoningEffort?: string },
 ): Promise<RepairContract> {
   const models = [config.model, ...config.fallbackModels].filter(Boolean);
   if (!models.length) throw new ContractError('No model provider is configured.', 'NOT_CONFIGURED');
@@ -147,13 +147,16 @@ export async function writeRepairContract(
       const body: Record<string, unknown> = {
         model,
         temperature: 0,
-        max_tokens: 600,
+        // A reasoning model spends its budget thinking before it answers, so a
+        // small budget returns no content at all. Same settings as the proposal.
+        max_tokens: 2000,
         response_format: { type: 'json_object' },
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: contractUserPrompt(proposal, targetId, issues) },
         ],
       };
+      if (config.reasoningEffort) body.reasoning = { effort: config.reasoningEffort };
       try {
         const response = await fetch(`${config.baseUrl ?? 'https://openrouter.ai/api/v1'}/chat/completions`, {
           method: 'POST',
@@ -161,7 +164,7 @@ export async function writeRepairContract(
           body: JSON.stringify(body),
           signal: controller.signal,
         });
-        if (!response.ok) throw new ContractError(`The model returned ${response.status}.`, 'REQUEST_FAILED');
+        if (!response.ok) throw new ContractError(response.status === 429 ? 'The free model is busy right now. Ask again in a moment.' : `The model returned ${response.status}.`, 'REQUEST_FAILED');
         const payload = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
         const text = payload.choices?.[0]?.message?.content ?? '';
         const predictions = parseContract(text, allowedIds, targetId);

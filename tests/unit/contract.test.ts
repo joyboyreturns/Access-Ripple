@@ -1,5 +1,5 @@
-import { describe as suite, it, expect } from 'vitest';
-import { checkPredictions, parseContract, type RepairContract } from '../../src/ai/contract.js';
+import { describe as suite, it, expect, vi, afterEach } from 'vitest';
+import { checkPredictions, parseContract, writeRepairContract, type RepairContract } from '../../src/ai/contract.js';
 import type { ScanResult } from '../../src/graph/schema.js';
 
 const page = (id: string, status: 'complete' | 'failed') => ({ id, url: `https://example.com/${id}`, title: id, status, depth: 0, controls: [], errors: [], findings: [], outgoingLinks: [], interactions: [] });
@@ -112,5 +112,29 @@ suite('checking the commitment against the browser', () => {
 
   it('does not validate a prediction whose baseline evidence is missing', () => {
     expect(checkPredictions(contract, scan([], []), scan([], [])).every((prediction) => prediction.outcome === 'not rechecked')).toBe(true);
+  });
+});
+
+suite('asking the model for its commitment', () => {
+  afterEach(() => vi.unstubAllGlobals());
+  const proposal = { summary: 'Add alt text', before: '<img src="a.png">', after: '<img src="a.png" alt="Product">' };
+  const answer = (status: number, content = '') => new Response(status === 200 ? JSON.stringify({ choices: [{ message: { content } }] }) : 'busy', { status });
+
+  // A reasoning model given a small budget spends it thinking and returns no content at all.
+  it('asks for low reasoning effort and leaves room for the answer', async () => {
+    const bodies: Array<Record<string, unknown>> = [];
+    vi.stubGlobal('fetch', vi.fn(async (_url: string, init: RequestInit) => {
+      bodies.push(JSON.parse(String(init.body)));
+      return answer(200, JSON.stringify({ predictions: [{ issueId: 'f1', expected: 'absent', reason: 'alt added' }] }));
+    }));
+    const contract = await writeRepairContract(proposal, 'f1', [finding('f1', 'p1')], { model: 'm', fallbackModels: [], key: 'k', baseUrl: 'http://model.test', reasoningEffort: 'low' });
+    expect(contract.predictions[0]?.issueId).toBe('f1');
+    expect(bodies[0]?.reasoning).toEqual({ effort: 'low' });
+    expect(Number(bodies[0]?.max_tokens)).toBeGreaterThanOrEqual(2000);
+  });
+
+  it('says plainly when every free model is busy', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => answer(429)));
+    await expect(writeRepairContract(proposal, 'f1', [finding('f1', 'p1')], { model: 'm', fallbackModels: ['n'], key: 'k', baseUrl: 'http://model.test' })).rejects.toThrow('busy right now');
   });
 });

@@ -14,6 +14,10 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const problems = [];
 page.on('console', (m) => { if (m.type() === 'error') problems.push('CONSOLE: ' + m.text()); });
 page.on('pageerror', (e) => problems.push('PAGEERROR: ' + e.message));
+// A busy free model answers 502 through our API. The sweep retries those, so
+// they are reported as provider retries rather than as faults in the studio.
+let modelBusy = 0;
+page.on('response', (r) => { if (r.status() === 502 && /\/api\/scans\/[^/]+\/(briefing|fix|contract)$/.test(r.url())) modelBusy++; });
 page.on('requestfailed', (r) => problems.push('REQFAIL: ' + r.url().slice(0, 90) + ' ' + (r.failure()?.errorText ?? '')));
 
 const results = [];
@@ -139,12 +143,20 @@ check('coverage explains itself', (await txt('.coverage-details'))?.includes('co
 // --- 8. AI briefing (only when a model is configured) ---
 const aiReady = await page.evaluate(async () => (await (await fetch('/api/ai/status')).json()).configured);
 if (aiReady) {
-  await page.click('.ai-briefing .button-solid');
-  await page.waitForSelector('.ai-text', { timeout: 120000 });
+  // Free-tier capacity is shared: a busy answer leaves the button in place, so ask twice more before failing.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.click('.ai-briefing .button-solid');
+    await page.waitForTimeout(300);
+    await page.waitForSelector('.ai-text, .ai-briefing .ai-error', { timeout: 120000 });
+    if (await page.$('.ai-text')) break;
+    await page.waitForTimeout(4000);
+  }
+  await page.waitForSelector('.ai-text', { timeout: 1000 });
   const ai = await txt('.ai-text');
   check('AI briefing is produced', Boolean(ai && ai.length > 40), (ai ?? '').slice(0, 70));
   const chips = await page.evaluate(() => document.querySelectorAll('.ai-citations button').length);
-  const gaps = await page.evaluate(() => document.querySelectorAll('.ai-citations .ai-gap').length);
+  // Gaps render under the summary as their own row, and inline when the model cites one.
+  const gaps = await page.evaluate(() => document.querySelectorAll('.ai-briefing .ai-gap').length);
   check('AI cites evidence', chips + gaps > 0, `${chips} evidence chips, ${gaps} gap chips`);
   check('AI names what is missing', gaps > 0, `${gaps} gap chips`);
 } else {
@@ -166,8 +178,14 @@ if (aiReady) {
   });
   await page.waitForTimeout(500);
   check('a finding can be selected', Boolean(picked), picked ?? '');
-  await page.click('.fix-propose .button-glass');
-  await page.waitForSelector('.fix-card', { timeout: 90000 });
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.click('.fix-propose .button-glass');
+    await page.waitForTimeout(300);
+    await page.waitForSelector('.fix-card, .fix-propose .ai-error', { timeout: 90000 });
+    if (await page.$('.fix-card')) break;
+    await page.waitForTimeout(4000);
+  }
+  await page.waitForSelector('.fix-card', { timeout: 1000 });
   const before = await page.evaluate(() => document.querySelector('.fix-line.before code')?.textContent ?? '');
   const after = await page.evaluate(() => document.querySelector('.fix-line.after code')?.textContent ?? '');
   check('a change is proposed', before.length > 10 && after.length > 10, `${before.slice(0, 40)} -> ${after.slice(0, 40)}`);
@@ -176,8 +194,15 @@ if (aiReady) {
   // The model has to commit to what its change will fix, before anything is applied.
   const predict = await page.$('button:has-text("Ask what this will fix")');
   if (predict) {
-    await predict.click();
-    await page.waitForSelector('.fix-contract', { timeout: 120000 });
+    // Free-tier capacity is shared: a busy answer offers "Ask again", so take it twice before failing.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      await page.click('.fix-card button:has-text("Ask")');
+      await page.waitForTimeout(300); // let the previous error clear before waiting again
+      await page.waitForSelector('.fix-contract, .fix-card .ai-error', { timeout: 120000 });
+      if (await page.$('.fix-contract')) break;
+      await page.waitForTimeout(4000);
+    }
+    await page.waitForSelector('.fix-contract', { timeout: 1000 });
     const commitments = await page.evaluate(() => [...document.querySelectorAll('.fix-contract li')].length);
     check('the model commits to what it will fix', commitments > 0, `${commitments} commitments`);
     check('it commits to the finding it targets', (await page.evaluate(() => document.querySelector('.fix-contract')?.innerText ?? '')).length > 40);
@@ -283,8 +308,10 @@ const failed = results.filter((r) => !r.pass);
 if (failed.length) console.log('FAILED:', failed.map((f) => f.name).join(' | '));
 // The studio abandons its own poll when a new scan starts. That is the app
 // working as designed, not a runtime problem.
-const real = problems.filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p) && !/REQFAIL: http:\/\/127\.0\.0\.1:5173\/api\/scans\/.*ERR_ABORTED/.test(p));
+let busyLeft = modelBusy;
+const real = problems.filter((p) => !(/status of 502/.test(p) && busyLeft-- > 0)).filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p) && !/REQFAIL: http:\/\/127\.0\.0\.1:5173\/api\/scans\/.*ERR_ABORTED/.test(p));
 console.log('runtime problems:', real.length ? real : 'none');
+if (modelBusy) console.log(`model provider busy, retried: ${modelBusy}`);
 // Leave the demo shop the way it was found, so a test run never spoils the
 // recording that follows it.
 await fetch('http://127.0.0.1:4317/api/sample/reset', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }).catch(() => undefined);

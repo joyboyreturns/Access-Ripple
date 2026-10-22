@@ -124,7 +124,7 @@ export async function writeFixProposal(scan: ScanResult, graph: SiteGraph, nodeI
         });
         const answer = await response.text();
         if (!response.ok) {
-          throw new BriefingError(`The model provider answered ${response.status}. ${answer.slice(0, 140)}`.trim(), 'REQUEST_FAILED');
+          throw new BriefingError(response.status === 429 ? 'The free model is busy right now. Ask again in a moment.' : `The model provider answered ${response.status}. ${answer.slice(0, 140)}`.trim(), 'REQUEST_FAILED');
         }
         let payload: { choices?: Array<{ message?: { content?: string | null } }> };
         try {

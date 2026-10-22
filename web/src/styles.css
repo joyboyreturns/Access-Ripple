@@ -437,3 +437,5 @@ select:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 @media(max-width:620px){.ripple-active .graph-stage{height:560px;min-height:560px;flex-basis:560px}.ripple-edge-label{font-size:10.5px}}
 .ripple-active .node-card text{font-size:13px}
 @media(max-width:620px){.ripple-active .node-card text{font-size:11.5px}}
+/* A scan result fits one screen. The map keeps its own height instead of stretching to the inspector, and the side columns scroll inside themselves. */
+@media(min-width:901px){.studio.has-scan .workspace{height:clamp(600px,calc(100dvh - 132px),980px);min-height:0}.studio.has-scan .workspace-sidebar,.studio.has-scan .inspector,.studio.has-scan .workspace-center{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}.studio.has-scan .canvas-wrap{min-height:0}.studio.has-scan .canvas-wrap:not(.journey-active):not(.ripple-active) .graph-stage{flex:1 1 auto;height:auto;min-height:340px}.studio.has-scan .result-summary{scroll-margin-top:12px}}

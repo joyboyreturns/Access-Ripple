@@ -359,7 +359,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const proposal = lastProposals.get(contractKey(request.params.scanId, body.data.nodeId));
     if (!proposal) return reply.code(409).send({ error: { code: 'NO_PROPOSAL', message: 'Ask for a proposed change first, so the prediction is about it.', retryable: true } });
     try {
-      const contract = await writeRepairContract(proposal, body.data.nodeId, issuesOnPage(scan.graph, target.pageId), { model: config.model, fallbackModels: config.fallbackModels, key: config.key, baseUrl: config.baseUrl });
+      const contract = await writeRepairContract(proposal, body.data.nodeId, issuesOnPage(scan.graph, target.pageId), { model: config.model, fallbackModels: config.fallbackModels, key: config.key, baseUrl: config.baseUrl, reasoningEffort: config.reasoningEffort });
       await contractStore.set(contractKey(request.params.scanId, body.data.nodeId), contract);
       return contract;
     } catch (error) {
