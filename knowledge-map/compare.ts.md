@@ -1,24 +1,24 @@
 ---
 source_file: "src/graph/compare.ts"
 type: "code"
-community: "Community 7"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_7
+  - community/Community_None
 ---
 
 # compare.ts
 
 ## Connections
-- [[GraphNode_1]] - `imports` [EXTRACTED]
-- [[ScanComparison_1]] - `contains` [EXTRACTED]
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
+- [[ScanComparison]] - `contains` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[compare.test.ts]] - `imports_from` [EXTRACTED]
-- [[compareScans()_1]] - `contains` [EXTRACTED]
+- [[compareScans()]] - `contains` [EXTRACTED]
 - [[graph.test.ts]] - `imports_from` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_7
+#graphify/code #graphify/EXTRACTED #community/Community_None

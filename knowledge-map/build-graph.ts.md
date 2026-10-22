@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/build-graph.ts"
 type: "code"
-community: "Community 8"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # build-graph.ts
@@ -14,12 +14,12 @@ tags:
 ## Connections
 - [[AccessibilityEvidence]] - `imports` [EXTRACTED]
 - [[GraphEdge]] - `imports` [EXTRACTED]
-- [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
 - [[InteractionEvidence]] - `imports` [EXTRACTED]
 - [[InteractionStep]] - `imports` [EXTRACTED]
 - [[PageEvidence]] - `imports` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `imports` [EXTRACTED]
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[SiteGraph]] - `imports` [EXTRACTED]
 - [[buildGraph()]] - `contains` [EXTRACTED]
 - [[exclusionLabel()]] - `contains` [EXTRACTED]
@@ -39,4 +39,4 @@ tags:
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

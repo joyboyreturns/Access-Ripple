@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L126"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # App()
@@ -34,7 +34,7 @@ tags:
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
-- [[compareScans()]] - `calls` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
@@ -80,8 +80,8 @@ tags:
 - [[studio()]] - `contains` [EXTRACTED]
 - [[submit()]] - `contains` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
-- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[waitForScan()_1]] - `calls` [EXTRACTED]
 - [[whoItProtects()]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,18 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community 4"
+community: "Community None"
 location: "L262"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Community_None
 ---
 
 # performScan()
 
 ## Connections
+- [[6. Where to look in the code]] - `references` [INFERRED]
 - [[abortReasonFor()]] - `calls` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[assertSafeUrl()]] - `calls` [EXTRACTED]
@@ -22,7 +23,7 @@ tags:
 - [[inspectControls()]] - `calls` [EXTRACTED]
 - [[launchScan()]] - `calls` [EXTRACTED]
 - [[looksLikeRefusal()]] - `calls` [EXTRACTED]
-- [[playwright]] - `imports_from` [EXTRACTED]
+- [[playwright_1]] - `imports_from` [EXTRACTED]
 - [[runAxe()]] - `calls` [EXTRACTED]
 - [[runInteractions()]] - `calls` [EXTRACTED]
 - [[safeDisplayUrl()]] - `calls` [EXTRACTED]
@@ -32,4 +33,4 @@ tags:
 - [[summarizeCoverage()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,17 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 16"
-location: "L26"
+community: "Community None"
+location: "L135"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_16
+  - community/Community_None
 ---
 
 # Optional AI briefing and proposed changes
 
 ## Connections
-- [[AccessRipple]] - `contains` [EXTRACTED]
+- [[In depth]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_16
+#graphify/document #graphify/EXTRACTED #community/Community_None

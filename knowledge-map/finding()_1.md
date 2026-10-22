@@ -1,18 +1,17 @@
 ---
-source_file: "tests/unit/graph-interactions.test.ts"
+source_file: "tests/unit/contract.test.ts"
 type: "code"
-community: "Community 26"
-location: "L12"
+community: "Community None"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_None
 ---
 
 # finding()
 
 ## Connections
-- [[graph-interactions.test.ts]] - `contains` [EXTRACTED]
-- [[node()]] - `calls` [EXTRACTED]
+- [[contract.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_None

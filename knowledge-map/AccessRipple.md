@@ -1,26 +1,30 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 16"
-location: "L1"
+community: "Community None"
+location: "L3"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_16
+  - community/Community_None
 ---
 
 # AccessRipple
 
 ## Connections
-- [[Compact architecture map]] - `contains` [EXTRACTED]
-- [[Current build]] - `contains` [EXTRACTED]
+- [[Built for Build With AI Basics]] - `contains` [EXTRACTED]
+- [[Code map for contributors]] - `contains` [EXTRACTED]
+- [[How it works]] - `contains` [EXTRACTED]
+- [[In depth]] - `contains` [EXTRACTED]
+- [[License]] - `contains` [EXTRACTED]
 - [[Media provenance]] - `contains` [EXTRACTED]
-- [[Optional AI briefing and proposed changes]] - `contains` [EXTRACTED]
-- [[Project planning]] - `contains` [EXTRACTED]
+- [[Quick start]] - `contains` [EXTRACTED]
 - [[README]] - `contains` [EXTRACTED]
-- [[Run the full app]] - `contains` [EXTRACTED]
-- [[Scan boundaries]] - `contains` [EXTRACTED]
-- [[The model has to put its claim on trial]] - `contains` [EXTRACTED]
+- [[See it]] - `contains` [EXTRACTED]
+- [[Thank you]] - `contains` [EXTRACTED]
+- [[The problem]] - `contains` [EXTRACTED]
 - [[Verification]] - `contains` [EXTRACTED]
+- [[What AccessRipple does]] - `contains` [EXTRACTED]
+- [[Who it is for]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_16
+#graphify/document #graphify/EXTRACTED #community/Community_None

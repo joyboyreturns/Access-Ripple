@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/build-graph.ts"
 type: "code"
-community: "Community 8"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # id()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[build-graph.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

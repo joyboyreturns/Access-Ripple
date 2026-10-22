@@ -1,25 +1,25 @@
 ---
 source_file: "web/src/graph-explorer.ts"
 type: "code"
-community: "Community 9"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Community_None
 ---
 
 # graph-explorer.ts
 
 ## Connections
 - [[EdgeExplanation]] - `contains` [EXTRACTED]
-- [[EvidenceLabel]] - `imports` [EXTRACTED]
+- [[EvidenceLabel_1]] - `imports` [EXTRACTED]
 - [[ExplorerOptions]] - `contains` [EXTRACTED]
 - [[ExplorerScene]] - `contains` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphEdge_1]] - `imports` [EXTRACTED]
 - [[GraphFilter]] - `imports` [EXTRACTED]
-- [[GraphNode]] - `imports` [EXTRACTED]
+- [[GraphNode_1]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
 - [[buildExplorerScene()]] - `contains` [EXTRACTED]
@@ -40,4 +40,4 @@ tags:
 - [[text()_1]] - `contains` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Community_None

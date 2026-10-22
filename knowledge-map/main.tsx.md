@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/main.tsx"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # main.tsx
@@ -14,9 +14,9 @@ tags:
 ## Connections
 - [[App()]] - `imports` [EXTRACTED]
 - [[App.tsx]] - `imports_from` [EXTRACTED]
-- [[motion]] - `imports_from` [EXTRACTED]
-- [[react]] - `imports_from` [EXTRACTED]
-- [[react-dom]] - `imports_from` [EXTRACTED]
+- [[motion_1]] - `imports_from` [EXTRACTED]
+- [[react_1]] - `imports_from` [EXTRACTED]
+- [[react-dom_1]] - `imports_from` [EXTRACTED]
 - [[web_src_styles]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

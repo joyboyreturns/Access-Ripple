@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community 12"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Community_None
 ---
 
 # contract.ts
@@ -14,13 +14,13 @@ tags:
 ## Connections
 - [[CheckedPrediction]] - `contains` [EXTRACTED]
 - [[ContractError]] - `contains` [EXTRACTED]
-- [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
 - [[PredictionExpectation]] - `contains` [EXTRACTED]
 - [[PredictionOutcome]] - `contains` [EXTRACTED]
-- [[RepairContract_1]] - `contains` [EXTRACTED]
-- [[RepairPrediction_1]] - `contains` [EXTRACTED]
-- [[SYSTEM_PROMPT]] - `contains` [EXTRACTED]
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[RepairContract]] - `contains` [EXTRACTED]
+- [[RepairPrediction]] - `contains` [EXTRACTED]
+- [[SYSTEM_PROMPT_1]] - `contains` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[SiteGraph]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[checkPredictions()]] - `contains` [EXTRACTED]
@@ -33,4 +33,4 @@ tags:
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[writeRepairContract()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Community_None

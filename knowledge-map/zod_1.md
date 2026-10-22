@@ -1,17 +1,18 @@
 ---
 source_file: "package.json"
-type: "code"
-community: "Community 21"
-location: "L35"
+type: "concept"
+community: "Community None"
+location: "L36"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_21
+  - community/Community_None
 ---
 
 # zod
 
 ## Connections
-- [[dependencies]] - `contains` [EXTRACTED]
+- [[app.ts]] - `imports_from` [EXTRACTED]
+- [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_21
+#graphify/concept #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,18 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 1"
+community: "Community None"
 location: "L357"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # traceJourney()
 
 ## Connections
+- [[6. Where to look in the code]] - `references` [INFERRED]
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
@@ -28,4 +29,4 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_1
+#graphify/code #graphify/EXTRACTED #community/Community_None

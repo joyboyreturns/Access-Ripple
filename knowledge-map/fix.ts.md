@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 2"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # fix.ts
@@ -15,13 +15,13 @@ tags:
 - [[AiConfig]] - `imports` [EXTRACTED]
 - [[BriefingError]] - `imports` [EXTRACTED]
 - [[FixConfig]] - `contains` [EXTRACTED]
-- [[FixProposal_1]] - `contains` [EXTRACTED]
+- [[FixProposal]] - `contains` [EXTRACTED]
 - [[SYSTEM_PROMPT_2]] - `contains` [EXTRACTED]
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[SiteGraph]] - `imports` [EXTRACTED]
 - [[aiStatus()]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
-- [[briefing.ts]] - `re_exports` [EXTRACTED]
+- [[briefing.ts]] - `imports_from` [EXTRACTED]
 - [[fix.test.ts]] - `imports_from` [EXTRACTED]
 - [[isGrounded()]] - `contains` [EXTRACTED]
 - [[parseProposal()]] - `contains` [EXTRACTED]
@@ -31,4 +31,4 @@ tags:
 - [[userPrompt()_1]] - `contains` [EXTRACTED]
 - [[writeFixProposal()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

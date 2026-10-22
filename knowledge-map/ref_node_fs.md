@@ -12,6 +12,7 @@ tags:
 
 ## Connections
 - [[app.ts]] - `imports_from` [EXTRACTED]
+- [[capture-readme.mjs]] - `imports_from` [EXTRACTED]
 - [[contracts.ts]] - `imports_from` [EXTRACTED]
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]

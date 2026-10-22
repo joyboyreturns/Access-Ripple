@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 1"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # presentation.ts
@@ -16,14 +16,14 @@ tags:
 - [[Copy]] - `contains` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphFilter]] - `contains` [EXTRACTED]
-- [[GraphNode]] - `imports` [EXTRACTED]
+- [[GraphNode_1]] - `imports` [EXTRACTED]
 - [[InteractionStepView]] - `imports` [EXTRACTED]
 - [[Journey]] - `contains` [EXTRACTED]
 - [[JourneyFinding]] - `contains` [EXTRACTED]
 - [[Ripple]] - `contains` [EXTRACTED]
 - [[RippleHop]] - `contains` [EXTRACTED]
 - [[RouteToFinding]] - `contains` [EXTRACTED]
-- [[ScanResult]] - `imports` [EXTRACTED]
+- [[ScanResult_1]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `contains` [EXTRACTED]
 - [[barrierRipple()]] - `contains` [EXTRACTED]
@@ -75,4 +75,4 @@ tags:
 - [[whoItProtects()]] - `contains` [EXTRACTED]
 - [[withoutSharedAffix()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_1
+#graphify/code #graphify/EXTRACTED #community/Community_None

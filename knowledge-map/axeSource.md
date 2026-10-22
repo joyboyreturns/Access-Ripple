@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community 4"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Community_None
 ---
 
 # axeSource
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[worker.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Community_None

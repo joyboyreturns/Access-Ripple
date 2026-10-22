@@ -1,12 +1,12 @@
 ---
 source_file: "tests/e2e/no-data.test.ts"
 type: "code"
-community: "Community 22"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_22
+  - community/Community_None
 ---
 
 # no-data.test.ts
@@ -22,4 +22,4 @@ tags:
 - [[scanStore]] - `imports` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_22
+#graphify/code #graphify/EXTRACTED #community/Community_None

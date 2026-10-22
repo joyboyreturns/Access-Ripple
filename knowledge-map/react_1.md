@@ -1,17 +1,22 @@
 ---
 source_file: "package.json"
-type: "code"
-community: "Community 21"
-location: "L33"
+type: "concept"
+community: "Community None"
+location: "L34"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_21
+  - community/Community_None
 ---
 
 # react
 
 ## Connections
-- [[dependencies]] - `contains` [EXTRACTED]
+- [[App.tsx]] - `imports_from` [EXTRACTED]
+- [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
+- [[Landing.tsx]] - `imports_from` [EXTRACTED]
+- [[SelectMenu.tsx]] - `imports_from` [EXTRACTED]
+- [[main.tsx]] - `imports_from` [EXTRACTED]
+- [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_21
+#graphify/concept #graphify/EXTRACTED #community/Community_None

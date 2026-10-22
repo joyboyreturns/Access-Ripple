@@ -36,3 +36,13 @@ Use the current test report and the research in `competitive-analysis.md` to mak
 ## 22 October recheck
 
 The rules page still lists the four equal criteria, and the [project gallery](https://learn-ai-basics.devpost.com/project-gallery) is still unpublished, so there is no field to compare against yet. Two faults that a judge could have seen were fixed: a page redirect could carry the scan to another server (the one failing test), and the one-click demo answered "Too many scans" after a rehearsal because the demo shop counted against the public-site rate limit. The ripple of a barrier was added for Innovation and Potential Impact: it places a finding on the journeys the browser recorded and names who the check protects, without claiming the barrier stops anyone.
+
+## 23 October recheck
+
+The rules page was read again: the deadline, the pass/fail Stage One (fits the theme, built with the skill pack as shown by `scope.md`, `prd.md` and `spec.md` in the repository) and the four equally weighted criteria are unchanged. The license must be detectable in the repository's About section; GitHub detects it as MIT.
+
+Two faults a judge or a live recording could have hit were fixed. The model's written prediction was sent without the low reasoning setting and with a 600-token budget, so a reasoning model could spend the budget thinking and return nothing; it now uses the same settings as the proposal, with a regression test. And a busy free model left no way to retry on screen; the briefing, the proposal and the prediction now say plainly that the model is busy and offer to ask again.
+
+For the video, a finished scan now fits one 1440 × 900 frame: the map keeps its own height instead of stretching to the inspector, and the result scrolls itself so the metrics, the whole map and the inspector share the screen. The README was rebuilt around the problem, the audience and the proof, with screenshots captured by `npm run capture:readme` and an architecture overview in `docs/ARCHITECTURE.md`.
+
+Verified: 202 tests across 22 files, typecheck, production build, and the 56-check browser sweep. Still open and human-owned: the public video link, the Devpost form, and the learner's final review.

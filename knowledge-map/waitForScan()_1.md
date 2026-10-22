@@ -1,17 +1,21 @@
 ---
-source_file: "tests/e2e/sample-scan.test.ts"
+source_file: "web/src/api.ts"
 type: "code"
-community: "Community 13"
-location: "L32"
+community: "Community None"
+location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_13
+  - community/Community_None
 ---
 
 # waitForScan()
 
 ## Connections
-- [[sample-scan.test.ts]] - `contains` [EXTRACTED]
+- [[App()]] - `calls` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `contains` [EXTRACTED]
+- [[readScan()]] - `calls` [EXTRACTED]
+- [[run()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_13
+#graphify/code #graphify/EXTRACTED #community/Community_None

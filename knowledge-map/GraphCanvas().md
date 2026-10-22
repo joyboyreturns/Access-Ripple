@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/GraphCanvas.tsx"
 type: "code"
-community: "Community 20"
+community: "Community None"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_20
+  - community/Community_None
 ---
 
 # GraphCanvas()
@@ -34,7 +34,7 @@ tags:
 - [[pageFor()]] - `calls` [EXTRACTED]
 - [[rippleGeometry()]] - `calls` [EXTRACTED]
 - [[startNode()]] - `contains` [EXTRACTED]
-- [[up()]] - `contains` [EXTRACTED]
+- [[up()_1]] - `contains` [EXTRACTED]
 - [[withoutSharedAffix()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_20
+#graphify/code #graphify/EXTRACTED #community/Community_None

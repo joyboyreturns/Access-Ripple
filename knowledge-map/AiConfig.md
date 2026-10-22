@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/briefing.ts"
 type: "code"
-community: "Community 2"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # AiConfig
@@ -16,4 +16,4 @@ tags:
 - [[briefing.ts]] - `contains` [EXTRACTED]
 - [[fix.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

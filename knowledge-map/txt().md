@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/check-studio.mjs"
 type: "code"
-community: "Community 14"
-location: "L21"
+community: "Community None"
+location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # txt()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[check-studio.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

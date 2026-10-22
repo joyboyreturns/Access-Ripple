@@ -1,33 +1,33 @@
 ---
 source_file: "web/src/types.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # types.ts
 
 ## Connections
 - [[App.tsx]] - `imports_from` [EXTRACTED]
-- [[EvidenceLabel]] - `contains` [EXTRACTED]
-- [[FixProposal]] - `contains` [EXTRACTED]
+- [[EvidenceLabel_1]] - `contains` [EXTRACTED]
+- [[FixProposal_1]] - `contains` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphEdge_1]] - `contains` [EXTRACTED]
-- [[GraphNode]] - `contains` [EXTRACTED]
-- [[GraphNodeKind]] - `contains` [EXTRACTED]
+- [[GraphNode_1]] - `contains` [EXTRACTED]
+- [[GraphNodeKind_1]] - `contains` [EXTRACTED]
 - [[InteractionEvidenceView]] - `contains` [EXTRACTED]
-- [[InteractionMode]] - `contains` [EXTRACTED]
-- [[InteractionOutcome]] - `contains` [EXTRACTED]
+- [[InteractionMode_1]] - `contains` [EXTRACTED]
+- [[InteractionOutcome_1]] - `contains` [EXTRACTED]
 - [[InteractionStepView]] - `contains` [EXTRACTED]
 - [[SampleInfo]] - `contains` [EXTRACTED]
-- [[ScanComparison]] - `contains` [EXTRACTED]
-- [[ScanCoverage]] - `contains` [EXTRACTED]
-- [[ScanResult]] - `contains` [EXTRACTED]
-- [[ScanSummary]] - `contains` [EXTRACTED]
+- [[ScanComparison_1]] - `contains` [EXTRACTED]
+- [[ScanCoverage_1]] - `contains` [EXTRACTED]
+- [[ScanResult_1]] - `contains` [EXTRACTED]
+- [[ScanSummary_1]] - `contains` [EXTRACTED]
 - [[SiteGraph_1]] - `contains` [EXTRACTED]
 - [[api.ts]] - `imports_from` [EXTRACTED]
 - [[graph-explorer.ts]] - `imports_from` [EXTRACTED]
@@ -37,4 +37,4 @@ tags:
 - [[refusal.test.ts]] - `imports_from` [EXTRACTED]
 - [[ripple.test.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None
