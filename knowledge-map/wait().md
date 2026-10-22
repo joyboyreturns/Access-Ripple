@@ -1,17 +1,18 @@
 ---
-source_file: "scripts/prepare-demo.mjs"
+source_file: "scripts/demo.mjs"
 type: "code"
-community: "Community 18"
-location: "L24"
+community: "Community None"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # wait()
 
 ## Connections
-- [[prepare-demo.mjs]] - `contains` [EXTRACTED]
+- [[demo.mjs]] - `contains` [EXTRACTED]
+- [[waitFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

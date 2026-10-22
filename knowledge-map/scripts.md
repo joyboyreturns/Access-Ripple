@@ -1,18 +1,19 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Community 17"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_17
+  - community/Community_None
 ---
 
 # scripts
 
 ## Connections
 - [[build]] - `contains` [EXTRACTED]
+- [[capturereadme]] - `contains` [EXTRACTED]
 - [[checkstudio]] - `contains` [EXTRACTED]
 - [[demo]] - `contains` [EXTRACTED]
 - [[dev]] - `contains` [EXTRACTED]
@@ -27,4 +28,4 @@ tags:
 - [[testwatch]] - `contains` [EXTRACTED]
 - [[typecheck]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_17
+#graphify/code #graphify/EXTRACTED #community/Community_None

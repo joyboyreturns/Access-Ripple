@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/url-safety.ts"
 type: "code"
-community: "Community 10"
+community: "Community None"
 location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_10
+  - community/Community_None
 ---
 
 # parseIpv6()
@@ -16,4 +16,4 @@ tags:
 - [[isPublicIp()]] - `calls` [EXTRACTED]
 - [[url-safety.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_10
+#graphify/code #graphify/EXTRACTED #community/Community_None

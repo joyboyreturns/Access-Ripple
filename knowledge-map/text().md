@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/rehearse.mjs"
 type: "code"
-community: "Community 14"
+community: "Community None"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # text()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[rehearse.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

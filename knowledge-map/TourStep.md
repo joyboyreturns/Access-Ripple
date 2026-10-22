@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/tour.ts"
 type: "code"
-community: "Community 28"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_28
+  - community/Community_None
 ---
 
 # TourStep
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tour.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_28
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 0"
-location: "L197"
+community: "Community None"
+location: "L199"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # run()
@@ -14,7 +14,7 @@ tags:
 ## Connections
 - [[App()]] - `contains` [EXTRACTED]
 - [[accept()]] - `calls` [EXTRACTED]
-- [[compareScans()]] - `calls` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[friendlyScanError()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
@@ -22,6 +22,6 @@ tags:
 - [[scanDemo()]] - `calls` [EXTRACTED]
 - [[storageSet()]] - `calls` [EXTRACTED]
 - [[submit()]] - `calls` [EXTRACTED]
-- [[waitForScan()]] - `calls` [EXTRACTED]
+- [[waitForScan()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

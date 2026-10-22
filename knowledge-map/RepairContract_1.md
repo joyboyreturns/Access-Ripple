@@ -1,20 +1,18 @@
 ---
-source_file: "src/ai/contract.ts"
+source_file: "web/src/api.ts"
 type: "code"
-community: "Community 29"
-location: "L30"
+community: "Community None"
+location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_29
+  - community/Community_None
 ---
 
 # RepairContract
 
 ## Connections
-- [[app.ts]] - `imports` [EXTRACTED]
-- [[contract.test.ts]] - `imports` [EXTRACTED]
-- [[contract.ts]] - `contains` [EXTRACTED]
-- [[contracts.ts]] - `imports` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_29
+#graphify/code #graphify/EXTRACTED #community/Community_None

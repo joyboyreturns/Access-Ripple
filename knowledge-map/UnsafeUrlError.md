@@ -1,22 +1,22 @@
 ---
 source_file: "src/scan/url-safety.ts"
 type: "code"
-community: "Community 10"
+community: "Community None"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_10
+  - community/Community_None
 ---
 
 # UnsafeUrlError
 
 ## Connections
-- [[dot-constructor()_1]] - `method` [EXTRACTED]
+- [[dot-constructor()_2]] - `method` [EXTRACTED]
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[assertSafeUrl()]] - `calls` [EXTRACTED]
 - [[buildApp()]] - `calls` [EXTRACTED]
 - [[url-safety.test.ts]] - `imports` [EXTRACTED]
 - [[url-safety.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_10
+#graphify/code #graphify/EXTRACTED #community/Community_None

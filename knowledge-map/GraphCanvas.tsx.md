@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/GraphCanvas.tsx"
 type: "code"
-community: "Community 9"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Community_None
 ---
 
 # GraphCanvas.tsx
@@ -20,7 +20,7 @@ tags:
 - [[Icon()]] - `imports` [EXTRACTED]
 - [[Icons.tsx]] - `imports_from` [EXTRACTED]
 - [[Journey]] - `imports` [EXTRACTED]
-- [[Props_1]] - `contains` [EXTRACTED]
+- [[Props]] - `contains` [EXTRACTED]
 - [[Ripple]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
@@ -33,9 +33,9 @@ tags:
 - [[graph-explorer.ts]] - `imports_from` [EXTRACTED]
 - [[pageFor()]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
-- [[react]] - `imports_from` [EXTRACTED]
+- [[react_1]] - `imports_from` [EXTRACTED]
 - [[rippleGeometry()]] - `contains` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[withoutSharedAffix()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Community_None

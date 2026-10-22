@@ -1,17 +1,18 @@
 ---
 source_file: "package.json"
-type: "code"
-community: "Community 21"
-location: "L27"
+type: "concept"
+community: "Community None"
+location: "L28"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_21
+  - community/Community_None
 ---
 
 # @fastify/swagger-ui
 
 ## Connections
-- [[dependencies]] - `contains` [EXTRACTED]
+- [[app.ts]] - `imports_from` [EXTRACTED]
+- [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_21
+#graphify/concept #graphify/EXTRACTED #community/Community_None

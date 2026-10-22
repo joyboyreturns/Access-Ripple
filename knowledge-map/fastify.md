@@ -1,20 +1,17 @@
 ---
 source_file: "package.json"
-type: "concept"
-community: "Community 13"
-location: "L29"
+type: "code"
+community: "Community None"
+location: "L30"
 tags:
-  - graphify/concept
+  - graphify/code
   - graphify/EXTRACTED
-  - community/Community_13
+  - community/Community_None
 ---
 
 # fastify
 
 ## Connections
-- [[app.ts]] - `imports_from` [EXTRACTED]
-- [[package.json]] - `imports` [EXTRACTED]
-- [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
-- [[studio-flow.test.ts]] - `imports_from` [EXTRACTED]
+- [[dependencies]] - `contains` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_13
+#graphify/code #graphify/EXTRACTED #community/Community_None

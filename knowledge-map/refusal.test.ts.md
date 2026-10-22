@@ -1,18 +1,18 @@
 ---
 source_file: "tests/unit/refusal.test.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # refusal.test.ts
 
 ## Connections
-- [[ScanResult]] - `imports` [EXTRACTED]
+- [[ScanResult_1]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[emptyGraph]] - `contains` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
@@ -21,4 +21,4 @@ tags:
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

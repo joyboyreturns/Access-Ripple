@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/persistence.test.ts"
 type: "code"
-community: "Community 18"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # uuidFor()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[persistence.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

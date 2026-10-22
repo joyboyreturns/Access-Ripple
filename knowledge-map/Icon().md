@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Icons.tsx"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # Icon()
@@ -27,4 +27,4 @@ tags:
 - [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[SelectMenu.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

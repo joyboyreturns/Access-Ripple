@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/presentation.test.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # page
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[presentation.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

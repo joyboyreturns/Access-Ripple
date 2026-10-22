@@ -1,18 +1,18 @@
 ---
 source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community 12"
+community: "Community None"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Community_None
 ---
 
 # CheckedPrediction
 
 ## Connections
-- [[RepairPrediction_1]] - `inherits` [EXTRACTED]
+- [[RepairPrediction]] - `inherits` [EXTRACTED]
 - [[contract.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Community_None

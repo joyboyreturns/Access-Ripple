@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # request()
@@ -16,7 +16,7 @@ tags:
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[applyProposal()]] - `calls` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
-- [[compareScans()]] - `calls` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[getAiStatus()]] - `calls` [EXTRACTED]
 - [[getProof()]] - `calls` [EXTRACTED]
@@ -28,7 +28,7 @@ tags:
 - [[rescan()]] - `calls` [EXTRACTED]
 - [[resetDemoShop()]] - `calls` [EXTRACTED]
 - [[setSampleState()]] - `calls` [EXTRACTED]
-- [[writeBriefing()]] - `calls` [EXTRACTED]
+- [[writeBriefing()_1]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

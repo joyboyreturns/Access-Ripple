@@ -19,7 +19,8 @@
     "check:studio": "node scripts/check-studio.mjs",
     "rehearse": "node scripts/rehearse.mjs",
     "start": "node dist/api/server.js",
-    "prepare:demo": "node scripts/prepare-demo.mjs"
+    "prepare:demo": "node scripts/prepare-demo.mjs",
+    "capture:readme": "node scripts/capture-readme.mjs"
   },
   "dependencies": {
     "@fastify/static": "^10.1.6",

@@ -1,17 +1,17 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 16"
-location: "L167"
+community: "Community None"
+location: "L48"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_16
+  - community/Community_None
 ---
 
-# Compact architecture map
+# How it works
 
 ## Connections
 - [[AccessRipple]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_16
+#graphify/document #graphify/EXTRACTED #community/Community_None

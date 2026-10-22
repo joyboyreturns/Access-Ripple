@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/briefing.ts"
 type: "code"
-community: "Community 2"
+community: "Community None"
 location: "L184"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # groundSentences()
@@ -14,6 +14,6 @@ tags:
 ## Connections
 - [[briefing.test.ts]] - `imports` [EXTRACTED]
 - [[briefing.ts]] - `contains` [EXTRACTED]
-- [[writeBriefing()_1]] - `calls` [EXTRACTED]
+- [[writeBriefing()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

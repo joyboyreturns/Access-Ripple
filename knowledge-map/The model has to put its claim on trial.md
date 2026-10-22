@@ -1,17 +1,17 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 16"
-location: "L53"
+community: "Community None"
+location: "L165"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_16
+  - community/Community_None
 ---
 
 # The model has to put its claim on trial
 
 ## Connections
-- [[AccessRipple]] - `contains` [EXTRACTED]
+- [[In depth]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_16
+#graphify/document #graphify/EXTRACTED #community/Community_None

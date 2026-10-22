@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/graph-explorer.ts"
 type: "code"
-community: "Community 9"
+community: "Community None"
 location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Community_None
 ---
 
 # text()
@@ -16,4 +16,4 @@ tags:
 - [[explorerFacets()]] - `calls` [EXTRACTED]
 - [[graph-explorer.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Community_None

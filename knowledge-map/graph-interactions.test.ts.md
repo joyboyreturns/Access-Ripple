@@ -1,19 +1,19 @@
 ---
 source_file: "tests/unit/graph-interactions.test.ts"
 type: "code"
-community: "Community 26"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_None
 ---
 
 # graph-interactions.test.ts
 
 ## Connections
 - [[GraphEdge_1]] - `imports` [EXTRACTED]
-- [[GraphNode]] - `imports` [EXTRACTED]
+- [[GraphNode_1]] - `imports` [EXTRACTED]
 - [[SiteGraph_1]] - `imports` [EXTRACTED]
 - [[buildExplorerScene()]] - `imports` [EXTRACTED]
 - [[checkout]] - `contains` [EXTRACTED]
@@ -21,7 +21,7 @@ tags:
 - [[explainEdge()]] - `imports` [EXTRACTED]
 - [[explorerFacets()]] - `imports` [EXTRACTED]
 - [[explorerNodeColor()]] - `imports` [EXTRACTED]
-- [[finding()_1]] - `contains` [EXTRACTED]
+- [[finding()_2]] - `contains` [EXTRACTED]
 - [[graph()]] - `contains` [EXTRACTED]
 - [[graph-explorer.ts]] - `imports_from` [EXTRACTED]
 - [[home]] - `contains` [EXTRACTED]
@@ -34,4 +34,4 @@ tags:
 - [[types.ts]] - `imports_from` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_None

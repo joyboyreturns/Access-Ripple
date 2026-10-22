@@ -1,18 +1,18 @@
 ---
 source_file: "src/store/memory.ts"
 type: "code"
-community: "Community 13"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_13
+  - community/Community_None
 ---
 
 # memory.ts
 
 ## Connections
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[app.test.ts]] - `imports_from` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[no-data.test.ts]] - `imports_from` [EXTRACTED]
@@ -22,4 +22,4 @@ tags:
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[studio-flow.test.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_13
+#graphify/code #graphify/EXTRACTED #community/Community_None

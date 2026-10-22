@@ -1,17 +1,18 @@
 ---
 source_file: "src/graph/build-graph.ts"
 type: "code"
-community: "Community 8"
+community: "Community None"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # buildGraph()
 
 ## Connections
+- [[6. Where to look in the code]] - `references` [INFERRED]
 - [[build-graph.ts]] - `contains` [EXTRACTED]
 - [[exclusionLabel()]] - `calls` [EXTRACTED]
 - [[export.test.ts]] - `imports` [EXTRACTED]
@@ -26,4 +27,4 @@ tags:
 - [[summarizeInteraction()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

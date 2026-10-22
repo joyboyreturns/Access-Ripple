@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community 4"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Community_None
 ---
 
 # worker.ts
@@ -17,13 +17,13 @@ tags:
 - [[ControlEvidence]] - `imports` [EXTRACTED]
 - [[DEFAULT_LIMITS]] - `contains` [EXTRACTED]
 - [[ExtractedControl]] - `contains` [EXTRACTED]
-- [[InteractionMode_1]] - `imports` [EXTRACTED]
+- [[InteractionMode]] - `imports` [EXTRACTED]
 - [[PageEvidence]] - `imports` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `imports` [EXTRACTED]
-- [[ScanCoverage_1]] - `imports` [EXTRACTED]
+- [[ScanCoverage]] - `imports` [EXTRACTED]
 - [[ScanInput]] - `contains` [EXTRACTED]
 - [[ScanLimits]] - `imports` [EXTRACTED]
-- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanResult]] - `imports` [EXTRACTED]
 - [[abortReasonFor()]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
@@ -53,4 +53,4 @@ tags:
 - [[timing.test.ts]] - `imports_from` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Community_None

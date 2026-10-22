@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/types.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # InteractionEvidenceView
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

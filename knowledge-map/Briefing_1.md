@@ -1,17 +1,18 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "web/src/api.ts"
 type: "code"
-community: "Community 2"
-location: "L35"
+community: "Community None"
+location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # Briefing
 
 ## Connections
-- [[briefing.ts]] - `contains` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

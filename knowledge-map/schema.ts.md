@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community 8"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # schema.ts
@@ -14,24 +14,24 @@ tags:
 ## Connections
 - [[AccessibilityEvidence]] - `contains` [EXTRACTED]
 - [[ControlEvidence]] - `contains` [EXTRACTED]
-- [[EvidenceLabel_1]] - `contains` [EXTRACTED]
+- [[EvidenceLabel]] - `contains` [EXTRACTED]
 - [[GraphEdge]] - `contains` [EXTRACTED]
 - [[GraphEdgeKind]] - `contains` [EXTRACTED]
-- [[GraphNode_1]] - `contains` [EXTRACTED]
-- [[GraphNodeKind_1]] - `contains` [EXTRACTED]
+- [[GraphNode]] - `contains` [EXTRACTED]
+- [[GraphNodeKind]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `contains` [EXTRACTED]
 - [[InteractionExclusion]] - `contains` [EXTRACTED]
 - [[InteractionExclusionReason]] - `contains` [EXTRACTED]
-- [[InteractionMode_1]] - `contains` [EXTRACTED]
-- [[InteractionOutcome_1]] - `contains` [EXTRACTED]
+- [[InteractionMode]] - `contains` [EXTRACTED]
+- [[InteractionOutcome]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `contains` [EXTRACTED]
 - [[PageEvidence]] - `contains` [EXTRACTED]
 - [[RevealedControlEvidence]] - `contains` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `contains` [EXTRACTED]
-- [[ScanCoverage_1]] - `contains` [EXTRACTED]
+- [[ScanCoverage]] - `contains` [EXTRACTED]
 - [[ScanLimits]] - `contains` [EXTRACTED]
 - [[ScanProgress]] - `contains` [EXTRACTED]
-- [[ScanResult_1]] - `contains` [EXTRACTED]
+- [[ScanResult]] - `contains` [EXTRACTED]
 - [[ScanStatus]] - `contains` [EXTRACTED]
 - [[SiteGraph]] - `contains` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
@@ -55,4 +55,4 @@ tags:
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

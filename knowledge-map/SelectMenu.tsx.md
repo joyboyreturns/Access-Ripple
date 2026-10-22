@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/SelectMenu.tsx"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # SelectMenu.tsx
@@ -15,9 +15,9 @@ tags:
 - [[App.tsx]] - `imports_from` [EXTRACTED]
 - [[Icon()]] - `imports` [EXTRACTED]
 - [[Icons.tsx]] - `imports_from` [EXTRACTED]
-- [[Props]] - `contains` [EXTRACTED]
+- [[Props_1]] - `contains` [EXTRACTED]
 - [[SelectMenu()]] - `contains` [EXTRACTED]
 - [[SelectOption]] - `contains` [EXTRACTED]
-- [[react]] - `imports_from` [EXTRACTED]
+- [[react_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None
