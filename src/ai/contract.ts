@@ -100,12 +100,13 @@ export function parseContract(text: string, allowedIds: string[], targetId: stri
     kept.push({ issueId, expected, reason });
   }
   if (!kept.some((prediction) => prediction.issueId === targetId)) return [];
-  return kept.slice(0, 3);
+  // Keep the mandatory target even if a model lists it after its side claims.
+  return [kept.find((prediction) => prediction.issueId === targetId)!, ...kept.filter((prediction) => prediction.issueId !== targetId)].slice(0, 3);
 }
 
 /** The findings and signals on the page the change is aimed at. */
 export function issuesOnPage(graph: SiteGraph, pageId: string | undefined): GraphNode[] {
-  return graph.nodes.filter((node) => (node.kind === 'accessibility-finding' || node.kind === 'runtime-error') && node.pageId === pageId);
+  return graph.nodes.filter((node) => (node.kind === 'accessibility-finding' || node.kind === 'runtime-error') && node.data.ruleId !== 'accessibility-check-incomplete' && node.pageId === pageId);
 }
 
 function contractUserPrompt(proposal: { summary: string; before: string; after: string }, targetId: string, issues: GraphNode[]): string {
@@ -199,7 +200,7 @@ export function checkPredictions(
     const node = before.get(prediction.issueId);
     const label = node?.label ?? prediction.issueId;
     const pageId = node?.pageId;
-    const rechecked = pageId
+    const rechecked = !node || node.data.ruleId === 'accessibility-check-incomplete' ? false : pageId
       ? inspectedBefore.has(pageId) && inspectedAfter.has(pageId) && !(node?.kind === 'accessibility-finding' && (checksFailedBefore.has(pageId) || checksFailedAfter.has(pageId)))
       : true;
     if (!rechecked) return { ...prediction, label, observed: 'not rechecked' as const, outcome: 'not rechecked' as const };

@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community None"
+community: "Community 4"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_4
 ---
 
 # worker.ts
@@ -17,13 +17,14 @@ tags:
 - [[ControlEvidence]] - `imports` [EXTRACTED]
 - [[DEFAULT_LIMITS]] - `contains` [EXTRACTED]
 - [[ExtractedControl]] - `contains` [EXTRACTED]
-- [[InteractionMode]] - `imports` [EXTRACTED]
+- [[InteractionMode_1]] - `imports` [EXTRACTED]
 - [[PageEvidence]] - `imports` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `imports` [EXTRACTED]
-- [[ScanCoverage]] - `imports` [EXTRACTED]
+- [[ScanCoverage_1]] - `imports` [EXTRACTED]
 - [[ScanInput]] - `contains` [EXTRACTED]
 - [[ScanLimits]] - `imports` [EXTRACTED]
-- [[ScanResult]] - `imports` [EXTRACTED]
+- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[abortReasonFor()]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
 - [[axeSource]] - `contains` [EXTRACTED]
@@ -44,6 +45,7 @@ tags:
 - [[runAxe()]] - `contains` [EXTRACTED]
 - [[runInteractions()]] - `imports` [EXTRACTED]
 - [[safeDisplayUrl()]] - `imports` [EXTRACTED]
+- [[scan-boundaries.test.ts]] - `imports_from` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[shouldCrawlLink()]] - `contains` [EXTRACTED]
 - [[stableId()]] - `imports` [EXTRACTED]
@@ -51,4 +53,4 @@ tags:
 - [[timing.test.ts]] - `imports_from` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_4

@@ -1,17 +1,17 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community None"
-location: "L141"
+community: "Community 12"
+location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_12
 ---
 
 # SYSTEM_PROMPT
 
 ## Connections
-- [[briefing.ts]] - `contains` [EXTRACTED]
+- [[contract.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_12

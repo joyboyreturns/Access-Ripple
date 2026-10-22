@@ -106,6 +106,31 @@ await page.waitForTimeout(200);
 check('zoom readout updates', (await txt('.zoom-readout')) !== '100%', await txt('.zoom-readout'));
 await page.click('button[aria-label="Reset map view"]');
 
+// --- 6b. The ripple of a barrier ---
+await page.click('.priority-grid button');
+await page.waitForTimeout(400);
+check('the review order explains itself', /RECORDED ACTION/.test((await txt('.priority-grid button small')) ?? ''), await txt('.priority-grid button small'));
+await page.click('button:has-text("See its ripple on the map")');
+await page.waitForTimeout(600);
+const ripple = await page.evaluate(() => ({
+  caption: document.querySelector('.canvas-caption')?.textContent ?? '',
+  centre: Boolean(document.querySelector('.map-node.ripple-center')),
+  pages: document.querySelectorAll('.map-node').length,
+  actions: [...document.querySelectorAll('.ripple-edge-label')].map((label) => label.textContent),
+  summary: document.querySelector('.ripple-summary')?.textContent ?? '',
+}));
+check('the ripple centres the barrier’s page', ripple.centre && /BARRIER RIPPLE/.test(ripple.caption), `${ripple.pages} points`);
+check('the ripple names the actions the browser took', ripple.actions.length >= 3, ripple.actions.join(', '));
+check('the ripple never claims a barrier stops a journey', ripple.summary.includes('not that it stops one'), ripple.summary.slice(0, 90));
+await page.focus('.map-edge');
+await page.keyboard.press('Enter');
+await page.waitForTimeout(300);
+check('an action in the ripple explains itself', /activated “.+” on/.test((await txt('.edge-inspector')) ?? ''), ((await txt('.edge-inspector p')) ?? '').slice(0, 90));
+await page.keyboard.press('Escape');
+await page.click('.canvas-top button:has-text("Back to map")');
+await page.waitForTimeout(400);
+check('leaving the ripple restores the map', !(await has('.ripple-active')) && (await has('.map-refinements')));
+
 // --- 7. Coverage details ---
 await page.click('.coverage-details summary');
 await page.waitForTimeout(300);

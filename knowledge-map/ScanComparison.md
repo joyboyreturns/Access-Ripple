@@ -1,18 +1,19 @@
 ---
-source_file: "src/graph/compare.ts"
+source_file: "web/src/types.ts"
 type: "code"
-community: "Community None"
-location: "L3"
+community: "Community 0"
+location: "L108"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # ScanComparison
 
 ## Connections
-- [[GraphNode]] - `references` [EXTRACTED]
-- [[compare.ts]] - `contains` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `imports` [EXTRACTED]
+- [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

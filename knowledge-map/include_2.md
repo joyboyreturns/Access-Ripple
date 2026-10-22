@@ -1,17 +1,17 @@
 ---
-source_file: "tsconfig.web.json"
+source_file: "tsconfig.build.json"
 type: "code"
-community: "Community None"
-location: "L15"
+community: "Community 25"
+location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_25
 ---
 
 # include
 
 ## Connections
-- [[tsconfig.web.json]] - `contains` [EXTRACTED]
+- [[tsconfig.build.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_25

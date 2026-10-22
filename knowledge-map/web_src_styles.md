@@ -1,11 +1,11 @@
 ---
 source_file: ""
 type: "concept"
-community: "Community None"
+community: "Community 0"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # web_src_styles
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_0

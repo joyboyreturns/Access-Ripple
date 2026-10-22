@@ -1,17 +1,17 @@
 ---
-source_file: "src/scan/url-safety.ts"
+source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community None"
-location: "L5"
+community: "Community 12"
+location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_12
 ---
 
 # .constructor()
 
 ## Connections
-- [[UnsafeUrlError]] - `method` [EXTRACTED]
+- [[ContractError]] - `method` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_12

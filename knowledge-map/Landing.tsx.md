@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Landing.tsx"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # Landing.tsx
@@ -18,7 +18,7 @@ tags:
 - [[Icons.tsx]] - `imports_from` [EXTRACTED]
 - [[Landing()]] - `contains` [EXTRACTED]
 - [[Mark()]] - `imports` [EXTRACTED]
-- [[motion_1]] - `imports_from` [EXTRACTED]
-- [[react_1]] - `imports_from` [EXTRACTED]
+- [[motion]] - `imports_from` [EXTRACTED]
+- [[react]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

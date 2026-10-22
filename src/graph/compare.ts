@@ -23,6 +23,7 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
   const fresh: GraphNode[] = [];
   const changed: Array<{ before: GraphNode; after: GraphNode }> = [];
   const issueKinds = new Set(['runtime-error', 'accessibility-finding']);
+  const isIssue = (node: GraphNode) => issueKinds.has(node.kind) && node.data.ruleId !== 'accessibility-check-incomplete';
 
   // A finding can only be said to have gone away if its page was looked at
   // again. If the page failed or was never revisited, the finding is unknown,
@@ -37,7 +38,7 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
   const checksFailedAfter = uncheckedPages(current.graph?.nodes ?? []);
   const notRechecked: GraphNode[] = [];
   for (const [id, oldNode] of before) {
-    if (!issueKinds.has(oldNode.kind)) continue;
+    if (!isIssue(oldNode)) continue;
     const newNode = after.get(id);
     const pageId = oldNode.pageId;
     let rechecked = !pageId || (inspectedBefore.has(pageId) && inspectedAfter.has(pageId));
@@ -48,7 +49,7 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
     else remaining.push(newNode);
   }
   for (const [id, newNode] of after) {
-    if (!issueKinds.has(newNode.kind) || before.has(id)) continue;
+    if (!isIssue(newNode) || before.has(id)) continue;
     fresh.push(newNode);
   }
 

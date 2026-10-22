@@ -43,6 +43,30 @@ describe('local scan API', () => {
     expect(scanStore.list()).toHaveLength(before);
   });
 
+  it('never queues an encoded cloud metadata address', async () => {
+    const app = await buildApp(); apps.push(app);
+    const metadata = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://[::ffff:a9fe:a9fe]/latest/meta-data/', allowPrivateNetwork: true } });
+    expect(metadata.statusCode).toBe(422);
+    expect(metadata.json().error.code).toBe('NEVER_SCANNED');
+    expect(scanStore.list()).toHaveLength(0);
+  });
+
+  it('serves an accepted repair on every supported demo page and restores it on reset', async () => {
+    const app = await buildApp(); apps.push(app);
+    const before = await app.inject({ method: 'GET', url: '/sample/cart' });
+    const title = before.body.match(/<title>[^<]+<\/title>/)?.[0];
+    expect(title).toBeTruthy();
+    const repairedTitle = '<title>Repaired cart example</title>';
+    try {
+      const applied = await app.inject({ method: 'POST', url: '/api/sample/apply', payload: { file: 'src/sample/site/cart.html', before: title, after: repairedTitle } });
+      expect(applied.statusCode).toBe(200);
+      expect((await app.inject({ method: 'GET', url: '/sample/cart' })).body).toContain(repairedTitle);
+    } finally {
+      await app.inject({ method: 'POST', url: '/api/sample/reset', payload: {} });
+    }
+    expect((await app.inject({ method: 'GET', url: '/sample/cart' })).body).toContain(title);
+  });
+
   it('blocks cross-origin browser requests', async () => {
     const app = await buildApp(); apps.push(app);
     const result = await app.inject({ method: 'GET', url: '/api/health', headers: { origin: 'https://attacker.example' } });
@@ -88,6 +112,17 @@ describe('local scan API', () => {
     }
   });
 
+  it('limits how often websites are scanned, but never the demo shop a rehearsal depends on', async () => {
+    const app = await buildApp(); apps.push(app);
+    for (let attempt = 0; attempt < 5; attempt++) {
+      expect((await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } })).statusCode).toBe(422);
+    }
+    const limited = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } });
+    expect(limited.statusCode).toBe(429);
+    const demo = await app.inject({ method: 'POST', url: '/api/scans', payload: { sample: 'checkout' } });
+    expect(demo.statusCode).toBe(202);
+  });
+
   it('accepts a demo shop scan without passing the private-address safety check', async () => {
     const app = await buildApp(); apps.push(app);
     const created = await app.inject({ method: 'POST', url: '/api/scans', payload: { sample: 'checkout' } });
@@ -106,7 +141,7 @@ describe('local scan API', () => {
         response.end(JSON.stringify({ choices: [{ message: { content: answer } }] }));
       });
     });
-    await new Promise<void>((resolve) => provider.listen(0, resolve));
+    await new Promise<void>((resolve, reject) => provider.listen(0, '127.0.0.1', resolve).once('error', reject));
     const address = provider.address();
     const port = typeof address === 'object' && address ? address.port : 0;
     const previous = { key: process.env.ACCESSRIPPLE_AI_KEY, base: process.env.ACCESSRIPPLE_AI_BASE_URL, model: process.env.ACCESSRIPPLE_AI_MODEL };

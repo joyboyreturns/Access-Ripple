@@ -1,12 +1,12 @@
 ---
 source_file: "src/store/contracts.ts"
 type: "code"
-community: "Community None"
+community: "Community 29"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_29
 ---
 
 # readAll()
@@ -15,4 +15,4 @@ tags:
 - [[contractPath()]] - `calls` [EXTRACTED]
 - [[contracts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_29

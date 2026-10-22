@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 1"
 location: "L135"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # describe()
@@ -23,7 +23,10 @@ tags:
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
 - [[destinationLabel()]] - `calls` [EXTRACTED]
+- [[explainEdge()]] - `calls` [EXTRACTED]
+- [[explorerFacets()]] - `calls` [EXTRACTED]
 - [[flowShort()]] - `calls` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
 - [[isTestedFlow()]] - `calls` [EXTRACTED]
 - [[lastStepOf()]] - `calls` [EXTRACTED]
 - [[presentation.test.ts]] - `imports` [EXTRACTED]
@@ -31,4 +34,4 @@ tags:
 - [[remainingSummary()]] - `calls` [EXTRACTED]
 - [[scanStory()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_1

@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community None"
+community: "Community 12"
 location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_12
 ---
 
 # PredictionOutcome
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[contract.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_12

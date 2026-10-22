@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "concept"
-community: "Community None"
+community: "Community 27"
 location: "L46"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_27
 ---
 
 # vitest
@@ -18,6 +18,7 @@ tags:
 - [[contract.test.ts]] - `imports_from` [EXTRACTED]
 - [[export.test.ts]] - `imports_from` [EXTRACTED]
 - [[fix.test.ts]] - `imports_from` [EXTRACTED]
+- [[graph-interactions.test.ts]] - `imports_from` [EXTRACTED]
 - [[graph-shape.test.ts]] - `imports_from` [EXTRACTED]
 - [[graph.test.ts]] - `imports_from` [EXTRACTED]
 - [[interaction.test.ts]] - `imports_from` [EXTRACTED]
@@ -26,7 +27,9 @@ tags:
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]
 - [[presentation.test.ts]] - `imports_from` [EXTRACTED]
 - [[refusal.test.ts]] - `imports_from` [EXTRACTED]
+- [[ripple.test.ts]] - `imports_from` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports_from` [EXTRACTED]
+- [[scan-boundaries.test.ts]] - `imports_from` [EXTRACTED]
 - [[studio-flow.test.ts]] - `imports_from` [EXTRACTED]
 - [[timing.test.ts]] - `imports_from` [EXTRACTED]
 - [[tour.test.ts]] - `imports_from` [EXTRACTED]
@@ -34,4 +37,4 @@ tags:
 - [[vitest.config.ts]] - `imports_from` [EXTRACTED]
 - [[web-api.test.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_27

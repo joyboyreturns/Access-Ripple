@@ -1,19 +1,19 @@
 ---
 source_file: "src/store/disk.ts"
 type: "code"
-community: "Community None"
+community: "Community 18"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_18
 ---
 
 # disk.ts
 
 ## Connections
-- [[ScanResult]] - `imports` [EXTRACTED]
-- [[ScanSummary]] - `contains` [EXTRACTED]
+- [[ScanResult_1]] - `imports` [EXTRACTED]
+- [[ScanSummary_1]] - `contains` [EXTRACTED]
 - [[allSummaries()]] - `contains` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[diskStore]] - `contains` [EXTRACTED]
@@ -25,4 +25,4 @@ tags:
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[summarizeScan()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_18

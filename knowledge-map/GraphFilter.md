@@ -1,20 +1,22 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 9"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_9
 ---
 
 # GraphFilter
 
 ## Connections
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[ExplorerOptions]] - `references` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
-- [[Props]] - `references` [EXTRACTED]
+- [[Props_1]] - `references` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_9

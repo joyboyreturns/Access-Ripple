@@ -1,17 +1,17 @@
 ---
-source_file: "web/src/types.ts"
+source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community None"
-location: "L2"
+community: "Community 8"
+location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # GraphNodeKind
 
 ## Connections
-- [[types.ts]] - `contains` [EXTRACTED]
+- [[schema.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8

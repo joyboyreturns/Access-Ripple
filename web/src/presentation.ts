@@ -236,8 +236,7 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
   const blocked = scan.coverage?.pagesBlocked ?? scan.pages.filter(p => p.status === 'skipped').length;
   const tested = scan.interactionPolicy?.tested ?? 0;
   const site = graph.nodes.find(n => n.kind === 'site')?.label ?? 'this website';
-  const order = ['critical', 'serious', 'moderate', 'minor'];
-  const top = [...findings].sort((a, b) => order.indexOf(severity(a)) - order.indexOf(severity(b)))[0];
+  const top = [...findings].sort(byPriority(graph))[0];
   const topPage = top ? pageFor(top, graph)?.label : undefined;
 
   const topCount = top ? Number(top.data.groupCount) || 1 : 1;
@@ -397,8 +396,9 @@ export function traceJourney(graph: SiteGraph, rootId: string): Journey | null {
     if (owner && owner.node.id !== source?.id) found.set(node.id, { node, caption: 'Recorded on the destination page · context, not proof this action fails' });
   }
   const findings = [...found.values()].sort((a, b) => Number(a.node.kind === 'runtime-error') - Number(b.node.kind === 'runtime-error'));
+  const visibleIds = new Set([...stepIds, ...findings.map(item => item.node.id)]);
   const edges = graph.edges.filter(e => {
-    if (!stepIds.has(e.source) || !stepIds.has(e.target)) return false;
+    if (!visibleIds.has(e.source) || !visibleIds.has(e.target)) return false;
     if (findings.some(item => item.node.id === e.target)) {
       if (e.source === flow?.id && destination && graph.edges.some(other => other.source === destination.id && other.target === e.target)) return false;
       if (e.source === source?.id && graph.edges.some(other => other.source === control.id && other.target === e.target)) return false;
@@ -435,4 +435,139 @@ function nextObservedHop(graph: SiteGraph, page: GraphNode, visited: Set<string>
   }).sort((a, b) => b.score - a.score);
   const best = candidates[0];
   return best ? { control: best.control, flow: best.flow, destination: best.destination } : null;
+}
+
+/**
+ * Who an automated check exists to protect, in the words of the success
+ * criterion behind it. This describes the rule, never a person the scan saw.
+ */
+const protects: Record<string, string> = {
+  'image-alt': 'People who use a screen reader',
+  'color-contrast': 'People with low vision or colour-vision differences',
+  'link-in-text-block': 'People with colour-vision differences',
+  'label': 'People who use a screen reader or voice control',
+  'button-name': 'People who use a screen reader or voice control',
+  'link-name': 'People who use a screen reader or voice control',
+  'bypass': 'People who navigate by keyboard or switch',
+  'document-title': 'People who use a screen reader',
+  'html-has-lang': 'People who use a screen reader',
+  'aria-valid-attr-value': 'People who use a screen reader',
+  'target-size': 'People with limited dexterity, and anyone on a touch screen',
+  'nested-interactive': 'People who use a screen reader or navigate by keyboard',
+  'scrollable-region-focusable': 'People who navigate by keyboard',
+  'meta-viewport': 'People who zoom the page to read it',
+  'video-caption': 'People who are deaf or hard of hearing',
+  'frame-title': 'People who use a screen reader',
+  'list': 'People who use a screen reader',
+  'listitem': 'People who use a screen reader',
+  'select-name': 'People who use a screen reader or voice control',
+  'input-image-alt': 'People who use a screen reader',
+  'svg-img-alt': 'People who use a screen reader',
+  'role-img-alt': 'People who use a screen reader',
+};
+export function whoItProtects(node: GraphNode): string { return node.kind === 'accessibility-finding' ? protects[str(node, 'ruleId')] ?? '' : ''; }
+
+/** One action the browser activated that took it from one page to another. */
+export type RippleHop = { from: GraphNode; control: GraphNode; flow: GraphNode; to: GraphNode; distance: number };
+export type Ripple = {
+  finding: GraphNode;
+  page: GraphNode;
+  /** Pages one, then two, recorded actions away from the barrier's page. */
+  rings: { page: GraphNode; distance: number }[];
+  /** Every recorded action into or out of the barrier's page, and the action that first reached each outer page. */
+  hops: RippleHop[];
+  arriving: number;
+  leaving: number;
+  isStart: boolean;
+  summary: string;
+};
+
+/** Every page-to-page step the browser actually took, and nothing it did not. */
+function observedHops(graph: SiteGraph): Omit<RippleHop, 'distance'>[] {
+  const byId = new Map(graph.nodes.map(node => [node.id, node]));
+  const hops: Omit<RippleHop, 'distance'>[] = [];
+  for (const edge of graph.edges) {
+    const control = byId.get(edge.source), flow = byId.get(edge.target);
+    if (control?.kind !== 'control' || !flow || !isTestedFlow(flow) || edge.evidenceLabel !== 'observed') continue;
+    const from = pageFor(control, graph);
+    const to = graph.nodes.find(n => n.kind === 'page' && graph.edges.some(e => e.source === flow.id && e.target === n.id && e.kind === 'links-to' && e.evidenceLabel === 'observed'));
+    if (from && to && from.id !== to.id) hops.push({ from, control, flow, to });
+  }
+  return hops;
+}
+
+/**
+ * The ripple of one barrier: the page it was found on, and the pages around it
+ * that the browser actually moved between, one and two actions away. It
+ * places a barrier on the journeys the browser took. It never claims that a
+ * barrier stops a journey, because one automated pass cannot know that.
+ */
+export function barrierRipple(graph: SiteGraph, findingId: string, maxDistance = 2): Ripple | null {
+  const finding = graph.nodes.find(node => node.id === findingId);
+  if (!finding || finding.kind !== 'accessibility-finding') return null;
+  const page = pageFor(finding, graph);
+  if (!page) return null;
+  const all = observedHops(graph);
+  const distance = new Map([[page.id, 0]]);
+  const rings: Ripple['rings'] = [];
+  const hops: RippleHop[] = [];
+  let frontier = [page.id];
+  for (let ring = 1; ring <= maxDistance && frontier.length; ring++) {
+    const next: string[] = [];
+    for (const hop of all) {
+      const inner = frontier.includes(hop.from.id) ? hop.from : frontier.includes(hop.to.id) ? hop.to : undefined;
+      if (!inner) continue;
+      const outer = inner === hop.from ? hop.to : hop.from;
+      const seen = distance.get(outer.id);
+      // Every action into or out of the barrier's own page is drawn. Further
+      // out, only the action that first reached a page is.
+      if (seen === undefined) { distance.set(outer.id, ring); next.push(outer.id); rings.push({ page: outer, distance: ring }); hops.push({ ...hop, distance: ring }); }
+      else if (ring === 1 && (hop.from.id === page.id || hop.to.id === page.id) && !hops.some(h => h.flow.id === hop.flow.id)) hops.push({ ...hop, distance: 1 });
+    }
+    frontier = next;
+  }
+  const arriving = hops.filter(hop => hop.to.id === page.id).length, leaving = hops.filter(hop => hop.from.id === page.id).length;
+  const near = rings.filter(item => item.distance === 1).length;
+  const isStart = Number(page.data.depth) === 0;
+  const name = cleanLabel(page.label);
+  const count = (value: number, one: string, many: string) => `${value} ${value === 1 ? one : many}`;
+  const where = isStart ? `${name}, the page the scan started on` : name;
+  const summary = !arriving && !leaving
+    ? `No recorded action leads into or out of ${where}, so this scan cannot place the barrier on a journey.`
+    : `${arriving ? `${count(arriving, 'recorded action leads', 'recorded actions lead')} a visitor to ${where}` : `No recorded action leads to ${where}`}${leaving ? `, and ${count(leaving, 'leads', 'lead')} on from it` : ', and none leads on from it'}, connecting it to ${count(near, 'other page', 'other pages')}. Each arrow was activated once in a disposable browser. It shows where this barrier sits on a journey, not that it stops one.`;
+  return { finding, page, rings, hops, arriving, leaving, isStart, summary };
+}
+
+/** How many recorded actions arrive at or leave a finding's page. A fact, not a score. */
+export function rippleReach(graph: SiteGraph, findingId: string): number {
+  const ripple = barrierRipple(graph, findingId, 1);
+  return ripple ? ripple.arriving + ripple.leaving : 0;
+}
+
+const severityRank: Record<string, number> = { critical: 0, serious: 1, moderate: 2, minor: 3, diagnostic: 4, info: 5 };
+
+/**
+ * The order to review findings in: severity, then how many recorded actions
+ * pass through the finding's page, then how many elements it affects. Each is
+ * a recorded fact and the order says which one decided it. None is weighted
+ * into a score, because a score would claim a precision the scan does not have.
+ */
+export function byPriority(graph: SiteGraph): (a: GraphNode, b: GraphNode) => number {
+  const reach = new Map<string, number>();
+  const of = (node: GraphNode) => {
+    if (!reach.has(node.id)) reach.set(node.id, node.kind === 'accessibility-finding' ? rippleReach(graph, node.id) : 0);
+    return reach.get(node.id)!;
+  };
+  return (a, b) => (severityRank[severity(a)] ?? 5) - (severityRank[severity(b)] ?? 5) || of(b) - of(a) || (Number(b.data.groupCount) || 1) - (Number(a.data.groupCount) || 1);
+}
+
+/** "Northstar · Your cart" becomes "Your cart" when every label starts with "Northstar · ". */
+export function withoutSharedAffix(label: string, all: string[]): string {
+  if (all.length < 2) return label;
+  for (const separator of [' · ', ' | ', ' — ', ' – ', ' - ']) {
+    const parts = all.map(item => item.split(separator));
+    if (parts.every(p => p.length > 1 && p[0] === parts[0]![0])) return label.split(separator).slice(1).join(separator);
+    if (parts.every(p => p.length > 1 && p[p.length - 1] === parts[0]![parts[0]!.length - 1])) return label.split(separator).slice(0, -1).join(separator);
+  }
+  return label;
 }

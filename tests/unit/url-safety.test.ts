@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertSafeUrl, isPublicIp, UnsafeUrlError } from '../../src/scan/url-safety.js';
+import { abortReasonFor, assertSafeUrl, isPublicIp, UnsafeUrlError } from '../../src/scan/url-safety.js';
 
 describe('URL safety policy', () => {
   it.each(['127.0.0.1', '10.1.2.3', '172.16.0.1', '192.168.1.20', '169.254.169.254', '::1', 'fc00::1', 'fe80::1', '2001:db8::1'])('rejects non-public address %s', (address) => {
@@ -86,8 +86,33 @@ describe('URL safety policy', () => {
       await expect(assertSafeUrl('http://169.254.169.254/', { allowPrivateNetwork: true, resolveHostname: async () => [{ address: '169.254.169.254', family: 4 }] })).rejects.toMatchObject({ code: 'NEVER_SCANNED' });
     });
 
+    it.each([
+      '::ffff:a9fe:a9fe',
+      '::a9fe:a9fe',
+      '64:ff9b::a9fe:a9fe',
+      '2002:a9fe:a9fe::1',
+      '2001:0:808:808:0:0:5601:5601',
+      'fd00:ec2:0:0:0:0:0:254',
+    ])('still refuses encoded metadata address %s', async (address) => {
+      await expect(assertSafeUrl(`http://[${address}]/`, { allowPrivateNetwork: true })).rejects.toMatchObject({ code: 'NEVER_SCANNED' });
+    });
+
+    it('rejects any metadata DNS answer even when other answers are allowed', async () => {
+      await expect(assertSafeUrl('http://my-machine.local/', {
+        allowPrivateNetwork: true,
+        resolveHostname: async () => [{ address: '192.168.1.20', family: 4 }, { address: '::ffff:a9fe:a9fe', family: 6 }],
+      })).rejects.toMatchObject({ code: 'NEVER_SCANNED' });
+    });
+
     it('still refuses a scheme other than http and https', async () => {
       await expect(assertSafeUrl('file:///etc/passwd', { allowPrivateNetwork: true })).rejects.toThrow();
     });
+  });
+
+  it('fails a page the scanner fetched itself with the reason the browser would give', () => {
+    expect(abortReasonFor(new Error('getaddrinfo ENOTFOUND nowhere.example'))).toBe('namenotresolved');
+    expect(abortReasonFor(new Error('connect ECONNREFUSED 127.0.0.1:9'))).toBe('connectionrefused');
+    expect(abortReasonFor(new Error('Timeout 12000ms exceeded.'))).toBe('timedout');
+    expect(abortReasonFor(new Error('socket hang up'))).toBe('failed');
   });
 });

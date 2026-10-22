@@ -76,18 +76,13 @@ export function parseProposal(text: string): { summary: string; before: string; 
 }
 
 /** The recorded markup must really be the markup of the element we are fixing. */
-export function isGrounded(proposal: { before: string }, snippet: string, targets: string[]): boolean {
+export function isGrounded(proposal: { before: string }, snippet: string, _targets: string[]): boolean {
   const before = proposal.before.replace(/\s+/g, ' ').trim();
   const recorded = snippet.replace(/\s+/g, ' ').trim();
   if (!recorded) return false;
-  if (before.includes(recorded) || recorded.includes(before)) return true;
-  // The browser sometimes reports only part of the markup. The selector may
-  // stand in for it, but only when the recorded markup really carries that
-  // selector: a proposal that merely mentions the selector proves nothing.
-  return targets.some((target) => {
-    const trimmed = target.trim();
-    return trimmed.length > 2 && recorded.includes(trimmed);
-  });
+  // A fragment or a selector mention is not the original element. Accepting
+  // either could ground a replacement for entirely unrelated markup.
+  return before === recorded;
 }
 
 export async function writeFixProposal(scan: ScanResult, graph: SiteGraph, nodeId: string, config: FixConfig, locate: (snippet: string) => { file: string; line: number } | undefined): Promise<FixProposal> {

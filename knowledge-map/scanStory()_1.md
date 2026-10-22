@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 0"
 location: "L227"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # scanStory()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
+- [[byPriority()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[groupIssues()]] - `calls` [EXTRACTED]
 - [[pageFor()]] - `calls` [EXTRACTED]
@@ -22,4 +23,4 @@ tags:
 - [[refusal.test.ts]] - `imports` [EXTRACTED]
 - [[severity()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

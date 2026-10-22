@@ -55,4 +55,20 @@ suite('comparing two scans', () => {
     expect(compareScans(before, after).demoShop).toBe(true);
     expect(compareScans(before, scan([page('p1', 'complete')], [])).demoShop).toBe(false);
   });
+
+  it('never counts an unavailable-check marker as a fixed or new issue', () => {
+    const marker = { ...finding('unchecked', 'p1'), data: { ruleId: 'accessibility-check-incomplete' } };
+    const unavailable = scan([page('p1', 'complete')], [marker]);
+    const clear = scan([page('p1', 'complete')], []);
+    expect(compareScans(unavailable, clear).resolved).toEqual([]);
+    expect(compareScans(clear, unavailable).new).toEqual([]);
+  });
+
+  it('keeps findings unknown when the second scan could not run its checks', () => {
+    const marker = { ...finding('unchecked', 'p1'), data: { ruleId: 'accessibility-check-incomplete' } };
+    const before = scan([page('p1', 'complete')], [finding('f1', 'p1')]);
+    const after = scan([page('p1', 'complete')], [marker]);
+    expect(compareScans(before, after).resolved).toEqual([]);
+    expect(compareScans(before, after).notRechecked.map((node) => node.id)).toEqual(['f1']);
+  });
 });

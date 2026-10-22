@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "concept"
-community: "Community None"
+community: "Community 7"
 location: "L30"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_7
 ---
 
 # jszip
@@ -16,4 +16,4 @@ tags:
 - [[obsidian.ts]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_7

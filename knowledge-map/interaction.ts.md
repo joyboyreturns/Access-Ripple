@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
+community: "Community 3"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # interaction.ts
@@ -19,8 +19,8 @@ tags:
 - [[InteractionBatch]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `imports` [EXTRACTED]
 - [[InteractionExclusion]] - `imports` [EXTRACTED]
-- [[InteractionMode]] - `imports` [EXTRACTED]
-- [[InteractionOutcome]] - `imports` [EXTRACTED]
+- [[InteractionMode_1]] - `imports` [EXTRACTED]
+- [[InteractionOutcome_1]] - `imports` [EXTRACTED]
 - [[InteractionRunOptions]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `imports` [EXTRACTED]
 - [[InteractionTarget]] - `contains` [EXTRACTED]
@@ -31,6 +31,7 @@ tags:
 - [[RevealedControlEvidence]] - `imports` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `imports` [EXTRACTED]
 - [[SnapshotItem]] - `contains` [EXTRACTED]
+- [[abortReasonFor()]] - `imports` [EXTRACTED]
 - [[activate()]] - `contains` [EXTRACTED]
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
 - [[build-graph.ts]] - `imports_from` [EXTRACTED]
@@ -44,7 +45,7 @@ tags:
 - [[itemKey()]] - `contains` [EXTRACTED]
 - [[locate()]] - `contains` [EXTRACTED]
 - [[outcomeLabel()]] - `contains` [EXTRACTED]
-- [[playwright_1]] - `imports_from` [EXTRACTED]
+- [[playwright]] - `imports_from` [EXTRACTED]
 - [[priority()]] - `contains` [EXTRACTED]
 - [[pushExclusion()]] - `contains` [EXTRACTED]
 - [[redactMessage()]] - `imports` [EXTRACTED]
@@ -60,4 +61,4 @@ tags:
 - [[withoutHash()]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

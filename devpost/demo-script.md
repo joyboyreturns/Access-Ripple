@@ -48,9 +48,9 @@ Cut straight to the result. The scan was run before you started recording, so th
 The summary is on screen: pages inspected, visible controls, accessibility findings, actions tested. Open the finding.
 Say: “Four pages, 681 controls, 40 accessibility findings in 4 kinds of barrier, and 10 actions actually activated. These are the MDN docs, and the target-size rule is failing on their featured article tags.”
 
-**0:48–1:08 — The route to it.**
-Show **ROUTES TO THIS POINT** in the inspector, then follow one of them. The map draws the route across the screen with a pulse travelling along it.
-Say: “Here are the controls whose recorded journeys lead to the page with the problem. That is how I choose what to investigate. This is the path the browser recorded — each step really happened.”
+**0:48–1:08 — Its ripple, and the route to it.**
+Press **See its ripple on the map** in the inspector. The barrier's page moves to the centre, the pages one and two recorded actions away sit on rings around it, and every arrow is named after the control the browser activated. Open one arrow to show its evidence, then press **Back to map** and follow one of the **ROUTES TO THIS POINT**.
+Say: “This is the barrier's ripple: every action the browser actually took into this page and on from it. It shows where the barrier sits on real journeys — it does not claim the barrier stops them. And the line under it says who this check protects — on MDN's tags, people with limited dexterity and anyone on a touch screen.”
 If you have a few seconds, show the discovery on the demo shop instead: the **Add to cart** button reveals a **View cart** link that is not in the page's source, and the scanner follows it. Say: “That cart link only exists after a click. The scanner found it by activating the button, and followed it into the next page — so a page that is not in the markup still ends up on the map.”
 
 **1:08–1:28 — The model proposes a change, and commits to what it will fix.**

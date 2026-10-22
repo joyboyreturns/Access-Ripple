@@ -65,6 +65,8 @@ export interface GraphEdge {
   source: string;
   target: string;
   evidenceLabel: EvidenceLabel;
+  /** The control the browser activated, when a view draws a page-to-page step. */
+  via?: string;
 }
 
 export interface SiteGraph {

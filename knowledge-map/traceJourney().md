@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
-location: "L358"
+community: "Community 1"
+location: "L357"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # traceJourney()
@@ -16,6 +16,7 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
 - [[destinationLabel()]] - `calls` [EXTRACTED]
+- [[graph-interactions.test.ts]] - `imports` [EXTRACTED]
 - [[isIssue()]] - `calls` [EXTRACTED]
 - [[isTestedFlow()]] - `calls` [EXTRACTED]
 - [[lastStepOf()]] - `calls` [EXTRACTED]
@@ -27,4 +28,4 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_1

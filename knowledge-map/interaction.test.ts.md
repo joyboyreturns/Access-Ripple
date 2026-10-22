@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/interaction.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 3"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # interaction.test.ts
@@ -15,11 +15,11 @@ tags:
 - [[ControlEvidence]] - `imports` [EXTRACTED]
 - [[InteractionStep]] - `imports` [EXTRACTED]
 - [[classifyAction()]] - `imports` [EXTRACTED]
-- [[control()_1]] - `contains` [EXTRACTED]
+- [[control()]] - `contains` [EXTRACTED]
 - [[interaction.ts]] - `imports_from` [EXTRACTED]
 - [[outcomeLabel()]] - `imports` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[summarizeInteraction()]] - `imports` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

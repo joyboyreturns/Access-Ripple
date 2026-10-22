@@ -1,17 +1,17 @@
 ---
-source_file: "tests/unit/interaction.test.ts"
+source_file: "tests/unit/graph-shape.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 8"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # control()
 
 ## Connections
-- [[interaction.test.ts]] - `contains` [EXTRACTED]
+- [[graph-shape.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8
