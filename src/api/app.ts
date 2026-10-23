@@ -11,8 +11,9 @@ import { z } from 'zod';
 import { assertSafeUrl, safeDisplayUrl, UnsafeUrlError } from '../scan/url-safety.js';
 import { aiStatus, BriefingError, readAiConfig, writeBriefing } from '../ai/briefing.js';
 import { readFixConfig, writeFixProposal } from '../ai/fix.js';
-import { appliedPatches, applyPatch, clearPatches, isDemoFixture, patchedContent } from '../sample/sandbox.js';
-import { checkPredictions, issuesOnPage, writeRepairContract, type RepairContract } from '../ai/contract.js';
+import { addVirtualPatch, allVirtualPatches, appliedPatches, applyPatch, clearPatches, clearVirtualPatches, isDemoFixture, locateInDemoShop, patchedContent, virtualPatchesFor } from '../sample/sandbox.js';
+import { checkPredictions, issuesOnPage, writeRepairContract, type CheckedPrediction, type RepairContract } from '../ai/contract.js';
+import { buildPatchExport } from '../export/patch.js';
 import { contractStore } from '../store/contracts.js';
 import { performScan, DEFAULT_LIMITS } from '../scan/worker.js';
 import { scanStore } from '../store/memory.js';
@@ -43,26 +44,6 @@ const SAMPLE_HOST = '127.0.0.1';
 const jobs: Array<() => Promise<void>> = [];
 let workerBusy = false;
 
-/**
- * Find the recorded markup in the local demo shop's source, so a proposal can
- * point at a real file and line. Only the tool's own fixture is searched.
- */
-function locateInDemoShop(snippet: string): { file: string; line: number } | undefined {
-  const needle = snippet.replace(/\s+/g, ' ').trim();
-  if (needle.length < 12) return undefined;
-  for (const file of ['checkout.html', 'checkout-fixed.html', 'catalog.html', 'cart.html', 'payment.html']) {
-    const path = resolve(process.cwd(), 'src/sample/site', file);
-    let text: string;
-    try { text = readFileSync(path, 'utf8'); } catch { continue; }
-    const flat = text.replace(/\s+/g, ' ');
-    const at = flat.indexOf(needle);
-    if (at < 0) continue;
-    const line = text.slice(0, at).split('\n').length;
-    return { file: `src/sample/site/${file}`, line };
-  }
-  return undefined;
-}
-
 function schedule(job: () => Promise<void>): void {
   jobs.push(job);
   void pumpQueue();
@@ -84,7 +65,17 @@ function canStartScan(address: string, requestsByAddress: Map<string, number[]>)
   return true;
 }
 
-function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode; allowPrivateNetwork?: boolean }, baseUrl: string): ScanResult {
+/**
+ * The changes a rescan of `previous` simulates: the ones it already carried,
+ * and the ones accepted on it since. A later change to the same element wins.
+ */
+function simulationsFor(previous: ScanResult): NonNullable<ScanResult['simulatedPatches']> {
+  const merged = new Map<string, NonNullable<ScanResult['simulatedPatches']>[number]>();
+  for (const patch of [...(previous.simulatedPatches ?? []), ...virtualPatchesFor(previous.id)]) merged.set(`${patch.pageUrl}|${patch.selector}`, patch);
+  return [...merged.values()];
+}
+
+function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode; allowPrivateNetwork?: boolean; simulatedPatches?: ScanResult['simulatedPatches'] }, baseUrl: string): ScanResult {
   const id = randomUUID();
   const url = options.sample ? `${baseUrl}/sample/checkout` : options.url;
   const now = new Date().toISOString();
@@ -95,13 +86,14 @@ function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?
     progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' }, pages: [], previousScanId: options.previousScanId,
     interactionPolicy: { mode, tested: 0, skipped: 0 },
     addressScope: options.allowPrivateNetwork ? 'private' : 'public',
+    simulatedPatches: options.simulatedPatches?.length ? options.simulatedPatches : undefined,
   };
   scanStore.set(scan);
   schedule(async () => {
     const active = scanStore.get(id);
     if (!active) return;
     try {
-      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, allowPrivateNetwork: options.allowPrivateNetwork, onUpdate: (updated) => scanStore.set(updated) });
+      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, allowPrivateNetwork: options.allowPrivateNetwork, simulatedPatches: options.simulatedPatches, onUpdate: (updated) => scanStore.set(updated) });
     } catch (error) {
       scanStore.set({ ...active, status: 'failed', error: { code: 'SCAN_WORKER_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan worker could not start.', retryable: true }, updatedAt: new Date().toISOString() });
     } finally {
@@ -319,8 +311,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     catch {
       return reply.code(422).send({ error: { code: 'URL_NO_LONGER_ALLOWED', message: 'The original address is no longer allowed by the scan safety policy.', retryable: false } });
     }
-    const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode, allowPrivateNetwork }, baseUrl);
-    return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
+    // A change accepted on a live site is simulated in the scanner's browser on
+    // this rescan, and on every rescan after it, so the prediction can be checked.
+    const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode, allowPrivateNetwork, simulatedPatches: simulationsFor(previous) }, baseUrl);
+    return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}`, simulatedPatches: scan.simulatedPatches?.length ?? 0 });
   });
 
   app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/fix', async (request, reply) => {
@@ -332,7 +326,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const config = readFixConfig();
     if (!config) return reply.code(503).send({ error: { code: 'AI_NOT_CONFIGURED', message: 'No model provider is configured. The suggested change is still shown without a model.', retryable: false } });
     try {
-      const proposal = await writeFixProposal(scan, scan.graph, body.data.nodeId, config, (snippet) => locateInDemoShop(snippet));
+      const proposal = await writeFixProposal(scan, scan.graph, body.data.nodeId, config, scan.sample ? locateInDemoShop : () => undefined);
       // Kept so the prediction can be about this exact change.
       lastProposals.set(contractKey(request.params.scanId, body.data.nodeId), proposal);
       return proposal;
@@ -381,6 +375,51 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   });
 
   app.get('/api/sample/patches', async () => ({ patches: appliedPatches() }));
+
+  // On a live site the tool cannot and does not change anything. An accepted
+  // proposal is recorded so the next rescan applies it inside the scanner's
+  // own browser, and every page checked that way is labelled as simulated.
+  app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/simulate', async (request, reply) => {
+    const scan = await getScan(request.params.scanId);
+    if (!scan) return reply.code(404).send({ error: { code: 'SCAN_NOT_FOUND', message: 'This scan is unavailable.', retryable: false } });
+    if (scan.sample) return reply.code(409).send({ error: { code: 'USE_DEMO_SHOP_APPLY', message: 'The demo shop changes for real. Apply the change to the demo shop instead.', retryable: false } });
+    const body = fixBody.safeParse(request.body ?? {});
+    if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_SIMULATE_REQUEST', message: 'Provide the id of an accessibility finding.', retryable: false } });
+    const target = scan.graph?.nodes.find((node) => node.id === body.data.nodeId);
+    if (!target || target.kind !== 'accessibility-finding') return reply.code(400).send({ error: { code: 'NOT_A_FINDING', message: 'That point is not an accessibility finding.', retryable: false } });
+    const proposal = lastProposals.get(contractKey(scan.id, body.data.nodeId));
+    if (!proposal) return reply.code(409).send({ error: { code: 'NO_PROPOSAL', message: 'Ask for a proposed change first, so there is something to simulate.', retryable: true } });
+    const snippet = typeof target.data.snippet === 'string' ? target.data.snippet : '';
+    const selector = Array.isArray(target.data.targets) && target.data.targets.length === 1 ? String(target.data.targets[0]) : '';
+    const page = scan.pages.find((item) => item.id === target.pageId);
+    if (!selector || !page) return reply.code(422).send({ error: { code: 'NOT_SIMULATABLE', message: 'This finding has no single element to change, so the change cannot be simulated.', retryable: false } });
+    // The recorded markup is cut at 400 characters. A change grounded in a cut
+    // copy could drop the rest of the element, so it is refused.
+    if (snippet.length >= 400) return reply.code(422).send({ error: { code: 'MARKUP_TRUNCATED', message: 'The recorded markup was cut short, so the change cannot be simulated safely.', retryable: false } });
+    const patch = addVirtualPatch({ scanId: scan.id, pageUrl: page.url, ruleId: String(target.data.ruleId ?? ''), nodeId: target.id, selector, before: proposal.before, after: proposal.after, summary: proposal.summary });
+    return { simulated: true, patch, note: 'The next rescan applies this change inside the scanner\'s browser only. The site is not changed.' };
+  });
+
+  app.post<{ Params: { scanId: string } }>('/api/scans/:scanId/simulate/reset', async (request) => {
+    clearVirtualPatches(request.params.scanId);
+    return { reset: true };
+  });
+
+  // Every accepted change as a unified diff, or as a pull request summary
+  // with what the model committed to and what the browser recorded.
+  app.get<{ Querystring: { format?: string } }>('/api/applied-fixes/patch', async (request, reply) => {
+    const scans = scanStore.list();
+    const outcomes: CheckedPrediction[] = [];
+    for (const [key, contract] of Object.entries(await contractStore.all())) {
+      const scanId = key.split(':')[0]!;
+      const previous = scans.find((scan) => scan.id === scanId);
+      const rescan = scans.filter((scan) => scan.previousScanId === scanId && scan.graph).sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+      if (previous?.graph && rescan) outcomes.push(...checkPredictions(contract, previous, rescan));
+    }
+    const result = buildPatchExport({ fixture: appliedPatches(), simulated: allVirtualPatches(), outcomes });
+    if (request.query.format === 'markdown') return reply.type('text/markdown; charset=utf-8').header('content-disposition', 'attachment; filename="accessripple-changes.md"').send(result.markdown);
+    return reply.type('text/x-patch; charset=utf-8').header('content-disposition', 'attachment; filename="accessripple-changes.patch"').send(result.patch);
+  });
 
   app.post('/api/sample/reset', async () => {
     clearPatches();

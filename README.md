@@ -2,27 +2,64 @@
 
 # AccessRipple
 
-**See every ripple.** A list tells you what failed. AccessRipple shows where it sits on the journeys people actually take — and makes the AI prove its fix.
+### An AI that has to prove its accessibility fix — checked by a real browser.
+
+A list tells you what failed. **AccessRipple shows where each barrier sits on the journeys people actually take, lets a model propose the fix, makes the model commit in writing to what that fix will do, and then rescans to check every claim.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-87be9b)](LICENSE)
 ![Node 22](https://img.shields.io/badge/node-22-87be9b)
-![TypeScript](https://img.shields.io/badge/TypeScript-7-83b9dd)
-![Tests](https://img.shields.io/badge/tests-202%20passing-87be9b)
-![Browser checks](https://img.shields.io/badge/studio%20sweep-56%2F56-87be9b)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-83b9dd)
+![Tests](https://img.shields.io/badge/tests-231%20passing-87be9b)
 ![Playwright + axe-core](https://img.shields.io/badge/Playwright-axe--core-b5a5f5)
+![Vercel AI Gateway](https://img.shields.io/badge/AI-Vercel%20AI%20Gateway-111111)
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
 
 <!-- Add the public YouTube or Vimeo link here once the demo video is uploaded:
 [▶ Watch the three-minute demo](https://youtu.be/...) · -->
-[Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md)
+[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md)
 
-<img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website or see it in 60 seconds." width="900">
+<img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">
 
 </div>
 
+## ▶ For judges: the whole idea in one press
+
+```sh
+npm install
+npx playwright install chromium
+npm run dev
+```
+
+Open **http://127.0.0.1:5173/#walkthrough**, or press **Run the judge walkthrough** on the landing page. No account, key or internet connection is needed.
+
+| # | What happens on screen | What it shows |
+| --- | --- | --- |
+| 1 | A real Chromium browser scans a four-page demo shop and presses its safe buttons | Evidence, not guesses: every point is *observed*, *inferred* or *not tested* |
+| 2 | The finding with the most recorded journeys through its page opens, with its **ripple** on the map | Which barrier to fix first, and where it sits on real journeys |
+| 3 | A model proposes the smallest change, grounded in the exact markup the browser recorded | The AI works from evidence and cannot invent an element |
+| 4 | The model **commits in writing**: "this finding will be gone, those two will still be there" | The AI's claim is on the record *before* anything changes |
+| 5 | The change is applied to the demo shop, the same pages are rescanned, and the proof opens | Each prediction comes back **held**, **failed** or **unknown** — never silently passed |
+
+<img src="docs/images/walkthrough.jpg" alt="The proof after the walkthrough: 3 no longer observed, 2 still observed, 0 new; the checkout page before the change with the missing image outlined and labelled 'Missing image description', and the same page after with the image restored; buttons to download the accepted changes as a .patch and a pull request summary." width="900">
+
+On this computer the walkthrough runs in about 22 seconds without a model; the panel shows the measured time on yours. With no model configured — or if the model is busy — the demo shop's prepared fix stands in, and the panel says so.
+
 ## The problem
 
-Accessibility checkers hand a developer a flat list of failures. The list cannot say **which barrier matters most**, **which journeys pass through it**, or **whether a fix actually worked**. AI repair tools make it worse in one way: they write plausible fixes and claim success without ever checking.
+Accessibility checkers hand a developer a flat list of failures. The list cannot say **which barrier matters most**, **which journeys pass through it**, or **whether a fix actually worked**. AI repair tools make the last part worse: they write plausible fixes and declare success without ever checking.
+
+About one in six people lives with a significant disability ([WHO](https://www.who.int/news-room/fact-sheets/detail/disability-and-health)). For them, a missing image description or a keyboard trap on a checkout page is the difference between buying and leaving.
+
+## What makes it different
+
+| | A typical checker | A typical AI fixer | **AccessRipple** |
+| --- | --- | --- | --- |
+| Finds barriers in a real browser | ✓ | sometimes | ✓ axe-core + a Tab-key probe |
+| Knows which journeys pass through a barrier | — | — | ✓ recorded by pressing the buttons |
+| Proposes a concrete fix | — | ✓ | ✓ grounded in the recorded markup, with a WCAG criterion and a diff |
+| States in advance what the fix will change | — | — | ✓ a written, checkable commitment |
+| Checks the fix by measuring again | — | — | ✓ rescan → held / failed / unknown |
+| Admits what it did not check | — | — | ✓ coverage gaps and "not rechecked" are first-class |
 
 ## Who it is for
 
@@ -30,20 +67,20 @@ Front-end developers and small teams who own a website — a shop, a portfolio, 
 
 ## What AccessRipple does
 
-1. **Opens your site in a real browser.** Playwright Chromium crawls up to five same-site pages and runs axe-core accessibility checks on each.
+1. **Opens your site in a real browser.** Playwright Chromium crawls up to five same-site pages, runs axe-core on each, and presses Tab through each page to catch keyboard traps and invisible focus.
 2. **Presses the buttons, safely.** Ordinary buttons and links are activated once each in disposable pages, and what actually happened is recorded. Requests that would change data are blocked; pay, delete, send and sign out are never pressed.
-3. **Draws one evidence map.** Pages, controls, recorded journeys, browser errors and accessibility findings become one spatial graph. Every point is labelled *observed*, *inferred* or *not tested*.
-4. **Shows a barrier's ripple.** Select a finding and see the pages one and two recorded actions away, each arrow named after the control the browser pressed.
-5. **Puts the AI on trial.** A model proposes a change grounded in the recorded markup, commits **in writing** to what it will fix, a human applies it to the demo shop, and the rescan reports each prediction as **held**, **failed** or **not rechecked**.
-6. **Keeps the result.** Rescan and compare, reopen recent scans after a restart, and export the whole graph as a linked Obsidian vault.
+3. **Draws one evidence map.** Pages, controls, recorded journeys, browser errors and accessibility findings become one spatial graph you can explore with a mouse or entirely from the keyboard.
+4. **Shows a barrier's ripple and reach.** Select a finding to see the pages one and two recorded actions away, and how many journeys pass through its page. These are counts, never a made-up score, and the tool never claims a barrier *stops* a journey.
+5. **Puts the AI on trial.** A model proposes a change grounded in the recorded markup and the page screenshot, commits **in writing** to what it will fix, a human applies it, and the rescan reports each prediction as **held**, **failed** or **not rechecked**. On any live site the change is *simulated* inside the scanner's own browser — the site is never touched, and the result is labelled **SIMULATED PATCH**.
+6. **Hands over the result.** Download every accepted change as a `.patch` and a pull request summary, reopen recent scans after a restart, or export the whole graph as a linked Obsidian vault.
 
 ## See it
 
 | The map of a scanned site | A barrier's ripple |
 | --- | --- |
-| <img src="docs/images/map.jpg" alt="The studio after scanning the demo shop: metrics for 4 pages, 14 controls, 2 accessibility findings and 9 actions tested, above a glowing spatial map and an inspector explaining that an image needs a text alternative."> | <img src="docs/images/ripple.jpg" alt="The ripple of the missing image description: the Secure checkout page in the centre, Catalogue, Payment preview and Your cart on rings around it, each arrow named after the control the browser activated."> |
+| <img src="docs/images/map.jpg" alt="The studio after scanning the demo shop: metrics for 4 pages, 14 controls, 2 accessibility findings and 9 actions tested, above a glowing spatial map; the inspector explains that an image needs a text alternative and shows the page with the image outlined."> | <img src="docs/images/ripple.jpg" alt="The ripple of the missing image description: the Secure checkout page in the centre, Catalogue, Payment preview and Your cart on rings around it, each arrow named after the control the browser activated."> |
 | **A recorded journey, step by step** | **The proof: before, after, and the model's predictions checked** |
-| <img src="docs/images/journey.jpg" alt="The journey of 'Proceed to checkout' traced across numbered steps with a travelling pulse, and the inspector listing each step the browser observed."> | <img src="docs/images/proof.jpg" alt="The proof dialog: 1 no longer observed, 4 still observed, 0 new; the checkout page before and after the change; and three model predictions all marked HELD."> |
+| <img src="docs/images/journey.jpg" alt="The journey of 'Proceed to checkout' traced across numbered steps with a travelling pulse, and the inspector listing each step the browser observed."> | <img src="docs/images/proof.jpg" alt="The proof dialog: the counts of what is no longer observed, still observed and new; the checkout page before and after the change; and the model's predictions, each marked with its verdict."> |
 
 ## How it works
 
@@ -53,12 +90,12 @@ flowchart LR
     Studio <-->|"JSON"| API["Fastify API<br/>loopback only"]
     API --> Gate{"URL safety gate"}
     Gate -->|"public, or your own<br/>computer with permission"| Worker["Scan worker"]
-    Worker --> Chrome["Playwright Chromium<br/>+ axe-core"]
+    Worker --> Chrome["Playwright Chromium<br/>axe-core + Tab probe"]
     Chrome -->|"GET / HEAD only"| Site[("Your website<br/>or the demo shop")]
-    Worker --> Graph["Evidence graph<br/>observed · inferred · untested"]
+    Worker --> Graph["Evidence graph + reach<br/>observed · inferred · untested"]
     Graph --> Studio
     API --> AI["Grounded AI layer<br/>optional"]
-    AI -->|"digest of recorded evidence"| LLM["Any OpenAI-compatible model"]
+    AI -->|"digest of recorded evidence"| LLM["Vercel AI Gateway<br/>MiniMax M3.1 Flash"]
     AI -->|"every claim checked<br/>against the scan"| Studio
 ```
 
@@ -66,8 +103,11 @@ flowchart LR
 flowchart LR
     F["Recorded finding"] --> P["Model proposes a change<br/>must match recorded markup"]
     P --> C["Model commits in writing<br/>gone or still there"]
-    C --> H["A human applies it<br/>to the demo shop"]
-    H --> R["Rescan"]
+    C --> H{"A human decides"}
+    H -->|"demo shop"| A["Apply to the shop"]
+    H -->|"any other site"| S["Simulate in the<br/>scanner's browser"]
+    A --> R["Rescan"]
+    S --> R
     R --> V{"Verdict per prediction"}
     V --> Held["HELD"]
     V --> Failed["FAILED"]
@@ -75,6 +115,17 @@ flowchart LR
 ```
 
 The full picture — the scan sequence, the graph model, the safety boundaries and where each piece lives in the code — is in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+
+## How it answers the judging criteria
+
+| Criterion | Where to look |
+| --- | --- |
+| **Design** | One coherent loop — scan → evidence → fix → commitment → rescan → verdict → export. A finished scan fits one 1440 × 900 screen; the map works by keyboard, a live region announces progress and verdicts, badges never rely on colour alone, and reduced motion is respected. |
+| **Potential impact** | A developer can trace a button to the page with a barrier, fix the one with the widest reach first, and hand over a `.patch` and a pull request summary. It works on public sites, on `localhost`, and on GitHub Pages. |
+| **Innovation** | The model's *pre-registered* prediction, checked by a real browser and reported as held, failed or unknown — plus a ripple and reach computed only from journeys the browser actually took. |
+| **Presentation** | The one-press walkthrough above, a guided tour whose steps double as captions, and a three-minute [demo script](devpost/demo-script.md) with time codes. |
+
+**Honest limits.** Automated checks catch a useful subset of barriers; they do not certify accessibility, and the studio says so on every result. A model's citation is checked to point at real evidence, not to be true of it. A simulated patch tests the change in the scanner's browser, not on the live site.
 
 ## Quick start
 
@@ -88,7 +139,7 @@ npm run demo
 
 `npm run demo` starts the app and opens the studio straight into a scan of the built-in demo shop. It takes about ten seconds, needs no internet connection, and always produces the same result.
 
-**The core demo needs no account, no key and no network.** The optional AI briefing and the proposed change need a model provider key, but the app is complete without one: it says so where the button would be, and shows the deterministic summary instead.
+**The core demo needs no account, no key and no network.** The optional AI briefing, the proposed change and the model's commitment need a [Vercel AI Gateway](https://vercel.com/ai-gateway) key in `.env` (see [below](#optional-ai-briefing-and-proposed-changes)). Without one the app is still complete: it says so where the button would be, and shows the deterministic summary instead.
 
 If `npm run demo` does not open, start the two servers yourself and open `http://127.0.0.1:5173/`:
 
@@ -100,7 +151,7 @@ The scanner also serves the built studio itself once you have run `npm run build
 
 ### A tour of the studio
 
-Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph. Before mapping, you can tick **Test form and submit controls too** to let the scanner activate submit controls as well; requests that would send or change data stay blocked either way. Choose **Scan the demo shop** to run the built-in fixture instead, or press **See it in 60 seconds** on the landing page to open the studio straight into that scan.
+Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a public website address, map it, and select a point for its impact and suggested next step. Use **List** for every recorded element, **Rescan and compare** after making your own source changes, and **Export vault** to save linked notes and the raw graph. Before mapping, you can tick **Test form and submit controls too** to let the scanner activate submit controls as well; requests that would send or change data stay blocked either way. Choose **Scan the demo shop** to run the built-in fixture instead, press **See it in 60 seconds** on the landing page to open the studio straight into that scan, or press **Judge walkthrough** to run the whole repair loop in one go.
 
 The **▶ guided tour** in the studio header walks the core journey one step at a time. Each step shows the sentence to say out loud, moves the interface to the place the narration is talking about, and advances when you perform the action. It doubles as the on-screen captions for a recorded demo, so a muted recording still explains itself.
 
@@ -143,16 +194,36 @@ cp .env.example .env
 ```
 
 ```sh
-ACCESSRIPPLE_AI_KEY=your-key
-ACCESSRIPPLE_AI_BASE_URL=https://openrouter.ai/api/v1
-ACCESSRIPPLE_AI_MODEL=minimax/minimax-m3.1-flash:free
-ACCESSRIPPLE_AI_FALLBACK_MODELS=openrouter/free,cohere/north-mini-code:free,google/gemma-4-31b-it:free
+ACCESSRIPPLE_AI_KEY=your-ai-gateway-key
+ACCESSRIPPLE_AI_BASE_URL=https://ai-gateway.vercel.sh/v1
+ACCESSRIPPLE_AI_MODEL=minimax/minimax-m3.1-flash
+ACCESSRIPPLE_AI_FALLBACK_MODELS=
 ACCESSRIPPLE_AI_REASONING_EFFORT=low
 ```
 
-Only the key is required; the other values shown are the defaults, and `.env.example` explains each one.
+Only the key is required (a [Vercel AI Gateway](https://vercel.com/ai-gateway) API key; `AI_GATEWAY_API_KEY` is read too); the other values shown are the defaults, and `.env.example` explains each one.
 
-Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it. Free-tier capacity is shared and a single model can be busy at any moment, so a chain of fallbacks is used: the models are tried in order and the first usable answer wins. If every model is busy, the studio says so in plain words and offers **Ask again** instead of a dead end.
+Requests go through the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), one OpenAI-compatible endpoint in front of many providers. The default model is MiniMax M3.1 Flash. Add more to `ACCESSRIPPLE_AI_FALLBACK_MODELS` to chain them, for example `deepseek/deepseek-v4.1-flash-1017`. Create a key under **AI Gateway → API Keys** in the Vercel dashboard and put it in `.env`; nothing else is needed. Each request asks for a low reasoning effort and a large token budget, because a reasoning model given a small budget can spend it all thinking and return no answer.
+
+```mermaid
+sequenceDiagram
+    participant S as Studio
+    participant A as Local API
+    participant G as Vercel AI Gateway
+    participant M as MiniMax M3.1 Flash
+    S->>A: Propose a change for this finding
+    A->>G: Rule, selector, recorded markup,<br/>and the page picture
+    G->>M: Same request, same shape
+    M-->>A: summary · before · after · why
+    A->>A: Drop it unless "before" is the recorded markup<br/>add the WCAG criterion and a unified diff
+    A-->>S: A grounded proposal
+    S->>A: What will it fix?
+    A->>G: The change + the ids on that page
+    M-->>A: Each id: gone or still there
+    A-->>S: A written commitment, checked by the rescan
+```
+
+Any OpenAI-compatible chat-completions endpoint works, including a local one. `.env` stays on this computer and is ignored by git; restart the scanner after changing it. A single model can be busy or rate limited at any moment, so a chain of fallbacks is used: the models are tried in order and the first usable answer wins. If every model is busy, the studio says so in plain words and offers **Ask again** instead of a dead end.
 
 Three rules keep the output honest, because an overconfident summary is worse than no summary.
 
@@ -160,7 +231,11 @@ Three rules keep the output honest, because an overconfident summary is worse th
 2. Every sentence must cite an evidence id that exists in the scan. Any sentence whose citations are all invalid is dropped, and if nothing survives the request fails and the studio keeps the deterministic summary. This checks that a citation points at something the browser really recorded. It does not check that the sentence is true of it, and the interface never claims it does.
 3. The digest includes the coverage gaps, not only the findings, and the model is asked to name at least one thing the scan did not check. The gaps are listed under the summary whether or not the model chose to mention them, as dashed chips that are not links, because they describe what is missing rather than a piece of evidence.
 
-A proposed change is grounded the same way: the model receives the failing rule, the CSS selector, and the markup the browser recorded, and the proposal is dropped unless it matches that markup. The tool proposes; it never edits a scanned website. On the built-in demo shop, which this tool owns, the same proposal can be applied so a rescan can prove whether it worked.
+A proposed change is grounded the same way: the model receives the failing rule, the CSS selector, the markup the browser recorded, and the picture of the page when there is one. The proposal is dropped unless it matches that markup. A model that refuses the picture is asked again with text only. Each proposal carries the WCAG success criterion, read from the check's own tags rather than from the model; the model's account of what a screen reader or keyboard user meets there, labelled as the model's; and the change as a unified diff built by the tool.
+
+The tool proposes; it never edits a scanned website. On the built-in demo shop, which this tool owns, the same proposal can be applied so a rescan can prove whether it worked. On any other site, **Simulate on the next rescan** records the change, and the rescan applies it inside the scanner's own disposable browser before the checks run. It applies only if the element at that selector still has exactly the recorded markup, and otherwise says it was not applied. Every page checked this way is marked **SIMULATED PATCH**, and every verdict about it says it was checked on a simulated page. The site itself is never touched.
+
+Every accepted change can be downloaded from the proof as one `.patch` file, or as a pull request summary that lists each change and the table of what the model committed to against what the browser recorded (`GET /api/applied-fixes/patch`, or `?format=markdown`).
 
 ### The model has to put its claim on trial
 
@@ -174,6 +249,22 @@ The rules keep this honest:
 - The finding the change targets must be covered, and at most two more may be predicted.
 - A prediction is only checked when the page it is about was inspected again. A page whose accessibility checks could not run cannot prove anything, so it is reported as **not rechecked** and never counted as a pass.
 - A prediction that failed is reported as failed. The tool does not hide the model's mistakes, because a tool that only shows successes is not telling you whether to trust it.
+
+### Keyboard, reach, and the picture of a barrier
+
+After the automated checks, the scanner presses Tab up to twelve times on each page and records where focus goes. Tab moves focus and activates nothing. Two things a static check cannot see are reported for a person to confirm: focus that goes round two elements and never leaves, on a page with more to reach (**keyboard trap**, 2.1.2), and a focused element that looks no different from an unfocused one (**focus not visible**, 2.4.7).
+
+Every finding, control and page carries its **reach**, counted from observed movement only: how many pages the browser reached beyond it, and how many recorded journeys pass through its page. Hovering or focusing a point lights those up on the map. These are counts, never a score, and they never claim that a barrier stops a journey. A finding whose markup fails the same check on two or more pages is marked as a shared component, because it is fixed once.
+
+Each finding also records where its element sat on the page. The inspector shows the page with that element outlined, and the proof outlines each finding on the before picture.
+
+### Accessible to the people it is for
+
+The map is a labelled region. On a point, the arrow keys move to the connected point that lies that way, Enter opens it, and focus moves to its details; Escape gives focus back to the map. Plus, minus and zero zoom and fit. One polite live region announces scan progress, a finished scan, a ready briefing, a proposal, the model's commitment, and the rescan's verdict. Every status and severity badge has a mark and a word as well as a colour. Dialogs trap focus natively and hand it back when they close.
+
+### The judge walkthrough
+
+**Judge walkthrough**, in the studio and on the landing page (`#walkthrough`), runs the whole argument in one press. It scans the demo shop, opens the finding with the most recorded journeys through its page, has the model propose a change and commit to its outcome, applies the change, rescans, and opens the proof. A panel shows each step and the time it took; without a model it took 22 seconds on this computer. Without a configured model, or when the model is busy, the demo shop's prepared fix stands in and the panel says so.
 
 ### The API
 
@@ -225,14 +316,14 @@ In the studio the same loop works through **Rescan and compare** after toggling 
 ## Verification
 
 ```sh
-npm test               # 202 unit, API and end-to-end tests, including real Chromium scans
+npm test               # 231 unit, API and end-to-end tests, including real Chromium scans
 npm run typecheck      # server and studio
 npm run build          # production studio and API
-npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 56 checks
+npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 45 checks plus the AI path with a key
 npm run capture:readme # needs `npm run dev`: regenerates the screenshots above
 ```
 
-`npm run check:studio` covers the one-click demo, every filter, the list, the inspector, the ripple, the coverage explanation, the AI briefing, the proposed change and the model's written prediction, the repair loop, the proof, the export, the saved history, and the error paths. When a free model is busy it asks again, and it reports those retries separately from faults in the studio.
+`npm run check:studio` covers the one-click demo, every filter, the list, the inspector, the ripple, the coverage explanation, the AI briefing, the proposed change and the model's written prediction, the repair loop, the proof, the export, the saved history, and the error paths. When a model is busy it asks again, and it reports those retries separately from faults in the studio.
 
 ## Built for Build With AI: Basics
 
@@ -281,7 +372,7 @@ AccessRipple stands on free and open-source work, and it would not exist without
 - **[React](https://react.dev/)**, **[Vite](https://vite.dev/)** and **[Motion](https://motion.dev/)** — the studio and its animation.
 - **[TypeScript](https://www.typescriptlang.org/)**, **[Zod](https://zod.dev/)**, **[Vitest](https://vitest.dev/)**, **[tsx](https://tsx.is/)**, **[concurrently](https://github.com/open-cli-tools/concurrently)** and **[JSZip](https://stuk.github.io/jszip/)** — types, validation, tests and tooling.
 - **[Node.js](https://nodejs.org/)** and **npm** — the runtime and the registry.
-- **[OpenRouter](https://openrouter.ai/)** and the teams behind the free models it serves — **MiniMax**, **Cohere** and **Google (Gemma)** — for the free tier that powers the optional AI briefing, proposal and prediction.
+- **[Vercel AI Gateway](https://vercel.com/ai-gateway)** and the teams behind the models it serves — **DeepSeek** and **MiniMax** — for the optional AI briefing, proposal and prediction.
 - **[Inter](https://rsms.me/inter/)** by Rasmus Andersson and **[Instrument Serif](https://github.com/Instrument/instrument-serif)** by Instrument — the typefaces, under the SIL Open Font License.
 - **[Graphify](https://pypi.org/project/graphifyy/)** and **[Obsidian](https://obsidian.md/)** — the code map and the vault the export opens in.
 - **[Mermaid](https://mermaid.js.org/)** and **[Shields.io](https://shields.io/)** — the diagrams and badges on this page.

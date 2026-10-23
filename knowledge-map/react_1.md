@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "concept"
-community: "Community None"
+community: "Community 34"
 location: "L34"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_34
 ---
 
 # react
@@ -19,4 +19,4 @@ tags:
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_34

@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community None"
-location: "L130"
+community: "Community 14"
+location: "L153"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_14
 ---
 
 # ScanLimits
@@ -15,4 +15,4 @@ tags:
 - [[schema.ts]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_14

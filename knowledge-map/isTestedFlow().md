@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 7"
 location: "L78"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_7
 ---
 
 # isTestedFlow()
@@ -22,4 +22,4 @@ tags:
 - [[testedFlowFor()]] - `calls` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_7

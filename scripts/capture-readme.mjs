@@ -71,4 +71,14 @@ if (proof && !proof.error) {
   console.log('SKIP proof.jpg (no before/after pair yet: run `npm run check:studio` first)');
 }
 
+// 6. The judge walkthrough: one press from a cold start to the proof, with
+// the barrier outlined on the before picture.
+// A fresh page, so no scan restored from this tab's session stops it starting.
+const walk = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, colorScheme: 'dark' });
+await walk.goto('http://127.0.0.1:5173/#walkthrough', { waitUntil: 'domcontentloaded' });
+await walk.waitForSelector('dialog.proof-dialog[open]', { timeout: 150000 });
+await walk.waitForTimeout(1800);
+await walk.screenshot({ ...shot, path: file('walkthrough.jpg') });
+console.log('walkthrough.jpg');
+
 await browser.close();

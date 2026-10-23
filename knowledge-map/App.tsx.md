@@ -1,26 +1,30 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
+community: "Community 8"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # App.tsx
 
 ## Connections
+- [[APPLIED_FIXES_PATCH]] - `imports` [EXTRACTED]
+- [[APPLIED_FIXES_SUMMARY]] - `imports` [EXTRACTED]
 - [[AiBriefing()]] - `contains` [EXTRACTED]
 - [[AiStatus]] - `imports` [EXTRACTED]
 - [[ApiError]] - `imports` [EXTRACTED]
 - [[App()]] - `contains` [EXTRACTED]
-- [[Briefing_1]] - `imports` [EXTRACTED]
+- [[Box]] - `contains` [EXTRACTED]
+- [[Briefing]] - `imports` [EXTRACTED]
+- [[ChangeExports()]] - `contains` [EXTRACTED]
 - [[Dialog()]] - `imports` [EXTRACTED]
 - [[EMPTY]] - `contains` [EXTRACTED]
 - [[FILTERS]] - `contains` [EXTRACTED]
-- [[FixProposal_1]] - `imports` [EXTRACTED]
+- [[FixProposal]] - `imports` [EXTRACTED]
 - [[FixProposalCard()]] - `contains` [EXTRACTED]
 - [[GraphCanvas()]] - `imports` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
@@ -31,26 +35,31 @@ tags:
 - [[Landing.tsx]] - `imports_from` [EXTRACTED]
 - [[Mark()]] - `imports` [EXTRACTED]
 - [[ProofView()]] - `contains` [EXTRACTED]
-- [[RepairContract_1]] - `imports` [EXTRACTED]
+- [[RepairContract]] - `imports` [EXTRACTED]
 - [[SampleInfo]] - `imports` [EXTRACTED]
 - [[Saved]] - `contains` [EXTRACTED]
-- [[ScanComparison_1]] - `imports` [EXTRACTED]
+- [[ScanComparison]] - `imports` [EXTRACTED]
 - [[ScanResult_1]] - `imports` [EXTRACTED]
 - [[ScanStory()]] - `contains` [EXTRACTED]
-- [[ScanSummary_1]] - `imports` [EXTRACTED]
+- [[ScanSummary]] - `imports` [EXTRACTED]
 - [[SelectMenu()]] - `imports` [EXTRACTED]
 - [[SelectMenu.tsx]] - `imports_from` [EXTRACTED]
-- [[SiteGraph_1]] - `imports` [EXTRACTED]
+- [[ShotWithBoxes()]] - `contains` [EXTRACTED]
+- [[SiteGraph]] - `imports` [EXTRACTED]
 - [[TOUR]] - `imports` [EXTRACTED]
 - [[TourContext]] - `imports` [EXTRACTED]
+- [[VerdictMark()]] - `contains` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
+- [[WALK_STEPS]] - `contains` [EXTRACTED]
+- [[WalkthroughPanel()]] - `contains` [EXTRACTED]
 - [[api.ts]] - `imports_from` [EXTRACTED]
 - [[applyProposal()]] - `imports` [EXTRACTED]
 - [[barrierRipple()]] - `imports` [EXTRACTED]
+- [[boxesOn()]] - `contains` [EXTRACTED]
 - [[byPriority()]] - `imports` [EXTRACTED]
 - [[checkApi()]] - `imports` [EXTRACTED]
 - [[cleanLabel()]] - `imports` [EXTRACTED]
-- [[compareScans()_1]] - `imports` [EXTRACTED]
+- [[compareScans()]] - `imports` [EXTRACTED]
 - [[createScan()]] - `imports` [EXTRACTED]
 - [[describe()]] - `imports` [EXTRACTED]
 - [[describeId()]] - `contains` [EXTRACTED]
@@ -73,6 +82,7 @@ tags:
 - [[pageFor()]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `imports_from` [EXTRACTED]
 - [[proposeFix()]] - `imports` [EXTRACTED]
+- [[reachFacts()]] - `imports` [EXTRACTED]
 - [[react_1]] - `imports_from` [EXTRACTED]
 - [[readGraph()]] - `imports` [EXTRACTED]
 - [[readScan()]] - `imports` [EXTRACTED]
@@ -85,6 +95,7 @@ tags:
 - [[setSampleState()]] - `imports` [EXTRACTED]
 - [[severity()]] - `imports` [EXTRACTED]
 - [[shortcutOf()]] - `imports` [EXTRACTED]
+- [[simulateProposal()]] - `imports` [EXTRACTED]
 - [[siteName()]] - `contains` [EXTRACTED]
 - [[storageGet()]] - `contains` [EXTRACTED]
 - [[storageSet()]] - `contains` [EXTRACTED]
@@ -92,9 +103,10 @@ tags:
 - [[tour.ts]] - `imports_from` [EXTRACTED]
 - [[traceJourney()]] - `imports` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
+- [[useReturnFocus()]] - `contains` [EXTRACTED]
 - [[waitForScan()_1]] - `imports` [EXTRACTED]
 - [[whoItProtects()]] - `imports` [EXTRACTED]
-- [[writeBriefing()_1]] - `imports` [EXTRACTED]
+- [[writeBriefing()]] - `imports` [EXTRACTED]
 - [[writeContract()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8

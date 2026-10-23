@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
+community: "Community 5"
 location: "L354"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_5
 ---
 
 # activate()
@@ -24,4 +24,4 @@ tags:
 - [[validationIssue()]] - `calls` [EXTRACTED]
 - [[withoutHash()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_5

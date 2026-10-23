@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community None"
+community: "Community 14"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_14
 ---
 
 # schema.ts
@@ -17,12 +17,12 @@ tags:
 - [[EvidenceLabel]] - `contains` [EXTRACTED]
 - [[GraphEdge]] - `contains` [EXTRACTED]
 - [[GraphEdgeKind]] - `contains` [EXTRACTED]
-- [[GraphNode]] - `contains` [EXTRACTED]
+- [[GraphNode_1]] - `contains` [EXTRACTED]
 - [[GraphNodeKind]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `contains` [EXTRACTED]
 - [[InteractionExclusion]] - `contains` [EXTRACTED]
 - [[InteractionExclusionReason]] - `contains` [EXTRACTED]
-- [[InteractionMode]] - `contains` [EXTRACTED]
+- [[InteractionMode_1]] - `contains` [EXTRACTED]
 - [[InteractionOutcome]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `contains` [EXTRACTED]
 - [[PageEvidence]] - `contains` [EXTRACTED]
@@ -33,7 +33,8 @@ tags:
 - [[ScanProgress]] - `contains` [EXTRACTED]
 - [[ScanResult]] - `contains` [EXTRACTED]
 - [[ScanStatus]] - `contains` [EXTRACTED]
-- [[SiteGraph]] - `contains` [EXTRACTED]
+- [[SimulatedPatchOutcome]] - `contains` [EXTRACTED]
+- [[SiteGraph_1]] - `contains` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.test.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.ts]] - `imports_from` [EXTRACTED]
@@ -45,6 +46,7 @@ tags:
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[evidence.ts]] - `imports_from` [EXTRACTED]
 - [[export.test.ts]] - `imports_from` [EXTRACTED]
+- [[fix.test.ts]] - `imports_from` [EXTRACTED]
 - [[fix.ts]] - `imports_from` [EXTRACTED]
 - [[graph-shape.test.ts]] - `imports_from` [EXTRACTED]
 - [[graph.test.ts]] - `imports_from` [EXTRACTED]
@@ -53,6 +55,7 @@ tags:
 - [[memory.ts]] - `imports_from` [EXTRACTED]
 - [[obsidian.ts]] - `imports_from` [EXTRACTED]
 - [[persistence.test.ts]] - `imports_from` [EXTRACTED]
+- [[reach.ts]] - `imports_from` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_14

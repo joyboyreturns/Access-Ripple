@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community None"
-location: "L29"
+community: "Community 12"
+location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_12
 ---
 
 # FixConfig
@@ -15,4 +15,4 @@ tags:
 - [[AiConfig]] - `inherits` [EXTRACTED]
 - [[fix.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_12

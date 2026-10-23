@@ -1,17 +1,17 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "web/src/api.ts"
 type: "code"
-community: "Community None"
-location: "L47"
+community: "Community 0"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # .constructor()
 
 ## Connections
-- [[BriefingError]] - `method` [EXTRACTED]
+- [[ApiError]] - `method` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

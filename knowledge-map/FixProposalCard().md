@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
-location: "L58"
+community: "Community 34"
+location: "L96"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_34
 ---
 
 # FixProposalCard()
@@ -17,4 +17,4 @@ tags:
 - [[Icon()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_34

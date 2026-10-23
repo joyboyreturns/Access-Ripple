@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
+community: "Community 8"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # EMPTY
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[App.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8

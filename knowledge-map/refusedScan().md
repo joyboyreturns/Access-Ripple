@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/refusal.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 16"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_16
 ---
 
 # refusedScan()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[refusal.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_16

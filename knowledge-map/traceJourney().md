@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 7"
 location: "L357"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_7
 ---
 
 # traceJourney()
@@ -29,4 +29,4 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[sample-scan.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_7

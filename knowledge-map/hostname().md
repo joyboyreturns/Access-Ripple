@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
+community: "Community 24"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # hostname()
@@ -16,4 +16,4 @@ tags:
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[siteName()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

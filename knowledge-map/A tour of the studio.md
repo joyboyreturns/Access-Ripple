@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community None"
-location: "L101"
+community: "Community 1"
+location: "L152"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # A tour of the studio
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Quick start]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_None
+#graphify/document #graphify/EXTRACTED #community/Community_1

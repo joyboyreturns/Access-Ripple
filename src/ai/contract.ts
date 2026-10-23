@@ -13,6 +13,9 @@
  */
 import type { GraphNode, ScanResult } from '../graph/schema.js';
 import type { SiteGraph } from '../graph/schema.js';
+import { matchIssues } from '../graph/compare.js';
+import { z } from 'zod';
+import { DEFAULT_BASE_URL, requestHeaders } from './briefing.js';
 
 /** What the model expects to be true after the change is applied. */
 export type PredictionExpectation = 'absent' | 'present';
@@ -41,6 +44,8 @@ export interface CheckedPrediction extends RepairPrediction {
   /** What the browser recorded: gone, still there, or not looked at again. */
   observed: PredictionExpectation | 'not rechecked';
   outcome: PredictionOutcome;
+  /** True when the page was checked with the change simulated in the scanner's browser, not on the site. */
+  simulated?: boolean;
 }
 
 const MODEL_TIMEOUT_MS = 25_000;
@@ -64,11 +69,15 @@ export class ContractError extends Error {
   }
 }
 
-/** Only these expectations are allowed, so a model cannot invent a third. */
-function parseExpectation(value: unknown): PredictionExpectation | null {
-  if (value === 'absent' || value === 'present') return value;
-  return null;
-}
+// The shape a model answer must have. Each prediction is checked on its own,
+// so one malformed entry is dropped without losing the others. Only the two
+// expectations are allowed, so a model cannot invent a third.
+const contractShape = z.object({ predictions: z.array(z.unknown()) });
+const predictionShape = z.object({
+  issueId: z.union([z.string(), z.number()]).transform((value) => String(value).trim()).pipe(z.string().min(1)),
+  expected: z.enum(['absent', 'present']),
+  reason: z.unknown().optional().transform((value) => String(value ?? '').trim().slice(0, 240)),
+});
 
 /**
  * Read the model's answer. Every prediction must name an id that was given
@@ -85,17 +94,16 @@ export function parseContract(text: string, allowedIds: string[], targetId: stri
   } catch {
     return [];
   }
-  const list = (parsed as { predictions?: unknown })?.predictions;
-  if (!Array.isArray(list)) return [];
+  const shape = contractShape.safeParse(parsed);
+  if (!shape.success) return [];
   const allowed = new Set(allowedIds);
   const seen = new Set<string>();
   const kept: RepairPrediction[] = [];
-  for (const entry of list) {
-    if (!entry || typeof entry !== 'object') continue;
-    const issueId = String((entry as { issueId?: unknown }).issueId ?? '').trim();
-    const expected = parseExpectation((entry as { expected?: unknown }).expected);
-    const reason = String((entry as { reason?: unknown }).reason ?? '').trim().slice(0, 240);
-    if (!issueId || !expected || !allowed.has(issueId) || seen.has(issueId)) continue;
+  for (const entry of shape.data.predictions) {
+    const prediction = predictionShape.safeParse(entry);
+    if (!prediction.success) continue;
+    const { issueId, expected, reason } = prediction.data;
+    if (!allowed.has(issueId) || seen.has(issueId)) continue;
     seen.add(issueId);
     kept.push({ issueId, expected, reason });
   }
@@ -158,13 +166,13 @@ export async function writeRepairContract(
       };
       if (config.reasoningEffort) body.reasoning = { effort: config.reasoningEffort };
       try {
-        const response = await fetch(`${config.baseUrl ?? 'https://openrouter.ai/api/v1'}/chat/completions`, {
+        const response = await fetch(`${config.baseUrl ?? DEFAULT_BASE_URL}/chat/completions`, {
           method: 'POST',
-          headers: { 'content-type': 'application/json', authorization: `Bearer ${config.key}`, 'x-title': 'AccessRipple' },
+          headers: requestHeaders(config),
           body: JSON.stringify(body),
           signal: controller.signal,
         });
-        if (!response.ok) throw new ContractError(response.status === 429 ? 'The free model is busy right now. Ask again in a moment.' : `The model returned ${response.status}.`, 'REQUEST_FAILED');
+        if (!response.ok) throw new ContractError(response.status === 429 ? 'The model is busy right now. Ask again in a moment.' : `The model returned ${response.status}.`, 'REQUEST_FAILED');
         const payload = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
         const text = payload.choices?.[0]?.message?.content ?? '';
         const predictions = parseContract(text, allowedIds, targetId);
@@ -192,7 +200,8 @@ export function checkPredictions(
   current: ScanResult,
 ): CheckedPrediction[] {
   const before = new Map((previous.graph?.nodes ?? []).map((node) => [node.id, node]));
-  const after = new Map((current.graph?.nodes ?? []).map((node) => [node.id, node]));
+  // The same pairing the comparison uses, so a finding whose path moved is still the same finding.
+  const after = matchIssues(previous, current);
   const inspectedBefore = new Set(previous.pages.filter((page) => page.status === 'complete').map((page) => page.id));
   const inspectedAfter = new Set(current.pages.filter((page) => page.status === 'complete').map((page) => page.id));
   const incomplete = (nodes: GraphNode[]) => new Set(nodes.filter((node) => node.kind === 'accessibility-finding' && node.data.ruleId === 'accessibility-check-incomplete' && node.pageId).map((node) => node.pageId as string));
@@ -208,6 +217,7 @@ export function checkPredictions(
       : true;
     if (!rechecked) return { ...prediction, label, observed: 'not rechecked' as const, outcome: 'not rechecked' as const };
     const observed: PredictionExpectation = after.has(prediction.issueId) ? 'present' : 'absent';
-    return { ...prediction, label, observed, outcome: observed === prediction.expected ? 'supported' as const : 'contradicted' as const };
+    const simulated = current.pages.some((page) => page.id === pageId && page.simulatedPatches?.some((patch) => patch.applied));
+    return { ...prediction, label, observed, outcome: observed === prediction.expected ? 'supported' as const : 'contradicted' as const, ...(simulated ? { simulated: true } : {}) };
   });
 }

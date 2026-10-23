@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 8"
 location: "L227"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # scanStory()
@@ -24,4 +24,4 @@ tags:
 - [[refusal.test.ts]] - `imports` [EXTRACTED]
 - [[severity()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8

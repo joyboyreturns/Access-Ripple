@@ -2,7 +2,7 @@ import type { BrowserContext, Locator, Page } from 'playwright';
 import { abortReasonFor, assertSafeUrl, safeDisplayUrl } from './url-safety.js';
 import { errorEvidence, redactMessage, stableId } from './evidence.js';
 import type {
-  ControlEvidence, InteractionEvidence, InteractionExclusion, InteractionMode, InteractionOutcome,
+  AccessibilityEvidence, ControlEvidence, InteractionEvidence, InteractionExclusion, InteractionMode, InteractionOutcome,
   InteractionStep, PageEvidence, RevealedControlEvidence, RuntimeErrorEvidence,
 } from '../graph/schema.js';
 
@@ -474,4 +474,117 @@ export function outcomeLabel(step: InteractionStep): string {
     case 'blocked': return step.blockKind === 'external-navigation' ? 'Leaves this website · not followed' : step.blockKind === 'unsafe-url' ? 'Blocked by the safety policy' : 'Data request blocked';
     case 'failed': return 'Interaction failed';
   }
+}
+
+/** One stop of the keyboard's Tab ring. */
+export interface FocusStop {
+  selector: string;
+  name?: string;
+  snippet: string;
+  /** Whether anything about the element looked different while it had focus. */
+  visibleFocus: boolean;
+  box?: { x: number; y: number; width: number; height: number };
+}
+
+export interface KeyboardProbe {
+  stops: FocusStop[];
+  /** How many elements on the page can be reached with Tab. */
+  tabbable: number;
+  /** For the last six presses, focus went round two or fewer elements on a page that has more. */
+  trapped: boolean;
+}
+
+/**
+ * Press Tab a bounded number of times and record where focus goes. Tab moves
+ * focus and activates nothing, so this is as safe as reading the page. It
+ * reports two things a person using a keyboard meets and a static check
+ * misses: focus that cannot get out of a small group of elements, and a
+ * focused element that looks no different from an unfocused one.
+ */
+export async function probeKeyboard(page: Page, presses = 12): Promise<KeyboardProbe> {
+  const tabbable = await page.evaluate(() => {
+    document.querySelectorAll('[data-accessripple-focus]').forEach((element) => element.removeAttribute('data-accessripple-focus'));
+    (document.activeElement as HTMLElement | null)?.blur?.();
+    const candidates = document.querySelectorAll('a[href], button, input:not([type="hidden"]), select, textarea, [tabindex], [contenteditable="true"], summary');
+    return Array.from(candidates).filter((element) => {
+      const tabIndex = (element as HTMLElement).tabIndex;
+      if (tabIndex < 0 || (element as HTMLButtonElement).disabled) return false;
+      const style = getComputedStyle(element);
+      return style.visibility !== 'hidden' && style.display !== 'none' && element.getClientRects().length > 0;
+    }).length;
+  });
+  const stops: FocusStop[] = [];
+  for (let press = 0; press < presses; press += 1) {
+    await page.keyboard.press('Tab');
+    const stop = await page.evaluate(() => {
+      const element = document.activeElement;
+      if (!element || element === document.body || element === document.documentElement) return null;
+      const path = (node: Element): string => {
+        if (node.id) return '#' + CSS.escape(node.id);
+        const parts: string[] = [];
+        let current: Element | null = node;
+        while (current && current !== document.body) {
+          const tag = current.tagName.toLowerCase();
+          const siblings = current.parentElement ? Array.from(current.parentElement.children).filter((child) => child.tagName === current!.tagName) : [];
+          parts.unshift(tag + (siblings.length > 1 ? `:nth-of-type(${siblings.indexOf(current) + 1})` : ''));
+          if (document.querySelectorAll(parts.join(' > ')).length === 1) break;
+          current = current.parentElement;
+        }
+        return parts.join(' > ');
+      };
+      const look = () => {
+        const style = getComputedStyle(element);
+        return [style.outlineStyle, style.outlineWidth, style.outlineColor, style.boxShadow, style.borderColor, style.backgroundColor, style.color, style.textDecorationLine].join('|');
+      };
+      const focused = look();
+      const outlined = (() => { const style = getComputedStyle(element); return style.outlineStyle !== 'none' && parseFloat(style.outlineWidth) > 0; })();
+      (element as HTMLElement).blur();
+      const unfocused = look();
+      (element as HTMLElement).focus({ preventScroll: true });
+      const rect = element.getBoundingClientRect();
+      const html = element.outerHTML;
+      const open = html.slice(0, html.indexOf('>') + 1);
+      return {
+        selector: path(element),
+        name: (element.getAttribute('aria-label') || (element as HTMLElement).innerText || element.getAttribute('title') || '').replace(/\s+/g, ' ').trim().slice(0, 80) || undefined,
+        // A short element is kept whole, so a proposed change can be applied to it.
+        snippet: (html.length <= 300 ? html : open).replace(/\s+/g, ' ').trim(),
+        visibleFocus: outlined || focused !== unfocused,
+        box: rect.width > 0 && rect.height > 0 ? { x: Math.round(rect.left + window.scrollX), y: Math.round(rect.top + window.scrollY), width: Math.round(rect.width), height: Math.round(rect.height) } : undefined,
+      };
+    }).catch(() => null);
+    if (stop) stops.push(stop);
+  }
+  // The last six presses never left two elements, on a page with more to reach.
+  const recent = stops.slice(-6).map((stop) => stop.selector);
+  const trapped = tabbable > 2 && recent.length === 6 && new Set(recent).size <= 2;
+  return { stops, tabbable, trapped };
+}
+
+/** What the keyboard probe found, as findings the rest of the tool already knows how to show. */
+export function keyboardFindings(pageId: string, probe: KeyboardProbe, controls: ControlEvidence[]): AccessibilityEvidence[] {
+  const findings: AccessibilityEvidence[] = [];
+  const controlFor = (selector: string) => controls.filter((control) => control.selector === selector).map((control) => control.id);
+  if (probe.trapped) {
+    const ring = [...new Set(probe.stops.slice(-6).map((stop) => stop.selector))];
+    const first = probe.stops.find((stop) => stop.selector === ring[0])!;
+    findings.push({
+      id: stableId('finding', `${pageId}|keyboard-trap|${ring.join(',')}`), ruleId: 'keyboard-trap', impact: 'critical', status: 'needs-review',
+      help: `Keyboard focus went round ${ring.length === 1 ? 'one element' : 'two elements'} and could not move on`,
+      helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html', targets: [first.selector], tags: ['wcag212'],
+      snippet: first.snippet, affectedControlIds: ring.flatMap(controlFor), ...(first.box ? { boundingBox: first.box } : {}), evidenceLabel: 'observed',
+    });
+  }
+  const seen = new Set<string>();
+  for (const stop of probe.stops) {
+    if (stop.visibleFocus || seen.has(stop.selector)) continue;
+    seen.add(stop.selector);
+    findings.push({
+      id: stableId('finding', `${pageId}|focus-not-visible|${stop.selector}`), ruleId: 'focus-not-visible', impact: 'serious', status: 'needs-review',
+      help: 'Nothing visible changed when this element received keyboard focus',
+      helpUrl: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html', targets: [stop.selector], tags: ['wcag247'],
+      snippet: stop.snippet, affectedControlIds: controlFor(stop.selector), ...(stop.box ? { boundingBox: stop.box } : {}), evidenceLabel: 'observed',
+    });
+  }
+  return findings;
 }

@@ -1,12 +1,12 @@
 ---
 source_file: "src/api/app.ts"
 type: "code"
-community: "Community None"
-location: "L124"
+community: "Community 3"
+location: "L116"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # AppOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[app.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

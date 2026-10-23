@@ -102,4 +102,42 @@ describe('evidence graph', () => {
     const comparison = compareScans(before, after);
     expect(comparison.resolved.some((node) => node.kind === 'runtime-error')).toBe(true);
   });
+
+  it('counts the pages and journeys beyond a point using observed movement only', () => {
+    const scan = sample('reach', false);
+    scan.pages[0]!.interactions = [observedInteraction()];
+    scan.pages[0]!.findings = [{ id: 'f1', ruleId: 'image-alt', impact: 'critical', status: 'detected', help: 'Images must have alternative text', helpUrl: '', targets: ['img'], snippet: '<img src="logo.png">', affectedControlIds: [], evidenceLabel: 'observed' }];
+    scan.pages.push({ id: 'p2', url: 'https://shop.example/checkout', title: 'Checkout', status: 'complete', depth: 1, controls: [{ id: 'c9', role: 'link', accessibleName: 'Pay', href: 'https://shop.example/pay', evidenceLabel: 'observed' }], errors: [], findings: [], outgoingLinks: [], interactions: [] });
+    const graph = buildGraph(scan);
+    const finding = graph.nodes.find((node) => node.kind === 'accessibility-finding')!;
+    expect(finding.data.downstreamPagesReachable).toBe(1);
+    expect(finding.data.journeysThrough).toBe(1);
+    const checkout = graph.nodes.find((node) => node.kind === 'page' && node.data.url === 'https://shop.example/checkout')!;
+    expect(finding.data.blastRadiusNodeIds).toContain(checkout.id);
+    // The checkout page has one recorded journey arriving and an untested link
+    // leaving. The untested link is not movement the browser made.
+    expect(checkout.data.journeysThrough).toBe(1);
+    expect(checkout.data.downstreamPagesReachable).toBe(0);
+    expect(graph.nodes.find((node) => node.id === 'c1')?.data.journeysThrough).toBe(1);
+  });
+
+  it('does not count a link the browser never followed as reach', () => {
+    const scan = sample('inferred', false);
+    scan.pages.push({ id: 'p2', url: 'https://shop.example/checkout', title: 'Checkout', status: 'complete', depth: 1, controls: [], errors: [], findings: [], outgoingLinks: [], interactions: [] });
+    const graph = buildGraph(scan);
+    const home = graph.nodes.find((node) => node.kind === 'page' && node.data.url === 'https://shop.example/')!;
+    expect(home.data.downstreamPagesReachable).toBe(0);
+    expect(home.data.journeysThrough).toBe(0);
+  });
+
+  it('marks the same failing markup on two pages as one shared component', () => {
+    const scan = sample('shared', false);
+    const header = (page: string) => ({ id: `f-${page}`, ruleId: 'link-name', impact: 'serious', status: 'detected' as const, help: 'Links must have discernible text', helpUrl: '', targets: [`header > a:nth-of-type(${page === 'p1' ? 1 : 2})`], snippet: '<a href="/" class="logo"></a>', affectedControlIds: [], evidenceLabel: 'observed' as const });
+    scan.pages[0]!.findings = [header('p1')];
+    scan.pages.push({ id: 'p2', url: 'https://shop.example/checkout', title: 'Checkout', status: 'complete', depth: 1, controls: [], errors: [], findings: [{ ...header('p2'), snippet: '<a  href="/" class="logo" data-accessripple-ref="3"></a>' }], outgoingLinks: [], interactions: [] });
+    const findings = buildGraph(scan).nodes.filter((node) => node.kind === 'accessibility-finding');
+    expect(findings).toHaveLength(2);
+    expect(findings.every((node) => node.data.sharedAcrossPages === 2)).toBe(true);
+    expect(new Set(findings.map((node) => node.data.sharedGroupId)).size).toBe(1);
+  });
 });

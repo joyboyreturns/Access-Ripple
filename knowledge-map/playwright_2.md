@@ -1,16 +1,22 @@
 ---
-source_file: "playwright"
-type: "code"
-community: "Community None"
+source_file: "package.json"
+type: "concept"
+community: "Community 9"
+location: "L33"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_9
 ---
 
 # playwright
 
 ## Connections
-- [[worker.ts]] - `dynamic_import` [EXTRACTED]
+- [[capture-readme.mjs]] - `imports_from` [EXTRACTED]
+- [[check-studio.mjs]] - `imports_from` [EXTRACTED]
+- [[interaction.ts]] - `imports_from` [EXTRACTED]
+- [[package.json]] - `imports` [EXTRACTED]
+- [[performScan()]] - `imports_from` [EXTRACTED]
+- [[rehearse.mjs]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_9

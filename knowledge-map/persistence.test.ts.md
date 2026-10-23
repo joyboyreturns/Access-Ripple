@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/persistence.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 36"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_36
 ---
 
 # persistence.test.ts
@@ -18,10 +18,10 @@ tags:
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]
 - [[ref_node_os]] - `imports_from` [EXTRACTED]
 - [[ref_node_path]] - `imports_from` [EXTRACTED]
-- [[scan()_3]] - `contains` [EXTRACTED]
+- [[scan()_1]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[summarizeScan()]] - `imports` [EXTRACTED]
 - [[uuidFor()]] - `contains` [EXTRACTED]
-- [[vitest_1]] - `imports_from` [EXTRACTED]
+- [[vitest]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_36

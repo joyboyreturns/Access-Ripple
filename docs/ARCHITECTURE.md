@@ -18,12 +18,12 @@ flowchart LR
         Routes["REST routes + OpenAPI docs<br/><i>src/api/app.ts</i>"]
         Gate["URL safety gate<br/><i>url-safety.ts</i>"]
         Worker["Scan worker<br/><i>worker.ts</i>"]
-        Interact["Interaction tester<br/><i>interaction.ts</i>"]
-        Graph["Graph builder<br/><i>build-graph.ts</i>"]
+        Interact["Interaction tester + keyboard probe<br/><i>interaction.ts</i>"]
+        Graph["Graph builder + reach<br/><i>build-graph.ts · reach.ts</i>"]
         Compare["Rescan comparison<br/><i>compare.ts</i>"]
         AI["Grounded AI layer<br/><i>briefing.ts · fix.ts · contract.ts</i>"]
-        Sandbox["Demo shop sandbox<br/><i>sandbox.ts</i>"]
-        Export["Obsidian export<br/><i>obsidian.ts</i>"]
+        Sandbox["Demo shop sandbox + simulated patches<br/><i>sandbox.ts</i>"]
+        Export["Obsidian vault · .patch · PR summary<br/><i>obsidian.ts · patch.ts</i>"]
     end
 
     subgraph Storage["On this computer"]
@@ -35,7 +35,7 @@ flowchart LR
     Chromium["Headless Chromium<br/>Playwright + axe-core"]
     Site["A public website<br/>or your own localhost"]
     Shop["Northstar demo shop<br/>built-in fixture"]
-    Model["Any OpenAI-compatible model<br/>optional · free tier by default"]
+    Model["Vercel AI Gateway<br/>MiniMax M3.1 Flash<br/>optional"]
 
     Landing --> Studio
     Studio --> Map
@@ -62,7 +62,7 @@ flowchart LR
 | API | Fastify 5, Zod, `@fastify/swagger` | Validates input, rate-limits public scans, serves the demo shop and OpenAPI docs |
 | Scanner | Playwright Chromium, axe-core 4 | Crawls up to five same-site pages, runs accessibility checks, activates safe controls |
 | Graph | Pure TypeScript | Turns scan evidence into nodes and edges, each labelled observed, inferred or untested |
-| AI | `fetch` to any chat-completions endpoint | Briefing, proposed change and written prediction, each grounded in recorded evidence |
+| AI | `fetch` to the Vercel AI Gateway, or any chat-completions endpoint | Briefing, proposed change and written prediction, each grounded in recorded evidence |
 | Storage | In-memory map + JSON files | Recent scans survive a restart; nothing leaves the computer except the scan itself and the optional model digest |
 
 ## 2. One scan, end to end
@@ -115,9 +115,11 @@ flowchart TD
     G1 -- Yes --> C["Model commits in writing<br/>POST /api/scans/{id}/contract<br/>each id: gone or still there"]
     C --> G2{"Only ids it was given?<br/>Target covered? At most 3?"}
     G2 -- No --> X2["Commitment rejected"]
-    G2 -- Yes --> H{"A human presses<br/>'Apply this change to the demo shop'"}
-    H --> S["Applied to an in-memory copy<br/>of the demo shop only"]
+    G2 -- Yes --> H{"A human decides"}
+    H -- "Demo shop:<br/>'Apply this change'" --> S["Applied to an in-memory copy<br/>of the demo shop only"]
+    H -- "Any other site:<br/>'Simulate on the next rescan'" --> SIM["Applied inside the scanner's own browser<br/>only if the markup still matches<br/>page labelled SIMULATED PATCH"]
     S --> R["Rescan the same site"]
+    SIM --> R
     R --> V{"Was the page<br/>inspected again?"}
     V -- No --> U["NOT RECHECKED<br/>never counted as a pass"]
     V -- Yes --> O{"Did the browser agree?"}
@@ -182,8 +184,8 @@ flowchart TD
 
 | Command | What it proves |
 | --- | --- |
-| `npm test` | 202 unit, API and end-to-end tests across 22 files, including real Chromium scans of the demo shop |
+| `npm test` | 231 unit, API and end-to-end tests across 25 files, including real Chromium scans of the demo shop |
 | `npm run typecheck` | Server and studio both type-check under TypeScript 7 |
 | `npm run build` | The production studio builds and the API compiles |
-| `npm run check:studio` | Drives the whole studio in a real browser and checks 56 behaviours, the AI path included |
+| `npm run check:studio` | Drives the whole studio in a real browser and checks 45 behaviours, plus the AI path when a model key is configured |
 | `npm run capture:readme` | Regenerates the README screenshots from the running studio |

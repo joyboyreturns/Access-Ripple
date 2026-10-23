@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community None"
+community: "Community 24"
 location: "L64"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # applyProposal()
@@ -17,5 +17,6 @@ tags:
 - [[acceptProposal()]] - `calls` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
+- [[walkthrough()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community None"
-location: "L23"
+community: "Community 1"
+location: "L47"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # The problem
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[AccessRipple]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_None
+#graphify/document #graphify/EXTRACTED #community/Community_1

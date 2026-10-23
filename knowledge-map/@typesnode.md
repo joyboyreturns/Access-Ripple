@@ -1,17 +1,17 @@
 ---
 source_file: "package.json"
-type: "code"
-community: "Community None"
+type: "concept"
+community: "Community 15"
 location: "L39"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_15
 ---
 
 # @types/node
 
 ## Connections
-- [[devDependencies]] - `contains` [EXTRACTED]
+- [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/concept #graphify/EXTRACTED #community/Community_15

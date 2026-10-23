@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
-location: "L251"
+community: "Community 0"
+location: "L321"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # askForContract()
@@ -15,4 +15,4 @@ tags:
 - [[App()]] - `contains` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

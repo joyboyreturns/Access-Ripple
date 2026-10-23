@@ -71,4 +71,32 @@ suite('comparing two scans', () => {
     expect(compareScans(before, after).resolved).toEqual([]);
     expect(compareScans(before, after).notRechecked.map((node) => node.id)).toEqual(['f1']);
   });
+
+  it('keeps a finding whose element path moved as the same finding', () => {
+    const moved = (id: string, target: string) => ({ ...finding(id, 'p1'), data: { ruleId: 'image-alt', impact: 'critical', targets: [target], snippet: '<img src="logo.png">' } });
+    const before = scan([page('p1', 'complete')], [moved('f-old', 'main > img')]);
+    const after = scan([page('p1', 'complete')], [moved('f-new', 'main > div > img')]);
+    const comparison = compareScans(before, after);
+    expect(comparison.resolved).toEqual([]);
+    expect(comparison.new).toEqual([]);
+    expect(comparison.remaining.map((node) => node.id)).toEqual(['f-new']);
+  });
+
+  it('still calls a finding resolved when its markup changed with the repair', () => {
+    const withMarkup = (id: string, snippet: string) => ({ ...finding(id, 'p1'), data: { ruleId: 'image-alt', impact: 'critical', targets: ['img'], snippet } });
+    const before = scan([page('p1', 'complete')], [withMarkup('f1', '<img src="a.png">'), withMarkup('f2', '<img src="b.png">')]);
+    const after = scan([page('p1', 'complete')], [withMarkup('f2-moved', '<img src="b.png">')]);
+    const comparison = compareScans(before, after);
+    expect(comparison.resolved.map((node) => node.id)).toEqual(['f1']);
+    expect(comparison.remaining.map((node) => node.id)).toEqual(['f2-moved']);
+  });
+
+  it('pairs each later finding once, preferring the closest element path', () => {
+    const twin = (id: string, target: string) => ({ ...finding(id, 'p1'), data: { ruleId: 'image-alt', impact: 'critical', targets: [target], snippet: '<img src="x.png">' } });
+    const before = scan([page('p1', 'complete')], [twin('a', 'li:nth-of-type(1) > img'), twin('b', 'li:nth-of-type(2) > img')]);
+    const after = scan([page('p1', 'complete')], [twin('b2', 'ul > li:nth-of-type(2) > img')]);
+    const comparison = compareScans(before, after);
+    expect(comparison.remaining.map((node) => node.id)).toEqual(['b2']);
+    expect(comparison.resolved.map((node) => node.id)).toEqual(['a']);
+  });
 });

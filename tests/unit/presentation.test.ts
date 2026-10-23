@@ -1,4 +1,4 @@
-import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, scanStory, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
+import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, reachFacts, scanStory, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
 import type { GraphNode, InteractionStepView, SiteGraph } from '../../web/src/types.js';
 import { describe as suite, it, expect } from 'vitest';
 
@@ -180,5 +180,20 @@ suite('the scan story',()=>{
     const story=scanStory(scan,graph);
     expect(story.headline).toContain('found no accessibility findings');
     expect(story.tone).toBe('clear');
+  });
+});
+
+suite('reach in words', () => {
+  const withReach = (data: Record<string, unknown>) => ({ id: 'f', kind: 'accessibility-finding' as const, label: 'x', evidenceLabel: 'observed' as const, data });
+  it('states the recorded counts, and never a score or a block', () => {
+    const facts = reachFacts(withReach({ downstreamPagesReachable: 3, journeysThrough: 1, blastRadiusNodeIds: ['a', 'b'], sharedAcrossPages: 2 }));
+    expect(facts?.text).toBe('3 more pages reached from here · 1 recorded journey through its page · same markup fails on 2 pages');
+    expect(facts?.radius).toEqual(['a', 'b']);
+    expect(facts?.text).not.toMatch(/block|score|stop/i);
+  });
+  it('says so when nothing lies beyond, and has nothing for a scan recorded before reach existed', () => {
+    expect(reachFacts(withReach({ downstreamPagesReachable: 0, journeysThrough: 0 }))?.text).toBe('No further page reached from here · 0 recorded journeys through its page');
+    expect(reachFacts(withReach({}))).toBeNull();
+    expect(reachFacts({ id: 'e', kind: 'runtime-error', label: 'x', evidenceLabel: 'observed', data: { downstreamPagesReachable: 1 } })).toBeNull();
   });
 });

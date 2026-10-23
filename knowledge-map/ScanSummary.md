@@ -1,18 +1,19 @@
 ---
-source_file: "src/store/disk.ts"
+source_file: "web/src/types.ts"
 type: "code"
-community: "Community None"
-location: "L22"
+community: "Community 0"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_0
 ---
 
 # ScanSummary
 
 ## Connections
-- [[app.ts]] - `imports` [EXTRACTED]
-- [[disk.ts]] - `contains` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `imports` [EXTRACTED]
+- [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_0

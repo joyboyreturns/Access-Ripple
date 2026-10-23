@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 8"
 location: "L135"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_8
 ---
 
 # describe()
@@ -19,6 +19,7 @@ tags:
 - [[ProofView()]] - `calls` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[blockedShort()]] - `calls` [EXTRACTED]
+- [[boxesOn()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
 - [[cleanQuoted()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
@@ -33,5 +34,6 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[remainingSummary()]] - `calls` [EXTRACTED]
 - [[scanStory()_1]] - `calls` [EXTRACTED]
+- [[walkthrough()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_8

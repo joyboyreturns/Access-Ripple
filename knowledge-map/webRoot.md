@@ -1,12 +1,12 @@
 ---
 source_file: "vite.config.ts"
 type: "code"
-community: "Community None"
+community: "Community 30"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_30
 ---
 
 # webRoot
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[vite.config.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_30

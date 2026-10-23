@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/graph-interactions.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 29"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_29
 ---
 
 # edge()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graph-interactions.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_29

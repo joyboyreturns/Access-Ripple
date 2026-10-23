@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 7"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_7
 ---
 
 # presentation.ts
@@ -16,7 +16,7 @@ tags:
 - [[Copy]] - `contains` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphFilter]] - `contains` [EXTRACTED]
-- [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
 - [[InteractionStepView]] - `imports` [EXTRACTED]
 - [[Journey]] - `contains` [EXTRACTED]
 - [[JourneyFinding]] - `contains` [EXTRACTED]
@@ -24,7 +24,7 @@ tags:
 - [[RippleHop]] - `contains` [EXTRACTED]
 - [[RouteToFinding]] - `contains` [EXTRACTED]
 - [[ScanResult_1]] - `imports` [EXTRACTED]
-- [[SiteGraph_1]] - `imports` [EXTRACTED]
+- [[SiteGraph]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `contains` [EXTRACTED]
 - [[barrierRipple()]] - `contains` [EXTRACTED]
 - [[blockedShort()]] - `contains` [EXTRACTED]
@@ -56,6 +56,7 @@ tags:
 - [[pageFor()]] - `contains` [EXTRACTED]
 - [[presentation.test.ts]] - `imports_from` [EXTRACTED]
 - [[protects]] - `contains` [EXTRACTED]
+- [[reachFacts()]] - `contains` [EXTRACTED]
 - [[refusal.test.ts]] - `imports_from` [EXTRACTED]
 - [[remainingSummary()]] - `contains` [EXTRACTED]
 - [[ripple.test.ts]] - `imports_from` [EXTRACTED]
@@ -75,4 +76,4 @@ tags:
 - [[whoItProtects()]] - `contains` [EXTRACTED]
 - [[withoutSharedAffix()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_7

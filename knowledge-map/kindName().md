@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 24"
 location: "L196"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # kindName()
@@ -16,4 +16,4 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/url-safety.ts"
 type: "code"
-community: "Community None"
+community: "Community 10"
 location: "L158"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_10
 ---
 
 # assertSafeUrl()
@@ -25,4 +25,4 @@ tags:
 - [[url-safety.ts]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_10

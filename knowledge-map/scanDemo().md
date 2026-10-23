@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
-location: "L228"
+community: "Community 24"
+location: "L298"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # scanDemo()
@@ -17,4 +17,4 @@ tags:
 - [[run()]] - `calls` [EXTRACTED]
 - [[setSampleState()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

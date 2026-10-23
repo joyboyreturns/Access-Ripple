@@ -1,12 +1,12 @@
 ---
 source_file: "docs/ARCHITECTURE.md"
 type: "document"
-community: "Community None"
+community: "Community 1"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # AccessRipple architecture
@@ -21,4 +21,4 @@ tags:
 - [[7. How it is verified]] - `contains` [EXTRACTED]
 - [[ARCHITECTURE]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_None
+#graphify/document #graphify/EXTRACTED #community/Community_1

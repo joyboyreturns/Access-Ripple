@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { abortReasonFor, safeDisplayUrl, assertSafeUrl } from './url-safety.js';
 import { errorEvidence, stableId } from './evidence.js';
-import { BLOCKED_PATH, runInteractions } from './interaction.js';
-import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanCoverage, ScanLimits, ScanResult } from '../graph/schema.js';
+import { BLOCKED_PATH, keyboardFindings, probeKeyboard, runInteractions } from './interaction.js';
+import type { AccessibilityEvidence, ControlEvidence, InteractionMode, PageEvidence, RuntimeErrorEvidence, ScanCoverage, ScanLimits, ScanResult, SimulatedPatchOutcome } from '../graph/schema.js';
 import { buildGraph } from '../graph/build-graph.js';
 
 const require = createRequire(import.meta.url);
@@ -71,6 +71,8 @@ export interface ScanInput {
   interactionMode?: InteractionMode;
   /** Set when the person scanning asked to reach an address on their own computer. */
   allowPrivateNetwork?: boolean;
+  /** Changes to simulate inside the scanner's own browser. The site itself is never changed. */
+  simulatedPatches?: NonNullable<ScanResult['simulatedPatches']>;
   onUpdate: (scan: ScanResult) => void;
 }
 
@@ -87,6 +89,7 @@ function initialResult(input: ScanInput): ScanResult {
     limits: { ...DEFAULT_LIMITS },
     progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' },
     pages: [],
+    simulatedPatches: input.simulatedPatches?.length ? input.simulatedPatches : undefined,
     previousScanId: input.previousScanId,
     interactionPolicy: { mode: input.interactionMode ?? 'safe', tested: 0, skipped: 0 },
     addressScope: input.allowPrivateNetwork ? 'private' : 'public',
@@ -169,6 +172,54 @@ async function inspectControls(page: import('playwright').Page, pageUrl: string,
   return { controls, links };
 }
 
+/**
+ * Where each failing element sat on the page, so the picture of the page can
+ * point at it. Only a plain selector is resolved; an element inside a frame or
+ * a shadow root, or one with no size, gets no box rather than a wrong one.
+ */
+async function recordBoxes(page: import('playwright').Page, findings: AccessibilityEvidence[]): Promise<void> {
+  const selectors = findings.map((finding) => finding.targets.length === 1 && !finding.targets[0]!.includes(',') ? finding.targets[0]! : '');
+  const boxes = await page.evaluate((list: string[]) => list.map((selector) => {
+    if (!selector) return null;
+    let element: Element | null = null;
+    try { element = document.querySelector(selector); } catch { return null; }
+    if (!element) return null;
+    const rect = element.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) return null;
+    return { x: Math.round(rect.left + window.scrollX), y: Math.round(rect.top + window.scrollY), width: Math.round(rect.width), height: Math.round(rect.height) };
+  }), selectors).catch(() => [] as Array<AccessibilityEvidence['boundingBox'] | null>);
+  findings.forEach((finding, index) => { const box = boxes[index]; if (box) finding.boundingBox = box; });
+}
+
+/**
+ * Apply recorded changes inside the scanner's own browser, before the page is
+ * checked. A change is applied only when the element at its selector still
+ * has exactly the markup the change was grounded in; otherwise it is reported
+ * as not applied, never silently skipped.
+ */
+async function simulatePatches(page: import('playwright').Page, patches: NonNullable<ScanResult['simulatedPatches']>): Promise<SimulatedPatchOutcome[]> {
+  if (!patches.length) return [];
+  const results = await page.evaluate((list: Array<{ selector: string; before: string; after: string }>) => {
+    const flat = (value: string) => value.replace(/\s+/g, ' ').trim();
+    return list.map(({ selector, before, after }) => {
+      let element: Element | null = null;
+      try { element = document.querySelector(selector); } catch { return { applied: false, reason: 'The selector could not be read.' }; }
+      if (!element) return { applied: false, reason: 'The element was not on the page.' };
+      // The recorded markup may be the start of a longer element, so it must be its prefix.
+      if (!flat(element.outerHTML).startsWith(flat(before).replace(/\s*\.\.\.$/, ''))) return { applied: false, reason: 'The element no longer has the recorded markup.' };
+      const template = document.createElement('template');
+      template.innerHTML = after;
+      const replacement = template.content.firstElementChild;
+      if (!replacement || template.content.childElementCount !== 1) return { applied: false, reason: 'The proposed markup is not one element.' };
+      // The element keeps its children when the proposal only rewrote its opening tag.
+      if (!replacement.childNodes.length && element.childNodes.length && !/<\/[a-z]/i.test(after)) replacement.append(...Array.from(element.childNodes));
+      element.replaceWith(replacement);
+      return { applied: true };
+    });
+  }, patches.map(({ selector, before, after }) => ({ selector, before, after }))).catch(() => patches.map(() => ({ applied: false, reason: 'The page did not allow the change to be simulated.' })));
+  return patches.map((patch, index) => ({ id: patch.id, nodeId: patch.nodeId, summary: patch.summary, selector: patch.selector, before: patch.before, after: patch.after, applied: results[index]?.applied ?? false, ...(results[index]?.reason ? { reason: results[index]!.reason } : {}) }));
+}
+
 async function runAxe(page: import('playwright').Page, pageId: string, maxFindings: number): Promise<AccessibilityEvidence[]> {
   try {
     // The check source is installed before the page's own scripts, so a site
@@ -198,11 +249,13 @@ async function runAxe(page: import('playwright').Page, pageId: string, maxFindin
             // The markup of the failing element, so a developer can see what
             // the check was actually looking at.
             snippet: String(node.html ?? '').replace(/\s+/g, ' ').trim().slice(0, 400) || undefined,
+            tags: (item.tags ?? []).map(String).filter((tag: string) => /^wcag\d{3,4}$/.test(tag)).slice(0, 6),
             evidenceLabel: 'observed',
           });
         }
       }
     }
+    await recordBoxes(page, output);
     return output;
   } catch (error) {
     return [{
@@ -393,6 +446,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
           pageId = stableId('page', finalDisplayUrl);
         }
         const title = (await page.title()).slice(0, 180) || undefined;
+        const simulated = await simulatePatches(page, (input.simulatedPatches ?? []).filter((patch) => patch.pageUrl === finalDisplayUrl));
         const { controls, links } = await inspectControls(page, finalUrl.toString(), scan.limits.maxControlsPerPage);
         const findings = await runAxe(page, pageId, scan.limits.maxFindingsPerPage);
         // Resolve both selector formats against the rendered DOM rather than comparing selector text.
@@ -410,6 +464,12 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         // finding is exactly the one worth showing after the repair.
         const shot = screenshotsTaken < (scan.limits.maxScreenshots ?? 5) ? await captureScreenshot(page) : undefined;
         if (shot) screenshotsTaken += 1;
+        // After the picture, so a focus ring the probe leaves behind is not in it.
+        // A page whose checks could not run is not probed either: it is unchecked.
+        if (!findings.some((finding) => finding.ruleId === 'accessibility-check-incomplete')) {
+          const probe = await probeKeyboard(page).catch(() => null);
+          if (probe) findings.push(...keyboardFindings(pageId, probe, controls).slice(0, Math.max(0, scan.limits.maxFindingsPerPage - findings.length)));
+        }
         if (looksLikeRefusal(title ?? "", controls.length, documentStatus)) {
           entry = {
             id: pageId, url: finalDisplayUrl, title, status: 'skipped', depth: next.depth, controls: [], errors: [errorEvidence('page', `The site refused the automated browser (HTTP ${documentStatus || 403}). Nothing on this site could be inspected.`, finalDisplayUrl)],
@@ -418,7 +478,7 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
         } else {
           // The live array is kept, because a request can be blocked after the page
           // has loaded and that block still belongs to this page.
-          entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors, findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot };
+          entry = { id: pageId, url: finalDisplayUrl, title, status: 'complete', depth: next.depth, controls, errors, findings, outgoingLinks: links.map(safeDisplayUrl), interactions: [], screenshot: shot, ...(simulated.length ? { simulatedPatches: simulated } : {}) };
         }
         if (next.depth < scan.limits.maxDepth) {
           for (const href of links) {

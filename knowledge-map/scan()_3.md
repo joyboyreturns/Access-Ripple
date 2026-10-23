@@ -1,17 +1,17 @@
 ---
-source_file: "tests/unit/persistence.test.ts"
+source_file: "tests/unit/contract.test.ts"
 type: "code"
-community: "Community None"
-location: "L8"
+community: "Community 6"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_6
 ---
 
 # scan()
 
 ## Connections
-- [[persistence.test.ts]] - `contains` [EXTRACTED]
+- [[contract.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_6

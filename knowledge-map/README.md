@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community None"
+community: "Community 1"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_1
 ---
 
 # README.md
@@ -15,4 +15,4 @@ tags:
 - [[ARCHITECTURE]] - `references` [EXTRACTED]
 - [[AccessRipple]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_None
+#graphify/document #graphify/EXTRACTED #community/Community_1

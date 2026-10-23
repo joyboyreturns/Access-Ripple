@@ -571,3 +571,24 @@ export function withoutSharedAffix(label: string, all: string[]): string {
   }
   return label;
 }
+
+/**
+ * How far a point reaches along recorded journeys, in words. Every number
+ * comes from observed movement in the scan; none of it says a barrier stops
+ * anyone, and none of it is a score.
+ */
+export function reachFacts(node: GraphNode | null | undefined): { pages: number; journeys: number; shared: number; radius: string[]; text: string } | null {
+  if (!node || !['accessibility-finding', 'control', 'page'].includes(node.kind) || typeof node.data.downstreamPagesReachable !== 'number') return null;
+  const pages = Number(node.data.downstreamPagesReachable) || 0;
+  const journeys = Number(node.data.journeysThrough) || 0;
+  const shared = Number(node.data.sharedAcrossPages) || 0;
+  const radius = Array.isArray(node.data.blastRadiusNodeIds) ? node.data.blastRadiusNodeIds.map(String) : [];
+  const plural = (value: number, one: string, many: string) => `${value} ${value === 1 ? one : many}`;
+  const where = node.kind === 'control' ? 'started here' : node.kind === 'page' ? 'through this page' : 'through its page';
+  const parts = [
+    pages ? `${plural(pages, 'more page', 'more pages')} reached from here` : 'No further page reached from here',
+    `${plural(journeys, 'recorded journey', 'recorded journeys')} ${where}`,
+    ...(shared > 1 ? [`same markup fails on ${shared} pages`] : []),
+  ];
+  return { pages, journeys, shared, radius, text: parts.join(' · ') };
+}
