@@ -42,7 +42,7 @@ Open **http://127.0.0.1:5173/#walkthrough**, or press **Run the judge walkthroug
 
 <img src="docs/images/walkthrough.jpg" alt="The proof after the walkthrough: 3 no longer observed, 2 still observed, 0 new; the checkout page before the change with the missing image outlined and labelled 'Missing image description', and the same page after with the image restored; buttons to download the accepted changes as a .patch and a pull request summary." width="900">
 
-On this computer the walkthrough runs in about 22 seconds without a model; the panel shows the measured time on yours. With no model configured — or if the model is busy — the demo shop's prepared fix stands in, and the panel says so.
+On this computer the walkthrough runs in about 12 seconds without a model (it was 22 before the demo shop's interaction wait was shortened); the panel shows the measured time on yours. With no model configured — or if the model is busy — the demo shop's prepared fix stands in, and the panel says so.
 
 ## The problem
 
@@ -137,7 +137,7 @@ npx playwright install chromium
 npm run demo
 ```
 
-`npm run demo` starts the app and opens the studio straight into a scan of the built-in demo shop. It takes about ten seconds, needs no internet connection, and always produces the same result.
+`npm run demo` starts the app and opens the studio straight into a scan of the built-in demo shop. It takes about six seconds, needs no internet connection, and always produces the same result.
 
 **The core demo needs no account, no key and no network.** The optional AI briefing, the proposed change and the model's commitment need a [Vercel AI Gateway](https://vercel.com/ai-gateway) key in `.env` (see [below](#optional-ai-briefing-and-proposed-changes)). Without one the app is still complete: it says so where the button would be, and shows the deterministic summary instead.
 

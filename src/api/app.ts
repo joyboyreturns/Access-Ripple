@@ -75,7 +75,7 @@ function simulationsFor(previous: ScanResult): NonNullable<ScanResult['simulated
   return [...merged.values()];
 }
 
-function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode; allowPrivateNetwork?: boolean; simulatedPatches?: ScanResult['simulatedPatches'] }, baseUrl: string): ScanResult {
+function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?: string; interactionMode?: InteractionMode; allowPrivateNetwork?: boolean; simulatedPatches?: ScanResult['simulatedPatches']; fixtureState?: ScanResult['fixtureState'] }, baseUrl: string): ScanResult {
   const id = randomUUID();
   const url = options.sample ? `${baseUrl}/sample/checkout` : options.url;
   const now = new Date().toISOString();
@@ -87,13 +87,14 @@ function launchScan(options: { url: string; sample?: 'checkout'; previousScanId?
     interactionPolicy: { mode, tested: 0, skipped: 0 },
     addressScope: options.allowPrivateNetwork ? 'private' : 'public',
     simulatedPatches: options.simulatedPatches?.length ? options.simulatedPatches : undefined,
+    fixtureState: options.sample ? options.fixtureState : undefined,
   };
   scanStore.set(scan);
   schedule(async () => {
     const active = scanStore.get(id);
     if (!active) return;
     try {
-      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, allowPrivateNetwork: options.allowPrivateNetwork, simulatedPatches: options.simulatedPatches, onUpdate: (updated) => scanStore.set(updated) });
+      await performScan({ id, url, sample: options.sample, previousScanId: options.previousScanId, interactionMode: mode, allowPrivateNetwork: options.allowPrivateNetwork, simulatedPatches: options.simulatedPatches, fixtureState: options.fixtureState, onUpdate: (updated) => scanStore.set(updated) });
     } catch (error) {
       scanStore.set({ ...active, status: 'failed', error: { code: 'SCAN_WORKER_FAILED', message: error instanceof Error ? error.message.slice(0, 240) : 'The scan worker could not start.', retryable: true }, updatedAt: new Date().toISOString() });
     } finally {
@@ -130,7 +131,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   // The checkout sample ships in two states so you can demo a real before/after repair loop.
   let sampleVariant: 'before' | 'after' = 'before';
 
+  // A web page can point its own name at 127.0.0.1 (DNS rebinding) and then read
+  // this API as if it were same-origin, with no Origin header to refuse. The Host
+  // header still carries the page's name, so only this computer's names pass.
+  const allowedHosts = new Set(['127.0.0.1', 'localhost', '[::1]']);
+  try { allowedHosts.add(new URL(baseUrl).hostname); } catch { /* The base address is not a URL. */ }
   app.addHook('onRequest', async (request, reply) => {
+    const hostName = (request.headers.host ?? '').replace(/:\d+$/, '').toLowerCase();
+    if (!allowedHosts.has(hostName)) return reply.code(403).send({ error: { code: 'HOST_BLOCKED', message: 'This scanner answers only to this computer’s own address.', retryable: false } });
     const origin = request.headers.origin;
     if (origin && !allowedOrigins.has(origin)) return reply.code(403).send({ error: { code: 'ORIGIN_BLOCKED', message: 'Requests from this website are not allowed.', retryable: false } });
     if (origin) reply.header('access-control-allow-origin', origin).header('vary', 'Origin');
@@ -254,7 +262,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
     const allowPrivateNetwork = body.data.allowPrivateNetwork === true;
     if ('sample' in body.data) {
-      const scan = launchScan({ sample: 'checkout', url: '', interactionMode, allowPrivateNetwork }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', interactionMode, allowPrivateNetwork, fixtureState: { variant: sampleVariant, appliedChanges: appliedPatches().length } }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;
@@ -303,7 +311,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       : body.data.allowPrivateNetwork === false ? false
       : previous.addressScope === 'private';
     if (previous.sample) {
-      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode, allowPrivateNetwork }, baseUrl);
+      const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode, allowPrivateNetwork, fixtureState: { variant: sampleVariant, appliedChanges: appliedPatches().length } }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
     let url: URL;

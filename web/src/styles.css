@@ -438,7 +438,7 @@ select:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 .ripple-active .node-card text{font-size:13px}
 @media(max-width:620px){.ripple-active .node-card text{font-size:11.5px}}
 /* A scan result fits one screen. The map keeps its own height instead of stretching to the inspector, and the side columns scroll inside themselves. */
-@media(min-width:901px){.studio.has-scan .workspace{height:clamp(600px,calc(100dvh - 132px),980px);min-height:0}.studio.has-scan .workspace-sidebar,.studio.has-scan .inspector,.studio.has-scan .workspace-center{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}.studio.has-scan .canvas-wrap{min-height:0}.studio.has-scan .canvas-wrap:not(.journey-active):not(.ripple-active) .graph-stage{flex:1 1 auto;height:auto;min-height:340px}.studio.has-scan .result-summary{scroll-margin-top:12px}}
+@media(min-width:901px){.studio.has-scan .workspace{height:clamp(560px,calc(100dvh - 216px),980px);min-height:0}.studio.has-scan .workspace-sidebar,.studio.has-scan .inspector,.studio.has-scan .workspace-center{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}.studio.has-scan .canvas-wrap{min-height:0}.studio.has-scan .canvas-wrap:not(.journey-active):not(.ripple-active) .graph-stage{flex:1 1 auto;height:auto;min-height:340px}.studio.has-scan .result-summary{scroll-margin-top:12px}}
 
 /* Reach: what lies beyond a point along recorded journeys. */
 .reach-badge{position:absolute;top:14px;left:14px;display:flex;align-items:flex-start;gap:8px;max-width:min(520px,calc(100% - 32px));padding:9px 13px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:9px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);color:var(--muted);font-size:12px;line-height:1.5;pointer-events:none;z-index:3}
@@ -464,6 +464,7 @@ select:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 /* A simulation is always named as one. */
 .simulated-banner{display:flex;gap:10px;align-items:flex-start;margin:0 0 16px;padding:11px 14px;border:1px dashed #f0aa4b;border-radius:8px;background:#f0aa4b12;font-size:13px;line-height:1.6;color:var(--text)}.simulated-banner svg{color:#f0aa4b;flex-shrink:0;margin-top:3px}
 .simulated-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px dashed #f0aa4b;border-radius:20px;color:#f0aa4b;font-size:10px;letter-spacing:.06em}
+.repair-banner{display:flex;gap:10px;align-items:flex-start;margin:0 0 16px;padding:11px 14px;border:1px solid var(--line,#ffffff26);border-radius:8px;font-size:13px;line-height:1.6;color:var(--text)}.repair-banner svg{flex-shrink:0;margin-top:3px}.repair-banner.prepared{border-style:dashed;border-color:#f0aa4b;background:#f0aa4b12}.repair-banner.prepared svg{color:#f0aa4b}.repair-banner.applied{border-color:#4fd1a0;background:#4fd1a012}.repair-banner.applied svg{color:#4fd1a0}[data-theme=light] .repair-banner.prepared svg{color:#8e5d22}[data-theme=light] .repair-banner.applied svg{color:#17795a}
 [data-theme=light] .simulated-chip,[data-theme=light] .simulated-banner svg{color:#8e5d22}
 /* The judge walkthrough. */
 .walkthrough{position:fixed;right:20px;bottom:20px;z-index:40;width:min(360px,calc(100vw - 32px));padding:16px 18px;border:1px solid var(--line2);border-radius:12px;background:var(--surface);box-shadow:0 18px 50px #0006}
@@ -475,3 +476,5 @@ select:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.walk-mark .spinner{animation:none}}
 .change-exports{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
 .box-outline.label-end b{left:auto;right:-2px}
+
+.first-look{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:8px 28px;margin:-6px 0 14px;padding:10px 22px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:13.5px;line-height:1.5;color:var(--text-soft,var(--text))}.first-look p{margin:0}.first-look b{color:var(--text);font-weight:600}.first-look .story-link{display:inline;padding:0;font-size:inherit}@media(max-width:900px){.first-look{grid-template-columns:1fr;padding:10px 14px}}

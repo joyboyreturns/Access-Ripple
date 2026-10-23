@@ -215,7 +215,12 @@ export function checkPredictions(
     const rechecked = !node || node.data.ruleId === 'accessibility-check-incomplete' ? false : pageId
       ? inspectedBefore.has(pageId) && inspectedAfter.has(pageId) && !(node?.kind === 'accessibility-finding' && (checksFailedBefore.has(pageId) || checksFailedAfter.has(pageId)))
       : true;
-    if (!rechecked) return { ...prediction, label, observed: 'not rechecked' as const, outcome: 'not rechecked' as const };
+    // A change simulated for this finding that the scanner could not apply was
+    // never tested: the page looked the same because nothing was changed, and that
+    // cannot contradict a prediction about what the change would do.
+    const patches = current.pages.find((item) => item.id === pageId)?.simulatedPatches?.filter((patch) => patch.nodeId === prediction.issueId) ?? [];
+    const untested = patches.length > 0 && !patches.some((patch) => patch.applied);
+    if (!rechecked || untested) return { ...prediction, label, observed: 'not rechecked' as const, outcome: 'not rechecked' as const };
     const observed: PredictionExpectation = after.has(prediction.issueId) ? 'present' : 'absent';
     const simulated = current.pages.some((page) => page.id === pageId && page.simulatedPatches?.some((patch) => patch.applied));
     return { ...prediction, label, observed, outcome: observed === prediction.expected ? 'supported' as const : 'contradicted' as const, ...(simulated ? { simulated: true } : {}) };

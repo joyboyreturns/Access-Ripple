@@ -120,6 +120,8 @@ export interface ScanComparison {
   notRechecked: GraphNode[];
   /** What the model predicted before the change, and what the browser recorded after it. */
   predictions?: Array<{ issueId: string; expected: 'absent' | 'present'; reason: string; label?: string; observed?: 'absent' | 'present' | 'not rechecked'; outcome?: 'supported' | 'contradicted' | 'not rechecked'; simulated?: boolean }>;
+  /** For the demo shop: a prepared fix, a change applied to its in-memory copy, or nothing recorded between the two scans. */
+  repair?: 'prepared-fix' | 'applied-change' | 'no-change';
   /** Pages of the later scan where a change was simulated in the scanner's browser. */
   simulatedPages?: Array<{ url: string; applied: number; notApplied: number }>;
 }

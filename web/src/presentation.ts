@@ -224,6 +224,16 @@ export function groupIssues(nodes: GraphNode[]): ViewNode[] {
  * Every number here comes from evidence the browser actually recorded, so the
  * sentence never claims more than the scan observed.
  */
+/**
+ * The finding to look at first: the one the story names, the one the inspector
+ * opens on, and the one the story's link opens. One definition, so the three
+ * can never name different findings.
+ */
+export function topFinding(graph: SiteGraph): ViewNode | undefined {
+  const real = graph.nodes.filter(n => n.kind === 'accessibility-finding' && n.data.ruleId !== 'accessibility-check-incomplete');
+  return [...groupIssues(real)].sort(byPriority(graph))[0];
+}
+
 export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: string; detail: string; tone: 'clear' | 'attention' | 'critical' } {
   // A page whose checks could not run is not a finding. Counting it as one
   // would tell a developer their site has a problem it may not have.
@@ -232,11 +242,11 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
   const findings = groupIssues(allFindings.filter(n => n.data.ruleId !== 'accessibility-check-incomplete'));
   const rawCount = allFindings.length - incomplete;
   const signals = graph.nodes.filter(n => n.kind === 'runtime-error');
-  const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'inspected').length ?? 0;
+  const pages = scan.coverage?.pagesInspected ?? scan.pages.filter(p => p.status === 'complete' || p.status === 'inspected').length;
   const blocked = scan.coverage?.pagesBlocked ?? scan.pages.filter(p => p.status === 'skipped').length;
   const tested = scan.interactionPolicy?.tested ?? 0;
   const site = graph.nodes.find(n => n.kind === 'site')?.label ?? 'this website';
-  const top = [...findings].sort(byPriority(graph))[0];
+  const top = topFinding(graph);
   const topPage = top ? pageFor(top, graph)?.label : undefined;
 
   const topCount = top ? Number(top.data.groupCount) || 1 : 1;
@@ -247,6 +257,16 @@ export function scanStory(scan: ScanResult, graph: SiteGraph): { headline: strin
     return {
       headline: `${site} refused the automated browser, so nothing on it could be inspected.`,
       detail: 'Some sites answer an automated browser with a challenge page instead of the site. This is a property of the site, not a fault in the scan.',
+      tone: 'attention',
+    };
+  }
+
+  // Nothing was inspected and nothing refused: the page never loaded, or loaded
+  // too slowly. "No findings" would read as a clean result, and it is not one.
+  if (!pages) {
+    return {
+      headline: `No page of ${site} could be inspected, so nothing is known about its accessibility.`,
+      detail: `The scan finished without opening a page it could check${signals.length ? `; the browser reported ${signals.length} signal${signals.length === 1 ? '' : 's'}, listed with the findings` : ''}. This is not a clean result. The site may be down, slow, or unreachable from this computer; try the scan again.`,
       tone: 'attention',
     };
   }

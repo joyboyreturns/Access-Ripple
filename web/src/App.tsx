@@ -5,7 +5,7 @@ import SelectMenu from './SelectMenu';
 import Landing, { Dialog } from './Landing';
 import Icon, { Mark } from './Icons';
 import { APPLIED_FIXES_PATCH, APPLIED_FIXES_SUMMARY, ApiError, applyProposal, checkApi, compareScans, createScan, downloadVault, getAiStatus, getProof, getSampleInfo, listScans, proposeFix, readGraph, readScan, resetDemoShop, rescan, setSampleState, simulateProposal, waitForScan, writeBriefing, writeContract, type AiStatus, type Briefing, type RepairContract } from './api';
-import { barrierRipple, byPriority, cleanLabel, describe, friendlyScanError, groupIssues, isIssue, kindName, matches, nodeColor, pageFor, reachFacts, remainingSummary, rippleReach, routesToFinding, scanStory, severity, shortcutOf, str, traceJourney, whoItProtects, type GraphFilter, type ViewNode } from './presentation';
+import { barrierRipple, byPriority, cleanLabel, describe, friendlyScanError, groupIssues, isIssue, kindName, matches, nodeColor, pageFor, reachFacts, remainingSummary, rippleReach, routesToFinding, scanStory, severity, topFinding, shortcutOf, str, traceJourney, whoItProtects, type GraphFilter, type ViewNode } from './presentation';
 import { TOUR, type TourContext } from './tour';
 import type { FixProposal, SampleInfo, ScanComparison, ScanResult, ScanSummary, SiteGraph } from './types';
 
@@ -78,6 +78,9 @@ function ProofView({ comparison, graph, previousGraph, onClose }: { comparison: 
       <button className="icon-btn" aria-label="Close the proof" onClick={onClose}><Icon name="close" size={18}/></button>
     </div>
     {simulated.length>0&&<p className="simulated-banner"><Icon name="warning" size={16}/><span><b>SIMULATED PATCH.</b> The second scan applied {simulated.reduce((total,page)=>total+page.applied,0)} change{simulated.reduce((total,page)=>total+page.applied,0)===1?'':'s'} inside the scanner’s own browser. These results describe that simulation, not the live site, which was not changed.</span></p>}
+    {comparison.repair==='prepared-fix'&&<p className="repair-banner prepared"><Icon name="info" size={16}/><span><b>PREPARED FIX.</b> The demo shop’s own repaired page was switched on for this second scan. It is not a change a model wrote, so it shows that a repair can be measured, not that a model can write one.</span></p>}
+    {comparison.repair==='applied-change'&&<p className="repair-banner applied"><Icon name="check" size={16}/><span><b>PROPOSED CHANGE, APPLIED TO THE DEMO SHOP.</b> The edit was applied to the demo shop’s in-memory copy, which this tool owns, and the second scan read it. Nothing on disk and no other site was changed.</span></p>}
+    {comparison.repair==='no-change'&&<p className="repair-banner none"><Icon name="info" size={16}/><span><b>NO CHANGE WAS RECORDED BETWEEN THESE SCANS.</b> Any difference below comes from the page itself, not from a repair.</span></p>}
     {shot&&<div className="proof-shots">
       <figure>{shot.before?<ShotWithBoxes src={shot.before} alt="The page before the change." boxes={boxesOn(shot.url,[{nodes:comparison.resolved,tone:'resolved'},{nodes:comparison.remaining,tone:'remaining'}],[previousGraph,graph])}/>:<img src="" alt="The page before the change"/>}<figcaption>Before{boxesOn(shot.url,[{nodes:comparison.resolved,tone:'resolved'},{nodes:comparison.remaining,tone:'remaining'}],[previousGraph,graph]).length>0?' · outlined where each finding was recorded':''}</figcaption></figure>
       <figure><img src={shot.after ?? shot.before ?? ''} alt="The page after the change"/><figcaption>After</figcaption></figure>
@@ -137,12 +140,27 @@ function describeId(id: string, graph: SiteGraph, fallback?: string, previousGra
 /** One readable paragraph that says what the scan found, so the result is legible at a glance. */
 function ScanStory({ scan, graph, onOpen }: { scan: ScanResult; graph: SiteGraph; onOpen: (node: ViewNode) => void }) {
   const story = useMemo(()=>scanStory(scan,graph),[scan,graph]);
-  const first=useMemo(()=>{
-    const findings=groupIssues(graph.nodes.filter(n=>n.kind==='accessibility-finding'));
-    const order=['critical','serious','moderate','minor'];
-    return [...findings].sort((a,b)=>order.indexOf(severity(a))-order.indexOf(severity(b)))[0]??null;
-  },[graph]);
+  const first=useMemo(()=>topFinding(graph)??null,[graph]);
   return <div className={`scan-story tone-${story.tone}`}><div className="story-head"><span className="eyebrow">WHAT WE FOUND</span><span className="story-tone">{story.tone==='clear'?'Nothing blocking':story.tone==='critical'?'Needs attention':'Worth a look'}</span></div><p className="story-headline">{story.headline}</p><p className="story-detail">{story.detail}</p>{first&&<button className="story-link" onClick={()=>onOpen(first)}>Open “{describe(first).title}” <Icon name="arrow" size={15}/></button>}</div>;
+}
+
+/**
+ * Three facts under the metrics so the first frame of a result answers what was
+ * found, who it affects, and what was actually tested. Every figure is read
+ * from the scan record; the sentence about people is the check's own audience.
+ */
+function FirstLook({ scan, graph, onOpen }: { scan: ScanResult; graph: SiteGraph; onOpen: (node: ViewNode) => void }) {
+  const top=useMemo(()=>topFinding(graph),[graph]);
+  const policy=scan.interactionPolicy;
+  const tested=policy?.tested??0,skipped=policy?.skipped??0;
+  const who=top?whoItProtects(top):'';
+  const reach=top?reachFacts(top):null;
+  const inspected=scan.coverage?.pagesInspected??scan.pages.filter(p=>p.status==='complete'||p.status==='inspected').length;
+  if(!inspected)return null;
+  return <div className="first-look" aria-label="What this scan shows">
+    <p><b>Start with</b>{top?<> <button className="story-link" onClick={()=>onOpen(top)}>{describe(top).title}</button>{who&&<> — it affects <b>{who.charAt(0).toLowerCase()+who.slice(1)}</b></>}{reach&&reach.journeys>0&&<>; {reach.journeys} recorded journey{reach.journeys===1?'':'s'} pass through its page</>}.</>:<> nothing: no accessibility finding was recorded in the checks that ran.</>}</p>
+    <p><b>Tested</b> {tested} control{tested===1?'':'s'} activated once in a disposable browser{skipped>0?`; ${skipped} left untested (permission, safety or budget), so nothing is claimed about them`:''}.</p>
+  </div>;
 }
 
 /**
@@ -169,9 +187,9 @@ function AiBriefing({ scan, graph, status, onOpen, onReady }: { scan: ScanResult
 const WALK_STEPS = ['Scan the demo shop', 'Open the finding with the widest reach', 'The model proposes a change', 'The model commits to what it will fix', 'Apply the change', 'Rescan and compare', 'Open the proof'];
 
 /** Where the walkthrough is. Each step has a mark and a word, and the panel says when a prepared fix stood in for the model. */
-function WalkthroughPanel({ walk, busy, onClose }: { walk: { step: number; note: string; model: boolean; error?: string; seconds?: number }; busy: boolean; onClose: () => void }) {
+function WalkthroughPanel({ walk, busy, onClose }: { walk: { step: number; note: string; model: boolean; noPrediction?: boolean; error?: string; seconds?: number }; busy: boolean; onClose: () => void }) {
   return <section className="walkthrough" aria-label="Judge walkthrough"><div className="walkthrough-head"><strong>Judge walkthrough</strong>{walk.seconds!==undefined&&<span className="walkthrough-time">{walk.seconds} s</span>}<button className="icon-btn" aria-label="Close the walkthrough" disabled={busy} onClick={onClose}><Icon name="close" size={16}/></button></div>
-    <ol>{WALK_STEPS.map((label,index)=>{const skipped=!walk.model&&(index===2||index===3);const state=walk.error&&index===walk.step?'failed':skipped&&walk.step>=4?'skipped':index<walk.step||walk.step===6?'done':index===walk.step?'current':'waiting';return <li key={label} className={state} aria-current={state==='current'?'step':undefined}><span className="walk-mark">{state==='done'?<Icon name="check" size={12}/>:state==='current'?<span className="spinner"/>:state==='failed'?<Icon name="close" size={12}/>:state==='skipped'?<Icon name="minus" size={12}/>:<span>{index+1}</span>}</span><span>{label}{state==='skipped'?' — skipped':''}</span></li>;})}</ol>
+    <ol>{WALK_STEPS.map((label,index)=>{const skipped=(!walk.model&&(index===2||index===3)||walk.noPrediction===true&&index===3);const state=walk.error&&index===walk.step?'failed':skipped&&walk.step>=4?'skipped':index<walk.step||walk.step===6?'done':index===walk.step?'current':'waiting';return <li key={label} className={state} aria-current={state==='current'?'step':undefined}><span className="walk-mark">{state==='done'?<Icon name="check" size={12}/>:state==='current'?<span className="spinner"/>:state==='failed'?<Icon name="close" size={12}/>:state==='skipped'?<Icon name="minus" size={12}/>:<span>{index+1}</span>}</span><span>{label}{state==='skipped'?' — skipped':''}</span></li>;})}</ol>
     <p className={walk.error?'ai-error':'walkthrough-note'}>{walk.error??walk.note}</p></section>;
 }
 
@@ -202,7 +220,7 @@ export default function App() {
   // otherwise have to go looking for: progress, readiness, and verdicts.
   const [announcement,setAnnouncement]=useState('');
   const announce=(message:string)=>{setAnnouncement('');window.setTimeout(()=>setAnnouncement(message),40);};
-  const [walk,setWalk]=useState<{step:number;note:string;model:boolean;error?:string;seconds?:number}|null>(null);
+  const [walk,setWalk]=useState<{step:number;note:string;model:boolean;noPrediction?:boolean;error?:string;seconds?:number}|null>(null);
   const inspectorReturn=useRef('');
   const controller=useRef<AbortController|null>(null),urlInput=useRef<HTMLInputElement>(null),inspector=useRef<HTMLElement>(null),demoStarted=useRef(false);
   const reduced=useReducedMotion();
@@ -248,7 +266,7 @@ export default function App() {
 
   function accept(result: ScanResult, data: SiteGraph) {
     setJourneyId(null);setRippleId(null);setScan(result);setGraph(data);setProgress(null);setUrl(result.sample?'':result.inputUrl);setFocus(false);setFilter('overview');setQuery('');setProposal(null);setProposalError('');setContract(null);setContractError('');
-    const issues=groupIssues(data.nodes.filter(isIssue));setSelected(issues.find(n=>n.kind==='accessibility-finding')??data.nodes[0]??null);setSimulatedIds([]);
+    const issues=groupIssues(data.nodes.filter(isIssue));setSelected(topFinding(data)??issues.find(n=>n.kind==='accessibility-finding')??data.nodes[0]??null);setSimulatedIds([]);
     const findings=data.nodes.filter(n=>n.kind==='accessibility-finding'&&n.data.ruleId!=='accessibility-check-incomplete').length;
     announce(`Scan complete. ${findings} accessibility finding${findings===1?'':'s'} on ${data.nodes.filter(n=>n.kind==='page').length} pages.`);
     setHistory(items=>[{scan:result,graph:data},...items.filter(item=>item.scan.id!==result.id)].slice(0,5));storageSet('accessripple-last-scan',result.id,true);
@@ -283,7 +301,7 @@ export default function App() {
       // Bring the metrics and the map into one frame, the way a viewer should first see a result.
       if(window.innerWidth>=901)window.setTimeout(()=>document.querySelector('.result-summary')?.scrollIntoView({behavior:reduced?'instant':'smooth',block:'start'}),160);
       setNotice(expired?'New scan complete. The earlier scan expired after a scanner restart, so comparison is unavailable.':finished.status==='partial'?'Some pages were unavailable. The map includes the evidence that could be collected.':'Scan complete. Explore a point to understand its impact.');
-      if(previous){try{const result=await compareScans(finished.id,previous.id);setComparison(result);setBeats(b=>({...b,compared:b.compared+1}));}catch{setNotice('The new scan is ready. The previous scan is no longer available for comparison.');}}
+      if(previous){try{const result=await compareScans(finished.id,previous.id);setComparison(result);setBeats(b=>({...b,compared:b.compared+1}));const unapplied=(result.simulatedPages??[]).reduce((total,page)=>total+page.notApplied,0);if(unapplied>0)setNotice(`${unapplied} simulated change${unapplied===1?' was':'s were'} not applied in the scanner’s browser, so that change was never tested and no prediction about it is judged.`);}catch{setNotice('The new scan is ready. The previous scan is no longer available for comparison.');}}
     }catch(cause){
       if(!abort.signal.aborted){
         const message=cause instanceof Error?cause.message:'The scan could not complete.';
@@ -355,9 +373,12 @@ export default function App() {
   async function walkthrough(){
     if(!sample||busy)return;
     const started=Date.now(),abort=new AbortController();controller.current?.abort();controller.current=abort;
-    const step=(index:number,note:string,model:boolean)=>{setWalk({step:index,note,model});announce(note);};
+    let noPrediction=false,lost='';
+    const step=(index:number,note:string,model:boolean)=>{setWalk({step:index,note,model,noPrediction});announce(note);};
     setBusy(true);setError('');setNotice('');setComparison(null);setProofOpen(false);
-    let model=Boolean(aiStatus?.configured);
+    // A walkthrough opened by address starts before the status request has
+    // answered, and guessing "no model" there would silently skip the model.
+    let model=aiStatus?Boolean(aiStatus.configured):await getAiStatus().then(status=>Boolean(status.configured),()=>false);
     try{
       step(0,'Scanning the demo shop in a real browser.',model);
       await resetDemoShop();await setSampleState('before');setSample({...sample,variant:'before'});
@@ -365,23 +386,33 @@ export default function App() {
       const before=await waitForScan(first.scanId,setProgress,abort.signal);
       if(before.status==='failed')throw new Error(before.error?.message||'The demo shop could not be scanned.');
       const beforeGraph=await readGraph(first.scanId);accept(before,beforeGraph);
-      const target=groupIssues(beforeGraph.nodes.filter(isIssue)).sort(byPriority(beforeGraph)).find(n=>n.kind==='accessibility-finding');
+      const target=topFinding(beforeGraph);
       if(!target)throw new Error('The demo shop scan recorded no finding to repair.');
       step(1,`Opening “${describe(target).title}”, the finding with the most recorded journeys through its page.`,model);
       setSelected(target);setRippleId(target.id);setJourneyId(null);setView('map');
       if(model){
+        const fallBack=async(why:string)=>{
+          model=false;lost=why;setProposal(null);setContract(null);
+          step(4,`The model step did not finish (${why}), so the demo shop’s prepared fix is applied instead. That fix is not a change the model wrote.`,model);
+          await resetDemoShop();await setSampleState('after');setSample({...sample,variant:'after'});
+        };
+        let change:FixProposal|null=null;
         try{
           step(2,'Asking the model for the smallest change that fixes it.',model);
-          const change=await proposeFix(before.id,target.id);setProposal(change);
-          step(3,'Asking the model to commit, in advance, to what the change will fix.',model);
-          setContract(await writeContract(before.id,target.id));
+          change=await proposeFix(before.id,target.id);setProposal(change);
           if(!change.location)throw new Error('the change could not be placed in the demo shop’s source');
-          step(4,'Applying the accepted change to the demo shop.',model);
-          await applyProposal({file:change.location.file,before:change.before,after:change.after,summary:change.summary});
-        }catch(cause){
-          model=false;
-          step(4,`The model step did not finish (${cause instanceof Error?cause.message:'no answer'}), so the demo shop’s prepared fix is applied instead.`,model);
-          await resetDemoShop();await setSampleState('after');setSample({...sample,variant:'after'});
+        }catch(cause){change=null;await fallBack(cause instanceof Error?cause.message:'no answer');}
+        if(change){
+          // The prediction is the point of the walkthrough, but a model change
+          // that arrived is still the model's. One retry, then say what is missing.
+          step(3,'Asking the model to commit, in advance, to what the change will fix.',model);
+          let made:RepairContract|null=null,reason='';
+          for(let attempt=0;attempt<2&&!made;attempt++){const asked=Date.now();try{made=await writeContract(before.id,target.id);}catch(cause){reason=cause instanceof Error?cause.message:'no answer';if(Date.now()-asked>8000)break;/* a slow failure is not retried; the wait would double */}}
+          if(made)setContract(made);
+          else{noPrediction=true;setContract(null);}
+          step(4,noPrediction?`The model’s change is applied, but its prediction did not arrive (${reason}), so this run has no prediction to check.`:'Applying the accepted change to the demo shop.',model);
+          try{await applyProposal({file:change.location!.file,before:change.before,after:change.after,summary:change.summary});}
+          catch(cause){await fallBack(cause instanceof Error?cause.message:'the change did not apply');noPrediction=false;}
         }
       }else{
         step(4,'No model is configured, so the demo shop’s prepared fix is applied instead.',model);
@@ -394,7 +425,7 @@ export default function App() {
       const afterGraph=await readGraph(again.scanId);accept(after,afterGraph);setPreviousGraph(beforeGraph);
       const result=await compareScans(after.id,before.id);setComparison(result);setBeats(b=>({...b,compared:b.compared+1}));
       const seconds=Math.round((Date.now()-started)/1000);
-      setWalk({step:6,note:`Done in ${seconds} seconds. ${result.resolved.length} no longer observed, ${result.new.length} new.`,model,seconds});
+      setWalk({step:6,note:`Done in ${seconds} seconds. ${result.resolved.length} no longer observed, ${result.new.length} new.${model?(noPrediction?' The change was written by the model and applied to the demo shop’s in-memory copy, but its prediction did not arrive, so there is no verdict to show.':' The change was written by the model and applied to the demo shop’s in-memory copy.'):` The repair was the demo shop’s prepared fix, not the model’s${lost?` (the model step failed: ${lost})`:''}.`}`,model,noPrediction,seconds});
       setProofOpen(true);
     }catch(cause){
       if(!abort.signal.aborted)setWalk(current=>({...(current??{step:0,note:'',model}),error:cause instanceof Error?friendlyScanError(cause.message):'The walkthrough stopped.'}));
@@ -493,6 +524,7 @@ export default function App() {
       {notice&&<div className="alert" role="status"><Icon name="check" size={18}/><span>{notice}</span><button className="icon-btn" aria-label="Dismiss notice" onClick={()=>setNotice('')}><Icon name="close" size={17}/></button></div>}
       {busy&&<div className="scan-progress" role="status" aria-live="polite"><div className="scan-progress-orbit"><Icon name="orbit" size={28}/></div><div><strong>{progress?.status==='running'?'Following the connections…':'Preparing the browser…'}</strong><span>{progress?.progress.currentUrl?hostname(progress.progress.currentUrl):'Opening a bounded browser session'}</span></div><div className="progress-status"><span>{progress?.progress.completedPages??0} pages inspected{typeof progress?.progress.remainingMs==='number'?` · ${Math.max(1,Math.ceil(progress.progress.remainingMs/1000))}s left`:''}</span><div className="progress-track"><i style={{width:`${Math.max(8,Math.min(94,((progress?.progress.completedPages??0)+.5)/5*100))}%`}}/></div></div></div>}
       {scan&&<div className="result-summary"><div className="result-site"><span className="site-symbol"><Icon name="globe" size={22}/></span><div><span className="eyebrow">{scan.status==='partial'?'PARTIAL SCAN':'SCAN COMPLETE'}{scan.sample?' · BUILT-IN DEMO SHOP':scan.addressScope==='private'?' · ADDRESS ON THIS COMPUTER':' · PUBLIC SITE'}</span><h2>{scan.sample?(sample?.name??'Northstar demo shop'):hostname(scan.inputUrl)}</h2></div></div><div className="summary-metrics"><button onClick={()=>changeFilter('pages')}><strong>{scan.coverage?.pagesInspected??scan.pages.filter(p=>p.status==='inspected').length}</strong><span>pages inspected</span></button><button onClick={()=>changeFilter('controls')}><strong>{counts.controls}</strong><span>visible controls</span></button><button className="finding-metric" onClick={()=>changeFilter('issues')}><strong>{counts.findings}</strong><span>accessibility findings</span></button><button onClick={()=>changeFilter('flows')}><strong>{counts.testedFlows}</strong><span>actions tested</span></button></div><div className="result-actions"><button className="icon-btn" title="Rescan and compare" aria-label="Rescan and compare" disabled={busy} onClick={()=>void run(scan.sample?{sample:'checkout'}:{url:scan.inputUrl},true)}><Icon name="refresh"/></button><button className="button button-glass compact" disabled={busy||exporting} onClick={()=>void exportScan()}><Icon name="download" size={17}/>{exporting?'Preparing…':'Export vault'}</button></div></div>}
+      {scan&&<FirstLook scan={scan} graph={graph} onOpen={node=>{setSelected(node);setFilter('issues');setBeats(b=>({...b,finding:b.finding+1}));}}/>}
       {comparison&&<div className="comparison" role="status"><Icon name="refresh"/><strong>What changed</strong>{comparison.simulatedPages?.some(page=>page.applied)&&<span className="simulated-chip"><Icon name="warning" size={12}/>SIMULATED PATCH · the site was not changed</span>}<span><b>{comparison.resolved.length}</b> no longer observed</span><span><b>{comparison.remaining.length}</b> still observed</span><span><b>{comparison.new.length}</b> new</span>{comparison.notRechecked.length>0&&<span><b>{comparison.notRechecked.length}</b> not rechecked</span>}<small>Findings and browser signals the browser no longer recorded — not a claim that the site is now accessible.{comparison.notRechecked.length>0?' A page that could not be checked again is listed as not rechecked, never as fixed.':''}</small>{comparison.pages.some(page=>page.before&&page.after)&&<button className="button button-glass compact" onClick={()=>setProofOpen(true)}><Icon name="target" size={15}/>See the page before and after</button>}{!comparison.demoShop&&<ChangeExports/>}{(comparison.predictions?.length??0)>0&&<div className="prediction-verdicts"><span className="eyebrow">THE MODEL COMMITTED TO THIS, AND THE BROWSER CHECKED IT</span>{comparison.predictions!.map((prediction)=><div className={`verdict ${prediction.outcome}`} key={prediction.issueId}><VerdictMark outcome={prediction.outcome}/><span><strong>{describeId(prediction.issueId, graph, prediction.label, previousGraph)}</strong><small>{prediction.outcome==='supported'?`The model said it would be ${prediction.expected==='absent'?'gone':'still there'}. It was.`:prediction.outcome==='contradicted'?`The model said it would be ${prediction.expected==='absent'?'gone':'still there'}. It was not.`:'That page was not checked again, so the prediction is unknown.'}</small></span></div>)}</div>}</div>}
       <nav className="mobile-filters" aria-label="Explore categories">{FILTERS.map(item=><button key={item.id} className={filter===item.id?'active':''} aria-pressed={filter===item.id} onClick={()=>changeFilter(item.id)}><Icon name={item.icon} size={16}/>{item.name}</button>)}</nav>
       <section className="workspace" aria-label="Website journey workspace">

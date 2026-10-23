@@ -73,6 +73,8 @@ export interface ScanInput {
   allowPrivateNetwork?: boolean;
   /** Changes to simulate inside the scanner's own browser. The site itself is never changed. */
   simulatedPatches?: NonNullable<ScanResult['simulatedPatches']>;
+  /** The demo shop's state when the scan started, carried onto the result. */
+  fixtureState?: ScanResult['fixtureState'];
   onUpdate: (scan: ScanResult) => void;
 }
 
@@ -90,6 +92,7 @@ function initialResult(input: ScanInput): ScanResult {
     progress: { completedPages: 0, totalPageLimit: DEFAULT_LIMITS.maxPages, message: 'Waiting for a scan worker.' },
     pages: [],
     simulatedPatches: input.simulatedPatches?.length ? input.simulatedPatches : undefined,
+    fixtureState: input.sample ? input.fixtureState : undefined,
     previousScanId: input.previousScanId,
     interactionPolicy: { mode: input.interactionMode ?? 'safe', tested: 0, skipped: 0 },
     addressScope: input.allowPrivateNetwork ? 'private' : 'public',
@@ -199,24 +202,28 @@ async function recordBoxes(page: import('playwright').Page, findings: Accessibil
  */
 async function simulatePatches(page: import('playwright').Page, patches: NonNullable<ScanResult['simulatedPatches']>): Promise<SimulatedPatchOutcome[]> {
   if (!patches.length) return [];
-  const results = await page.evaluate((list: Array<{ selector: string; before: string; after: string }>) => {
-    const flat = (value: string) => value.replace(/\s+/g, ' ').trim();
+  // A string, not a function: a transpiler that keeps function names adds a helper
+  // call to a function body, the helper does not exist inside the page, and the
+  // change then fails to apply with no visible cause. inspectControls does the same.
+  const list = patches.map(({ selector, before, after }) => ({ selector, before, after }));
+  const results = await page.evaluate(`((list) => {
+    const flat = (value) => value.replace(/\\s+/g, ' ').trim();
     return list.map(({ selector, before, after }) => {
-      let element: Element | null = null;
+      let element = null;
       try { element = document.querySelector(selector); } catch { return { applied: false, reason: 'The selector could not be read.' }; }
       if (!element) return { applied: false, reason: 'The element was not on the page.' };
       // The recorded markup may be the start of a longer element, so it must be its prefix.
-      if (!flat(element.outerHTML).startsWith(flat(before).replace(/\s*\.\.\.$/, ''))) return { applied: false, reason: 'The element no longer has the recorded markup.' };
+      if (!flat(element.outerHTML).startsWith(flat(before).replace(/\\s*\\.\\.\\.$/, ''))) return { applied: false, reason: 'The element no longer has the recorded markup.' };
       const template = document.createElement('template');
       template.innerHTML = after;
       const replacement = template.content.firstElementChild;
       if (!replacement || template.content.childElementCount !== 1) return { applied: false, reason: 'The proposed markup is not one element.' };
       // The element keeps its children when the proposal only rewrote its opening tag.
-      if (!replacement.childNodes.length && element.childNodes.length && !/<\/[a-z]/i.test(after)) replacement.append(...Array.from(element.childNodes));
+      if (!replacement.childNodes.length && element.childNodes.length && !/<\\/[a-z]/i.test(after)) replacement.append(...Array.from(element.childNodes));
       element.replaceWith(replacement);
       return { applied: true };
     });
-  }, patches.map(({ selector, before, after }) => ({ selector, before, after }))).catch(() => patches.map(() => ({ applied: false, reason: 'The page did not allow the change to be simulated.' })));
+  })(${JSON.stringify(list)})`).then((value) => value as Array<{ applied: boolean; reason?: string }>).catch(() => patches.map(() => ({ applied: false, reason: 'The page did not allow the change to be simulated.' })));
   return patches.map((patch, index) => ({ id: patch.id, nodeId: patch.nodeId, summary: patch.summary, selector: patch.selector, before: patch.before, after: patch.after, applied: results[index]?.applied ?? false, ...(results[index]?.reason ? { reason: results[index]!.reason } : {}) }));
 }
 
@@ -335,7 +342,13 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
     queue.push({ url: rawUrl, depth });
   };
   enqueue(input.url, 0);
-  const browser = await chromium.launch({ headless: true });  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
+  const browser = await chromium.launch({ headless: true });
+  const context = await browser.newContext({ acceptDownloads: false, serviceWorkers: 'block', ignoreHTTPSErrors: false });
+  // Under `npm run dev` the transpiler (tsx) keeps function names by wrapping each
+  // named inner function in a `__name` call. A function sent into a page with
+  // page.evaluate has no such helper there, and would fail silently: the keyboard
+  // probe found nothing and nothing explained why. The helper is a no-op here.
+  await context.addInitScript('globalThis.__name = globalThis.__name || ((target) => target);');
   const pages: PageEvidence[] = [];
   let interactionsUsed = 0;
   let interactionMsUsed = 0;
@@ -509,7 +522,9 @@ export async function performScan(input: ScanInput): Promise<ScanResult> {
             maxPerPage: scan.limits.maxInteractionsPerPage,
             maxPerScanRemaining: remaining,
             deadline: Math.min(startedAt + scan.limits.totalTimeoutMs * 0.9, interactionStarted + (interactionBudget - interactionMsUsed)),
-            settleMs: 750,
+            // The owned demo shop answers locally and settles within a frame or two,
+            // so it does not need the wait a real network page does.
+            settleMs: input.sample ? 300 : 750,
             clickTimeoutMs: 2500,
             reopenTimeoutMs: Math.min(10_000, scan.limits.navigationTimeoutMs),
             onProgress: (message) => {

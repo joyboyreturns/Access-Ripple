@@ -205,6 +205,8 @@ export interface ScanResult {
   addressScope?: 'public' | 'private';
   /** Changes simulated in the scanner's browser on this scan. A rescan carries them forward. */
   simulatedPatches?: Array<{ id: string; scanId: string; pageUrl: string; ruleId: string; nodeId: string; selector: string; before: string; after: string; summary: string; appliedAt: string }>;
+  /** For the demo shop: which fixture state this scan read, so a comparison can say whether a prepared fix or an applied change separates two scans. */
+  fixtureState?: { variant: 'before' | 'after'; appliedChanges: number };
   coverage?: ScanCoverage;
   error?: { code: string; message: string; retryable: boolean };
 }

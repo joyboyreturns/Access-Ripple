@@ -19,6 +19,21 @@ export interface ScanComparison {
    * browser. What it recorded there is a simulation of the change, not the site.
    */
   simulatedPages: Array<{ url: string; applied: number; notApplied: number }>;
+  /**
+   * What separates the two demo-shop scans: the fixture's own prepared fix, a
+   * change applied to the fixture's in-memory copy (the model's, when it was
+   * accepted), or nothing the tool recorded. Absent for any other site.
+   */
+  repair?: 'prepared-fix' | 'applied-change' | 'no-change';
+}
+
+/** Which kind of repair the demo shop went through between two scans, from the state each scan recorded. */
+function repairBetween(previous: ScanResult, current: ScanResult): ScanComparison['repair'] {
+  const before = previous.fixtureState;
+  const after = current.fixtureState;
+  if (previous.sample !== 'checkout' || current.sample !== 'checkout' || !before || !after) return undefined;
+  if (before.variant !== after.variant) return after.variant === 'after' ? 'prepared-fix' : 'no-change';
+  return after.appliedChanges > before.appliedChanges ? 'applied-change' : 'no-change';
 }
 
 const issueKinds = new Set(['runtime-error', 'accessibility-finding']);
@@ -147,5 +162,5 @@ export function compareScans(previous: ScanResult, current: ScanResult): ScanCom
     applied: page.simulatedPatches!.filter((patch) => patch.applied).length,
     notApplied: page.simulatedPatches!.filter((patch) => !patch.applied).length,
   }));
-  return { previousScanId: previous.id, currentScanId: current.id, resolved, remaining, new: fresh, changed, pages, notRechecked, simulatedPages, demoShop: previous.sample === 'checkout' && current.sample === 'checkout' };
+  return { previousScanId: previous.id, currentScanId: current.id, resolved, remaining, new: fresh, changed, pages, notRechecked, simulatedPages, demoShop: previous.sample === 'checkout' && current.sample === 'checkout', repair: repairBetween(previous, current) };
 }
