@@ -9,6 +9,8 @@ const port = Number(process.env.PORT ?? 4317);
 if (host !== '127.0.0.1' && host !== '::1' && host !== 'localhost') {
   throw new Error('AccessRipple scans are local-only in this proof of concept. HOST must be a loopback address.');
 }
-const app = await buildApp({ baseUrl: `http://${host}:${port}`, logger: true });
+// Names the studio may be opened by through a private proxy on this computer, e.g. `tailscale serve`.
+const trustedHosts = (process.env.ACCESSRIPPLE_TRUSTED_HOSTS ?? '').split(',').map((name) => name.trim()).filter(Boolean);
+const app = await buildApp({ baseUrl: `http://${host}:${port}`, logger: true, trustedHosts });
 await app.listen({ host, port });
 app.log.info(`AccessRipple API is listening locally at http://${host}:${port}`);

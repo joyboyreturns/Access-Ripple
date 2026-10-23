@@ -27,6 +27,14 @@ describe('local scan API', () => {
     }
   });
 
+  it('answers to a host the operator lists, and to nobody else', async () => {
+    const app = await buildApp({ trustedHosts: ['home-pc.tail601a7c.ts.net'] }); apps.push(app);
+    const listed = await app.inject({ method: 'GET', url: '/api/health', headers: { host: 'home-pc.tail601a7c.ts.net', origin: 'https://home-pc.tail601a7c.ts.net' } });
+    expect(listed.statusCode).toBe(200);
+    const other = await app.inject({ method: 'GET', url: '/api/health', headers: { host: 'evil.example.com' } });
+    expect(other.statusCode).toBe(403);
+  });
+
   it('rejects private URLs and malformed bodies before starting a scan', async () => {
     const app = await buildApp(); apps.push(app);
     const privateTarget = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } });
