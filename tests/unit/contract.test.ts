@@ -122,6 +122,17 @@ suite('checking the commitment against the browser', () => {
     expect(checkPredictions(contract, before, after)[0]).toMatchObject({ outcome: 'contradicted', observed: 'present' });
   });
 
+  it('does not call a prediction contradicted when the simulated change could not be applied', () => {
+    const before = scan([page('p1', 'complete')], [finding('f1', 'p1'), signal('e1', 'p1')]);
+    const patch = (applied: boolean) => ({ id: 'simulated:s:f1', nodeId: 'f1', summary: 'Add alt text', selector: 'img', before: '<img>', after: '<img alt="x">', applied, ...(applied ? {} : { reason: 'The element no longer has the recorded markup.' }) });
+    // The change was never applied, so the finding is naturally still there: unknown, not contradicted.
+    const notApplied = scan([{ ...page('p1', 'complete'), simulatedPatches: [patch(false)] }], [finding('f1', 'p1'), signal('e1', 'p1')]);
+    expect(checkPredictions(contract, before, notApplied)[0]).toMatchObject({ outcome: 'not rechecked', observed: 'not rechecked' });
+    // Applied and still there is a real contradiction.
+    const applied = scan([{ ...page('p1', 'complete'), simulatedPatches: [patch(true)] }], [finding('f1', 'p1'), signal('e1', 'p1')]);
+    expect(checkPredictions(contract, before, applied)[0]).toMatchObject({ outcome: 'contradicted', simulated: true });
+  });
+
   it('does not validate a prediction whose baseline evidence is missing', () => {
     expect(checkPredictions(contract, scan([], []), scan([], [])).every((prediction) => prediction.outcome === 'not rechecked')).toBe(true);
   });

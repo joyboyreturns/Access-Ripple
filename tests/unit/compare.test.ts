@@ -99,4 +99,14 @@ suite('comparing two scans', () => {
     expect(comparison.remaining.map((node) => node.id)).toEqual(['b2']);
     expect(comparison.resolved.map((node) => node.id)).toEqual(['a']);
   });
+
+  it('says what separated two demo-shop scans: a prepared fix, an applied change, or nothing', () => {
+    const shop = (fixtureState: ScanResult['fixtureState']): ScanResult => ({ ...scan([page('p1', 'complete')], [finding('f1', 'p1')]), sample: 'checkout', fixtureState });
+    expect(compareScans(shop({ variant: 'before', appliedChanges: 0 }), shop({ variant: 'after', appliedChanges: 0 })).repair).toBe('prepared-fix');
+    expect(compareScans(shop({ variant: 'before', appliedChanges: 0 }), shop({ variant: 'before', appliedChanges: 1 })).repair).toBe('applied-change');
+    expect(compareScans(shop({ variant: 'before', appliedChanges: 0 }), shop({ variant: 'before', appliedChanges: 0 })).repair).toBe('no-change');
+    // A scan that did not record the fixture's state, or a public site, claims nothing about a repair.
+    expect(compareScans(shop(undefined), shop({ variant: 'after', appliedChanges: 0 })).repair).toBeUndefined();
+    expect(compareScans(scan([page('p1', 'complete')], []), scan([page('p1', 'complete')], [])).repair).toBeUndefined();
+  });
 });

@@ -1,4 +1,4 @@
-import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, reachFacts, scanStory, sceneGraph, shortcutOf, traceJourney } from '../../web/src/presentation.js';
+import { cleanLabel, describe as describeNode, friendlyScanError, groupIssues, reachFacts, scanStory, sceneGraph, topFinding, shortcutOf, traceJourney } from '../../web/src/presentation.js';
 import type { GraphNode, InteractionStepView, SiteGraph } from '../../web/src/types.js';
 import { describe as suite, it, expect } from 'vitest';
 
@@ -195,5 +195,25 @@ suite('reach in words', () => {
     expect(reachFacts(withReach({ downstreamPagesReachable: 0, journeysThrough: 0 }))?.text).toBe('No further page reached from here · 0 recorded journeys through its page');
     expect(reachFacts(withReach({}))).toBeNull();
     expect(reachFacts({ id: 'e', kind: 'runtime-error', label: 'x', evidenceLabel: 'observed', data: { downstreamPagesReachable: 1 } })).toBeNull();
+  });
+
+  it('names one finding to start with, and the story, the inspector and the link all agree on it',()=>{
+    const minor={...finding('minor','p1','#a'),data:{ruleId:'link-in-text-block',impact:'minor',targets:['#a']}};
+    const critical={...finding('crit','p1','#b'),label:'Images must have alternative text',data:{ruleId:'image-alt',impact:'critical',targets:['#b']}};
+    const incomplete={...finding('inc','p1','#c'),data:{ruleId:'accessibility-check-incomplete',impact:'critical',targets:['#c']}};
+    const graph:SiteGraph={schemaVersion:'1.0',nodes:[site,page,minor,incomplete,critical],edges:[]};
+    expect(topFinding(graph)?.id).toBe('crit');
+    const scan={coverage:{pagesInspected:1,pagesBlocked:0},interactionPolicy:{tested:0}} as never;
+    expect(scanStory(scan,graph).detail).toContain(describeNode(topFinding(graph)!).title);
+  });
+
+  it('never calls a scan that opened no page a scan with no findings',()=>{
+    const graph:SiteGraph={schemaVersion:'1.0',nodes:[site],edges:[]};
+    const scan={coverage:{pagesInspected:0,pagesBlocked:0},interactionPolicy:{tested:0}} as never;
+    const story=scanStory(scan,graph);
+    expect(story.headline).toMatch(/could be inspected, so nothing is known/);
+    expect(story.headline).not.toMatch(/no accessibility findings/);
+    expect(story.detail).toMatch(/not a clean result/);
+    expect(story.tone).toBe('attention');
   });
 });

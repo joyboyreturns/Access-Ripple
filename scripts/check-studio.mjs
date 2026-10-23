@@ -297,6 +297,31 @@ await page.click('button:has-text("Map this website")');
 await page.waitForTimeout(800);
 check('invalid scheme is rejected', (await txt('.alert.error'))?.includes('http') ?? false);
 
+// --- 14b. The one-press walkthrough names where the repair came from ---
+// With a model configured the change is the model's; without one, or when the
+// model fails, the demo shop's prepared fix stands in. Either way the proof has
+// to say which, and a prepared fix must never be presented as the model's.
+{
+  await resetShop();
+  const configured = (await (await fetch('http://127.0.0.1:4317/api/ai/status')).json()).configured;
+  await page.goto('http://127.0.0.1:5173/#walkthrough', { waitUntil: 'domcontentloaded' });
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  const started = Date.now();
+  await page.waitForSelector('dialog.proof-dialog', { timeout: 240000 });
+  const seconds = (Date.now() - started) / 1000;
+  const banner = await txt('.repair-banner');
+  const note = await txt('.walkthrough-note');
+  const prepared = banner?.includes('PREPARED FIX') ?? false;
+  const proposed = banner?.includes('PROPOSED CHANGE') ?? false;
+  check('the proof says where the repair came from', prepared !== proposed, banner?.slice(0, 40) ?? 'no banner');
+  check('the walkthrough note agrees with the proof', prepared ? /prepared fix, not the model/.test(note ?? '') : /written by the model/.test(note ?? ''), note?.slice(0, 120) ?? '');
+  if (!configured) check('without a model the repair is labelled as the prepared fix', prepared);
+  if (!prepared) check('a model change shows the prediction the browser checked', (await has('.proof-predictions .verdict')) || /no verdict to show/.test(note ?? ''));
+  check('the walkthrough finishes within a minute', seconds < 60, `${seconds.toFixed(0)} s after the page loaded`);
+  await page.keyboard.press('Escape');
+  await resetShop();
+}
+
 // --- 15. Theme ---
 await page.click('button[aria-label="Switch to light mode"]');
 await page.waitForTimeout(500);

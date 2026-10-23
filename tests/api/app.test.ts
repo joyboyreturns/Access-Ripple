@@ -17,6 +17,16 @@ describe('local scan API', () => {
     expect(sample.body).toContain('Complete your order');
   });
 
+  it('answers only to this computer\'s own names, so a rebound web page cannot read scan history', async () => {
+    const app = await buildApp(); apps.push(app);
+    const rebound = await app.inject({ method: 'GET', url: '/api/scans', headers: { host: 'evil.example.com:4317' } });
+    expect(rebound.statusCode).toBe(403);
+    expect(rebound.json().error.code).toBe('HOST_BLOCKED');
+    for (const host of ['127.0.0.1:4317', 'localhost:5173', '[::1]:4317']) {
+      expect((await app.inject({ method: 'GET', url: '/api/health', headers: { host } })).statusCode).toBe(200);
+    }
+  });
+
   it('rejects private URLs and malformed bodies before starting a scan', async () => {
     const app = await buildApp(); apps.push(app);
     const privateTarget = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } });
