@@ -35,7 +35,7 @@ Not every famous site behaves the same. These were measured on this machine:
 
 **0:00–0:08 — The argument, over the landing page.**
 Show the hero for three seconds, then the positioning line.
-Say: “A list tells you what failed. I also need to know how someone reaches it. AccessRipple connects the finding to the journey a control actually took, and checks whether my change removed it.”
+Say: “This is for developers who own a website. A list tells you what failed. AccessRipple shows which journeys pass through each barrier, has an AI propose a fix, and then rescans to check it.” Say who it is for and what it does in the first ten seconds, and start on the app, not on a title card.
 
 **0:08–0:22 — Type a URL.**
 Click **Explore your website**, type `developer.mozilla.org` with no `https://`, and press **Map this website**.
@@ -74,9 +74,13 @@ Say: “Ten controls were activated. Thirty-six were not, because they needed pe
 Press **Export vault**, open the zip briefly.
 Say: “The whole map exports as a linked Obsidian vault, so a team keeps the evidence, not a screenshot.”
 
-**2:22–3:00 — Learning and close.**
-Say what you actually learned building this with AI, in one sentence, in your own words.
-Then: **“I learned that finding a problem isn't enough. I need evidence that my change actually helped.”**
+**2:22–3:00 — How I built it, and what I learned.**
+The judges score the learning journey as well as the app, so give it these 38 seconds. Say it in your own words; the prompts below are real events from this project, so pick the two that mattered to you:
+- The planning skills (`1-start` to `4-spec`) turned a vague idea into a scope, a PRD and a spec before any code. What did the interview change about your idea?
+- A reasoning model spent its whole token budget thinking and returned nothing. Lowering the reasoning effort and raising the budget fixed it.
+- Models put the citation after the full stop, which tore it off its sentence. Folding it back made the grounding check work.
+- A rehearsal found that every keyboard finding was silently missing because of a helper the dev server added. Rehearsing end to end caught what unit tests could not.
+Then close on: **“I learned that finding a problem isn't enough. I need evidence that my change actually helped.”**
 Show the repository link.
 
 ## If something goes wrong
