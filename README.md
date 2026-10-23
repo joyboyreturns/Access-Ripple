@@ -9,7 +9,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 [![License: MIT](https://img.shields.io/badge/license-MIT-87be9b)](LICENSE)
 ![Node 22](https://img.shields.io/badge/node-22-87be9b)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-83b9dd)
-![Tests](https://img.shields.io/badge/tests-231%20passing-87be9b)
+![Tests](https://img.shields.io/badge/tests-236%20passing-87be9b)
 ![Playwright + axe-core](https://img.shields.io/badge/Playwright-axe--core-b5a5f5)
 ![Vercel AI Gateway](https://img.shields.io/badge/AI-Vercel%20AI%20Gateway-111111)
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
