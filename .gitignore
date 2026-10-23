@@ -7,6 +7,9 @@
 .env.*
 !.env.example
 
+# Recorded demo clips
+recordings/
+
 # Installed tools and build output
 node_modules/
 dist/
