@@ -334,7 +334,7 @@ if (failed.length) console.log('FAILED:', failed.map((f) => f.name).join(' | '))
 // The studio abandons its own poll when a new scan starts. That is the app
 // working as designed, not a runtime problem.
 let busyLeft = modelBusy;
-const real = problems.filter((p) => !(/status of 502/.test(p) && busyLeft-- > 0)).filter((p) => !/422/.test(p) && !/ripple-hero\.mp4/.test(p) && !/REQFAIL: http:\/\/127\.0\.0\.1:5173\/api\/scans\/.*ERR_ABORTED/.test(p));
+const real = problems.filter((p) => !(/status of 502/.test(p) && busyLeft-- > 0)).filter((p) => !/422/.test(p) && !/REQFAIL: http:\/\/127\.0\.0\.1:5173\/api\/scans\/.*ERR_ABORTED/.test(p));
 console.log('runtime problems:', real.length ? real : 'none');
 if (modelBusy) console.log(`model provider busy, retried: ${modelBusy}`);
 // Leave the demo shop the way it was found, so a test run never spoils the

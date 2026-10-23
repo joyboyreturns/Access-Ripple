@@ -26,7 +26,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const problems = [];
 page.on('console', (m) => { if (m.type() === 'error' && !/422/.test(m.text())) problems.push('CONSOLE: ' + m.text()); });
 page.on('pageerror', (e) => problems.push('PAGEERROR: ' + e.message));
-page.on('requestfailed', (r) => { if (!/ripple-hero\.mp4/.test(r.url())) problems.push('REQFAIL: ' + r.url()); });
+page.on('requestfailed', (r) => { problems.push('REQFAIL: ' + r.url()); });
 
 const check = (name, pass, detail = '') => console.log(`${pass ? 'PASS' : 'FAIL'}  ${name}${detail ? ' :: ' + detail : ''}`);
 const text = (selector) => page.evaluate((s) => document.querySelector(s)?.textContent?.trim() ?? null, selector);

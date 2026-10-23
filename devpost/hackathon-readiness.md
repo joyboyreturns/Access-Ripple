@@ -18,7 +18,7 @@ Required: a new project created during the submission period, Devpost Learn Skil
 | Public repository | Project memory names `joyboyreturns/Access-Ripple`. | Check public access and that the final tested changes and planning files are present before submission. No push performed by this research. |
 | Public working video | `devpost/demo-script.md` is a recording guide. | A guide is not a video. No final public video URL was verified. |
 | Submission description / registration | No final submitted form inspected. | Human-owned and unverified; the entrant must supply truthful learning and ownership details. |
-| Media and dependency rights | README records font notices and hero-video provenance. | Confirm publication permission for the video and any third-party imagery; provenance alone is not a license grant. |
+| Media and dependency rights | README records font notices; the landing animation is drawn in code (`RippleField.tsx`) and no third-party video ships. | Confirm publication permission for the video and any third-party imagery; provenance alone is not a license grant. |
 
 ## Judging review
 
