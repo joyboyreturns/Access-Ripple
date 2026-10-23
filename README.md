@@ -155,7 +155,7 @@ Open `http://127.0.0.1:5173/` and choose **Explore your website**. Enter a publi
 
 The **▶ guided tour** in the studio header walks the core journey one step at a time. Each step shows the sentence to say out loud, moves the interface to the place the narration is talking about, and advances when you perform the action. It doubles as the on-screen captions for a recorded demo, so a muted recording still explains itself.
 
-A finished scan scrolls itself so the metrics, the whole map and the inspector share one screen. The decorative video and fonts are served locally. Video motion can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect, and completed scans are kept on this computer so they can be reopened from **Recent scans** after the scanner restarts. No sample graph is seeded into the interface.
+A finished scan scrolls itself so the metrics, the whole map and the inspector share one screen. The decorative animation and fonts are served locally. The animation can be paused and starts paused when reduced motion is requested. The latest scan identifier is retained in this tab’s session so a reload can reconnect, and completed scans are kept on this computer so they can be reopened from **Recent scans** after the scanner restarts. No sample graph is seeded into the interface.
 
 ## In depth
 
@@ -343,7 +343,7 @@ The build checklist, UI verification notes, competitive analysis and app map are
 
 ## Media provenance
 
-The landing animation is the video supplied in the learner’s Vesper design-reference prompt, stored at `web/public/media/ripple-hero.mp4`. It is decorative and is not a recording of AccessRipple scanning a website. Its source is recorded beside the asset. The Inter and Instrument Serif fonts are self-hosted with their OFL notices in `web/public/fonts/`. The screenshots in `docs/images/` are captures of this application.
+The landing animation is drawn in the browser by `web/src/RippleField.tsx`: a canvas of about twenty thousand grains laid out by a few lines of geometry. It is original to this project, uses no media file, is decorative, and is not a recording of AccessRipple scanning a website. The Inter and Instrument Serif fonts are self-hosted with their OFL notices in `web/public/fonts/`. The screenshots in `docs/images/` are captures of this application.
 
 ## Code map for contributors
 
