@@ -16,7 +16,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 
 <!-- Add the public YouTube or Vimeo link here once the demo video is uploaded:
 [▶ Watch the three-minute demo](https://youtu.be/...) · -->
-[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md)
+[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md) · [Build journey](devpost/build-journey.md)
 
 <img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">
 
@@ -264,7 +264,7 @@ The map is a labelled region. On a point, the arrow keys move to the connected p
 
 ### The judge walkthrough
 
-**Judge walkthrough**, in the studio and on the landing page (`#walkthrough`), runs the whole argument in one press. It scans the demo shop, opens the finding with the most recorded journeys through its page, has the model propose a change and commit to its outcome, applies the change, rescans, and opens the proof. A panel shows each step and the time it took; without a model it took 22 seconds on this computer. Without a configured model, or when the model is busy, the demo shop's prepared fix stands in and the panel says so.
+**Judge walkthrough**, in the studio and on the landing page (`#walkthrough`), runs the whole argument in one press. It scans the demo shop, opens the finding with the most recorded journeys through its page, has the model propose a change and commit to its outcome, applies the change, rescans, and opens the proof. A panel shows each step and the time it took; without a model it took about 12 seconds on this computer. Without a configured model, or when the model is busy, the demo shop's prepared fix stands in and the panel says so.
 
 ### The API
 
@@ -324,6 +324,19 @@ npm run capture:readme # needs `npm run dev`: regenerates the screenshots above
 ```
 
 `npm run check:studio` covers the one-click demo, every filter, the list, the inspector, the ripple, the coverage explanation, the AI briefing, the proposed change and the model's written prediction, the repair loop, the proof, the export, the saved history, and the error paths. When a model is busy it asks again, and it reports those retries separately from faults in the studio.
+
+## How it was built: what I learned
+
+I started with a coding agent and no plan. The Devpost skill pack made me plan first, and that changed the idea: from "a map of a website" to "an AI that has to prove its accessibility fix". The full story from the first commit to the latest is in **[devpost/build-journey.md](devpost/build-journey.md)**. The moments that taught me the most:
+
+| What went wrong | What it taught me |
+| --- | --- |
+| A reasoning model spent its whole token budget thinking and returned nothing | Read the raw response. Low reasoning effort and a large budget took the answer from 21 s to 3.5 s. |
+| Models wrote each citation after the full stop, tearing it off its sentence | Check grounding against what models really do, not what a mock does. |
+| A strict Content Security Policy blocked the checks, and four unchecked pages were reported as "4 findings" | A page nobody checked is not a page with a problem. Unchecked is its own state and is never counted. |
+| Stack Overflow and Devpost answer a bot with a challenge page, and the scan called it an inspected page | Say "refused", not "clean". |
+| A code review found the "Apply the demo repair" button swapped in a prewritten file | Make the model's change *cause* the measured result, or the demo proves nothing. |
+| A dev-server helper silently broke every keyboard finding on live sites | Rehearse the whole route end to end. Unit tests could not see it. |
 
 ## Built for Build With AI: Basics
 
