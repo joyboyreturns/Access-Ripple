@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community None"
-location: "L69"
+community: "Community 24"
+location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # resetDemoShop()
@@ -18,5 +18,6 @@ tags:
 - [[breakDemo()]] - `calls` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
 - [[scanDemo()]] - `calls` [EXTRACTED]
+- [[walkthrough()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

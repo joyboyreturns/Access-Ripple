@@ -1,17 +1,22 @@
 ---
-source_file: "web/src/types.ts"
+source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community None"
-location: "L3"
+community: "Community 5"
+location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_5
 ---
 
 # InteractionMode
 
 ## Connections
-- [[types.ts]] - `contains` [EXTRACTED]
+- [[InteractionRunOptions]] - `references` [EXTRACTED]
+- [[ScanInput]] - `references` [EXTRACTED]
+- [[app.ts]] - `imports` [EXTRACTED]
+- [[interaction.ts]] - `imports` [EXTRACTED]
+- [[schema.ts]] - `contains` [EXTRACTED]
+- [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_5

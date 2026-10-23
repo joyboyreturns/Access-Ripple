@@ -80,7 +80,7 @@ export interface ScanResult {
   status: 'queued' | 'running' | 'complete' | 'partial' | 'failed';
   inputUrl: string;
   progress: { completedPages: number; totalPageLimit: number; message: string; currentUrl?: string; remainingMs?: number };
-  pages: Array<{ id: string; url: string; title?: string; status: string; findings: unknown[]; controls: unknown[] }>;
+  pages: Array<{ id: string; url: string; title?: string; status: string; findings: unknown[]; controls: unknown[]; screenshot?: { dataUrl: string }; simulatedPatches?: Array<{ summary: string; applied: boolean; reason?: string }> }>;
   error?: { message: string };
   previousScanId?: string;
   canonicalOrigin?: string;
@@ -119,7 +119,9 @@ export interface ScanComparison {
   /** Findings whose page was not inspected again, so they are unknown rather than resolved. */
   notRechecked: GraphNode[];
   /** What the model predicted before the change, and what the browser recorded after it. */
-  predictions?: Array<{ issueId: string; expected: 'absent' | 'present'; reason: string; label?: string; observed?: 'absent' | 'present' | 'not rechecked'; outcome?: 'supported' | 'contradicted' | 'not rechecked' }>;
+  predictions?: Array<{ issueId: string; expected: 'absent' | 'present'; reason: string; label?: string; observed?: 'absent' | 'present' | 'not rechecked'; outcome?: 'supported' | 'contradicted' | 'not rechecked'; simulated?: boolean }>;
+  /** Pages of the later scan where a change was simulated in the scanner's browser. */
+  simulatedPages?: Array<{ url: string; applied: number; notApplied: number }>;
 }
 
 /** A concrete change a model proposes for one finding, grounded in the recorded markup. */
@@ -131,5 +133,11 @@ export interface FixProposal {
   after: string;
   why: string;
   location?: { file: string; line: number };
+  /** The success criterion the failing check maps to. */
+  wcagCriterion?: string;
+  /** The model's account of what a screen reader or keyboard user meets. */
+  assistiveTechImpact?: string;
+  /** The change as a unified diff, built by the tool. */
+  unifiedDiff?: string;
   model: string;
 }

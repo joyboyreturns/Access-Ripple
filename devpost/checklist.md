@@ -153,3 +153,16 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Exempt the demo shop from the five-scans-a-minute limit, which was making the one-click demo fail with "Too many scans" after a rehearsal.
 - [x] Verify: 200 tests across 22 files, typecheck, production build, two back-to-back browser sweeps at 56/56, axe-core with no violations in both themes at 1440 px and 390 px, and a real developer.mozilla.org scan with its ripple.
 - [ ] Learner review of the ripple and the revised demo beat in `devpost/demo-script.md`.
+
+### Vercel AI Gateway, a repair loop on any site, and a one-press walkthrough (23 October 2026)
+- [x] Move the AI layer from OpenRouter to the Vercel AI Gateway, with MiniMax M3.1 Flash as the default (DeepSeek V4.1 Flash 1017 to follow when the learner says so), and no Google models. The low reasoning setting stays, because the gateway accepts it and a reasoning model without it can return no answer. OpenRouter's attribution headers are only sent to OpenRouter.
+- [x] Give a proposal the page picture (with a text-only retry), the WCAG criterion from the check's own tags, the model's account of what assistive technology meets, and a unified diff. Validate the model's commitment with Zod.
+- [x] Record each finding's WCAG tags and its element's bounding box; outline it in the inspector and on the proof's before picture.
+- [x] Count each point's reach from observed movement only — pages beyond it, journeys through its page, the points it lights up — and mark findings shared across pages. No score, and no claim that a barrier stops a journey.
+- [x] Match findings across a rescan by id, then by page, check and element markup, so a repair that moves markup around another element does not turn it into one fixed and one new.
+- [x] Simulate an accepted change on any site inside the scanner's own browser, applied only when the recorded markup is still there, and label every such page and verdict as simulated. Export every accepted change as a `.patch` and a pull request summary.
+- [x] Probe each page with up to twelve Tab presses for keyboard traps and invisible focus, reported as needs review.
+- [x] Make the map a labelled region with arrow-key movement between connected points; move focus into the details and back with Escape; announce progress, readiness and verdicts in one live region; give every badge a mark and a word; return focus when a dialog closes.
+- [x] Add the judge walkthrough: scan, open the widest-reaching finding, propose, commit, apply, rescan, proof — in one press, with the prepared fix standing in when no model answers.
+- [x] Verify: 231 tests across 25 files, typecheck, production build, `npm run check:studio` at 45/45 with the AI beats skipped (no gateway key yet), and the walkthrough run in the browser in 22 seconds.
+- [ ] Learner adds a Vercel AI Gateway key to `.env`, reruns `npm run check:studio` with the AI beats, and records the walkthrough with the model.

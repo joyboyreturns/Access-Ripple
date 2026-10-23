@@ -1,22 +1,23 @@
 ---
-source_file: "src/graph/schema.ts"
+source_file: "web/src/types.ts"
 type: "code"
-community: "Community None"
-location: "L7"
+community: "Community 16"
+location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_16
 ---
 
 # GraphNode
 
 ## Connections
-- [[ScanComparison]] - `references` [EXTRACTED]
-- [[build-graph.ts]] - `imports` [EXTRACTED]
-- [[compare.ts]] - `imports` [EXTRACTED]
-- [[contract.ts]] - `imports` [EXTRACTED]
-- [[obsidian.ts]] - `imports` [EXTRACTED]
-- [[schema.ts]] - `contains` [EXTRACTED]
+- [[EdgeExplanation]] - `references` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
+- [[graph-interactions.test.ts]] - `imports` [EXTRACTED]
+- [[presentation.test.ts]] - `imports` [EXTRACTED]
+- [[presentation.ts]] - `imports` [EXTRACTED]
+- [[ripple.test.ts]] - `imports` [EXTRACTED]
+- [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_16

@@ -1,12 +1,12 @@
 ---
 source_file: "src/store/disk.ts"
 type: "code"
-community: "Community None"
+community: "Community 36"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_36
 ---
 
 # allSummaries()
@@ -16,4 +16,4 @@ tags:
 - [[scanDirectory()]] - `calls` [EXTRACTED]
 - [[summarizeScan()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_36

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/graph-explorer.ts"
 type: "code"
-community: "Community None"
+community: "Community 18"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_18
 ---
 
 # graph-explorer.ts
@@ -19,8 +19,8 @@ tags:
 - [[GraphCanvas.tsx]] - `imports_from` [EXTRACTED]
 - [[GraphEdge_1]] - `imports` [EXTRACTED]
 - [[GraphFilter]] - `imports` [EXTRACTED]
-- [[GraphNode_1]] - `imports` [EXTRACTED]
-- [[SiteGraph_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
+- [[SiteGraph]] - `imports` [EXTRACTED]
 - [[ViewNode]] - `imports` [EXTRACTED]
 - [[buildExplorerScene()]] - `contains` [EXTRACTED]
 - [[cleanLabel()]] - `imports` [EXTRACTED]
@@ -37,7 +37,7 @@ tags:
 - [[ripple.test.ts]] - `imports_from` [EXTRACTED]
 - [[severity()]] - `imports` [EXTRACTED]
 - [[strings()]] - `contains` [EXTRACTED]
-- [[text()_1]] - `contains` [EXTRACTED]
+- [[text()]] - `contains` [EXTRACTED]
 - [[types.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_18

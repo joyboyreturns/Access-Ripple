@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community None"
-location: "L223"
+community: "Community 4"
+location: "L276"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_4
 ---
 
 # shouldCrawlLink()
@@ -15,4 +15,4 @@ tags:
 - [[performScan()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_4

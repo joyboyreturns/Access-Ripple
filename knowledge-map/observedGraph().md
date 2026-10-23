@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/presentation.test.ts"
 type: "code"
-community: "Community None"
+community: "Community 26"
 location: "L88"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_26
 ---
 
 # observedGraph()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[presentation.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_26

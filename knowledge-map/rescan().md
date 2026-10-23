@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community None"
-location: "L98"
+community: "Community 35"
+location: "L110"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_35
 ---
 
 # rescan()
@@ -17,6 +17,7 @@ tags:
 - [[api.ts]] - `contains` [EXTRACTED]
 - [[request()]] - `calls` [EXTRACTED]
 - [[run()]] - `calls` [EXTRACTED]
+- [[walkthrough()]] - `calls` [EXTRACTED]
 - [[web-api.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_35

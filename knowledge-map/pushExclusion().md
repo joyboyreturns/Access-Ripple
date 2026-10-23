@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
+community: "Community 39"
 location: "L148"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_39
 ---
 
 # pushExclusion()
@@ -15,4 +15,4 @@ tags:
 - [[interaction.ts]] - `contains` [EXTRACTED]
 - [[runInteractions()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_39

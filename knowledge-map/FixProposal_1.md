@@ -1,19 +1,17 @@
 ---
-source_file: "web/src/types.ts"
+source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community None"
-location: "L126"
+community: "Community 12"
+location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_12
 ---
 
 # FixProposal
 
 ## Connections
-- [[App.tsx]] - `imports` [EXTRACTED]
-- [[api.ts]] - `imports` [EXTRACTED]
-- [[types.ts]] - `contains` [EXTRACTED]
+- [[fix.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_12

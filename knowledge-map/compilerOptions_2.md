@@ -1,28 +1,20 @@
 ---
-source_file: "tsconfig.web.json"
+source_file: "tsconfig.build.json"
 type: "code"
-community: "Community None"
-location: "L2"
+community: "Community 28"
+location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_28
 ---
 
 # compilerOptions
 
 ## Connections
-- [[jsx]] - `contains` [EXTRACTED]
-- [[lib_1]] - `contains` [EXTRACTED]
-- [[module_1]] - `contains` [EXTRACTED]
-- [[moduleResolution_1]] - `contains` [EXTRACTED]
-- [[noEmit]] - `contains` [EXTRACTED]
-- [[noUnusedLocals]] - `contains` [EXTRACTED]
-- [[noUnusedParameters]] - `contains` [EXTRACTED]
-- [[skipLibCheck_1]] - `contains` [EXTRACTED]
-- [[strict_1]] - `contains` [EXTRACTED]
-- [[target_1]] - `contains` [EXTRACTED]
-- [[tsconfig.web.json]] - `contains` [EXTRACTED]
+- [[outDir_1]] - `contains` [EXTRACTED]
+- [[rootDir_1]] - `contains` [EXTRACTED]
+- [[tsconfig.build.json]] - `contains` [EXTRACTED]
 - [[types_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_28

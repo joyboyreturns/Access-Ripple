@@ -1,12 +1,12 @@
 ---
 source_file: "src/sample/sandbox.ts"
 type: "code"
-community: "Community None"
-location: "L72"
+community: "Community 3"
+location: "L104"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # appliedPatches()
@@ -16,4 +16,4 @@ tags:
 - [[buildApp()]] - `calls` [EXTRACTED]
 - [[sandbox.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

@@ -1,29 +1,32 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community None"
+community: "Community 5"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_5
 ---
 
 # interaction.ts
 
 ## Connections
+- [[AccessibilityEvidence]] - `imports` [EXTRACTED]
 - [[ActionClass]] - `contains` [EXTRACTED]
 - [[BLOCKED_PATH]] - `contains` [EXTRACTED]
 - [[ControlEvidence]] - `imports` [EXTRACTED]
+- [[FocusStop]] - `contains` [EXTRACTED]
 - [[IGNORED_ROLES]] - `contains` [EXTRACTED]
 - [[InteractionBatch]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `imports` [EXTRACTED]
 - [[InteractionExclusion]] - `imports` [EXTRACTED]
-- [[InteractionMode]] - `imports` [EXTRACTED]
+- [[InteractionMode_1]] - `imports` [EXTRACTED]
 - [[InteractionOutcome]] - `imports` [EXTRACTED]
 - [[InteractionRunOptions]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `imports` [EXTRACTED]
 - [[InteractionTarget]] - `contains` [EXTRACTED]
+- [[KeyboardProbe]] - `contains` [EXTRACTED]
 - [[NAMED_ROLES]] - `contains` [EXTRACTED]
 - [[ObservationEvent]] - `contains` [EXTRACTED]
 - [[PageEvidence]] - `imports` [EXTRACTED]
@@ -43,10 +46,12 @@ tags:
 - [[firstBlockKind()]] - `contains` [EXTRACTED]
 - [[interaction.test.ts]] - `imports_from` [EXTRACTED]
 - [[itemKey()]] - `contains` [EXTRACTED]
+- [[keyboardFindings()]] - `contains` [EXTRACTED]
 - [[locate()]] - `contains` [EXTRACTED]
 - [[outcomeLabel()]] - `contains` [EXTRACTED]
-- [[playwright_1]] - `imports_from` [EXTRACTED]
+- [[playwright_2]] - `imports_from` [EXTRACTED]
 - [[priority()]] - `contains` [EXTRACTED]
+- [[probeKeyboard()]] - `contains` [EXTRACTED]
 - [[pushExclusion()]] - `contains` [EXTRACTED]
 - [[redactMessage()]] - `imports` [EXTRACTED]
 - [[runInteractions()]] - `contains` [EXTRACTED]
@@ -61,4 +66,4 @@ tags:
 - [[withoutHash()]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_5

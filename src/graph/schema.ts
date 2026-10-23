@@ -107,6 +107,10 @@ export interface AccessibilityEvidence {
   targets: string[];
   affectedControlIds?: string[];
   snippet?: string;
+  /** The check's own tags, such as "wcag111", which name the success criterion. */
+  tags?: string[];
+  /** Where the failing element sat on the page, in page coordinates, when it was visible. */
+  boundingBox?: { x: number; y: number; width: number; height: number };
   evidenceLabel: 'observed';
 }
 
@@ -125,6 +129,25 @@ export interface PageEvidence {
   errorMessage?: string;
   /** A small picture of the rendered page, kept only for pages that have something to show. */
   screenshot?: { dataUrl: string };
+  /**
+   * Changes the scanner applied inside its own browser before checking this
+   * page. When any applied, this page is a simulation of the change, not the
+   * live site, and must be labelled as one.
+   */
+  simulatedPatches?: SimulatedPatchOutcome[];
+}
+
+/** One change the scanner tried to simulate on a page, and whether the recorded markup was still there to change. */
+export interface SimulatedPatchOutcome {
+  id: string;
+  nodeId: string;
+  summary: string;
+  selector: string;
+  before: string;
+  after: string;
+  applied: boolean;
+  /** Why a change was not applied: the element was gone, or its markup no longer matched. */
+  reason?: string;
 }
 
 export interface ScanLimits {
@@ -180,6 +203,8 @@ export interface ScanResult {
   interactionPolicy?: { mode: InteractionMode; tested: number; skipped: number };
   /** Whether this scan reached a public address, or one on the scanner's own computer. */
   addressScope?: 'public' | 'private';
+  /** Changes simulated in the scanner's browser on this scan. A rescan carries them forward. */
+  simulatedPatches?: Array<{ id: string; scanId: string; pageUrl: string; ruleId: string; nodeId: string; selector: string; before: string; after: string; summary: string; appliedAt: string }>;
   coverage?: ScanCoverage;
   error?: { code: string; message: string; retryable: boolean };
 }

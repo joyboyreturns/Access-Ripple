@@ -65,6 +65,18 @@ export function applyProposal(input: { file: string; before: string; after: stri
   return request<{ applied: boolean; file: string; summary: string; before: string; after: string; appliedAt: string }>('/api/sample/apply', { method: 'POST', body: JSON.stringify(input) });
 }
 
+/**
+ * Record a proposed change on a live site, so the next rescan simulates it in
+ * the scanner's own browser. The site itself is never changed.
+ */
+export function simulateProposal(scanId: string, nodeId: string) {
+  return request<{ simulated: boolean; note: string }>(`/api/scans/${encodeURIComponent(scanId)}/simulate`, { method: 'POST', body: JSON.stringify({ nodeId }) });
+}
+
+/** Every accepted change, as a patch file or as a pull request summary. */
+export const APPLIED_FIXES_PATCH = '/api/applied-fixes/patch';
+export const APPLIED_FIXES_SUMMARY = '/api/applied-fixes/patch?format=markdown';
+
 /** Put the demo shop back the way it was. */
 export function resetDemoShop() {
   return request<{ reset: boolean }>('/api/sample/reset', { method: 'POST', body: '{}' });

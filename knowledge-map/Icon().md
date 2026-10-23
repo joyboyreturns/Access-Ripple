@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Icons.tsx"
 type: "code"
-community: "Community None"
+community: "Community 34"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_34
 ---
 
 # Icon()
@@ -15,6 +15,7 @@ tags:
 - [[AiBriefing()]] - `calls` [EXTRACTED]
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[ChangeExports()]] - `calls` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]
 - [[FixProposalCard()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
@@ -26,5 +27,7 @@ tags:
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[SelectMenu()]] - `calls` [EXTRACTED]
 - [[SelectMenu.tsx]] - `imports` [EXTRACTED]
+- [[VerdictMark()]] - `calls` [EXTRACTED]
+- [[WalkthroughPanel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_34

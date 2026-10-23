@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/tour.ts"
 type: "code"
-community: "Community None"
+community: "Community 38"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_38
 ---
 
 # TourContext
@@ -16,4 +16,4 @@ tags:
 - [[tour.test.ts]] - `imports` [EXTRACTED]
 - [[tour.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_38

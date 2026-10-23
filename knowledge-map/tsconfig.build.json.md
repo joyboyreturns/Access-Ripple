@@ -1,21 +1,21 @@
 ---
 source_file: "tsconfig.build.json"
 type: "code"
-community: "Community None"
+community: "Community 28"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_28
 ---
 
 # tsconfig.build.json
 
 ## Connections
 - [[dot-tsconfig.json]] - `extends` [EXTRACTED]
-- [[compilerOptions]] - `contains` [EXTRACTED]
+- [[compilerOptions_2]] - `contains` [EXTRACTED]
 - [[exclude]] - `contains` [EXTRACTED]
 - [[extends]] - `contains` [EXTRACTED]
-- [[include]] - `contains` [EXTRACTED]
+- [[include_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_28

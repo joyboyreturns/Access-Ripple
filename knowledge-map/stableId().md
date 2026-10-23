@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/evidence.ts"
 type: "code"
-community: "Community None"
+community: "Community 4"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_4
 ---
 
 # stableId()
@@ -16,9 +16,10 @@ tags:
 - [[evidence.ts]] - `contains` [EXTRACTED]
 - [[inspectControls()]] - `calls` [EXTRACTED]
 - [[interaction.ts]] - `imports` [EXTRACTED]
+- [[keyboardFindings()]] - `calls` [EXTRACTED]
 - [[performScan()]] - `calls` [EXTRACTED]
 - [[runAxe()]] - `calls` [EXTRACTED]
 - [[runSingleInteraction()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_4

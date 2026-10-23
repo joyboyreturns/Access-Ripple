@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community None"
+community: "Community 32"
 location: "L565"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_32
 ---
 
 # withoutSharedAffix()
@@ -17,4 +17,4 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[ripple.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_32

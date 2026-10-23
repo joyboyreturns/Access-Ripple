@@ -1,5 +1,5 @@
 import { describe as suite, it, expect } from 'vitest';
-import { buildDigest, groundSentences, readAiConfig, aiStatus } from '../../src/ai/briefing.js';
+import { buildDigest, groundSentences, readAiConfig, aiStatus, requestHeaders } from '../../src/ai/briefing.js';
 import type { ScanResult, SiteGraph } from '../../src/graph/schema.js';
 
 const graph: SiteGraph = {
@@ -122,5 +122,31 @@ suite('provider configuration', () => {
     expect(config?.baseUrl).toBe('https://example.test/v1');
     expect(config?.model).toBe('some/model');
     expect(aiStatus({ ACCESSRIPPLE_AI_KEY: 'secret' } as NodeJS.ProcessEnv).configured).toBe(true);
+  });
+
+  it('goes through the Vercel AI Gateway to MiniMax M3.1 Flash by default', () => {
+    const config = readAiConfig({ ACCESSRIPPLE_AI_KEY: 'secret' } as NodeJS.ProcessEnv);
+    expect(config?.baseUrl).toBe('https://ai-gateway.vercel.sh/v1');
+    expect(config?.model).toBe('minimax/minimax-m3.1-flash');
+    expect(config?.fallbackModels).toEqual([]);
+    expect(readAiConfig({ ACCESSRIPPLE_AI_KEY: 'k', ACCESSRIPPLE_AI_FALLBACK_MODELS: 'deepseek/deepseek-v4.1-flash-1017' } as NodeJS.ProcessEnv)?.fallbackModels).toEqual(['deepseek/deepseek-v4.1-flash-1017']);
+    expect(config?.reasoningEffort).toBe('low');
+    expect(aiStatus({ ACCESSRIPPLE_AI_KEY: 'secret' } as NodeJS.ProcessEnv).provider).toBe('ai-gateway.vercel.sh');
+  });
+
+  it('reads the key under the name the AI Gateway documents', () => {
+    expect(readAiConfig({ AI_GATEWAY_API_KEY: 'gateway' } as NodeJS.ProcessEnv)?.key).toBe('gateway');
+    // The tool's own name wins when both are set.
+    expect(readAiConfig({ AI_GATEWAY_API_KEY: 'gateway', ACCESSRIPPLE_AI_KEY: 'own' } as NodeJS.ProcessEnv)?.key).toBe('own');
+  });
+
+  it('sends attribution headers to OpenRouter only', () => {
+    const gateway = requestHeaders({ key: 'k', baseUrl: 'https://ai-gateway.vercel.sh/v1', siteUrl: 'https://x.test' });
+    expect(gateway.authorization).toBe('Bearer k');
+    expect(gateway['HTTP-Referer']).toBeUndefined();
+    expect(gateway['X-Title']).toBeUndefined();
+    const openrouter = requestHeaders({ key: 'k', baseUrl: 'https://openrouter.ai/api/v1', siteUrl: 'https://x.test' });
+    expect(openrouter['HTTP-Referer']).toBe('https://x.test');
+    expect(openrouter['X-Title']).toBe('AccessRipple');
   });
 });

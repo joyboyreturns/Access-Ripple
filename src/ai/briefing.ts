@@ -20,7 +20,7 @@ export interface AiConfig {
   model: string;
   /** Tried in order when the primary model cannot be used. */
   fallbackModels: string[];
-  /** OpenRouter reasoning effort. Empty string means no reasoning parameter. */
+  /** Reasoning effort sent as `reasoning.effort`. Empty string means no reasoning parameter. */
   reasoningEffort: string;
   siteUrl: string;
 }
@@ -50,15 +50,31 @@ export class BriefingError extends Error {
   }
 }
 
-const DEFAULT_BASE_URL = 'https://openrouter.ai/api/v1';
-// The primary model is the fastest of the free tier that follows the
-// citation format well. The fallbacks matter: free-tier capacity is shared
-// and a single model can be busy at any moment.
-const DEFAULT_MODEL = 'minimax/minimax-m3.1-flash:free';
-const DEFAULT_FALLBACKS = 'openrouter/free,cohere/north-mini-code:free,google/gemma-4-31b-it:free';
+export const DEFAULT_BASE_URL = 'https://ai-gateway.vercel.sh/v1';
+// Requests go through the Vercel AI Gateway. MiniMax M3.1 Flash is the
+// default. More models can be chained with ACCESSRIPPLE_AI_FALLBACK_MODELS,
+// for example deepseek/deepseek-v4.1-flash-1017; none is added by default, so
+// nothing is called that was not asked for.
+const DEFAULT_MODEL = 'minimax/minimax-m3.1-flash';
+const DEFAULT_FALLBACKS = '';
+
+/**
+ * The headers for one chat-completions request. OpenRouter reads a referrer
+ * and a title to attribute the app; the Vercel AI Gateway does not need them,
+ * so they are only sent to OpenRouter.
+ */
+export function requestHeaders(config: { key: string; baseUrl?: string; siteUrl?: string }): Record<string, string> {
+  const headers: Record<string, string> = { 'content-type': 'application/json', authorization: `Bearer ${config.key}` };
+  if ((config.baseUrl ?? DEFAULT_BASE_URL).includes('openrouter.ai')) {
+    headers['HTTP-Referer'] = config.siteUrl ?? 'https://accessripple.local';
+    headers['X-Title'] = 'AccessRipple';
+  }
+  return headers;
+}
 
 export function readAiConfig(env: NodeJS.ProcessEnv = process.env): AiConfig | null {
-  const key = (env.ACCESSRIPPLE_AI_KEY ?? '').trim();
+  // AI_GATEWAY_API_KEY is the name the Vercel AI Gateway documents.
+  const key = (env.ACCESSRIPPLE_AI_KEY || env.AI_GATEWAY_API_KEY || '').trim();
   if (!key) return null;
   const model = (env.ACCESSRIPPLE_AI_MODEL ?? DEFAULT_MODEL).trim();
   const fallbacks = (env.ACCESSRIPPLE_AI_FALLBACK_MODELS ?? DEFAULT_FALLBACKS)
@@ -238,19 +254,19 @@ async function requestCompletion(model: string, config: AiConfig, scan: ScanResu
       { role: 'user', content: userPrompt(scan, graph, digest) },
     ],
   };
-  // OpenRouter reasoning models spend their budget thinking before they answer.
+  // Reasoning models spend their budget thinking before they answer.
   // Asking for a low effort keeps the answer short enough to arrive quickly.
   if (config.reasoningEffort) body.reasoning = { effort: config.reasoningEffort };
   try {
     const response = await fetch(`${config.baseUrl}/chat/completions`, {
       method: 'POST',
       signal: controller.signal,
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${config.key}`, 'HTTP-Referer': config.siteUrl, 'X-Title': 'AccessRipple' },
+      headers: requestHeaders(config),
       body: JSON.stringify(body),
     });
     if (!response.ok) {
       const text = await response.text().catch(() => '');
-      throw new BriefingError(response.status === 429 ? 'The free model is busy right now. Ask again in a moment.' : `The model provider answered ${response.status}. ${text.slice(0, 160)}`.trim(), 'REQUEST_FAILED');
+      throw new BriefingError(response.status === 429 ? 'The model is busy right now. Ask again in a moment.' : `The model provider answered ${response.status}. ${text.slice(0, 160)}`.trim(), 'REQUEST_FAILED');
     }
     const payload = await response.json() as { choices?: Array<{ message?: { content?: string | null }; finish_reason?: string }> };
     const content = payload.choices?.[0]?.message?.content ?? '';

@@ -1,12 +1,12 @@
 ---
 source_file: "src/sample/sandbox.ts"
 type: "code"
-community: "Community None"
-location: "L76"
+community: "Community 3"
+location: "L108"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_3
 ---
 
 # clearPatches()
@@ -18,4 +18,4 @@ tags:
 - [[no-data.test.ts]] - `imports` [EXTRACTED]
 - [[sandbox.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_3

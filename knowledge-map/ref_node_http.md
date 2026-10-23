@@ -12,6 +12,8 @@ tags:
 
 ## Connections
 - [[app.test.ts]] - `imports_from` [EXTRACTED]
+- [[keyboard-probe.test.ts]] - `imports_from` [EXTRACTED]
 - [[scan-boundaries.test.ts]] - `imports_from` [EXTRACTED]
+- [[simulated-patch.test.ts]] - `imports_from` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Community_27

@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community None"
+community: "Community 4"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_4
 ---
 
 # worker.ts
@@ -17,13 +17,14 @@ tags:
 - [[ControlEvidence]] - `imports` [EXTRACTED]
 - [[DEFAULT_LIMITS]] - `contains` [EXTRACTED]
 - [[ExtractedControl]] - `contains` [EXTRACTED]
-- [[InteractionMode]] - `imports` [EXTRACTED]
+- [[InteractionMode_1]] - `imports` [EXTRACTED]
 - [[PageEvidence]] - `imports` [EXTRACTED]
 - [[RuntimeErrorEvidence]] - `imports` [EXTRACTED]
 - [[ScanCoverage]] - `imports` [EXTRACTED]
 - [[ScanInput]] - `contains` [EXTRACTED]
 - [[ScanLimits]] - `imports` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
+- [[SimulatedPatchOutcome]] - `imports` [EXTRACTED]
 - [[abortReasonFor()]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
@@ -36,9 +37,13 @@ tags:
 - [[initialResult()]] - `contains` [EXTRACTED]
 - [[inspectControls()]] - `contains` [EXTRACTED]
 - [[interaction.ts]] - `imports_from` [EXTRACTED]
+- [[keyboard-probe.test.ts]] - `imports_from` [EXTRACTED]
+- [[keyboardFindings()]] - `imports` [EXTRACTED]
 - [[looksLikeRefusal()]] - `contains` [EXTRACTED]
 - [[performScan()]] - `contains` [EXTRACTED]
-- [[playwright_2]] - `dynamic_import` [EXTRACTED]
+- [[playwright_1]] - `dynamic_import` [EXTRACTED]
+- [[probeKeyboard()]] - `imports` [EXTRACTED]
+- [[recordBoxes()]] - `contains` [EXTRACTED]
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]
 - [[ref_node_module]] - `imports_from` [EXTRACTED]
 - [[require]] - `contains` [EXTRACTED]
@@ -48,9 +53,11 @@ tags:
 - [[scan-boundaries.test.ts]] - `imports_from` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[shouldCrawlLink()]] - `contains` [EXTRACTED]
+- [[simulatePatches()]] - `contains` [EXTRACTED]
+- [[simulated-patch.test.ts]] - `imports_from` [EXTRACTED]
 - [[stableId()]] - `imports` [EXTRACTED]
 - [[summarizeCoverage()]] - `contains` [EXTRACTED]
 - [[timing.test.ts]] - `imports_from` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_4

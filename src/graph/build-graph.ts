@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import type { AccessibilityEvidence, GraphEdge, GraphNode, InteractionEvidence, InteractionStep, PageEvidence, RuntimeErrorEvidence, ScanResult, SiteGraph } from './schema.js';
 import { safeDisplayUrl } from '../scan/url-safety.js';
 import { outcomeLabel, summarizeInteraction } from '../scan/interaction.js';
+import { annotateReach } from './reach.js';
 
 function id(prefix: string, value: string): string {
   return `${prefix}:${createHash('sha1').update(value).digest('hex').slice(0, 14)}`;
@@ -60,7 +61,7 @@ export function buildGraph(scan: ScanResult): SiteGraph {
     pageIds.set(page.url, pageId);
     const pageStatus = page.status === 'failed' ? 'error' : page.status === 'skipped' ? 'untested'
       : page.findings.some((finding) => finding.ruleId === 'accessibility-check-incomplete') ? 'needs-review' : 'clear';
-    addNode({ id: pageId, kind: 'page', label: page.title || new URL(page.url).pathname || '/', status: pageStatus, evidenceLabel: 'observed', pageId, data: { url: page.url, depth: page.depth, status: page.status, errorMessage: page.errorMessage } });
+    addNode({ id: pageId, kind: 'page', label: page.title || new URL(page.url).pathname || '/', status: pageStatus, evidenceLabel: 'observed', pageId, data: { url: page.url, depth: page.depth, status: page.status, errorMessage: page.errorMessage, ...(page.simulatedPatches?.some((patch) => patch.applied) ? { simulated: true } : {}) } });
     edges.push({ id: id('edge', `${siteId}|contains|${pageId}`), kind: 'contains', source: siteId, target: pageId, evidenceLabel: 'observed' });
   }
 
@@ -164,5 +165,5 @@ export function buildGraph(scan: ScanResult): SiteGraph {
 
   // Incomplete/repeated evidence must not create orphan or duplicate edges.
   const uniqueEdges = new Map(edges.filter((edge) => seen.has(edge.source) && seen.has(edge.target)).map((edge) => [edge.id, edge]));
-  return { schemaVersion: '1.0', nodes, edges: [...uniqueEdges.values()] };
+  return annotateReach({ schemaVersion: '1.0', nodes, edges: [...uniqueEdges.values()] });
 }

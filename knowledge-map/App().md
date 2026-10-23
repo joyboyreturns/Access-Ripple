@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community None"
-location: "L126"
+community: "Community 24"
+location: "L178"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_24
 ---
 
 # App()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AiBriefing()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `contains` [EXTRACTED]
+- [[ChangeExports()]] - `calls` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]
 - [[FixProposalCard()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
@@ -23,6 +24,9 @@ tags:
 - [[ProofView()]] - `calls` [EXTRACTED]
 - [[ScanStory()]] - `calls` [EXTRACTED]
 - [[SelectMenu()]] - `calls` [EXTRACTED]
+- [[ShotWithBoxes()]] - `calls` [EXTRACTED]
+- [[VerdictMark()]] - `calls` [EXTRACTED]
+- [[WalkthroughPanel()]] - `calls` [EXTRACTED]
 - [[accept()]] - `contains` [EXTRACTED]
 - [[acceptProposal()]] - `contains` [EXTRACTED]
 - [[applyProposal()]] - `calls` [EXTRACTED]
@@ -34,7 +38,7 @@ tags:
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
-- [[compareScans()_1]] - `calls` [EXTRACTED]
+- [[compareScans()]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
@@ -57,6 +61,7 @@ tags:
 - [[openScan()]] - `contains` [EXTRACTED]
 - [[pageFor()]] - `calls` [EXTRACTED]
 - [[proposeFix()]] - `calls` [EXTRACTED]
+- [[reachFacts()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
 - [[repairDemo()]] - `contains` [EXTRACTED]
@@ -72,6 +77,8 @@ tags:
 - [[shortcutOf()]] - `calls` [EXTRACTED]
 - [[showProof()]] - `contains` [EXTRACTED]
 - [[showRipple()]] - `contains` [EXTRACTED]
+- [[simulateOnRescan()]] - `contains` [EXTRACTED]
+- [[simulateProposal()]] - `calls` [EXTRACTED]
 - [[siteName()]] - `calls` [EXTRACTED]
 - [[startTour()]] - `contains` [EXTRACTED]
 - [[storageGet()]] - `calls` [EXTRACTED]
@@ -81,7 +88,8 @@ tags:
 - [[submit()]] - `contains` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 - [[waitForScan()_1]] - `calls` [EXTRACTED]
+- [[walkthrough()]] - `contains` [EXTRACTED]
 - [[whoItProtects()]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_24

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/main.tsx"
 type: "code"
-community: "Community None"
+community: "Community 34"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_34
 ---
 
 # main.tsx
@@ -19,4 +19,4 @@ tags:
 - [[react-dom_1]] - `imports_from` [EXTRACTED]
 - [[web_src_styles]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_34

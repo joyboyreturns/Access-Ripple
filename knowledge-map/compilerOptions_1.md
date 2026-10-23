@@ -1,30 +1,28 @@
 ---
-source_file: "tsconfig.json"
+source_file: "tsconfig.web.json"
 type: "code"
-community: "Community None"
+community: "Community 21"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_None
+  - community/Community_21
 ---
 
 # compilerOptions
 
 ## Connections
-- [[esModuleInterop]] - `contains` [EXTRACTED]
-- [[forceConsistentCasingInFileNames]] - `contains` [EXTRACTED]
-- [[lib]] - `contains` [EXTRACTED]
-- [[module]] - `contains` [EXTRACTED]
-- [[moduleResolution]] - `contains` [EXTRACTED]
-- [[noUncheckedIndexedAccess]] - `contains` [EXTRACTED]
-- [[outDir_1]] - `contains` [EXTRACTED]
-- [[resolveJsonModule]] - `contains` [EXTRACTED]
-- [[rootDir_1]] - `contains` [EXTRACTED]
-- [[skipLibCheck]] - `contains` [EXTRACTED]
-- [[strict]] - `contains` [EXTRACTED]
-- [[target]] - `contains` [EXTRACTED]
-- [[tsconfig.json]] - `contains` [EXTRACTED]
+- [[jsx]] - `contains` [EXTRACTED]
+- [[lib_1]] - `contains` [EXTRACTED]
+- [[module_1]] - `contains` [EXTRACTED]
+- [[moduleResolution_1]] - `contains` [EXTRACTED]
+- [[noEmit]] - `contains` [EXTRACTED]
+- [[noUnusedLocals]] - `contains` [EXTRACTED]
+- [[noUnusedParameters]] - `contains` [EXTRACTED]
+- [[skipLibCheck_1]] - `contains` [EXTRACTED]
+- [[strict_1]] - `contains` [EXTRACTED]
+- [[target_1]] - `contains` [EXTRACTED]
+- [[tsconfig.web.json]] - `contains` [EXTRACTED]
 - [[types_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_None
+#graphify/code #graphify/EXTRACTED #community/Community_21

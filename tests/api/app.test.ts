@@ -67,6 +67,35 @@ describe('local scan API', () => {
     expect((await app.inject({ method: 'GET', url: '/sample/cart' })).body).toContain(title);
   });
 
+  it('exports accepted changes as a patch and as a pull request summary', async () => {
+    const app = await buildApp(); apps.push(app);
+    await app.inject({ method: 'POST', url: '/api/sample/reset' });
+    const empty = await app.inject({ method: 'GET', url: '/api/applied-fixes/patch?format=markdown' });
+    expect(empty.statusCode).toBe(200);
+    expect(empty.headers['content-type']).toContain('text/markdown');
+    expect(empty.body).toContain('No change has been accepted yet.');
+    const applied = await app.inject({ method: 'POST', url: '/api/sample/apply', payload: { file: 'src/sample/site/checkout.html', before: '<img class="product-art" src="/sample/missing-product.webp">', after: '<img class="product-art" src="/sample/missing-product.webp" alt="Product">', summary: 'Add alternative text.' } });
+    expect(applied.statusCode).toBe(200);
+    const patch = await app.inject({ method: 'GET', url: '/api/applied-fixes/patch' });
+    expect(patch.headers['content-type']).toContain('text/x-patch');
+    expect(patch.body).toContain('+<img class="product-art" src="/sample/missing-product.webp" alt="Product">');
+    await app.inject({ method: 'POST', url: '/api/sample/reset' });
+  });
+
+  it('refuses to simulate a change without a proposal, and sends the demo shop to its real apply', async () => {
+    const app = await buildApp(); apps.push(app);
+    const page = { id: 'p1', url: 'https://shop.example/', status: 'complete' as const, depth: 0, controls: [], errors: [], findings: [], outgoingLinks: [], interactions: [] };
+    const graph = { schemaVersion: '1.0' as const, edges: [], nodes: [{ id: 'f1', kind: 'accessibility-finding' as const, label: 'Images must have alternative text', status: 'detected' as const, pageId: 'p1', evidenceLabel: 'observed' as const, data: { ruleId: 'image-alt', targets: ['img'], snippet: '<img src="a.png">' } }] };
+    const base = { createdAt: '', updatedAt: '', status: 'complete' as const, inputUrl: 'https://shop.example/', limits: {} as never, progress: { completedPages: 1, totalPageLimit: 5, message: '' }, pages: [page], graph };
+    scanStore.set({ ...base, id: 'live' });
+    scanStore.set({ ...base, id: 'demo', sample: 'checkout' });
+    const noProposal = await app.inject({ method: 'POST', url: '/api/scans/live/simulate', payload: { nodeId: 'f1' } });
+    expect(noProposal.statusCode).toBe(409);
+    expect(noProposal.json().error.code).toBe('NO_PROPOSAL');
+    const demo = await app.inject({ method: 'POST', url: '/api/scans/demo/simulate', payload: { nodeId: 'f1' } });
+    expect(demo.json().error.code).toBe('USE_DEMO_SHOP_APPLY');
+  });
+
   it('blocks cross-origin browser requests', async () => {
     const app = await buildApp(); apps.push(app);
     const result = await app.inject({ method: 'GET', url: '/api/health', headers: { origin: 'https://attacker.example' } });

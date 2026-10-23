@@ -52,6 +52,11 @@ suite('reading the model’s commitment', () => {
     expect(parseContract('{"predictions":"none"}', ['f1'], 'f1')).toEqual([]);
   });
 
+  it('drops a malformed entry without losing the valid ones', () => {
+    const predictions = parseContract(JSON.stringify({ predictions: [null, 'f1', { issueId: '', expected: 'absent' }, { issueId: 'f1', expected: 'absent' }, { issueId: 'e1', expected: 'present', reason: 42 }] }), ['f1', 'e1'], 'f1');
+    expect(predictions).toEqual([{ issueId: 'f1', expected: 'absent', reason: '' }, { issueId: 'e1', expected: 'present', reason: '42' }]);
+  });
+
   it('keeps at most three predictions', () => {
     const many = JSON.stringify({ predictions: ['f1', 'e1', 'e2', 'e3', 'e4'].map((id) => ({ issueId: id, expected: 'absent', reason: '' })) });
     expect(parseContract(many, ['f1', 'e1', 'e2', 'e3', 'e4'], 'f1')).toHaveLength(3);
@@ -108,6 +113,13 @@ suite('checking the commitment against the browser', () => {
     const before = scan([page('p1', 'complete')], [finding('f1', 'p1')]);
     const after = scan([page('p1', 'complete')], []);
     expect(checkPredictions(contract, before, after)[0]?.label).toBe('Images must have alternative text');
+  });
+
+  it('does not mistake a finding whose element path moved for one that went away', () => {
+    const at = (id: string, target: string) => ({ ...finding(id, 'p1'), data: { ruleId: 'image-alt', impact: 'critical', targets: [target], snippet: '<img src="logo.png">' } });
+    const before = scan([page('p1', 'complete')], [at('f1', 'main > img'), signal('e1', 'p1')]);
+    const after = scan([page('p1', 'complete')], [at('f1-moved', 'main > div > img'), signal('e1', 'p1')]);
+    expect(checkPredictions(contract, before, after)[0]).toMatchObject({ outcome: 'contradicted', observed: 'present' });
   });
 
   it('does not validate a prediction whose baseline evidence is missing', () => {
