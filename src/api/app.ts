@@ -114,7 +114,7 @@ async function getScan(id: string): Promise<ScanResult | undefined> {
   return loaded;
 }
 
-export interface AppOptions { baseUrl?: string; logger?: boolean; }
+export interface AppOptions { baseUrl?: string; logger?: boolean; /** Extra host names this scanner may be reached by, for a private proxy such as `tailscale serve`. */ trustedHosts?: string[]; }
 
 export async function buildApp(options: AppOptions = {}): Promise<FastifyInstance> {
   const requestsByAddress = new Map<string, number[]>();
@@ -136,11 +136,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   // header still carries the page's name, so only this computer's names pass.
   const allowedHosts = new Set(['127.0.0.1', 'localhost', '[::1]']);
   try { allowedHosts.add(new URL(baseUrl).hostname); } catch { /* The base address is not a URL. */ }
+  // Opt-in only: a name the operator lists is reached through a proxy on this computer, so the connection still arrives from loopback.
+  for (const name of options.trustedHosts ?? []) allowedHosts.add(name.trim().toLowerCase());
+  const originIsTrusted = (origin: string) => { try { return (options.trustedHosts ?? []).some((name) => name.trim().toLowerCase() === new URL(origin).hostname); } catch { return false; } };
   app.addHook('onRequest', async (request, reply) => {
     const hostName = (request.headers.host ?? '').replace(/:\d+$/, '').toLowerCase();
     if (!allowedHosts.has(hostName)) return reply.code(403).send({ error: { code: 'HOST_BLOCKED', message: 'This scanner answers only to this computer’s own address.', retryable: false } });
     const origin = request.headers.origin;
-    if (origin && !allowedOrigins.has(origin)) return reply.code(403).send({ error: { code: 'ORIGIN_BLOCKED', message: 'Requests from this website are not allowed.', retryable: false } });
+    if (origin && !allowedOrigins.has(origin) && !originIsTrusted(origin)) return reply.code(403).send({ error: { code: 'ORIGIN_BLOCKED', message: 'Requests from this website are not allowed.', retryable: false } });
     if (origin) reply.header('access-control-allow-origin', origin).header('vary', 'Origin');
     if (request.method === 'OPTIONS') return reply.code(204).header('access-control-allow-methods', 'GET,POST,OPTIONS').header('access-control-allow-headers', 'content-type').send();
     const remote = request.ip.replace(/^::ffff:/, '');
