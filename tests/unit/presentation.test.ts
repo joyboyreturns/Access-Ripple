@@ -161,6 +161,7 @@ suite('plain-language labels and destinations',()=>{
   it('turns common browser failures into an understandable next step',()=>{
     expect(friendlyScanError('page.goto: net::ERR_NAME_NOT_RESOLVED at https://nope.example')).toContain('could not be found');
     expect(friendlyScanError('Timeout 60000ms exceeded.')).toContain('took too long');
+    expect(friendlyScanError("browserType.launch: Executable doesn't exist at /x/chrome\n║ Looks like Playwright was just installed")).toContain('npx playwright install chromium');
     expect(friendlyScanError('The scan worker could not start.')).toBe('The scan worker could not start.');
   });
 });

@@ -57,6 +57,7 @@ function cleanQuoted(text: string): string {
 /** Turn common browser failures into a next step people can understand. */
 export function friendlyScanError(message: string): string {
   const text = message.toLowerCase();
+  if (/executable doesn't exist|playwright install/.test(text)) return 'The scanner’s browser is not installed yet. In the project folder run “npx playwright install chromium”, then press the button again.';
   if (/name_not_resolved|enotfound|getaddrinfo/.test(text)) return 'That address could not be found. Check the spelling and try again.';
   if (/err_connection_refused|econnrefused/.test(text)) return 'The site refused the connection. It may be offline or blocking automated browsers.';
   if (/err_cert|ssl|certificate/.test(text)) return 'The site’s security certificate could not be verified, so the scan stopped.';
