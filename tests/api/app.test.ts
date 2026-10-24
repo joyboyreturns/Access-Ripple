@@ -161,10 +161,15 @@ describe('local scan API', () => {
 
   it('limits how often websites are scanned, but never the demo shop a rehearsal depends on', async () => {
     const app = await buildApp(); apps.push(app);
-    for (let attempt = 0; attempt < 5; attempt++) {
+    // Refused addresses send nothing to anyone, so they never use up the allowance.
+    for (let attempt = 0; attempt < 6; attempt++) {
       expect((await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } })).statusCode).toBe(422);
     }
-    const limited = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } });
+    const onThisComputer = { url: 'http://127.0.0.1:9/', allowPrivateNetwork: true };
+    for (let attempt = 0; attempt < 5; attempt++) {
+      expect((await app.inject({ method: 'POST', url: '/api/scans', payload: onThisComputer })).statusCode).toBe(202);
+    }
+    const limited = await app.inject({ method: 'POST', url: '/api/scans', payload: onThisComputer });
     expect(limited.statusCode).toBe(429);
     const demo = await app.inject({ method: 'POST', url: '/api/scans', payload: { sample: 'checkout' } });
     expect(demo.statusCode).toBe(202);

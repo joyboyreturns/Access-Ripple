@@ -319,7 +319,7 @@ In the studio the same loop works through **Rescan and compare** after toggling 
 npm test               # 231 unit, API and end-to-end tests, including real Chromium scans
 npm run typecheck      # server and studio
 npm run build          # production studio and API
-npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 45 checks plus the AI path with a key
+npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 60 checks plus the AI path with a key
 npm run capture:readme # needs `npm run dev`: regenerates the screenshots above
 ```
 
