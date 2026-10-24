@@ -261,7 +261,6 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     // The limit protects other people's websites from being hammered. The demo
     // shop is this tool's own page on this computer, and a rehearsal that scans
     // it five times in a minute must not end a recording on an error.
-    if (!('sample' in body.data) && !canStartScan(request.ip, requestsByAddress)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
     const allowPrivateNetwork = body.data.allowPrivateNetwork === true;
     if ('sample' in body.data) {
@@ -274,6 +273,9 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       const unsafe = error instanceof UnsafeUrlError ? error : new UnsafeUrlError('The website address is not allowed.');
       return reply.code(422).send({ error: { code: unsafe.code, message: unsafe.message, retryable: unsafe.code === 'HOST_NOT_FOUND' } });
     }
+    // Charged only once the address is known to be scannable: a mistyped or
+    // refused address sends nothing to anyone, so it must not lock a person out.
+    if (!canStartScan(request.ip, requestsByAddress)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
     const scan = launchScan({ url: url.toString(), interactionMode, allowPrivateNetwork }, baseUrl);
     return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
   });
