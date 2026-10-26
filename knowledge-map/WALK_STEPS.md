@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 8"
-location: "L169"
+community: "Community None"
+location: "L187"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # WALK_STEPS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[App.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

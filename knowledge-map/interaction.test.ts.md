@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/interaction.test.ts"
 type: "code"
-community: "Community 14"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # interaction.test.ts
@@ -20,6 +20,6 @@ tags:
 - [[outcomeLabel()]] - `imports` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[summarizeInteraction()]] - `imports` [EXTRACTED]
-- [[vitest]] - `imports_from` [EXTRACTED]
+- [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 34"
-location: "L172"
+community: "Community None"
+location: "L190"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # WalkthroughPanel()
@@ -16,4 +16,4 @@ tags:
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[Icon()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_None

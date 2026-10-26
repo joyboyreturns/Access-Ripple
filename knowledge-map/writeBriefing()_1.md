@@ -1,23 +1,20 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "web/src/api.ts"
 type: "code"
-community: "Community 2"
-location: "L227"
+community: "Community None"
+location: "L59"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # writeBriefing()
 
 ## Connections
-- [[BriefingError]] - `calls` [EXTRACTED]
-- [[app.ts]] - `imports` [EXTRACTED]
-- [[briefing.ts]] - `contains` [EXTRACTED]
-- [[buildApp()]] - `calls` [EXTRACTED]
-- [[buildDigest()]] - `calls` [EXTRACTED]
-- [[groundSentences()]] - `calls` [EXTRACTED]
-- [[requestCompletion()]] - `calls` [EXTRACTED]
+- [[AiBriefing()]] - `calls` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[api.ts]] - `contains` [EXTRACTED]
+- [[request()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

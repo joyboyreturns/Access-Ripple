@@ -1,22 +1,22 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Community 22"
-location: "L25"
+community: "Community None"
+location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_22
+  - community/Community_None
 ---
 
 # dependencies
 
 ## Connections
-- [[@fastifystatic_1]] - `contains` [EXTRACTED]
-- [[@fastifyswagger_1]] - `contains` [EXTRACTED]
-- [[@fastifyswagger-ui_1]] - `contains` [EXTRACTED]
-- [[axe-core_1]] - `contains` [EXTRACTED]
-- [[fastify_1]] - `contains` [EXTRACTED]
+- [[@fastifystatic]] - `contains` [EXTRACTED]
+- [[@fastifyswagger]] - `contains` [EXTRACTED]
+- [[@fastifyswagger-ui]] - `contains` [EXTRACTED]
+- [[axe-core]] - `contains` [EXTRACTED]
+- [[fastify]] - `contains` [EXTRACTED]
 - [[jszip]] - `contains` [EXTRACTED]
 - [[motion]] - `contains` [EXTRACTED]
 - [[package.json]] - `contains` [EXTRACTED]
@@ -25,4 +25,4 @@ tags:
 - [[react-dom]] - `contains` [EXTRACTED]
 - [[zod]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_22
+#graphify/code #graphify/EXTRACTED #community/Community_None

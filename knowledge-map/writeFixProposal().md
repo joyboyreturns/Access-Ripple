@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 12"
+community: "Community None"
 location: "L144"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Community_None
 ---
 
 # writeFixProposal()
@@ -22,7 +22,7 @@ tags:
 - [[rejectsImages()]] - `calls` [EXTRACTED]
 - [[requestHeaders()]] - `calls` [EXTRACTED]
 - [[unifiedDiff()]] - `calls` [EXTRACTED]
-- [[userPrompt()]] - `calls` [EXTRACTED]
+- [[userPrompt()_1]] - `calls` [EXTRACTED]
 - [[wcagCriterion()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Community_None

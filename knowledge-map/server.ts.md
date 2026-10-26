@@ -1,12 +1,12 @@
 ---
 source_file: "src/api/server.ts"
 type: "code"
-community: "Community 3"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_None
 ---
 
 # server.ts
@@ -15,5 +15,6 @@ tags:
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[buildApp()]] - `imports` [EXTRACTED]
 - [[port]] - `contains` [EXTRACTED]
+- [[trustedHosts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_None

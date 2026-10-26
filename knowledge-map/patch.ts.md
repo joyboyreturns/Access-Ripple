@@ -1,12 +1,12 @@
 ---
 source_file: "src/export/patch.ts"
 type: "code"
-community: "Community 11"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_11
+  - community/Community_None
 ---
 
 # patch.ts
@@ -27,4 +27,4 @@ tags:
 - [[sandbox.ts]] - `imports_from` [EXTRACTED]
 - [[unifiedDiff()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_11
+#graphify/code #graphify/EXTRACTED #community/Community_None

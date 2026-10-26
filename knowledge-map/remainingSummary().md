@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 8"
-location: "L185"
+community: "Community None"
+location: "L186"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # remainingSummary()
@@ -17,4 +17,4 @@ tags:
 - [[describe()]] - `calls` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

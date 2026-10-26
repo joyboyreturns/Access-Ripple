@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 1"
-location: "L253"
+community: "Community None"
+location: "L252"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # Keyboard, reach, and the picture of a barrier
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[In depth]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_1
+#graphify/document #graphify/EXTRACTED #community/Community_None

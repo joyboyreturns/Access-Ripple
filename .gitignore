@@ -41,3 +41,4 @@ test-results/
 
 # Throwaway scripts written while working
 *.tmp.mjs
+.DS_Store

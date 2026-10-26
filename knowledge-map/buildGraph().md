@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/build-graph.ts"
 type: "code"
-community: "Community 14"
+community: "Community None"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # buildGraph()
@@ -28,4 +28,4 @@ tags:
 - [[summarizeInteraction()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

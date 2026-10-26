@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/types.ts"
 type: "code"
-community: "Community 18"
+community: "Community None"
 location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # GraphEdge
@@ -19,4 +19,4 @@ tags:
 - [[ripple.test.ts]] - `imports` [EXTRACTED]
 - [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

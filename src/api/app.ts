@@ -114,10 +114,12 @@ async function getScan(id: string): Promise<ScanResult | undefined> {
   return loaded;
 }
 
-export interface AppOptions { baseUrl?: string; logger?: boolean; /** Extra host names this scanner may be reached by, for a private proxy such as `tailscale serve`. */ trustedHosts?: string[]; }
+export interface AppOptions { baseUrl?: string; logger?: boolean; publicDemo?: boolean; /** Extra host names this scanner may be reached by through a loopback proxy. */ trustedHosts?: string[]; }
 
 export async function buildApp(options: AppOptions = {}): Promise<FastifyInstance> {
   const requestsByAddress = new Map<string, number[]>();
+  let aiRequestId: string | undefined;
+  let aiRequests: number[] = [];
   const app = Fastify({
     logger: options.logger ? { level: 'info', serializers: { req: (req) => ({ method: req.method, host: 'local', remoteAddress: req.socket.remoteAddress }) } } : false,
     bodyLimit: 16 * 1024,
@@ -150,6 +152,21 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     if (remote !== '127.0.0.1' && remote !== '::1') return reply.code(403).send({ error: { code: 'LOCAL_ONLY', message: 'The scanner is available only from this computer.', retryable: false } });
   });
 
+  // Bodies are available after parsing, not in onRequest. Never let a public
+  // visitor opt into the hosting computer's private network.
+  app.addHook('preHandler', async (request, reply) => {
+    if (!options.publicDemo || request.method !== 'POST') return;
+    if ((request.body as { allowPrivateNetwork?: boolean } | undefined)?.allowPrivateNetwork) return reply.code(403).send({ error: { code: 'PRIVATE_SCAN_DISABLED', message: 'Private-network scans are disabled on this public demo. Scan a public website or the demo shop.', retryable: false } });
+    if (/^\/api\/scans\/[^/]+\/(briefing|fix|contract)$/.test(request.url.split('?')[0]!)) {
+      const now = Date.now();
+      aiRequests = aiRequests.filter((time) => now - time < 60_000);
+      if (aiRequestId || aiRequests.length >= 12) return reply.code(429).send({ error: { code: 'DEMO_AI_BUSY', message: 'The shared demo model is busy. Please wait a moment and ask again.', retryable: true } });
+      aiRequestId = request.id;
+      aiRequests.push(now);
+    }
+  });
+  app.addHook('onResponse', async (request) => { if (aiRequestId === request.id) aiRequestId = undefined; });
+
   app.setErrorHandler((error, request, reply) => {
     const err = error instanceof Error ? error : new Error(String(error));
     const statusCode = (err as Error & { statusCode?: number }).statusCode;
@@ -163,7 +180,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   });
   await app.register(swaggerUi, { routePrefix: '/docs' });
 
-  app.get('/api/health', async () => ({ status: 'ok', localOnly: true, graphSchemaVersion: '1.0' }));
+  app.get('/api/health', async () => ({ status: 'ok', localOnly: !options.publicDemo, publicDemo: Boolean(options.publicDemo), graphSchemaVersion: '1.0' }));
 
   // The optional AI briefing. It is off unless a provider key is configured,
   // and the deterministic scan story always remains available without one.
@@ -264,6 +281,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const interactionMode: InteractionMode = body.data.authorizeSubmit === true ? 'include-submits' : 'safe';
     const allowPrivateNetwork = body.data.allowPrivateNetwork === true;
     if ('sample' in body.data) {
+      if (options.publicDemo && workerBusy) return reply.code(429).send({ error: { code: 'DEMO_BUSY', message: 'Another visitor is scanning. Please try again when their scan finishes (up to 100 seconds).', retryable: true } });
       const scan = launchScan({ sample: 'checkout', url: '', interactionMode, allowPrivateNetwork, fixtureState: { variant: sampleVariant, appliedChanges: appliedPatches().length } }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
@@ -273,6 +291,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       const unsafe = error instanceof UnsafeUrlError ? error : new UnsafeUrlError('The website address is not allowed.');
       return reply.code(422).send({ error: { code: unsafe.code, message: unsafe.message, retryable: unsafe.code === 'HOST_NOT_FOUND' } });
     }
+    if (options.publicDemo && workerBusy) return reply.code(429).send({ error: { code: 'DEMO_BUSY', message: 'Another visitor is scanning. Please try again when their scan finishes (up to 100 seconds).', retryable: true } });
     // Charged only once the address is known to be scannable: a mistyped or
     // refused address sends nothing to anyone, so it must not lock a person out.
     if (!canStartScan(request.ip, requestsByAddress)) return reply.code(429).send({ error: { code: 'SCAN_RATE_LIMIT', message: 'Too many scans were started. Wait a minute and try again.', retryable: true } });
@@ -312,10 +331,11 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
       : body.data.authorizeSubmit === false ? 'safe'
       : previous.interactionPolicy?.mode ?? 'safe';
     // A rescan of a private address keeps the permission that address needed.
-    const allowPrivateNetwork = body.data.allowPrivateNetwork === true ? true
+    const allowPrivateNetwork = options.publicDemo ? false : body.data.allowPrivateNetwork === true ? true
       : body.data.allowPrivateNetwork === false ? false
       : previous.addressScope === 'private';
     if (previous.sample) {
+      if (options.publicDemo && workerBusy) return reply.code(429).send({ error: { code: 'DEMO_BUSY', message: 'Another visitor is scanning. Please try again when their scan finishes (up to 100 seconds).', retryable: true } });
       const scan = launchScan({ sample: 'checkout', url: '', previousScanId: previous.id, interactionMode, allowPrivateNetwork, fixtureState: { variant: sampleVariant, appliedChanges: appliedPatches().length } }, baseUrl);
       return reply.code(202).send({ scanId: scan.id, previousScanId: previous.id, status: scan.status, statusUrl: `/api/scans/${scan.id}` });
     }
@@ -324,6 +344,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     catch {
       return reply.code(422).send({ error: { code: 'URL_NO_LONGER_ALLOWED', message: 'The original address is no longer allowed by the scan safety policy.', retryable: false } });
     }
+    if (options.publicDemo && workerBusy) return reply.code(429).send({ error: { code: 'DEMO_BUSY', message: 'Another visitor is scanning. Please try again when their scan finishes (up to 100 seconds).', retryable: true } });
     // A change accepted on a live site is simulated in the scanner's browser on
     // this rescan, and on every rescan after it, so the prediction can be checked.
     const scan = launchScan({ url: url.toString(), previousScanId: previous.id, interactionMode, allowPrivateNetwork, simulatedPatches: simulationsFor(previous) }, baseUrl);
@@ -381,6 +402,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     const body = applyBody.safeParse(request.body ?? {});
     if (!body.success) return reply.code(400).send({ error: { code: 'INVALID_APPLY_REQUEST', message: 'Provide the file, the original markup, and the replacement.', retryable: false } });
     const { file, before, after, summary } = body.data;
+    if (options.publicDemo && ![...lastProposals.values()].some((proposal) => proposal.before === before && proposal.after === after)) return reply.code(403).send({ error: { code: 'PROPOSAL_REQUIRED', message: 'Ask the model for a change before applying it on this public demo.', retryable: false } });
     if (!isDemoFixture(file)) return reply.code(403).send({ error: { code: 'FIXTURE_ONLY', message: 'Only the built-in demo shop can be changed by the tool.', retryable: false } });
     const patch = applyPatch(file, before, after, summary ?? 'A change that was accepted in the studio.');
     if (!patch) return reply.code(422).send({ error: { code: 'PATCH_DOES_NOT_APPLY', message: 'The recorded markup was not found in that file, so the change was not applied.', retryable: false } });

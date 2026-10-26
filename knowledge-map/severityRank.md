@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 7"
-location: "L547"
+community: "Community None"
+location: "L568"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_7
+  - community/Community_None
 ---
 
 # severityRank
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_7
+#graphify/code #graphify/EXTRACTED #community/Community_None

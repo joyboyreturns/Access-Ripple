@@ -1,19 +1,17 @@
 ---
-source_file: "web/src/graph-explorer.ts"
+source_file: "scripts/rehearse.mjs"
 type: "code"
-community: "Community 18"
-location: "L29"
+community: "Community None"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # text()
 
 ## Connections
-- [[buildExplorerScene()]] - `calls` [EXTRACTED]
-- [[explorerFacets()]] - `calls` [EXTRACTED]
-- [[graph-explorer.ts]] - `contains` [EXTRACTED]
+- [[rehearse.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

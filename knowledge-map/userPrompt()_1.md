@@ -1,18 +1,18 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 2"
-location: "L170"
+community: "Community None"
+location: "L100"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # userPrompt()
 
 ## Connections
-- [[briefing.ts]] - `contains` [EXTRACTED]
-- [[requestCompletion()]] - `calls` [EXTRACTED]
+- [[fix.ts]] - `contains` [EXTRACTED]
+- [[writeFixProposal()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

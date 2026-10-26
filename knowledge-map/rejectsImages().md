@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 12"
+community: "Community None"
 location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Community_None
 ---
 
 # rejectsImages()
@@ -15,4 +15,4 @@ tags:
 - [[fix.ts]] - `contains` [EXTRACTED]
 - [[writeFixProposal()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Community_None

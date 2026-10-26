@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 24"
-location: "L178"
+community: "Community None"
+location: "L196"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_24
+  - community/Community_None
 ---
 
 # App()
@@ -16,6 +16,7 @@ tags:
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[ChangeExports()]] - `calls` [EXTRACTED]
 - [[Dialog()]] - `calls` [EXTRACTED]
+- [[FirstLook()]] - `calls` [EXTRACTED]
 - [[FixProposalCard()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[Icon()]] - `calls` [EXTRACTED]
@@ -38,7 +39,7 @@ tags:
 - [[changeFilter()]] - `contains` [EXTRACTED]
 - [[checkApi()]] - `calls` [EXTRACTED]
 - [[cleanLabel()]] - `calls` [EXTRACTED]
-- [[compareScans()]] - `calls` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[describeId()]] - `calls` [EXTRACTED]
@@ -86,10 +87,11 @@ tags:
 - [[str()]] - `calls` [EXTRACTED]
 - [[studio()]] - `contains` [EXTRACTED]
 - [[submit()]] - `contains` [EXTRACTED]
+- [[topFinding()]] - `calls` [EXTRACTED]
 - [[traceJourney()]] - `calls` [EXTRACTED]
 - [[waitForScan()_1]] - `calls` [EXTRACTED]
 - [[walkthrough()]] - `contains` [EXTRACTED]
 - [[whoItProtects()]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_24
+#graphify/code #graphify/EXTRACTED #community/Community_None

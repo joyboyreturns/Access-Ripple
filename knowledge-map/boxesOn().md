@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 8"
+community: "Community None"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # boxesOn()
@@ -18,4 +18,4 @@ tags:
 - [[pageFor()]] - `calls` [EXTRACTED]
 - [[str()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

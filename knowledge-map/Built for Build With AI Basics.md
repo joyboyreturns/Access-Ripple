@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 1"
-location: "L328"
+community: "Community None"
+location: "L340"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # Built for Build With AI: Basics
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[AccessRipple]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_1
+#graphify/document #graphify/EXTRACTED #community/Community_None

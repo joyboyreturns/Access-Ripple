@@ -1,18 +1,18 @@
 ---
 source_file: "src/store/contracts.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # contracts.ts
 
 ## Connections
-- [[RepairContract_1]] - `imports` [EXTRACTED]
+- [[RepairContract]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[contract.ts]] - `imports_from` [EXTRACTED]
 - [[contractPath()]] - `contains` [EXTRACTED]
@@ -21,4 +21,4 @@ tags:
 - [[ref_node_fs]] - `imports_from` [EXTRACTED]
 - [[ref_node_path]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

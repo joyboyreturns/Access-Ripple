@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 18"
+community: "Community None"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # cleanLabel()
@@ -26,4 +26,4 @@ tags:
 - [[presentation.test.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

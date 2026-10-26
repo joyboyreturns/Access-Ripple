@@ -1,17 +1,17 @@
 ---
-source_file: "src/ai/briefing.ts"
+source_file: "src/scan/url-safety.ts"
 type: "code"
-community: "Community 2"
-location: "L47"
+community: "Community None"
+location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # .constructor()
 
 ## Connections
-- [[BriefingError]] - `method` [EXTRACTED]
+- [[UnsafeUrlError]] - `method` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

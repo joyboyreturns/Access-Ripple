@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/SelectMenu.tsx"
 type: "code"
-community: "Community 33"
+community: "Community None"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Community_None
 ---
 
 # closeMenu()
@@ -15,4 +15,4 @@ tags:
 - [[SelectMenu()]] - `contains` [EXTRACTED]
 - [[onKeyDown()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Community_None

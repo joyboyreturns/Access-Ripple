@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/capture-readme.mjs"
 type: "code"
-community: "Community 9"
+community: "Community None"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Community_None
 ---
 
 # file()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[capture-readme.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Community_None

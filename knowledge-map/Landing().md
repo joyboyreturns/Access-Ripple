@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Landing.tsx"
 type: "code"
-community: "Community 34"
-location: "L13"
+community: "Community None"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # Landing()
@@ -18,5 +18,6 @@ tags:
 - [[Icon()]] - `calls` [EXTRACTED]
 - [[Landing.tsx]] - `contains` [EXTRACTED]
 - [[Mark()]] - `calls` [EXTRACTED]
+- [[RippleField()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_None

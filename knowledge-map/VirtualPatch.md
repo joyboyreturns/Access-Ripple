@@ -1,12 +1,12 @@
 ---
 source_file: "src/sample/sandbox.ts"
 type: "code"
-community: "Community 11"
+community: "Community None"
 location: "L120"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_11
+  - community/Community_None
 ---
 
 # VirtualPatch
@@ -15,4 +15,4 @@ tags:
 - [[patch.ts]] - `imports` [EXTRACTED]
 - [[sandbox.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_11
+#graphify/code #graphify/EXTRACTED #community/Community_None

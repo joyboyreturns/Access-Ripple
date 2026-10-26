@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 0"
-location: "L262"
+community: "Community None"
+location: "L281"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # askForProposal()
@@ -15,4 +15,4 @@ tags:
 - [[App()]] - `contains` [EXTRACTED]
 - [[proposeFix()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

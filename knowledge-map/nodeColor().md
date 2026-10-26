@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 20"
-location: "L197"
+community: "Community None"
+location: "L198"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_20
+  - community/Community_None
 ---
 
 # nodeColor()
@@ -19,4 +19,4 @@ tags:
 - [[graph-explorer.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_20
+#graphify/code #graphify/EXTRACTED #community/Community_None

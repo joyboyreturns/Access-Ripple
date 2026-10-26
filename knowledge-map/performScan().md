@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community 4"
-location: "L315"
+community: "Community None"
+location: "L322"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Community_None
 ---
 
 # performScan()
@@ -25,7 +25,7 @@ tags:
 - [[keyboardFindings()]] - `calls` [EXTRACTED]
 - [[launchScan()]] - `calls` [EXTRACTED]
 - [[looksLikeRefusal()]] - `calls` [EXTRACTED]
-- [[playwright_2]] - `imports_from` [EXTRACTED]
+- [[playwright_1]] - `imports_from` [EXTRACTED]
 - [[probeKeyboard()]] - `calls` [EXTRACTED]
 - [[runAxe()]] - `calls` [EXTRACTED]
 - [[runInteractions()]] - `calls` [EXTRACTED]
@@ -38,4 +38,4 @@ tags:
 - [[summarizeCoverage()]] - `calls` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Community_None

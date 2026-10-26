@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/SelectMenu.tsx"
 type: "code"
-community: "Community 34"
+community: "Community None"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # SelectOption
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[SelectMenu.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_None

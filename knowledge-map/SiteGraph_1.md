@@ -1,24 +1,27 @@
 ---
-source_file: "src/graph/schema.ts"
+source_file: "web/src/types.ts"
 type: "code"
-community: "Community 2"
-location: "L26"
+community: "Community None"
+location: "L72"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_None
 ---
 
 # SiteGraph
 
 ## Connections
-- [[briefing.test.ts]] - `imports` [EXTRACTED]
-- [[briefing.ts]] - `imports` [EXTRACTED]
-- [[build-graph.ts]] - `imports` [EXTRACTED]
-- [[contract.ts]] - `imports` [EXTRACTED]
-- [[fix.test.ts]] - `imports` [EXTRACTED]
-- [[fix.ts]] - `imports` [EXTRACTED]
-- [[reach.ts]] - `imports` [EXTRACTED]
-- [[schema.ts]] - `contains` [EXTRACTED]
+- [[App.tsx]] - `imports` [EXTRACTED]
+- [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
+- [[Props]] - `references` [EXTRACTED]
+- [[api.ts]] - `imports` [EXTRACTED]
+- [[graph-explorer.ts]] - `imports` [EXTRACTED]
+- [[graph-interactions.test.ts]] - `imports` [EXTRACTED]
+- [[presentation.test.ts]] - `imports` [EXTRACTED]
+- [[presentation.ts]] - `imports` [EXTRACTED]
+- [[refusal.test.ts]] - `imports` [EXTRACTED]
+- [[ripple.test.ts]] - `imports` [EXTRACTED]
+- [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_None

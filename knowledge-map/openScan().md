@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 35"
-location: "L247"
+community: "Community None"
+location: "L266"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Community_None
 ---
 
 # openScan()
@@ -17,4 +17,4 @@ tags:
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[readScan()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 8"
-location: "L542"
+community: "Community None"
+location: "L563"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # rippleReach()
@@ -19,4 +19,4 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[ripple.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

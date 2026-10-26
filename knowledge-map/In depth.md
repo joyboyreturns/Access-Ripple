@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 1"
-location: "L160"
+community: "Community None"
+location: "L159"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # In depth
@@ -25,4 +25,4 @@ tags:
 - [[The ripple of a barrier]] - `contains` [EXTRACTED]
 - [[Your own sites]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_1
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "src/store/contracts.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # contractStore
@@ -15,4 +15,4 @@ tags:
 - [[app.ts]] - `imports` [EXTRACTED]
 - [[contracts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

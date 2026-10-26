@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # contract.ts
@@ -15,14 +15,14 @@ tags:
 - [[CheckedPrediction]] - `contains` [EXTRACTED]
 - [[ContractError]] - `contains` [EXTRACTED]
 - [[DEFAULT_BASE_URL]] - `imports` [EXTRACTED]
-- [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
 - [[PredictionExpectation]] - `contains` [EXTRACTED]
 - [[PredictionOutcome]] - `contains` [EXTRACTED]
-- [[RepairContract_1]] - `contains` [EXTRACTED]
-- [[RepairPrediction_1]] - `contains` [EXTRACTED]
-- [[SYSTEM_PROMPT_2]] - `contains` [EXTRACTED]
+- [[RepairContract]] - `contains` [EXTRACTED]
+- [[RepairPrediction]] - `contains` [EXTRACTED]
+- [[SYSTEM_PROMPT_1]] - `contains` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
-- [[SiteGraph_1]] - `imports` [EXTRACTED]
+- [[SiteGraph]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.ts]] - `imports_from` [EXTRACTED]
 - [[checkPredictions()]] - `contains` [EXTRACTED]
@@ -42,4 +42,4 @@ tags:
 - [[writeRepairContract()]] - `contains` [EXTRACTED]
 - [[zod_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

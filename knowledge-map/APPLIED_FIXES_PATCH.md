@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/api.ts"
 type: "code"
-community: "Community 0"
+community: "Community None"
 location: "L77"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # APPLIED_FIXES_PATCH
@@ -15,4 +15,4 @@ tags:
 - [[App.tsx]] - `imports` [EXTRACTED]
 - [[api.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

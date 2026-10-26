@@ -1,12 +1,12 @@
 ---
 source_file: "src/api/app.ts"
 type: "code"
-community: "Community 3"
-location: "L108"
+community: "Community None"
+location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_None
 ---
 
 # getScan()
@@ -15,4 +15,4 @@ tags:
 - [[app.ts]] - `contains` [EXTRACTED]
 - [[buildApp()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/contract.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L120"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # contractUserPrompt()
@@ -15,4 +15,4 @@ tags:
 - [[contract.ts]] - `contains` [EXTRACTED]
 - [[writeRepairContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

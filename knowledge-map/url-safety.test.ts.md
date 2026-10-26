@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/url-safety.test.ts"
 type: "code"
-community: "Community 10"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_10
+  - community/Community_None
 ---
 
 # url-safety.test.ts
@@ -17,6 +17,6 @@ tags:
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
 - [[isPublicIp()]] - `imports` [EXTRACTED]
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
-- [[vitest]] - `imports_from` [EXTRACTED]
+- [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_10
+#graphify/code #graphify/EXTRACTED #community/Community_None

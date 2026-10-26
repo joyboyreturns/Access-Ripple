@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Community 19"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_19
+  - community/Community_None
 ---
 
 # scripts
@@ -21,6 +21,7 @@ tags:
 - [[devweb]] - `contains` [EXTRACTED]
 - [[package.json]] - `contains` [EXTRACTED]
 - [[preparedemo]] - `contains` [EXTRACTED]
+- [[record]] - `contains` [EXTRACTED]
 - [[rehearse]] - `contains` [EXTRACTED]
 - [[start]] - `contains` [EXTRACTED]
 - [[startapi]] - `contains` [EXTRACTED]
@@ -28,4 +29,4 @@ tags:
 - [[testwatch]] - `contains` [EXTRACTED]
 - [[typecheck]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_19
+#graphify/code #graphify/EXTRACTED #community/Community_None

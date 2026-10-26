@@ -1,12 +1,12 @@
 ---
 source_file: "tests/e2e/keyboard-probe.test.ts"
 type: "code"
-community: "Community 27"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_27
+  - community/Community_None
 ---
 
 # shell()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[keyboard-probe.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_27
+#graphify/code #graphify/EXTRACTED #community/Community_None

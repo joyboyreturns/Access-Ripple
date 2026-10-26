@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 35"
-location: "L355"
+community: "Community None"
+location: "L374"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Community_None
 ---
 
 # walkthrough()
@@ -15,19 +15,18 @@ tags:
 - [[App()]] - `contains` [EXTRACTED]
 - [[accept()]] - `calls` [EXTRACTED]
 - [[applyProposal()]] - `calls` [EXTRACTED]
-- [[byPriority()]] - `calls` [EXTRACTED]
-- [[compareScans()]] - `calls` [EXTRACTED]
+- [[compareScans()_1]] - `calls` [EXTRACTED]
 - [[createScan()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
 - [[friendlyScanError()]] - `calls` [EXTRACTED]
-- [[groupIssues()]] - `calls` [EXTRACTED]
-- [[isIssue()]] - `indirect_call` [INFERRED]
+- [[getAiStatus()]] - `calls` [EXTRACTED]
 - [[proposeFix()]] - `calls` [EXTRACTED]
 - [[readGraph()]] - `calls` [EXTRACTED]
 - [[rescan()]] - `calls` [EXTRACTED]
 - [[resetDemoShop()]] - `calls` [EXTRACTED]
 - [[setSampleState()]] - `calls` [EXTRACTED]
+- [[topFinding()]] - `calls` [EXTRACTED]
 - [[waitForScan()_1]] - `calls` [EXTRACTED]
 - [[writeContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Community_None

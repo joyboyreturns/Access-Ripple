@@ -1,12 +1,12 @@
 ---
 source_file: "src/api/app.ts"
 type: "code"
-community: "Community 3"
-location: "L118"
+community: "Community None"
+location: "L119"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_None
 ---
 
 # buildApp()
@@ -26,7 +26,7 @@ tags:
 - [[checkPredictions()]] - `calls` [EXTRACTED]
 - [[clearPatches()]] - `calls` [EXTRACTED]
 - [[clearVirtualPatches()]] - `calls` [EXTRACTED]
-- [[compareScans()_1]] - `calls` [EXTRACTED]
+- [[compareScans()]] - `calls` [EXTRACTED]
 - [[contractKey()]] - `calls` [EXTRACTED]
 - [[contractsFor()]] - `calls` [EXTRACTED]
 - [[createObsidianZip()]] - `calls` [EXTRACTED]
@@ -43,8 +43,8 @@ tags:
 - [[simulationsFor()]] - `calls` [EXTRACTED]
 - [[studio-flow.test.ts]] - `imports` [EXTRACTED]
 - [[summarizeScan()]] - `indirect_call` [INFERRED]
-- [[writeBriefing()_1]] - `calls` [EXTRACTED]
+- [[writeBriefing()]] - `calls` [EXTRACTED]
 - [[writeFixProposal()]] - `calls` [EXTRACTED]
 - [[writeRepairContract()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_None

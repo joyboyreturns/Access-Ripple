@@ -1,17 +1,17 @@
 ---
-source_file: "tests/unit/compare.test.ts"
+source_file: "tests/unit/presentation.test.ts"
 type: "code"
-community: "Community 6"
-location: "L6"
+community: "Community None"
+location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # finding()
 
 ## Connections
-- [[compare.test.ts]] - `contains` [EXTRACTED]
+- [[presentation.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

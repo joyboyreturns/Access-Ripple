@@ -1,29 +1,29 @@
 ---
 source_file: "src/api/app.ts"
 type: "code"
-community: "Community 3"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_None
 ---
 
 # app.ts
 
 ## Connections
-- [[@fastifystatic]] - `imports_from` [EXTRACTED]
-- [[@fastifyswagger]] - `imports_from` [EXTRACTED]
-- [[@fastifyswagger-ui]] - `imports_from` [EXTRACTED]
+- [[@fastifystatic_1]] - `imports_from` [EXTRACTED]
+- [[@fastifyswagger_1]] - `imports_from` [EXTRACTED]
+- [[@fastifyswagger-ui_1]] - `imports_from` [EXTRACTED]
 - [[AppOptions]] - `contains` [EXTRACTED]
 - [[BriefingError]] - `imports` [EXTRACTED]
 - [[CheckedPrediction]] - `imports` [EXTRACTED]
 - [[DEFAULT_LIMITS]] - `imports` [EXTRACTED]
 - [[DEFAULT_ORIGINS]] - `contains` [EXTRACTED]
-- [[InteractionMode_1]] - `imports` [EXTRACTED]
-- [[RepairContract_1]] - `imports` [EXTRACTED]
+- [[InteractionMode]] - `imports` [EXTRACTED]
+- [[RepairContract]] - `imports` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
-- [[ScanSummary_1]] - `imports` [EXTRACTED]
+- [[ScanSummary]] - `imports` [EXTRACTED]
 - [[UnsafeUrlError]] - `imports` [EXTRACTED]
 - [[addVirtualPatch()]] - `imports` [EXTRACTED]
 - [[aiStatus()]] - `imports` [EXTRACTED]
@@ -41,7 +41,7 @@ tags:
 - [[clearPatches()]] - `imports` [EXTRACTED]
 - [[clearVirtualPatches()]] - `imports` [EXTRACTED]
 - [[compare.ts]] - `imports_from` [EXTRACTED]
-- [[compareScans()_1]] - `imports` [EXTRACTED]
+- [[compareScans()]] - `imports` [EXTRACTED]
 - [[contract.ts]] - `imports_from` [EXTRACTED]
 - [[contractKey()]] - `contains` [EXTRACTED]
 - [[contractStore]] - `imports` [EXTRACTED]
@@ -51,7 +51,7 @@ tags:
 - [[createObsidianZip()]] - `imports` [EXTRACTED]
 - [[disk.ts]] - `imports_from` [EXTRACTED]
 - [[diskStore]] - `imports` [EXTRACTED]
-- [[fastify]] - `imports_from` [EXTRACTED]
+- [[fastify_1]] - `imports_from` [EXTRACTED]
 - [[fix.ts]] - `imports_from` [EXTRACTED]
 - [[fixBody]] - `contains` [EXTRACTED]
 - [[getScan()]] - `contains` [EXTRACTED]
@@ -88,9 +88,9 @@ tags:
 - [[url-safety.ts]] - `imports_from` [EXTRACTED]
 - [[virtualPatchesFor()]] - `imports` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
-- [[writeBriefing()_1]] - `imports` [EXTRACTED]
+- [[writeBriefing()]] - `imports` [EXTRACTED]
 - [[writeFixProposal()]] - `imports` [EXTRACTED]
 - [[writeRepairContract()]] - `imports` [EXTRACTED]
 - [[zod_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_None

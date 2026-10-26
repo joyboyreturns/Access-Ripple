@@ -12,5 +12,6 @@ tags:
 
 ## Connections
 - [[demo.mjs]] - `imports_from` [EXTRACTED]
+- [[record.mjs]] - `imports_from` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Community_23

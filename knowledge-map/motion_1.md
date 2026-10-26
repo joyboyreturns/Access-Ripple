@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "concept"
-community: "Community 34"
-location: "L32"
+community: "Community None"
+location: "L33"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # motion
@@ -17,4 +17,4 @@ tags:
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_34
+#graphify/concept #graphify/EXTRACTED #community/Community_None

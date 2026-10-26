@@ -1,12 +1,12 @@
 ---
 source_file: "tests/unit/export.test.ts"
 type: "code"
-community: "Community 31"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Community_None
 ---
 
 # export.test.ts
@@ -20,6 +20,6 @@ tags:
 - [[obsidian.ts]] - `imports_from` [EXTRACTED]
 - [[scan_1]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
-- [[vitest]] - `imports_from` [EXTRACTED]
+- [[vitest_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 0"
-location: "L341"
+community: "Community None"
+location: "L360"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_0
+  - community/Community_None
 ---
 
 # simulateOnRescan()
@@ -15,4 +15,4 @@ tags:
 - [[App()]] - `contains` [EXTRACTED]
 - [[simulateProposal()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_0
+#graphify/code #graphify/EXTRACTED #community/Community_None

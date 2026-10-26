@@ -9,13 +9,12 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 [![License: MIT](https://img.shields.io/badge/license-MIT-87be9b)](LICENSE)
 ![Node 22](https://img.shields.io/badge/node-22-87be9b)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-83b9dd)
-![Tests](https://img.shields.io/badge/tests-236%20passing-87be9b)
+![Tests](https://img.shields.io/badge/tests-240%20passing-87be9b)
 ![Playwright + axe-core](https://img.shields.io/badge/Playwright-axe--core-b5a5f5)
 ![Vercel AI Gateway](https://img.shields.io/badge/AI-Vercel%20AI%20Gateway-111111)
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
 
-<!-- Add the public YouTube or Vimeo link here once the demo video is uploaded:
-[▶ Watch the three-minute demo](https://youtu.be/...) · -->
+[**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) ·
 [**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md) · [Build journey](devpost/build-journey.md)
 
 <img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">

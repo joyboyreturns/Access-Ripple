@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 3"
+community: "Community None"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_None
 ---
 
 # readFixConfig()
@@ -17,4 +17,4 @@ tags:
 - [[fix.ts]] - `contains` [EXTRACTED]
 - [[readAiConfig()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_None

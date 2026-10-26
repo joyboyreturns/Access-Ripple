@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Icons.tsx"
 type: "code"
-community: "Community 34"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # Icon()
@@ -30,4 +30,4 @@ tags:
 - [[VerdictMark()]] - `calls` [EXTRACTED]
 - [[WalkthroughPanel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_None

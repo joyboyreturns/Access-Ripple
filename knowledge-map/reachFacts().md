@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 26"
-location: "L580"
+community: "Community None"
+location: "L601"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_None
 ---
 
 # reachFacts()
@@ -14,9 +14,10 @@ tags:
 ## Connections
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[FirstLook()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
 - [[presentation.test.ts]] - `imports` [EXTRACTED]
 - [[presentation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_None

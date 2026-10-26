@@ -1,12 +1,12 @@
 ---
 source_file: "tsconfig.build.json"
 type: "concept"
-community: "Community 28"
+community: "Community None"
 location: "L2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_28
+  - community/Community_None
 ---
 
 # ./tsconfig.json
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tsconfig.build.json]] - `extends` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_28
+#graphify/concept #graphify/EXTRACTED #community/Community_None

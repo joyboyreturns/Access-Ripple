@@ -1,18 +1,18 @@
 ---
 source_file: "src/export/obsidian.ts"
 type: "code"
-community: "Community 31"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Community_None
 ---
 
 # obsidian.ts
 
 ## Connections
-- [[GraphNode_1]] - `imports` [EXTRACTED]
+- [[GraphNode]] - `imports` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[createObsidianZip()]] - `contains` [EXTRACTED]
@@ -23,4 +23,4 @@ tags:
 - [[safeName()]] - `contains` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Community_None

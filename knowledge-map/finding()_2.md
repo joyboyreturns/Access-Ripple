@@ -1,18 +1,18 @@
 ---
-source_file: "tests/unit/ripple.test.ts"
+source_file: "tests/unit/graph-interactions.test.ts"
 type: "code"
-community: "Community 32"
-location: "L7"
+community: "Community None"
+location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_None
 ---
 
 # finding()
 
 ## Connections
-- [[ripple.test.ts]] - `contains` [EXTRACTED]
-- [[shop()]] - `calls` [EXTRACTED]
+- [[graph-interactions.test.ts]] - `contains` [EXTRACTED]
+- [[node()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_None

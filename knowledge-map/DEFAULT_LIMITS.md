@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/worker.ts"
 type: "code"
-community: "Community 4"
+community: "Community None"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Community_None
 ---
 
 # DEFAULT_LIMITS
@@ -16,4 +16,4 @@ tags:
 - [[timing.test.ts]] - `imports` [EXTRACTED]
 - [[worker.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Community_None

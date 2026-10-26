@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/types.ts"
 type: "code"
-community: "Community 26"
+community: "Community None"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_None
 ---
 
 # InteractionStepView
@@ -16,4 +16,4 @@ tags:
 - [[presentation.ts]] - `imports` [EXTRACTED]
 - [[types.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_None

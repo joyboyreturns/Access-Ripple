@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 8"
-location: "L138"
+community: "Community None"
+location: "L141"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # ScanStory()
@@ -16,8 +16,7 @@ tags:
 - [[App.tsx]] - `contains` [EXTRACTED]
 - [[Icon()]] - `calls` [EXTRACTED]
 - [[describe()]] - `calls` [EXTRACTED]
-- [[groupIssues()]] - `calls` [EXTRACTED]
 - [[scanStory()_1]] - `calls` [EXTRACTED]
-- [[severity()]] - `calls` [EXTRACTED]
+- [[topFinding()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

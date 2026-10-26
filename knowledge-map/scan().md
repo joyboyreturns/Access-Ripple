@@ -1,17 +1,17 @@
 ---
-source_file: "tests/unit/graph-shape.test.ts"
+source_file: "tests/unit/compare.test.ts"
 type: "code"
-community: "Community 14"
-location: "L7"
+community: "Community None"
+location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # scan()
 
 ## Connections
-- [[graph-shape.test.ts]] - `contains` [EXTRACTED]
+- [[compare.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

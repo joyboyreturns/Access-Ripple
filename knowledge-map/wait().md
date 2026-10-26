@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/demo.mjs"
 type: "code"
-community: "Community 23"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_23
+  - community/Community_None
 ---
 
 # wait()
@@ -15,4 +15,4 @@ tags:
 - [[demo.mjs]] - `contains` [EXTRACTED]
 - [[waitFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_23
+#graphify/code #graphify/EXTRACTED #community/Community_None

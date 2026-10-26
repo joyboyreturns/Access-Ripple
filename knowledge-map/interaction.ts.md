@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/interaction.ts"
 type: "code"
-community: "Community 5"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/Community_None
 ---
 
 # interaction.ts
@@ -21,7 +21,7 @@ tags:
 - [[InteractionBatch]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `imports` [EXTRACTED]
 - [[InteractionExclusion]] - `imports` [EXTRACTED]
-- [[InteractionMode_1]] - `imports` [EXTRACTED]
+- [[InteractionMode]] - `imports` [EXTRACTED]
 - [[InteractionOutcome]] - `imports` [EXTRACTED]
 - [[InteractionRunOptions]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `imports` [EXTRACTED]
@@ -49,7 +49,7 @@ tags:
 - [[keyboardFindings()]] - `contains` [EXTRACTED]
 - [[locate()]] - `contains` [EXTRACTED]
 - [[outcomeLabel()]] - `contains` [EXTRACTED]
-- [[playwright_2]] - `imports_from` [EXTRACTED]
+- [[playwright_1]] - `imports_from` [EXTRACTED]
 - [[priority()]] - `contains` [EXTRACTED]
 - [[probeKeyboard()]] - `contains` [EXTRACTED]
 - [[pushExclusion()]] - `contains` [EXTRACTED]
@@ -66,4 +66,4 @@ tags:
 - [[withoutHash()]] - `contains` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/Community_None

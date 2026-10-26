@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/graph-explorer.ts"
 type: "code"
-community: "Community 18"
+community: "Community None"
 location: "L190"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/Community_None
 ---
 
 # explorerFacets()
@@ -20,6 +20,6 @@ tags:
 - [[graph-interactions.test.ts]] - `imports` [EXTRACTED]
 - [[incompleteCheck()]] - `calls` [EXTRACTED]
 - [[severity()]] - `calls` [EXTRACTED]
-- [[text()]] - `calls` [EXTRACTED]
+- [[text()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/Community_None

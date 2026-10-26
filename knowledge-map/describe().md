@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 8"
-location: "L135"
+community: "Community None"
+location: "L136"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # describe()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[App()]] - `calls` [EXTRACTED]
 - [[App.tsx]] - `imports` [EXTRACTED]
+- [[FirstLook()]] - `calls` [EXTRACTED]
 - [[GraphCanvas()]] - `calls` [EXTRACTED]
 - [[GraphCanvas.tsx]] - `imports` [EXTRACTED]
 - [[ProofView()]] - `calls` [EXTRACTED]
@@ -36,4 +37,4 @@ tags:
 - [[scanStory()_1]] - `calls` [EXTRACTED]
 - [[walkthrough()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

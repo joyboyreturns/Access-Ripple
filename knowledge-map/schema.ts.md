@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/schema.ts"
 type: "code"
-community: "Community 14"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/Community_None
 ---
 
 # schema.ts
@@ -17,12 +17,12 @@ tags:
 - [[EvidenceLabel]] - `contains` [EXTRACTED]
 - [[GraphEdge]] - `contains` [EXTRACTED]
 - [[GraphEdgeKind]] - `contains` [EXTRACTED]
-- [[GraphNode_1]] - `contains` [EXTRACTED]
+- [[GraphNode]] - `contains` [EXTRACTED]
 - [[GraphNodeKind]] - `contains` [EXTRACTED]
 - [[InteractionEvidence]] - `contains` [EXTRACTED]
 - [[InteractionExclusion]] - `contains` [EXTRACTED]
 - [[InteractionExclusionReason]] - `contains` [EXTRACTED]
-- [[InteractionMode_1]] - `contains` [EXTRACTED]
+- [[InteractionMode]] - `contains` [EXTRACTED]
 - [[InteractionOutcome]] - `contains` [EXTRACTED]
 - [[InteractionStep]] - `contains` [EXTRACTED]
 - [[PageEvidence]] - `contains` [EXTRACTED]
@@ -34,7 +34,7 @@ tags:
 - [[ScanResult]] - `contains` [EXTRACTED]
 - [[ScanStatus]] - `contains` [EXTRACTED]
 - [[SimulatedPatchOutcome]] - `contains` [EXTRACTED]
-- [[SiteGraph_1]] - `contains` [EXTRACTED]
+- [[SiteGraph]] - `contains` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.test.ts]] - `imports_from` [EXTRACTED]
 - [[briefing.ts]] - `imports_from` [EXTRACTED]
@@ -58,4 +58,4 @@ tags:
 - [[reach.ts]] - `imports_from` [EXTRACTED]
 - [[worker.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,19 +1,19 @@
 ---
 source_file: "tests/unit/ripple.test.ts"
 type: "code"
-community: "Community 32"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_None
 ---
 
 # shop()
 
 ## Connections
-- [[finding()_2]] - `calls` [EXTRACTED]
-- [[page()]] - `calls` [EXTRACTED]
+- [[finding()_4]] - `calls` [EXTRACTED]
+- [[page()_2]] - `calls` [EXTRACTED]
 - [[ripple.test.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_None

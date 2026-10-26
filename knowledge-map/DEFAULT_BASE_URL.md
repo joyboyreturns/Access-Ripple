@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/briefing.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # DEFAULT_BASE_URL
@@ -15,4 +15,4 @@ tags:
 - [[briefing.ts]] - `contains` [EXTRACTED]
 - [[contract.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

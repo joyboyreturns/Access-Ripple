@@ -1,23 +1,24 @@
 ---
-source_file: "web/src/api.ts"
+source_file: "src/graph/compare.ts"
 type: "code"
-community: "Community 35"
-location: "L114"
+community: "Community None"
+location: "L103"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Community_None
 ---
 
 # compareScans()
 
 ## Connections
-- [[App()]] - `calls` [EXTRACTED]
-- [[App.tsx]] - `imports` [EXTRACTED]
-- [[accept()]] - `calls` [EXTRACTED]
-- [[api.ts]] - `contains` [EXTRACTED]
-- [[request()]] - `calls` [EXTRACTED]
-- [[run()]] - `calls` [EXTRACTED]
-- [[walkthrough()]] - `calls` [EXTRACTED]
+- [[app.ts]] - `imports` [EXTRACTED]
+- [[buildApp()]] - `calls` [EXTRACTED]
+- [[compare.test.ts]] - `imports` [EXTRACTED]
+- [[compare.ts]] - `contains` [EXTRACTED]
+- [[graph.test.ts]] - `imports` [EXTRACTED]
+- [[matchIssues()]] - `calls` [EXTRACTED]
+- [[repairBetween()]] - `calls` [EXTRACTED]
+- [[simulated-patch.test.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Community_None

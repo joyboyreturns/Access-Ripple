@@ -1,12 +1,12 @@
 ---
 source_file: "src/ai/fix.ts"
 type: "code"
-community: "Community 12"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Community_None
 ---
 
 # fix.ts
@@ -15,15 +15,15 @@ tags:
 - [[AiConfig]] - `imports` [EXTRACTED]
 - [[BriefingError]] - `imports` [EXTRACTED]
 - [[FixConfig]] - `contains` [EXTRACTED]
-- [[FixProposal_1]] - `contains` [EXTRACTED]
+- [[FixProposal]] - `contains` [EXTRACTED]
 - [[RULE_CRITERIA]] - `contains` [EXTRACTED]
-- [[SYSTEM_PROMPT]] - `contains` [EXTRACTED]
+- [[SYSTEM_PROMPT_2]] - `contains` [EXTRACTED]
 - [[ScanResult]] - `imports` [EXTRACTED]
-- [[SiteGraph_1]] - `imports` [EXTRACTED]
+- [[SiteGraph]] - `imports` [EXTRACTED]
 - [[WCAG_NAMES]] - `contains` [EXTRACTED]
 - [[aiStatus()]] - `imports` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
-- [[briefing.ts]] - `re_exports` [EXTRACTED]
+- [[briefing.ts]] - `imports_from` [EXTRACTED]
 - [[fix.test.ts]] - `imports_from` [EXTRACTED]
 - [[isGrounded()]] - `contains` [EXTRACTED]
 - [[locateInDemoShop()]] - `imports` [EXTRACTED]
@@ -36,8 +36,8 @@ tags:
 - [[sandbox.ts]] - `imports_from` [EXTRACTED]
 - [[schema.ts]] - `imports_from` [EXTRACTED]
 - [[unifiedDiff()]] - `contains` [EXTRACTED]
-- [[userPrompt()]] - `contains` [EXTRACTED]
+- [[userPrompt()_1]] - `contains` [EXTRACTED]
 - [[wcagCriterion()]] - `contains` [EXTRACTED]
 - [[writeFixProposal()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Community_None

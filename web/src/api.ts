@@ -28,7 +28,7 @@ async function request<T>(path: string, init?: RequestInit, options?: { timeout?
 }
 
 export function checkApi() {
-  return request<{ status: string; localOnly: boolean }>('/api/health');
+  return request<{ status: string; localOnly: boolean; publicDemo?: boolean }>('/api/health');
 }
 
 export function createScan(input: { url: string; authorizeSubmit?: boolean; allowPrivateNetwork?: boolean } | { sample: 'checkout'; authorizeSubmit?: boolean; allowPrivateNetwork?: boolean }) {

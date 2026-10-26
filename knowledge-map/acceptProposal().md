@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/App.tsx"
 type: "code"
-community: "Community 24"
-location: "L328"
+community: "Community None"
+location: "L347"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_24
+  - community/Community_None
 ---
 
 # acceptProposal()
@@ -16,4 +16,4 @@ tags:
 - [[applyProposal()]] - `calls` [EXTRACTED]
 - [[setSampleState()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_24
+#graphify/code #graphify/EXTRACTED #community/Community_None

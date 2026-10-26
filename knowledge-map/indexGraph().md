@@ -1,12 +1,12 @@
 ---
 source_file: "src/graph/reach.ts"
 type: "code"
-community: "Community 6"
+community: "Community None"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # indexGraph()
@@ -15,4 +15,4 @@ tags:
 - [[annotateReach()]] - `calls` [EXTRACTED]
 - [[reach.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Community_None

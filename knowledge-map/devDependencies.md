@@ -1,26 +1,26 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Community 25"
-location: "L38"
+community: "Community None"
+location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_25
+  - community/Community_None
 ---
 
 # devDependencies
 
 ## Connections
-- [[@typesnode_1]] - `contains` [EXTRACTED]
-- [[@typesreact_1]] - `contains` [EXTRACTED]
-- [[@typesreact-dom_1]] - `contains` [EXTRACTED]
+- [[@typesnode]] - `contains` [EXTRACTED]
+- [[@typesreact]] - `contains` [EXTRACTED]
+- [[@typesreact-dom]] - `contains` [EXTRACTED]
 - [[@vitejsplugin-react]] - `contains` [EXTRACTED]
-- [[concurrently_1]] - `contains` [EXTRACTED]
+- [[concurrently]] - `contains` [EXTRACTED]
 - [[package.json]] - `contains` [EXTRACTED]
-- [[tsx_1]] - `contains` [EXTRACTED]
-- [[typescript_1]] - `contains` [EXTRACTED]
+- [[tsx]] - `contains` [EXTRACTED]
+- [[typescript]] - `contains` [EXTRACTED]
 - [[vite]] - `contains` [EXTRACTED]
-- [[vitest_1]] - `contains` [EXTRACTED]
+- [[vitest]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_25
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/presentation.ts"
 type: "code"
-community: "Community 8"
-location: "L555"
+community: "Community None"
+location: "L576"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_None
 ---
 
 # byPriority()
@@ -17,8 +17,7 @@ tags:
 - [[presentation.ts]] - `contains` [EXTRACTED]
 - [[ripple.test.ts]] - `imports` [EXTRACTED]
 - [[rippleReach()]] - `calls` [EXTRACTED]
-- [[scanStory()_1]] - `calls` [EXTRACTED]
 - [[severity()]] - `calls` [EXTRACTED]
-- [[walkthrough()]] - `calls` [EXTRACTED]
+- [[topFinding()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_None

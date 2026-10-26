@@ -1,12 +1,12 @@
 ---
 source_file: "src/scan/url-safety.ts"
 type: "code"
-community: "Community 10"
+community: "Community None"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_10
+  - community/Community_None
 ---
 
 # isNeverScannedAddress()
@@ -18,4 +18,4 @@ tags:
 - [[parseIpv6()]] - `calls` [EXTRACTED]
 - [[url-safety.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_10
+#graphify/code #graphify/EXTRACTED #community/Community_None

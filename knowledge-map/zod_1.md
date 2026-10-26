@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "concept"
-community: "Community 6"
-location: "L36"
+community: "Community None"
+location: "L37"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Community_None
 ---
 
 # zod
@@ -16,4 +16,4 @@ tags:
 - [[contract.ts]] - `imports_from` [EXTRACTED]
 - [[package.json]] - `imports` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_6
+#graphify/concept #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "web/src/Landing.tsx"
 type: "code"
-community: "Community 34"
-location: "L5"
+community: "Community None"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_None
 ---
 
 # Dialog()
@@ -18,4 +18,4 @@ tags:
 - [[Landing()]] - `calls` [EXTRACTED]
 - [[Landing.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_None

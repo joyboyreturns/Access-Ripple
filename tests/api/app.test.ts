@@ -61,6 +61,36 @@ describe('local scan API', () => {
     expect(scanStore.list()).toHaveLength(before);
   });
 
+  it('never lets public visitors opt into the hosting computer network', async () => {
+    const app = await buildApp({ publicDemo: true }); apps.push(app);
+    expect((await app.inject({ method: 'GET', url: '/api/health' })).json()).toMatchObject({ publicDemo: true, localOnly: false });
+    for (const url of ['/api/scans', '/api/scans/old-private-scan/rescan']) {
+      const result = await app.inject({ method: 'POST', url, payload: { url: 'http://127.0.0.1:9000/admin', allowPrivateNetwork: true } });
+      expect(result.statusCode).toBe(403);
+      expect(result.json().error.code).toBe('PRIVATE_SCAN_DISABLED');
+    }
+    const direct = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://127.0.0.1:9000/admin' } });
+    expect(direct.statusCode).toBe(422);
+    expect(scanStore.list()).toHaveLength(0);
+  });
+
+  it('refuses arbitrary fixture markup from a public visitor', async () => {
+    const app = await buildApp({ publicDemo: true }); apps.push(app);
+    const result = await app.inject({ method: 'POST', url: '/api/sample/apply', payload: { file: 'src/sample/site/cart.html', before: '<title>Cart</title>', after: '<script>alert(1)</script>' } });
+    expect(result.statusCode).toBe(403);
+    expect(result.json().error.code).toBe('PROPOSAL_REQUIRED');
+    expect((await app.inject({ method: 'GET', url: '/sample/cart' })).body).not.toContain('<script>alert(1)</script>');
+  });
+
+  it('does not inherit a saved private-network permission on a public rescan', async () => {
+    const app = await buildApp({ publicDemo: true }); apps.push(app);
+    scanStore.set({ id: 'old-private', createdAt: '', updatedAt: '', status: 'complete', inputUrl: 'http://127.0.0.1:9000/admin', addressScope: 'private', limits: {} as never, progress: { completedPages: 0, totalPageLimit: 5, message: '' }, pages: [] });
+    const result = await app.inject({ method: 'POST', url: '/api/scans/old-private/rescan', payload: {} });
+    expect(result.statusCode).toBe(422);
+    expect(result.json().error.code).toBe('URL_NO_LONGER_ALLOWED');
+    expect(scanStore.list()).toHaveLength(1);
+  });
+
   it('never queues an encoded cloud metadata address', async () => {
     const app = await buildApp(); apps.push(app);
     const metadata = await app.inject({ method: 'POST', url: '/api/scans', payload: { url: 'http://[::ffff:a9fe:a9fe]/latest/meta-data/', allowPrivateNetwork: true } });

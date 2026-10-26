@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Community 1"
+community: "Community None"
 location: "L3"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/Community_None
 ---
 
 # AccessRipple
@@ -16,6 +16,7 @@ tags:
 - [[Built for Build With AI Basics]] - `contains` [EXTRACTED]
 - [[Code map for contributors]] - `contains` [EXTRACTED]
 - [[How it answers the judging criteria]] - `contains` [EXTRACTED]
+- [[How it was built what I learned]] - `contains` [EXTRACTED]
 - [[How it works]] - `contains` [EXTRACTED]
 - [[In depth]] - `contains` [EXTRACTED]
 - [[License]] - `contains` [EXTRACTED]
@@ -31,4 +32,4 @@ tags:
 - [[Who it is for]] - `contains` [EXTRACTED]
 - [[▶ For judges the whole idea in one press]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_1
+#graphify/document #graphify/EXTRACTED #community/Community_None
