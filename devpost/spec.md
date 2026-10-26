@@ -221,7 +221,7 @@ The default interface contains no sample data or sample CTA, as requested by the
 The current implementation supersedes the earlier local-only deployment notes:
 Home PC runs the production build under `accessripple.service` with Node 22,
 Playwright Chromium, and restart-on-failure. Tailscale Funnel exposes HTTPS at
-[the live demo](https://home-pc.tail601a7c.ts.net/); the scanner still binds only
+[the live demo](https://accessripple.tail601a7c.ts.net/); the scanner still binds only
 to loopback. Public mode disables private-network scanning and uses a separate
 history directory at `.data/public-demo`. Visitors share demo history and
 fixture state, which the interface discloses. Local installations retain the

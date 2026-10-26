@@ -49,8 +49,8 @@ Verified: 202 tests across 22 files, typecheck, production build, and the 56-che
 
 ## 26 October submission audit
 
-Public links: [demo](https://home-pc.tail601a7c.ts.net/),
-[one-press walkthrough](https://home-pc.tail601a7c.ts.net/#walkthrough),
+Public links: [demo](https://accessripple.tail601a7c.ts.net/),
+[one-press walkthrough](https://accessripple.tail601a7c.ts.net/#walkthrough),
 [video](https://youtu.be/Uzcq7tJ8JL0),
 [repository](https://github.com/joyboyreturns/Access-Ripple).
 

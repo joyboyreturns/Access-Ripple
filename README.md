@@ -14,7 +14,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 ![Vercel AI Gateway](https://img.shields.io/badge/AI-Vercel%20AI%20Gateway-111111)
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
 
-[**Open the live demo**](https://home-pc.tail601a7c.ts.net/) · [**Run the judge walkthrough**](https://home-pc.tail601a7c.ts.net/#walkthrough) · [**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) ·
+[**Open the live demo**](https://accessripple.tail601a7c.ts.net/) · [**Run the judge walkthrough**](https://accessripple.tail601a7c.ts.net/#walkthrough) · [**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) ·
 [**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md) · [Build journey](devpost/build-journey.md)
 
 <img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">
@@ -23,7 +23,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 
 ## ▶ For judges: the whole idea in one press
 
-**[Run the hosted walkthrough](https://home-pc.tail601a7c.ts.net/#walkthrough)** — no installation or account required. The shared demo is hosted on Home PC through Tailscale Funnel. Scan history and demo-shop changes are visible to other visitors; use public URLs only. See [hosting and operation](docs/DEPLOYMENT.md).
+**[Run the hosted walkthrough](https://accessripple.tail601a7c.ts.net/#walkthrough)** — no installation or account required. The shared demo is hosted on Home PC through Tailscale Funnel. Scan history and demo-shop changes are visible to other visitors; use public URLs only. See [hosting and operation](docs/DEPLOYMENT.md).
 
 To run your own local copy:
 

@@ -174,7 +174,7 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Public YouTube video supplied and checked without sign-in: https://youtu.be/Uzcq7tJ8JL0 (2:53).
 - [x] Public repository checked; credential-pattern scan found no matches in tracked files or Git history, and the personal learner profile remains untracked.
 - [x] Home PC production service uses Node 22, starts at boot, and restarts after failure; public HTTPS uses Tailscale Funnel.
-- [x] Public walkthrough, before/after screenshots, ZIP export, mobile overflow, and private-network safeguards verified at https://home-pc.tail601a7c.ts.net/.
+- [x] Public walkthrough, before/after screenshots, ZIP export, mobile overflow, and private-network safeguards verified at https://accessripple.tail601a7c.ts.net/.
 - [x] Live AI enabled on Home PC with explicit key-transfer approval; public walkthrough shows one finding no longer observed and three held predictions.
 - [x] Compatible fast-uri patches applied; dependency audit reports zero vulnerabilities.
 - [x] Public history is separate from private local history; shared demo state is disclosed.

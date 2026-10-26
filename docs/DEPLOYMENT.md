@@ -22,7 +22,7 @@ NODE_ENV=production
 HOST=127.0.0.1
 PORT=4317
 ACCESSRIPPLE_PUBLIC_DEMO=true
-ACCESSRIPPLE_TRUSTED_HOSTS=home-pc.tail601a7c.ts.net
+ACCESSRIPPLE_TRUSTED_HOSTS=accessripple.tail601a7c.ts.net
 ACCESSRIPPLE_DATA_DIR=.data/public-demo
 ```
 
@@ -57,8 +57,8 @@ a crash. After updating code and rebuilding:
 ```sh
 sudo systemctl restart accessripple
 curl --fail http://127.0.0.1:4317/api/health
-sudo tailscale funnel --bg --https=443 http://127.0.0.1:4317
-tailscale funnel status
+docker start accessripple-funnel
+docker exec accessripple-funnel tailscale funnel status
 ```
 
 Funnel terminates HTTPS and forwards to the loopback service. Add only its
@@ -71,7 +71,9 @@ screenshots load, exports download, and private scans are refused. Keep the PC
 awake and connected throughout judging. To turn off public HTTPS access:
 
 ```sh
-sudo tailscale funnel --https=443 off
+docker stop accessripple-funnel
 ```
 
 The pre-existing tailnet-only TCP mapping on port 4318 can remain in place.
+
+The public identity is a separate userspace Tailscale container, `accessripple-funnel`, matching the Culture Forge hosting pattern. It uses the persistent Docker volume `accessripple-funnel-state`, the config directory `/mnt/cloud_storage/accessripple-funnel` mounted read-only at `/config`, and `--network host` so the proxy can dial the loopback-only service. It needs no privileged mode or network-admin capability. Its hostname is `accessripple`, `TS_AUTH_ONCE=true` preserves registration across restarts, and the restart policy is `unless-stopped`. Home PC's main Tailscale node and Culture Forge's node keep their names.
