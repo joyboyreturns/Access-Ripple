@@ -25,15 +25,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 
 **[Run the hosted walkthrough](https://accessripple.tail601a7c.ts.net/#walkthrough)** — no installation or account required. The shared demo is hosted on Home PC through Tailscale Funnel. Scan history and demo-shop changes are visible to other visitors; use public URLs only. See [hosting and operation](docs/DEPLOYMENT.md).
 
-To run your own local copy:
-
-```sh
-npm install
-npx playwright install chromium
-npm run dev
-```
-
-Open **http://127.0.0.1:5173/#walkthrough**, or press **Run the judge walkthrough** on the landing page. No account, key or internet connection is needed.
+Open **https://accessripple.tail601a7c.ts.net/#walkthrough**, or press **Run the judge walkthrough** on the landing page. No account, key or installation is needed. To run your own copy instead, see [Quick start](#quick-start).
 
 | # | What happens on screen | What it shows |
 | --- | --- | --- |
