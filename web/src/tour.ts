@@ -2,8 +2,6 @@
  * The guided tour doubles as the recording script and as on-screen captions.
  * Each step carries the sentence to say out loud, so a silent recording still
  * tells the reviewer what is happening and why it matters.
- *
- * The order here and the order in `devpost/demo-script.md` are the same.
  */
 export type TourContext = {
   hasScan: boolean;

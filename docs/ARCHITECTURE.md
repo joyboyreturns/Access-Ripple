@@ -188,4 +188,3 @@ flowchart TD
 | `npm run typecheck` | Server and studio both type-check under TypeScript 7 |
 | `npm run build` | The production studio builds and the API compiles |
 | `npm run check:studio` | Drives the whole studio in a real browser and checks 45 behaviours, plus the AI path when a model key is configured |
-| `npm run capture:readme` | Regenerates the README screenshots from the running studio |

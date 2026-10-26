@@ -15,7 +15,7 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
 
 [**Open the live demo**](https://accessripple.tail601a7c.ts.net/) · [**Run the judge walkthrough**](https://accessripple.tail601a7c.ts.net/#walkthrough) · [**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) ·
-[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md) · [Demo script](devpost/demo-script.md) · [Build journey](devpost/build-journey.md)
+[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md)
 
 <img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">
 
@@ -118,7 +118,7 @@ The full picture — the scan sequence, the graph model, the safety boundaries a
 | **Design** | One coherent loop — scan → evidence → fix → commitment → rescan → verdict → export. A finished scan fits one 1440 × 900 screen; the map works by keyboard, a live region announces progress and verdicts, badges never rely on colour alone, and reduced motion is respected. |
 | **Potential impact** | A developer can trace a button to the page with a barrier, fix the one with the widest reach first, and hand over a `.patch` and a pull request summary. It works on public sites, on `localhost`, and on GitHub Pages. |
 | **Innovation** | The model's *pre-registered* prediction, checked by a real browser and reported as held, failed or unknown — plus a ripple and reach computed only from journeys the browser actually took. |
-| **Presentation** | The one-press walkthrough above, a guided tour whose steps double as captions, and a three-minute [demo script](devpost/demo-script.md) with time codes. |
+| **Presentation** | The one-press walkthrough above, a guided tour whose steps double as captions. |
 
 **Honest limits.** Automated checks catch a useful subset of barriers; they do not certify accessibility, and the studio says so on every result. A model's citation is checked to point at real evidence, not to be true of it. A simulated patch tests the change in the scanner's browser, not on the live site.
 
@@ -315,14 +315,13 @@ npm test               # 231 unit, API and end-to-end tests, including real Chro
 npm run typecheck      # server and studio
 npm run build          # production studio and API
 npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 60 checks plus the AI path with a key
-npm run capture:readme # needs `npm run dev`: regenerates the screenshots above
 ```
 
 `npm run check:studio` covers the one-click demo, every filter, the list, the inspector, the ripple, the coverage explanation, the AI briefing, the proposed change and the model's written prediction, the repair loop, the proof, the export, the saved history, and the error paths. When a model is busy it asks again, and it reports those retries separately from faults in the studio.
 
 ## How it was built: what I learned
 
-I started with a coding agent and no plan. The Devpost skill pack made me plan first, and that changed the idea: from "a map of a website" to "an AI that has to prove its accessibility fix". The full story from the first commit to the latest is in **[devpost/build-journey.md](devpost/build-journey.md)**. The moments that taught me the most:
+I started with a coding agent and no plan. The Devpost skill pack made me plan first, and that changed the idea: from "a map of a website" to "an AI that has to prove its accessibility fix". The moments that taught me the most:
 
 | What went wrong | What it taught me |
 | --- | --- |
@@ -340,33 +339,17 @@ AccessRipple was built for [Build With AI: Basics](https://learn-ai-basics.devpo
 | Requirement | Where it is |
 | --- | --- |
 | New project, built during the submission period | First commit 19 October 2026; full history in this repository |
-| Built with the Devpost Learn Skill Pack | `1-start` → `2-scope` → `3-prd` → `4-spec` → `5-build`, then `6-ship` for the submission; [`skills-lock.json`](skills-lock.json) records the installed pack |
+| Built with the Devpost Learn Skill Pack | `1-start` → `2-scope` → `3-prd` → `4-spec` → `5-build`, then `6-ship` for the submission |
 | Planning documents in the repository | [`devpost/scope.md`](devpost/scope.md), [`devpost/prd.md`](devpost/prd.md), [`devpost/spec.md`](devpost/spec.md) |
 | A working proof of concept, end to end | Scan → map → ripple → AI proposal and prediction → apply → rescan → verdict → export, checked by `npm run check:studio` |
 | Installs and runs consistently | `npm install`, `npx playwright install chromium`, `npm run demo`; the demo shop needs no network |
 | Public repository with an open-source license | MIT, in [`LICENSE`](LICENSE) |
-| Demo video under three minutes | Route and narration in [`devpost/demo-script.md`](devpost/demo-script.md) |
+| Demo video under three minutes | Linked in the submission |
 
-The build checklist, UI verification notes, competitive analysis and app map are in [`devpost/`](devpost/).
 
 ## Media provenance
 
 The landing animation is drawn in the browser by `web/src/RippleField.tsx`: a canvas of about twenty thousand grains laid out by a few lines of geometry. It is original to this project, uses no media file, is decorative, and is not a recording of AccessRipple scanning a website. The Inter and Instrument Serif fonts are self-hosted with their OFL notices in `web/public/fonts/`. The screenshots in `docs/images/` are captures of this application.
-
-## Code map for contributors
-
-The project keeps a Graphify source map and an Obsidian note/canvas export in `graphify-out/` and `knowledge-map/`. After source changes, refresh both with:
-
-```sh
-graphify update . --force --no-cluster
-graphify export obsidian --graph graphify-out/graph.json --dir knowledge-map
-```
-
-Open `knowledge-map/` as a vault in Obsidian to browse the generated notes and `graph.canvas`. Query a focused part of the code instead of loading the whole repository, for example:
-
-```sh
-graphify query "control flow graph error nodes" --seed buildGraph --budget 400
-```
 
 ## Thank you
 
@@ -382,9 +365,7 @@ AccessRipple stands on free and open-source work, and it would not exist without
 - **[Node.js](https://nodejs.org/)** and **npm** — the runtime and the registry.
 - **[Vercel AI Gateway](https://vercel.com/ai-gateway)** and the teams behind the models it serves — **DeepSeek** and **MiniMax** — for the optional AI briefing, proposal and prediction.
 - **[Inter](https://rsms.me/inter/)** by Rasmus Andersson and **[Instrument Serif](https://github.com/Instrument/instrument-serif)** by Instrument — the typefaces, under the SIL Open Font License.
-- **[Graphify](https://pypi.org/project/graphifyy/)** and **[Obsidian](https://obsidian.md/)** — the code map and the vault the export opens in.
 - **[Mermaid](https://mermaid.js.org/)** and **[Shields.io](https://shields.io/)** — the diagrams and badges on this page.
-- **[Claude Code](https://claude.com/claude-code)** and **[OpenCode](https://opencode.ai/)** — the AI coding agents that paired on the build.
 - **[GitHub](https://github.com/)** — for hosting the code.
 
 And thank you to everyone who works to make the web usable by everyone. This tool is a small attempt to help.
