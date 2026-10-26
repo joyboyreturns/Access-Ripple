@@ -1,7 +1,14 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createServer } from 'node:http';
 import { buildApp } from '../../src/api/app.js';
 import { scanStore } from '../../src/store/memory.js';
+
+// API admission tests must not leave real browser jobs running after their
+// stores are cleared. Browser behavior is covered by the end-to-end suites.
+vi.mock('../../src/scan/worker.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../src/scan/worker.js')>();
+  return { ...actual, performScan: vi.fn(async () => {}) };
+});
 
 describe('local scan API', () => {
   const apps: Array<Awaited<ReturnType<typeof buildApp>>> = [];

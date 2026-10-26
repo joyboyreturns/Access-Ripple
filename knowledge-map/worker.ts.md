@@ -26,6 +26,7 @@ tags:
 - [[ScanResult]] - `imports` [EXTRACTED]
 - [[SimulatedPatchOutcome]] - `imports` [EXTRACTED]
 - [[abortReasonFor()]] - `imports` [EXTRACTED]
+- [[app.test.ts]] - `dynamic_import` [EXTRACTED]
 - [[app.ts]] - `imports_from` [EXTRACTED]
 - [[assertSafeUrl()]] - `imports` [EXTRACTED]
 - [[axeSource]] - `contains` [EXTRACTED]

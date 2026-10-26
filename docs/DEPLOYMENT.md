@@ -23,7 +23,7 @@ HOST=127.0.0.1
 PORT=4317
 ACCESSRIPPLE_PUBLIC_DEMO=true
 ACCESSRIPPLE_TRUSTED_HOSTS=home-pc.tail601a7c.ts.net
-ACCESSRIPPLE_DATA_DIR=.data-public
+ACCESSRIPPLE_DATA_DIR=.data/public-demo
 ```
 
 Use a new, empty data directory for public hosting so private local scan

@@ -13,5 +13,6 @@ tags:
 
 ## Connections
 - [[Hosting the public demo]] - `contains` [EXTRACTED]
+- [[README]] - `references` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None

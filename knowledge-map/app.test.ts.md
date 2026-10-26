@@ -18,5 +18,6 @@ tags:
 - [[ref_node_http]] - `imports_from` [EXTRACTED]
 - [[scanStore]] - `imports` [EXTRACTED]
 - [[vitest_1]] - `imports_from` [EXTRACTED]
+- [[worker.ts]] - `dynamic_import` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_None

@@ -14,5 +14,6 @@ tags:
 ## Connections
 - [[ARCHITECTURE]] - `references` [EXTRACTED]
 - [[AccessRipple]] - `contains` [EXTRACTED]
+- [[DEPLOYMENT]] - `references` [EXTRACTED]
 
 #graphify/document #graphify/EXTRACTED #community/Community_None

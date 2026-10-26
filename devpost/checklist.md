@@ -166,3 +166,17 @@ Activity and evidence: Implementation and mechanical verification are recorded i
 - [x] Add the judge walkthrough: scan, open the widest-reaching finding, propose, commit, apply, rescan, proof — in one press, with the prepared fix standing in when no model answers.
 - [x] Verify: 231 tests across 25 files, typecheck, production build, `npm run check:studio` at 45/45 with the AI beats skipped (no gateway key yet), and the walkthrough run in the browser in 22 seconds.
 - [ ] Learner adds a Vercel AI Gateway key to `.env`, reruns `npm run check:studio` with the AI beats, and records the walkthrough with the model.
+
+### Submission audit and public demo — 26 October 2026
+
+- [x] Typecheck, production build, and 240 tests across 25 files pass.
+- [x] Full local studio browser check: 59/59, no runtime errors; live AI proposal and three supported predictions verified, with busy-provider fallback labelled honestly.
+- [x] Public YouTube video supplied and checked without sign-in: https://youtu.be/Uzcq7tJ8JL0 (2:53).
+- [x] Public repository checked; credential-pattern scan found no matches in tracked files or Git history, and the personal learner profile remains untracked.
+- [x] Home PC production service uses Node 22, starts at boot, and restarts after failure; public HTTPS uses Tailscale Funnel.
+- [x] Public walkthrough, before/after screenshots, ZIP export, mobile overflow, and private-network safeguards verified at https://home-pc.tail601a7c.ts.net/.
+- [x] Live AI enabled on Home PC with explicit key-transfer approval; public walkthrough shows one finding no longer observed and three held predictions.
+- [x] Compatible fast-uri patches applied; dependency audit reports zero vulnerabilities.
+- [x] Public history is separate from private local history; shared demo state is disclosed.
+- [ ] Learner removes drafting notes from the YouTube description and supplies their own description.
+- [ ] Learner final review, submission fields, exit survey, and Devpost submission remain human-owned; no completion is claimed here.

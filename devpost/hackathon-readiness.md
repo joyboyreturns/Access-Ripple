@@ -46,3 +46,33 @@ Two faults a judge or a live recording could have hit were fixed. The model's wr
 For the video, a finished scan now fits one 1440 × 900 frame: the map keeps its own height instead of stretching to the inspector, and the result scrolls itself so the metrics, the whole map and the inspector share the screen. The README was rebuilt around the problem, the audience and the proof, with screenshots captured by `npm run capture:readme` and an architecture overview in `docs/ARCHITECTURE.md`.
 
 Verified: 202 tests across 22 files, typecheck, production build, and the 56-check browser sweep. Still open and human-owned: the public video link, the Devpost form, and the learner's final review.
+
+## 26 October submission audit
+
+Public links: [demo](https://home-pc.tail601a7c.ts.net/),
+[one-press walkthrough](https://home-pc.tail601a7c.ts.net/#walkthrough),
+[video](https://youtu.be/Uzcq7tJ8JL0),
+[repository](https://github.com/joyboyreturns/Access-Ripple).
+
+The video plays without sign-in and is 2:53. Its public description still
+contains drafting notes; the builder should replace those with their own
+project description. The transcript covers scan, evidence, proposal,
+prediction, apply, rescan, proof, public-site use, and a learning reflection.
+
+Verified locally: typecheck, production build, 240 tests, and 59/59 studio
+browser checks with no runtime errors. A real model proposed the image-alt
+repair, the browser stopped observing one finding, and all three predictions
+were supported. A separate busy-model walkthrough completed with the prepared
+repair, clearly labelled. The public Home PC deployment also completed the
+prepared-fix walkthrough, served both proof pictures, exported the vault,
+and fit a 390-pixel viewport without horizontal overflow.
+
+Public-demo mode blocks private network access and arbitrary fixture edits,
+limits concurrent scans and model requests, and uses a fresh history directory.
+No credential-pattern matches were found in tracked files or Git history.
+The public GitHub homepage now points at the hosted demo. The technical audit
+does not certify accessibility, guarantee uptime or a competition result,
+or establish personal eligibility. Learner review and Devpost submission are
+still outstanding.
+
+The live AI was then enabled on Home PC using the existing Gateway key with the builder's explicit approval. A fresh public walkthrough applied the model's change, stopped observing one finding, and displayed three held predictions; export and mobile checks passed again. The dependency audit's moderate fast-uri advisory was fixed with compatible transitive patches; the updated lockfile audits clean. Both public Funnel relay IPs answered the health check after refreshing the registration.

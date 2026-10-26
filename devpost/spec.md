@@ -215,3 +215,19 @@ The studio uses a lightweight SVG spatial projection with yaw, pitch, pan, zoom,
 The UI connects to scan, rescan, comparison, and ZIP export endpoints. It retains the latest scan ID in tab session storage and restores a result while the local scanner still has it. Rescan handles an expired result by starting a fresh URL scan and explicitly omitting unavailable comparison. Restarting the scanner still clears backend results.
 
 The default interface contains no sample data or sample CTA, as requested by the learner. The backend fixture remains for controlled regression testing. No external-site auto-repair, sample repair UI, public deployment, or completed learner final review is claimed by this revision.
+
+## Public demo deployment — 26 October 2026
+
+The current implementation supersedes the earlier local-only deployment notes:
+Home PC runs the production build under `accessripple.service` with Node 22,
+Playwright Chromium, and restart-on-failure. Tailscale Funnel exposes HTTPS at
+[the live demo](https://home-pc.tail601a7c.ts.net/); the scanner still binds only
+to loopback. Public mode disables private-network scanning and uses a separate
+history directory at `.data/public-demo`. Visitors share demo history and
+fixture state, which the interface discloses. Local installations retain the
+private-address opt-in. Scan history is now persisted across restarts.
+
+The demonstration video is [available on YouTube](https://youtu.be/Uzcq7tJ8JL0)
+(2 minutes 53 seconds, accessible without sign-in on 26 October). Deployment
+settings and recovery commands are in [the hosting guide](../docs/DEPLOYMENT.md).
+This records technical deployment, not learner final sign-off or Devpost submission.

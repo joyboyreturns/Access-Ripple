@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "tests/api/app.test.ts": {
-    "mtime": 1793015590.8967397,
-    "seen": 1793015637.230516,
-    "ast_hash": "b4c7368fea52483b0c1025c2c1d59edc",
+    "mtime": 1793016367.9057922,
+    "seen": 1793016404.631775,
+    "ast_hash": "1e9a4bc66d0466210ff23063a9fd4cb3",
     "semantic_hash": ""
   },
   "tests/e2e/sample-scan.test.ts": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1793015590.9867988,
-    "seen": 1793015637.2305841,
-    "ast_hash": "c35e3ca27d27f2c1d14fab91025213c5",
+    "mtime": 1793016033.7124286,
+    "seen": 1793016173.12713,
+    "ast_hash": "41ec460fcb0464a480e276385ce9e908",
     "semantic_hash": ""
   },
   "src/sample/site/checkout.html": {
@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "docs/DEPLOYMENT.md": {
-    "mtime": 1793015624.9031456,
-    "seen": 1793015637.230588,
-    "ast_hash": "949ecaa1d6a5a49b5a89d56cb8270450",
+    "mtime": 1793016033.7776456,
+    "seen": 1793016173.127132,
+    "ast_hash": "5b5effcd517cd142749e90ed2c343472",
     "semantic_hash": ""
   }
 }
