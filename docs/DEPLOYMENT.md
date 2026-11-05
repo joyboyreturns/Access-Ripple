@@ -1,79 +1,53 @@
-# Hosting the public demo
+# Run AccessRipple locally
 
-AccessRipple needs a persistent Node 22 process and Playwright Chromium. The
-scanner is not a static site or a Vercel serverless function. The Vercel AI
-Gateway supplies the optional model; it does not host the scanner.
+The public hackathon demo has been retired. There is no maintained public demo or Funnel endpoint. AccessRipple needs a Node.js 22 process and Playwright Chromium; the optional Vercel AI Gateway supplies a model and does not host the scanner.
 
-## Build and run
+## Install and develop
 
 ```sh
+git clone https://github.com/joyboyreturns/Access-Ripple.git
+cd Access-Ripple
 npm ci
-npx playwright install --with-deps chromium
+npx playwright install chromium
+npm run dev
+```
+
+Open http://127.0.0.1:5173/ for the studio, or http://127.0.0.1:5173/#walkthrough for the repair walkthrough. The API runs at http://127.0.0.1:4317/ and its health endpoint is `/api/health`. Keep the terminal open; Ctrl+C stops both development servers.
+
+`npm run demo` starts the same servers and opens the built-in shop scan automatically. Use either `npm run dev` or `npm run demo`, one session at a time. After dependencies and Chromium are installed, the built-in shop and prepared repair need no network or API key. Optional AI requests and public-site scans use the network.
+
+## Build and run without Vite
+
+```sh
+npm run build
+npm start
+```
+
+Open http://127.0.0.1:4317/. The scanner serves the compiled studio and API together. Keep it bound to `127.0.0.1`; local use needs no reverse proxy, Tailscale Funnel, Docker container, or system service.
+
+## Optional configuration
+
+Copy `.env.example` to `.env` and fill in `ACCESSRIPPLE_AI_KEY` to use model-generated briefings, proposals, and predictions. See the [README AI setup](../README.md#optional-ai-briefing-and-proposed-changes). Keep credentials in the ignored `.env`, then restart the app after changing settings.
+
+Leave `ACCESSRIPPLE_PUBLIC_DEMO=false` and `ACCESSRIPPLE_TRUSTED_HOSTS` empty for ordinary local use. If reusing configuration from a previous public deployment, remove its public hostname and public-demo settings first. Public-demo mode blocks local-network scanning.
+
+Completed scans are saved under `.data/` by default (the newest 25). Stop the app and delete that directory to clear local history, or set `ACCESSRIPPLE_DATA_DIR` to use a different location. Demo-shop repairs are held in memory; scanning the shop again resets it to its broken state.
+
+## Troubleshooting
+
+- **Unsupported Node version:** run `node --version` and use Node 22.x, then rerun `npm ci`.
+- **Chromium missing:** run `npx playwright install chromium`. On Linux, missing system libraries can be installed with `npx playwright install --with-deps chromium`; this may require sudo.
+- **Port already in use:** stop an earlier AccessRipple session or the process using port 4317 or 5173, then restart. The development studio expects the API on port 4317.
+- **Browser did not open:** open the printed localhost URL manually. An automatic browser opener is only a convenience.
+- **Local website refused:** tick **Scan an address on my own computer** in the studio before scanning localhost or a private address. Cloud credential endpoints remain blocked.
+- **AI unavailable:** the scanner and deterministic summary still work. Check the key and provider settings, restart after editing `.env`, and inspect the terminal for provider errors. The walkthrough labels its prepared repair when used.
+
+## Verify a checkout
+
+```sh
 npm run typecheck
 npm test
 npm run build
 ```
 
-Keep the process bound to `127.0.0.1:4317`. Configure these server-side settings
-in an ignored `.env` or in the process manager:
-
-```dotenv
-NODE_ENV=production
-HOST=127.0.0.1
-PORT=4317
-ACCESSRIPPLE_PUBLIC_DEMO=true
-ACCESSRIPPLE_TRUSTED_HOSTS=accessripple.tail601a7c.ts.net
-ACCESSRIPPLE_DATA_DIR=.data/public-demo
-```
-
-Use a new, empty data directory for public hosting so private local scan
-history is not published. Public visitors share scan history, the demo shop,
-and accepted changes; the studio displays this explicitly. Do not use private
-URLs or confidential page content on the shared demo. Use the local app for
-private work.
-
-Public-demo mode refuses private-network opt-ins, does not inherit old private
-scan permissions, and only accepts demo-shop edits previously proposed by the
-server. It admits a new scan when the worker is idle. Model requests are
-serialized and limited to twelve starts per minute across the demo. The model
-provider's own budget and rate limits still apply.
-
-Optional model settings are documented in `.env.example`. Use a Vercel **AI
-Gateway API key**, stored only on the server as `ACCESSRIPPLE_AI_KEY` (or
-`AI_GATEWAY_API_KEY`); a Vercel deployment token is a different credential.
-Without a model, the judge walkthrough uses and labels the prepared repair.
-
-```sh
-npm start
-```
-
-## Home PC and Tailscale Funnel
-
-The Home PC checkout is `/mnt/cloud_storage/AccessRipple`; its system service
-is `accessripple.service`. Use its installed Node 22 runtime. Keep the service
-enabled, with `Restart=always`, so it starts after a reboot and recovers after
-a crash. After updating code and rebuilding:
-
-```sh
-sudo systemctl restart accessripple
-curl --fail http://127.0.0.1:4317/api/health
-docker start accessripple-funnel
-docker exec accessripple-funnel tailscale funnel status
-```
-
-Funnel terminates HTTPS and forwards to the loopback service. Add only its
-exact hostname to `ACCESSRIPPLE_TRUSTED_HOSTS`. Do not expose the scanner's raw
-port or change `HOST` to `0.0.0.0`.
-
-Check `/api/health` from outside the tailnet, then open `/#walkthrough` in a
-fresh browser session. Confirm that the proof labels the repair source,
-screenshots load, exports download, and private scans are refused. Keep the PC
-awake and connected throughout judging. To turn off public HTTPS access:
-
-```sh
-docker stop accessripple-funnel
-```
-
-The pre-existing tailnet-only TCP mapping on port 4318 can remain in place.
-
-The public identity is a separate userspace Tailscale container, `accessripple-funnel`, matching the Culture Forge hosting pattern. It uses the persistent Docker volume `accessripple-funnel-state`, the config directory `/mnt/cloud_storage/accessripple-funnel` mounted read-only at `/config`, and `--network host` so the proxy can dial the loopback-only service. It needs no privileged mode or network-admin capability. Its hostname is `accessripple`, `TS_AUTH_ONCE=true` preserves registration across restarts, and the restart policy is `unless-stopped`. Home PC's main Tailscale node and Culture Forge's node keep their names.
+For the full browser check, start `npm run dev` in another terminal, then run `npm run check:studio`.

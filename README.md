@@ -9,23 +9,39 @@ A list tells you what failed. **AccessRipple shows where each barrier sits on th
 [![License: MIT](https://img.shields.io/badge/license-MIT-87be9b)](LICENSE)
 ![Node 22](https://img.shields.io/badge/node-22-87be9b)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-83b9dd)
-![Tests](https://img.shields.io/badge/tests-240%20passing-87be9b)
 ![Playwright + axe-core](https://img.shields.io/badge/Playwright-axe--core-b5a5f5)
 ![Vercel AI Gateway](https://img.shields.io/badge/AI-Vercel%20AI%20Gateway-111111)
 [![Built for Build With AI: Basics](https://img.shields.io/badge/Devpost-Build%20With%20AI%3A%20Basics-003e54)](https://learn-ai-basics.devpost.com/)
 
-[**Open the live demo**](https://accessripple.tail601a7c.ts.net/) · [**Run the judge walkthrough**](https://accessripple.tail601a7c.ts.net/#walkthrough) · [**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) ·
-[**Try it in one press**](#-for-judges-the-whole-idea-in-one-press) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md)
+[**Install locally**](#local-installation) · [**Try the repair walkthrough**](#try-the-repair-walkthrough) · [**▶ Watch the demo video**](https://youtu.be/Uzcq7tJ8JL0) · [Architecture](docs/ARCHITECTURE.md) · [Scope](devpost/scope.md) · [PRD](devpost/prd.md) · [Spec](devpost/spec.md)
 
-<img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or run the judge walkthrough." width="900">
+<img src="docs/images/landing.jpg" alt="The AccessRipple landing page: 'Understand your website. See every ripple.' with buttons to explore a website, see it in 60 seconds, or start the repair walkthrough." width="900">
 
 </div>
 
-## ▶ For judges: the whole idea in one press
+AccessRipple runs on your own computer. The hosted hackathon demo has been retired; follow the local setup below to scan sites and try the full repair loop.
 
-**[Run the hosted walkthrough](https://accessripple.tail601a7c.ts.net/#walkthrough)** — no installation or account required. The shared demo is hosted on Home PC through Tailscale Funnel. Scan history and demo-shop changes are visible to other visitors; use public URLs only. See [hosting and operation](docs/DEPLOYMENT.md).
+## Local installation
 
-Open **https://accessripple.tail601a7c.ts.net/#walkthrough**, or press **Run the judge walkthrough** on the landing page. No account, key or installation is needed. To run your own copy instead, see [Quick start](#quick-start).
+Install **Git**, **Node.js 22.x** and **npm**. Check your runtime with `node --version` and `npm --version`; this project requires Node 22.
+
+```sh
+git clone https://github.com/joyboyreturns/Access-Ripple.git
+cd Access-Ripple
+npm ci
+npx playwright install chromium
+npm run dev
+```
+
+On Linux, if Chromium reports missing system libraries, run `npx playwright install --with-deps chromium` (installing system packages may require sudo).
+
+Open **http://127.0.0.1:5173/**. The studio runs on port **5173** and the scanner API on **4317**; keep the terminal open while using the app. Check the API at **http://127.0.0.1:4317/api/health**. Press **Ctrl+C** in the terminal to stop both servers.
+
+Installation downloads npm packages and Chromium. Once installed, the built-in demo shop and prepared repair work without an account, API key, or internet connection. Scanning public sites and using an AI provider require network access. To enable model-generated briefings, proposals, and predictions, see [optional AI setup](#optional-ai-briefing-and-proposed-changes).
+
+### Try the repair walkthrough
+
+With `npm run dev` running, open **http://127.0.0.1:5173/#walkthrough**. The current interface calls this **Judge walkthrough**; it works locally and needs no hosted service.
 
 | # | What happens on screen | What it shows |
 | --- | --- | --- |
@@ -37,7 +53,22 @@ Open **https://accessripple.tail601a7c.ts.net/#walkthrough**, or press **Run the
 
 <img src="docs/images/walkthrough.jpg" alt="The proof after the walkthrough: 3 no longer observed, 2 still observed, 0 new; the checkout page before the change with the missing image outlined and labelled 'Missing image description', and the same page after with the image restored; buttons to download the accepted changes as a .patch and a pull request summary." width="900">
 
-On this computer the walkthrough runs in about 12 seconds without a model (it was 22 before the demo shop's interaction wait was shortened); the panel shows the measured time on yours. With no model configured — or if the model is busy — the demo shop's prepared fix stands in, and the panel says so.
+Without a configured model, or when the model is busy, the walkthrough uses the demo shop's prepared repair and labels that choice. The panel reports the elapsed time on your machine.
+
+For a shorter first run, `npm run demo` starts the same development servers and opens **http://127.0.0.1:5173/#demo** straight into a scan of the built-in shop. Stop an existing development session before starting it so the ports are free.
+
+### Scan your own site
+
+Return to the landing page, choose **Explore your website**, enter its URL, and select **Map this website**. For a site on localhost or a private network, tick **Scan an address on my own computer** before scanning. Select a finding to inspect its evidence and ripple, rescan after a change, and export the results.
+
+### Run a local production build
+
+```sh
+npm run build
+npm start
+```
+
+Open **http://127.0.0.1:4317/**; the API serves the built studio, so Vite is not needed. Keep the app bound to loopback. [Local operation and troubleshooting](docs/DEPLOYMENT.md) covers ports, Chromium, saved scans, and optional configuration.
 
 ## The problem
 
@@ -111,38 +142,7 @@ flowchart LR
 
 The full picture — the scan sequence, the graph model, the safety boundaries and where each piece lives in the code — is in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
-## How it answers the judging criteria
-
-| Criterion | Where to look |
-| --- | --- |
-| **Design** | One coherent loop — scan → evidence → fix → commitment → rescan → verdict → export. A finished scan fits one 1440 × 900 screen; the map works by keyboard, a live region announces progress and verdicts, badges never rely on colour alone, and reduced motion is respected. |
-| **Potential impact** | A developer can trace a button to the page with a barrier, fix the one with the widest reach first, and hand over a `.patch` and a pull request summary. It works on public sites, on `localhost`, and on GitHub Pages. |
-| **Innovation** | The model's *pre-registered* prediction, checked by a real browser and reported as held, failed or unknown — plus a ripple and reach computed only from journeys the browser actually took. |
-| **Presentation** | The one-press walkthrough above, a guided tour whose steps double as captions. |
-
 **Honest limits.** Automated checks catch a useful subset of barriers; they do not certify accessibility, and the studio says so on every result. A model's citation is checked to point at real evidence, not to be true of it. A simulated patch tests the change in the scanner's browser, not on the live site.
-
-## Quick start
-
-Requirements: Node.js 22 and npm.
-
-```sh
-npm install
-npx playwright install chromium
-npm run demo
-```
-
-`npm run demo` starts the app and opens the studio straight into a scan of the built-in demo shop. It takes about six seconds, needs no internet connection, and always produces the same result.
-
-**The core demo needs no account, no key and no network.** The optional AI briefing, the proposed change and the model's commitment need a [Vercel AI Gateway](https://vercel.com/ai-gateway) key in `.env` (see [below](#optional-ai-briefing-and-proposed-changes)). Without one the app is still complete: it says so where the button would be, and shows the deterministic summary instead.
-
-If `npm run demo` does not open, start the two servers yourself and open `http://127.0.0.1:5173/`:
-
-```sh
-npm run dev
-```
-
-The scanner also serves the built studio itself once you have run `npm run build`, so `npm start` gives a working application on `http://127.0.0.1:4317/`.
 
 ### A tour of the studio
 
@@ -257,9 +257,9 @@ Each finding also records where its element sat on the page. The inspector shows
 
 The map is a labelled region. On a point, the arrow keys move to the connected point that lies that way, Enter opens it, and focus moves to its details; Escape gives focus back to the map. Plus, minus and zero zoom and fit. One polite live region announces scan progress, a finished scan, a ready briefing, a proposal, the model's commitment, and the rescan's verdict. Every status and severity badge has a mark and a word as well as a colour. Dialogs trap focus natively and hand it back when they close.
 
-### The judge walkthrough
+### The repair walkthrough
 
-**Judge walkthrough**, in the studio and on the landing page (`#walkthrough`), runs the whole argument in one press. It scans the demo shop, opens the finding with the most recorded journeys through its page, has the model propose a change and commit to its outcome, applies the change, rescans, and opens the proof. A panel shows each step and the time it took; without a model it took about 12 seconds on this computer. Without a configured model, or when the model is busy, the demo shop's prepared fix stands in and the panel says so.
+The repair walkthrough (currently labelled **Judge walkthrough** in the interface), in the studio and on the landing page (`#walkthrough`), runs the whole argument in one press. It scans the demo shop, opens the finding with the most recorded journeys through its page, has the model propose a change and commit to its outcome, applies the change, rescans, and opens the proof. A panel shows each step and the time it took; without a model it took about 12 seconds on this computer. Without a configured model, or when the model is busy, the demo shop's prepared fix stands in and the panel says so.
 
 ### The API
 
@@ -311,7 +311,7 @@ In the studio the same loop works through **Rescan and compare** after toggling 
 ## Verification
 
 ```sh
-npm test               # 231 unit, API and end-to-end tests, including real Chromium scans
+npm test               # unit, API and end-to-end tests, including real Chromium scans
 npm run typecheck      # server and studio
 npm run build          # production studio and API
 npm run check:studio   # needs `npm run dev`: drives the whole studio in a real browser, 60 checks plus the AI path with a key
@@ -332,20 +332,9 @@ I started with a coding agent and no plan. The Devpost skill pack made me plan f
 | A code review found the "Apply the demo repair" button swapped in a prewritten file | Make the model's change *cause* the measured result, or the demo proves nothing. |
 | A dev-server helper silently broke every keyboard finding on live sites | Rehearse the whole route end to end. Unit tests could not see it. |
 
-## Built for Build With AI: Basics
+## Project background
 
-AccessRipple was built for [Build With AI: Basics](https://learn-ai-basics.devpost.com/), Devpost's learning hackathon, with the [Devpost Learn Skill Pack](https://github.com/challengepost/learn-ai-basics) and an AI coding agent.
-
-| Requirement | Where it is |
-| --- | --- |
-| New project, built during the submission period | First commit 19 October 2026; full history in this repository |
-| Built with the Devpost Learn Skill Pack | `1-start` → `2-scope` → `3-prd` → `4-spec` → `5-build`, then `6-ship` for the submission |
-| Planning documents in the repository | [`devpost/scope.md`](devpost/scope.md), [`devpost/prd.md`](devpost/prd.md), [`devpost/spec.md`](devpost/spec.md) |
-| A working proof of concept, end to end | Scan → map → ripple → AI proposal and prediction → apply → rescan → verdict → export, checked by `npm run check:studio` |
-| Installs and runs consistently | `npm install`, `npx playwright install chromium`, `npm run demo`; the demo shop needs no network |
-| Public repository with an open-source license | MIT, in [`LICENSE`](LICENSE) |
-| Demo video under three minutes | Linked in the submission |
-
+AccessRipple began at [Build With AI: Basics](https://learn-ai-basics.devpost.com/), using the [Devpost Learn Skill Pack](https://github.com/challengepost/learn-ai-basics). The original [scope](devpost/scope.md), [PRD](devpost/prd.md), and [spec](devpost/spec.md) remain as project history. The hackathon deployment has been retired; local installation is the supported way to run it.
 
 ## Media provenance
 
